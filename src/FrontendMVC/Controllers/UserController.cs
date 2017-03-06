@@ -9,6 +9,7 @@ namespace FrontendMVC.Controllers
 {
     public class UserController : Controller
     {
+        
         // POST: /UserController/
         [HttpPost]
         public IActionResult Post(UserViewModel model)
@@ -20,7 +21,8 @@ namespace FrontendMVC.Controllers
                 return View("~/Views/Home/Index.cshtml", model);
             }
 
-            return View("~/Views/Home/Index.cshtml");
+            model.UserName = "Tak -- Tak";
+            return View("~/Views/Home/Index.cshtml",model);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -15,5 +16,17 @@ namespace FrontendMVC.Controllers
         {
             return View();
         }
+
+        public IActionResult post(Models.Model.Lobby objLobby)
+        {
+            Debug.WriteLine("Create lobby" + objLobby.Name + " ");
+            
+
+
+            //Send return to home page 
+            return Redirect("/") ;
+
+        }
+
     }
 }
