@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FrontendMVC.Controllers
 {
-    //[Route("api/[controller]")]
+    [Route("api/[controller]")]
     public class AuthenticationController : Controller
     {
         // GET: api/values
@@ -19,14 +19,8 @@ namespace FrontendMVC.Controllers
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
+        [HttpGet]
         public string Get(int id)
-        {
-            return "value";
-        }
-
-        [HttpGet("{id}")]
-        public string Get([FromBody]string value)
         {
             return "value";
         }
