@@ -14,5 +14,10 @@ namespace FrontendMVC.Controllers
         {
             return View(new UserViewModel());
         }
+
+        public PartialViewResult LoginBox()
+        {
+            return PartialView(new AuthenticationViewModel());
+        }
     }
 }
