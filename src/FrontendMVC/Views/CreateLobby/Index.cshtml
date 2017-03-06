@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+a
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="header">
+                Create lobby
+            </h1>
+
+            <form method="post">
+                <div class="row form-group label-floating">
+                    <label for="LobbyName" class="control-label">Lobby name</label>
+                    <input type="text" id="LobbyName" class="form-control" />
+                </div>
+                <div class="row form-group label-floating">
+                    <label for="LobbyDescription" class="control-label">Describe your lobby</label>
+                    <textarea rows="5" id="LobbyDescription" class="form-control"></textarea>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary pull-right">Create lobby</button>
+                    <button type="reset" class="btn btn-primary pull-left">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

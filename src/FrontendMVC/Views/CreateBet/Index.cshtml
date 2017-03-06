@@ -1,0 +1,59 @@
+﻿@{
+    ViewData["Title"] = "Create Bet";
+}
+a
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form>
+                <div class="col-md-6">
+                    <h1 class="header">
+                        Create bet
+                    </h1>
+                    <div class="row form-group label-floating">
+                        <label for="betName" class="control-label">Bet name</label>
+                        <input type="text" id="betName" class="form-control" />
+                    </div>
+                    <div class="row form-group label-floating">
+                        <label for="BetDescription" class="control-label">Describe your bet</label>
+                        <textarea rows="5" id="BetDescription" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <br/><br/><br/>
+
+                        <div class="row form-group label-floating">
+                            <label for="judgeName" class="control-label">Judge</label>
+                            <input type="text" id="judgeName" class="form-control"/>
+                        </div>
+                        <!--DATE PICKER START #STARTDATE -->
+                        <div class="container">
+                            <div class="row">
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepicker1'>
+                                            <input type='text' class="form-control" />
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(document).ready(function () {
+                                            $('#datetimepicker1').datetimepicker();
+                                    });
+                                    
+                                </script>
+                            </div>
+                        </div>
+                        <!--DATE PICKER END #STARTDATE -->
+
+                        <button type="submit" class="btn btn-primary pull-right">Create lobby</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
