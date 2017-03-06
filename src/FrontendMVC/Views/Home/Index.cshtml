@@ -1,0 +1,47 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+a
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>
+                LocalBet helps you make bets with your friends.
+            </h2>
+            <img src="~/images/handshake-icon.png" width="100%"/>
+        </div>
+        <div class="col-md-6">
+            <form method="post">
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label for="FirstName" class="control-label">First name</label>
+                        <input type="text" id="FirstName" class="form-control"/>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="LastName" class="control-label">Last name</label>
+                        <input type="text" id="LastName" class="form-control" />
+                    </div>
+                </div>
+                <div class="row form-group">
+                    <label for="RegisterUserName" class="control-label">User name</label>
+                    <input type="text" id="RegisterUserName" class="form-control"/>
+                </div>
+                <div class="row form-group">
+                    <label for="Email" class="control-label">Email</label>
+                    <input type="email" id="Email" class="form-control" />
+                </div>
+                <div class="row form-group">
+                    <label for="RegisterPassword1" class="control-label">Password</label>
+                    <input type="password" id="RegisterPassword1" class="form-control"/>
+                </div>
+                <div class="row form-group">
+                    <label for="RegisterPassword2" class="control-label">Repeat password</label>
+                    <input type="password" id="RegisterPassword2" class="form-control"/>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary pull-right">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

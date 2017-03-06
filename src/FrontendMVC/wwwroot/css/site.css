@@ -1,0 +1,14 @@
+﻿div.row
+{
+    border: 0px solid;
+}
+
+.row + .row
+{
+    border-top:0;
+}
+
+body { padding-top: 40px; }
+@media screen and (max-width: 768px) {
+    body { padding-top: 0px; }
+}
