@@ -33,10 +33,15 @@ namespace FrontendMVC.Controllers
 
         // POST api/values
         [HttpPost]
-        public string Post([FromBody]string value)//
+        public string Post(ViewModels.AuthenticationViewModel loginModel)//[FromBody]string value
         {
-            
-            return "value hej ";
+
+           // if (TryValidateModel(loginModel))
+            {
+               // return NotFound();
+            }
+
+            return loginModel.ToString();
         }
 
         // PUT api/values/5
