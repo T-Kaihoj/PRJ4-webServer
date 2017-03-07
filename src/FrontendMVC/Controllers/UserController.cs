@@ -57,7 +57,7 @@ namespace FrontendMVC.Controllers
                 // Error, return to main page with the model.
                 return View("~/Views/Home/Index.cshtml", model);
             }
-
+            
 
             // TODO: Check if username is in use.
 
@@ -70,8 +70,12 @@ namespace FrontendMVC.Controllers
             var authentication = new AuthenticationController();
             authentication.Post(model.UserName, model.Password1);
 
+
+
+
             model.UserName = "Tak -- Tak";
-            return Redirect("/");
+
+            return View("~/Views/Home/Index.cshtml",model);
         }
     }
 }
