@@ -21,8 +21,11 @@ namespace FrontendMVC.Controllers
         public IActionResult post(CreateLobbyViewModel objLobby)
         {
             Debug.WriteLine("Create lobby" + objLobby.Name + " ");
-            
 
+            if (objLobby.Name == null || objLobby.Description== null )
+            {
+                return Redirect("/404");
+            }
 
             //Send return to home page 
             return Redirect("/") ;
