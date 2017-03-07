@@ -67,8 +67,8 @@ namespace FrontendMVC.Controllers
 
 
             //todo Authentication
-            //var authentication = new AuthenticationController();
-            //authentication.Post(model.UserName, model.Password1);
+            var authentication = new AuthenticationController();
+            authentication.Post(model.UserName, model.Password1);
 
             model.UserName = "Tak -- Tak";
             return Redirect("/");
