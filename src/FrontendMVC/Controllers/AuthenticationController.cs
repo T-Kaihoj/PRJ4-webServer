@@ -4,50 +4,28 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace FrontendMVC.Controllers
 {
-    [Route("api/[controller]")]
     public class AuthenticationController : Controller
     {
-        // GET: api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/values/5
-        [HttpGet]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
+        // POST
         [HttpPost]
-        public string Post(ViewModels.AuthenticationViewModel loginModel)//[FromBody]string value
+        public IActionResult Post([FromForm]string userName, [FromForm]string password)
         {
-
-           // if (TryValidateModel(loginModel))
+            if(string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
             {
-               // return NotFound();
+                return View("InvalidCredentials");
             }
 
-            return loginModel.ToString();
-        }
+            // Check the data.
+            if (userName != password)
+            {
+                return View("InvalidCredentials");
+            }
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+            // Login the user.
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            return View("ValidCredentials");
         }
     }
 }

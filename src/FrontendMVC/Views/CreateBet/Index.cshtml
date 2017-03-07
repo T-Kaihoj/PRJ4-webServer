@@ -1,22 +1,23 @@
 ﻿@{
     ViewData["Title"] = "Create Bet";
 }
-a
+
+
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <form>
+            <form  asp-controller="CreateLobby" asp-action="post">
                 <div class="col-md-6">
                     <h1 class="header">
                         Create bet
                     </h1>
                     <div class="row form-group label-floating">
                         <label for="betName" class="control-label">Bet name</label>
-                        <input type="text" id="betName" class="form-control" />
+                        <input type="text" id="betName" name="betName" class="form-control" />
                     </div>
                     <div class="row form-group label-floating">
                         <label for="BetDescription" class="control-label">Describe your bet</label>
-                        <textarea rows="5" id="BetDescription" class="form-control"></textarea>
+                        <textarea rows="5" id="BetDescription" name="BetDescription" class="form-control"></textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
