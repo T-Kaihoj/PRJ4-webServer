@@ -72,6 +72,9 @@ namespace FrontendMVC.Controllers
 
 
 
+
+            model.UserName = "Tak -- Tak";
+
             return View("~/Views/Home/Index.cshtml",model);
         }
     }
