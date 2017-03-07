@@ -22,17 +22,40 @@ a
                 <div class="col-md-6">
                     <div class="row">
                         <br/><br/><br/>
-
                         <div class="row form-group label-floating">
                             <label for="judgeName" class="control-label">Judge</label>
                             <input type="text" id="judgeName" class="form-control"/>
                         </div>
                         <!--DATE PICKER START #STARTDATE -->
                         <div class="container">
-                            <div class="row">
+                            <div class="row form-group label-floating">
+                                <label for="datetimepickerstart" class="control-label">Start date</label>
                                 <div class='col-sm-6'>
                                     <div class="form-group">
-                                        <div class='input-group date' id='datetimepicker1'>
+                                        <div class='input-group date' id='datetimepickerstart'>
+                                            <input type='text' class="form-control"/>
+                                            <span class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <script type="text/javascript">
+                                    $(document).ready(function() {
+                                        $('#datetimepickerstart').datetimepicker();
+                                    });
+
+                                </script>
+                            </div>
+                        </div>
+                        <!--DATE PICKER END #STARTDATE -->
+                        <!--DATE PICKER START #ENDDATE -->
+                        <div class="container">
+                            <div class="row form-group label-floating">
+                                <label for="datetimepickerend" class="control-label">End date</label>
+                                <div class='col-sm-6'>
+                                    <div class="form-group">
+                                        <div class='input-group date' id='datetimepickerend'>
                                             <input type='text' class="form-control" />
                                             <span class="input-group-addon">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -41,16 +64,28 @@ a
                                     </div>
                                 </div>
                                 <script type="text/javascript">
-                                    $(document).ready(function () {
-                                            $('#datetimepicker1').datetimepicker();
+                                    $(document).ready(function() {
+                                        $('#datetimepickerend').datetimepicker();
                                     });
-                                    
+
                                 </script>
                             </div>
                         </div>
-                        <!--DATE PICKER END #STARTDATE -->
+                        <!--DATE PICKER END #ENDDATE -->
+                        <div class="row pull-left">
+                            <div class="togglebutton">
+                                <label>
+                                    End when judged 
+                                    <input type="checkbox" checked="">
+                                </label>
+                            </div>
+                        </div>
 
-                        <button type="submit" class="btn btn-primary pull-right">Create lobby</button>
+                        <div class="row pull-right">
+                            <br/>
+                            <button type="submit" class="btn btn-primary pull-right">Create lobby</button>
+                        </div>
+                        
                     </div>
                 </div>
             </form>
