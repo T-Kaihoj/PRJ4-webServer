@@ -21,8 +21,16 @@ namespace FrontendMVC.Controllers
                 return View("~/Views/Home/Index.cshtml", model);
             }
 
+            // add new User to DB
+
+
+
+            //Authentication
+            //var authentication = new AuthenticationController();
+            //authentication.Post(model.UserName, model.Password1);
+
             model.UserName = "Tak -- Tak";
-            return View("~/Views/Home/Index.cshtml",model);
+            return Redirect("/");
         }
     }
 }
