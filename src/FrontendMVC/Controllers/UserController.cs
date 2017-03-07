@@ -70,8 +70,8 @@ namespace FrontendMVC.Controllers
             var authentication = new AuthenticationController();
             authentication.Post(model.UserName, model.Password1);
 
-            model.UserName = "Tak -- Tak";
-            return Redirect("/");
+
+            return View("~/Views/Home/Index.cshtml",model);
         }
     }
 }
