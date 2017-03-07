@@ -58,6 +58,7 @@ namespace FrontendMVC.Controllers
                 return View("~/Views/Home/Index.cshtml", model);
             }
 
+<<<<<<< HEAD
 
             // TODO: Check if username is in use.
 
@@ -71,6 +72,9 @@ namespace FrontendMVC.Controllers
             authentication.Post(model.UserName, model.Password1);
 
 
+=======
+            model.UserName = "Tak -- Tak";
+>>>>>>> parent of 8fd1235... user con  add new User to DB no test
             return View("~/Views/Home/Index.cshtml",model);
         }
     }
