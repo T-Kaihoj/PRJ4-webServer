@@ -15,9 +15,9 @@ namespace Models
             
         }
 
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Bet> Bets { get; set; }
-        public virtual DbSet<Lobby> Lobbies { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Bet> Bets { get; set; }
+        public DbSet<Lobby> Lobbies { get; set; }
 
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
