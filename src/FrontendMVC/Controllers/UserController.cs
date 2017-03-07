@@ -58,11 +58,20 @@ namespace FrontendMVC.Controllers
                 return View("~/Views/Home/Index.cshtml", model);
             }
 
+
             // TODO: Check if username is in use.
 
             // TODO: Persist user in repository.
+            // add new User to DB
 
-            return View("UserCreated");
+
+
+            //todo Authentication
+            //var authentication = new AuthenticationController();
+            //authentication.Post(model.UserName, model.Password1);
+
+            model.UserName = "Tak -- Tak";
+            return Redirect("/");
         }
     }
 }
