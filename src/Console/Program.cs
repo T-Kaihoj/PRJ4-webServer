@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Models;
-using Models.Model;
+using Models.Core.Model;
+using Models.Core.Repositories;
+using Models.Persistence.Repositories;
 
 namespace Console
 {
@@ -11,26 +14,25 @@ namespace Console
     {
         public static void Main(string[] args)
         {
-            using (Context db = new Context())
+            
+            using (var unitOfWork = new UnitOfWork(new Context(new DbContextOptions<Context>())))
             {
-             
-            var bruger = new User
-            {
-                Balance = 100,
-                Email = "dfd@dkfdf.com",
-                FirstName = "Jeppe",
-                Hash = "dsfsfsf",
-                LastName = "Traberg",
-                Salt = "fsfsf",
-                Username = "fdsfdfsdff"
-
-            };
-
-                db.Users.Add(bruger);
+                User user = new User();
+                //user.Username = "Thomas12";
+                user.Balance = 12;
+                user.Email = "email@MyEmail.com";
+                user.FirstName = "Thomas";
+                user.LastName = "Hansen";
                 
-                db.SaveChanges();
-                
+                //Context db = new Context();
+                //db.Users.Add(user);
+
+                unitOfWork.User.Add(user);
+
+                //db.SaveChanges();
+                unitOfWork.Complete();
             }
+            
         }
     }
 }
