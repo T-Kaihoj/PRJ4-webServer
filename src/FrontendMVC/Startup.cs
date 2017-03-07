@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-
+using Models;
 namespace FrontendMVC
 {
     public class Startup
@@ -28,8 +28,10 @@ namespace FrontendMVC
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("LocalBet")));
             // Add framework services.
-            
+
             services.AddMvc();
         }
 
