@@ -4,6 +4,7 @@
   "dependencies": {
     "bootstrap-material-design": "#0.5.10",
     "font-awesome": "^4.7",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.47"
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "jquery-validation": "1.15.0"
   }
 }

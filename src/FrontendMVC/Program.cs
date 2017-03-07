@@ -4,6 +4,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Models;
+using Models.Core.Model;
 
 namespace FrontendMVC
 {
@@ -11,6 +14,7 @@ namespace FrontendMVC
     {
         public static void Main(string[] args)
         {
+            
             var host = new WebHostBuilder()
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
@@ -19,6 +23,22 @@ namespace FrontendMVC
                 .Build();
 
             host.Run();
+            
+            /*
+            using (var unitOfWork = new UnitOfWork(new Context()))
+            {
+                User user = new User();
+
+                user.Username = "Thomas123";
+                user.FirstName = "Thomas";
+                user.LastName = "Nielsen";
+
+                unitOfWork.User.Add(user);
+
+                unitOfWork.Complete();
+            }
+            */
         }
+        
     }
 }
