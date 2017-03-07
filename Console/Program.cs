@@ -12,6 +12,7 @@ namespace Console
     {
         public static void Main(string[] args)
         {
+            /*
             using (var unitOfWork = new UnitOfWork(new Context(new DbContextOptions<Context>())))
             {
                 User user = new User();
@@ -24,6 +25,7 @@ namespace Console
 
                 unitOfWork.Complete();
             }
+            */
         }
     }
 }
