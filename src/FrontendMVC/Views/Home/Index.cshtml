@@ -15,7 +15,7 @@
             <img src="~/images/handshake-icon.png" width="100"/>
         </div>
         <div class="col-md-6">
-            <form asp-controller="User" asp-action="CreateUser" method="post">
+            <form asp-controller="User" asp-action="CreateUser" id="createUserForm" method="post">
                 <div class="row">
                     <div class="form-group col-md-6">
                         <label asp-for="FirstName" class="control-label">First name</label>
@@ -52,6 +52,58 @@
                     <button type="submit" class="btn btn-primary pull-right">Register</button>
                 </div>
             </form>
+            <script>
+                // Setup validation of the "createUserForm"
+                $("#createUserForm").validate({
+                    rules: {
+                        FirstName: {
+                            required: true
+                        },
+                        LastName: {
+                            required: true
+                        },
+                        UserName: {
+                            required: true
+                        },
+                        Email: {
+                            required: true
+                        },
+                        Password1: {
+                            required: true
+                        },
+                        Password2: {
+                            required: true,
+                            equalTo: "#Password1"
+                        }
+                    },
+
+                    messages: {
+                        FirstName: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorFirstNameRequired)"
+                        },
+                        LastName: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorLastNameRequired)"
+                        },
+                        UserName: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorUserNameRequired)"
+                        },
+                        Email: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorEmailRequired)"
+                        },
+                        Password1: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired1)"
+                        },
+                        Password2: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired2)",
+                            equalto: "@Html.Raw(UserViewModelErrors.ErrorPasswordNotIdentical)"
+                        }
+                    },
+
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+                });
+            </script>
         </div>
     </div>
 </div>
