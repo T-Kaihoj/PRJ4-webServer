@@ -28,7 +28,7 @@ namespace FrontendMVC.Database.Data
                     {
                         unitOfWork.User.Add(user);
                     }
-                    Debug.Write("Users added!!!");
+                    Debug.WriteLine("Users added!!!");
                 }
 
                 if (!context.Bets.Any())
@@ -44,7 +44,7 @@ namespace FrontendMVC.Database.Data
                     {
                         unitOfWork.Bet.Add(bet);
                     }
-                    Debug.Write("Bets added!!!");
+                    Debug.WriteLine("Bets added!!!");
                 }
 
 
@@ -62,11 +62,11 @@ namespace FrontendMVC.Database.Data
                     {
                         unitOfWork.Lobby.Add(lobby);
                     }
-                    Debug.Write("Lobbies added!!!");
+                    Debug.WriteLine("Lobbies added!!!");
                 }
 
                 unitOfWork.Complete();
-                Debug.Write("Initialization done!!!");
+                Debug.WriteLine("Initialization done!!!");
             }
         }
     }
