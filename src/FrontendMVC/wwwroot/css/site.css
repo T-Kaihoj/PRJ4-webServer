@@ -12,3 +12,8 @@ body { padding-top: 70px; }
 @media screen and (max-width: 768px) {
     body { padding-top: 0px; }
 }
+
+/* Style links in the navbar to have a color change on hover. */
+div.navbar a:hover {
+    background-color: #19a094 !important;
+}
