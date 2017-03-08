@@ -26,15 +26,17 @@
         <link rel="stylesheet" href="~/css/site.css" />
 
         <!-- JavaScript -->
-        <script src="~/lib/jquery/dist/jquery.js"></script>
-        <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
-        <script src="~/lib/jquery-validation/dist/additional-methods.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-        <script src="~/lib/bootstrap-material-design/dist/js/material.js"></script>
-        <script src="~/lib/bootstrap-material-design/dist/js/ripples.js"></script>
-        <script type="text/javascript" src="~/lib/moment/min/moment.min.js"></script>
-        <script type="text/javascript" src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-        <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/additional-methods.min.js" defer></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="~/lib/bootstrap-material-design/dist/js/material.min.js" defer></script>
+        <script src="~/lib/bootstrap-material-design/dist/js/ripples.min.js" defer></script>
+        <script type="text/javascript" src="~/lib/moment/min/moment.min.js" defer></script>
+        <script type="text/javascript" src="~/lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js" defer></script>
+        
+        <!-- Load site specific javascript. Can be deferred until later -->
+        <script src="~/js/site.js" asp-append-version="true" defer></script>
     </environment>
 </head>
 <body>
