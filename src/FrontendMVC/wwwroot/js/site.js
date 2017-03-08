@@ -24,3 +24,18 @@ jQuery.validator.setDefaults({
         }
     }
 });
+
+function registerDateTimePicker(datetimepicker) {
+    $(document).ready(function () {
+        // Find the element.
+        var item = $(datetimepicker);
+
+        // Register the change event on the datetime picker.
+        item.on("dp.change", function (e) {
+            item.closest(".form-group").removeClass("is-empty");
+        });
+
+        // Start the datetime picker.
+        item.datetimepicker();
+    });
+}

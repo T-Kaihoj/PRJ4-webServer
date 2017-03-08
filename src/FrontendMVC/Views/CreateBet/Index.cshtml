@@ -23,50 +23,28 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <div class="row form-group label-floating">
+                <div class="form-group label-floating">
                     <label for="judgeName" class="control-label">Judge</label>
                     <input type="text" id="judgeName" class="form-control" />
                 </div>
-                <!--DATE PICKER START #STARTDATE -->
-                <div class="row form-group label-floating">
+                <div class="form-group label-floating">
                     <label for="datetimepickerstart" class="control-label">Start date</label>
-                    <div class='col-sm-6'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepickerstart'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $('#datetimepickerstart').datetimepicker();
-                        });
-                    </script>
+                    <div class="input-group date" id="datetimepickerstart">
+                        <input type="text" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div>                    
                 </div>
-                <!--DATE PICKER END #STARTDATE -->
-                <!--DATE PICKER START #ENDDATE -->
-                <div class="row form-group label-floating">
+                <div class="form-group label-floating">
                     <label for="datetimepickerend" class="control-label">End date</label>
-                    <div class='col-sm-6'>
-                        <div class="form-group">
-                            <div class='input-group date' id='datetimepickerend'>
-                                <input type='text' class="form-control" />
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-calendar"></span>
-                                </span>
-                            </div>
-                        </div>
+                    <div class="input-group date" id="datetimepickerend">
+                        <input type="text" class="form-control" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                     </div>
-                    <script type="text/javascript">
-                        $(document).ready(function () {
-                            $('#datetimepickerend').datetimepicker();
-                        });
-                    </script>
                 </div>
-                <!--DATE PICKER END #ENDDATE -->
             </div>
         </div>
         <!-- Note a manual hack here. We wish to align the toggle button and the submit button. We use some custom css,
@@ -89,3 +67,8 @@
         </div>
     </form>
 </div>
+
+<script>
+    registerDateTimePicker("#datetimepickerstart");
+    registerDateTimePicker("#datetimepickerend");
+</script>
