@@ -1,18 +1,18 @@
-﻿<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
-<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-@{
+﻿@{
     ViewData["Title"] = "Create Bet";
 }
-
 
 <div class="container">
     <form asp-controller="CreateLobby" asp-action="post">
         <div class="row">
-
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <h1 class="header">
                     Create bet
                 </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
                 <div class="row form-group label-floating">
                     <label for="betName" class="control-label">Bet name</label>
                     <input type="text" id="betName" name="betName" class="form-control" />
@@ -22,64 +22,69 @@
                     <textarea rows="5" id="BetDescription" name="BetDescription" class="form-control"></textarea>
                 </div>
             </div>
-
             <div class="col-md-6">
-
-                <br /><br /><br />
                 <div class="row form-group label-floating">
                     <label for="judgeName" class="control-label">Judge</label>
                     <input type="text" id="judgeName" class="form-control" />
                 </div>
                 <!--DATE PICKER START #STARTDATE -->
-                    <div class="row form-group label-floating">
-                        <label for="datetimepickerstart" class="control-label">Start date</label>
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepickerstart'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
+                <div class="row form-group label-floating">
+                    <label for="datetimepickerstart" class="control-label">Start date</label>
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepickerstart'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
                             </div>
                         </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $('#datetimepickerstart').datetimepicker();
-                            });
-
-                        </script>
                     </div>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#datetimepickerstart').datetimepicker();
+                        });
+                    </script>
+                </div>
                 <!--DATE PICKER END #STARTDATE -->
                 <!--DATE PICKER START #ENDDATE -->
-                    <div class="row form-group label-floating">
-                        <label for="datetimepickerend" class="control-label">End date</label>
-                        <div class='col-sm-6'>
-                            <div class="form-group">
-                                <div class='input-group date' id='datetimepickerend'>
-                                    <input type='text' class="form-control" />
-                                    <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
-                                    </span>
-                                </div>
+                <div class="row form-group label-floating">
+                    <label for="datetimepickerend" class="control-label">End date</label>
+                    <div class='col-sm-6'>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepickerend'>
+                                <input type='text' class="form-control" />
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-calendar"></span>
+                                </span>
                             </div>
                         </div>
-                        <script type="text/javascript">
-                            $(document).ready(function () {
-                                $('#datetimepickerend').datetimepicker();
-                            });
-
-                        </script>
                     </div>
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $('#datetimepickerend').datetimepicker();
+                        });
+                    </script>
+                </div>
                 <!--DATE PICKER END #ENDDATE -->
             </div>
         </div>
-        <div class="row">
-                <label for="endonjudged" class="control-label">End when judged</label>
-                <input id="endonjudged" type="checkbox" checked data-toggle="toggle" data-onstyle="success">
-
-            <div class="pull-right">
-                <button type="submit" class="btn btn-primary pull-right">Create lobby</button>
+        <!-- Note a manual hack here. We wish to align the toggle button and the submit button. We use some custom css,
+        but this interferes with pull-right from bootstrap. To circumvent this, we set a manual style on the submit
+        button to get it to pull right. -->
+        <div class="row vertical-align">
+            <div class="col-md-6">
+                <div class="togglebutton">
+                    <label>
+                        End when judged
+                        <!-- A few nonblank spaces to get some distance between the toggle button and the text. -->
+                        &nbsp; &nbsp;
+                        <input id="endonjudged" type="checkbox" checked="">
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary" style="margin-left: auto;">Create lobby</button>
             </div>
         </div>
     </form>

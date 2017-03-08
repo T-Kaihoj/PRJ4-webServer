@@ -1,4 +1,5 @@
-﻿div.row
+﻿/* The following two styles are only used for debugging purposes. */
+div.row
 {
     border: 0px solid;
 }
@@ -16,4 +17,16 @@ body { padding-top: 70px; }
 /* Style links in the navbar to have a color change on hover. */
 div.navbar a:hover {
     background-color: #19a094 !important;
+}
+
+.vertical-align {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+  display: flex;
+  align-items: center;     /* Align the flex-items vertically */
+  
 }
