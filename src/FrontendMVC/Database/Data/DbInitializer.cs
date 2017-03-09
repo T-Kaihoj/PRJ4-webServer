@@ -14,7 +14,7 @@ namespace FrontendMVC.Database.Data
             using (var unitOfWork = new UnitOfWork(context))
             {
                 context.Database.EnsureCreated();
-
+                
                 if (!context.Users.Any())
                 {
                     var users = new User[]
