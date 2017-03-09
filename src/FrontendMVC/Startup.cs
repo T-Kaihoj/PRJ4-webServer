@@ -30,8 +30,8 @@ namespace FrontendMVC
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddDbContext<Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalBet")));
+            //services.AddDbContext<Context>(options =>
+              //  options.UseSqlServer(Configuration.GetConnectionString("LocalBet")));
                 
 
             // Add framework services.
@@ -40,7 +40,7 @@ namespace FrontendMVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, Context context)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
@@ -64,7 +64,7 @@ namespace FrontendMVC
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             
-            DbInitializer.Initialize(context);
+            //DbInitializer.Initialize(context);
         }
     }
 }
