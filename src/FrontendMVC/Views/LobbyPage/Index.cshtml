@@ -1,0 +1,33 @@
+﻿@using FrontendMVC.ViewModels;
+
+@{
+    ViewData["Title"] = "LobbyPage";
+}
+
+@model CreateLobbyViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="header">
+                Lobby1
+            </h1>
+
+            <form method="post" asp-controller="CreateLobby" asp-action="post">
+                <div class="row">
+                    <p class="lead">
+                        Bet 1 - Weightloss
+                    </p>
+                </div>
+                <div class="row form-group label-floating">
+                    <label for="LobbyDescription" class="control-label">Describe your lobby</label>
+                    <textarea rows="5" id="LobbyDescription" name="Description" class="form-control"></textarea>
+                </div>
+                <div class="row">
+                    <button type="submit" class="btn btn-primary pull-right">Create lobby</button>
+                    <button type="reset" class="btn btn-primary pull-left">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
