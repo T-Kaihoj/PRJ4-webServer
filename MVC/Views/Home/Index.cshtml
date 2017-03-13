@@ -1,31 +1,131 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@using FrontendMVC.ViewModels;
+
+@{
+    ViewData["Title"] = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@model UserViewModel
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>
+                LocalBet helps you make bets with your friends.
+            </h3>
+            <img src="~/images/handshake-icon.png" width="100" />
+        </div>
+        <div class="col-md-6">
+            <form asp-controller="User" asp-action="CreateUser" id="createUserForm" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            <label asp-for="FirstName" class="control-label">First name</label>
+                            <input asp-for="FirstName" type="text" value="@Model.FirstName" class="form-control" />
+                            <span asp-validation-for="FirstName" class="help-block"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group label-floating">
+                            <label asp-for="LastName" class="control-label">Last name</label>
+                            <input asp-for="LastName" type="text" value="@Model.LastName" class="form-control" />
+                            <span asp-validation-for="LastName" class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            <label asp-for="UserName" class="control-label">User name</label>
+                            <input asp-for="UserName" type="text" value="@Model.UserName" class="form-control" />
+                            <span asp-validation-for="UserName" class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            <label asp-for="Email" class="control-label">Email</label>
+                            <input asp-for="Email" type="email" value="@Model.Email" class="form-control" />
+                            <span asp-validation-for="Email" class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            <label asp-for="Password1" class="control-label">Password</label>
+                            <input asp-for="Password1" type="password" value="@Model.Password1" class="form-control" />
+                            <span asp-validation-for="Password1" class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            <label asp-for="Password2" class="control-label">Repeat password</label>
+                            <input asp-for="Password2" type="password" value="@Model.Password2" class="form-control" />
+                            <span asp-validation-for="Password2" class="help-block"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary pull-right">Register</button>
+                    </div>
+                </div>
+            </form>
+            <script>
+                // Setup validation of the "createUserForm"
+                $("#createUserForm").validate({
+                    rules: {
+                        FirstName: {
+                            required: true
+                        },
+                        LastName: {
+                            required: true
+                        },
+                        UserName: {
+                            required: true
+                        },
+                        Email: {
+                            required: true
+                        },
+                        Password1: {
+                            required: true
+                        },
+                        Password2: {
+                            required: true,
+                            equalTo: "#Password1"
+                        }
+                    },
+
+                    messages: {
+                        FirstName: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorFirstNameRequired)"
+                        },
+                        LastName: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorLastNameRequired)"
+                        },
+                        UserName: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorUserNameRequired)"
+                        },
+                        Email: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorEmailRequired)"
+                        },
+                        Password1: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired1)"
+                        },
+                        Password2: {
+                            required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired2)",
+                            equalto: "@Html.Raw(UserViewModelErrors.ErrorPasswordNotIdentical)"
+                        }
+                    },
+
+                    submitHandler: function (form) {
+                        form.submit();
+                    }
+                });
+            </script>
+        </div>
     </div>
 </div>
