@@ -158,9 +158,20 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Authentication\InvalidCredentials.cshtml" />
+    <Content Include="Views\Authentication\ValidCredentials.cshtml" />
+    <Content Include="Views\BetPage\Index.cshtml" />
+    <Content Include="Views\CreateBet\Index.cshtml" />
+    <Content Include="Views\CreateLobby\Index.cshtml" />
+    <Content Include="Views\InviteToLobby\Index.cshtml" />
+    <Content Include="Views\LobbyPage\Index.cshtml" />
+    <Content Include="Views\_ViewImports.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
+    <Content Include="Views\User\UserCreated.cshtml" />
+    <Content Include="Views\Shared\LoginBox.cshtml" />
+    <Content Include="Views\Shared\MenuBox.cshtml" />
+    <Content Include="Views\Shared\UserBox.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
