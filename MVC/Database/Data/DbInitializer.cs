@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Threading.Tasks;
-using FrontendMVC.Database.Models;
+using MVC.Database.Models;
 
-namespace FrontendMVC.Database.Data
+namespace MVC.Database.Data
 {
     public static class DbInitializer
     {
@@ -13,7 +11,8 @@ namespace FrontendMVC.Database.Data
         {
             using (var unitOfWork = new UnitOfWork(context))
             {
-                context.Database.EnsureCreated();
+                //context.Database.EnsureCreated();
+                context.Database.CreateIfNotExists();
                 
                 if (!context.Users.Any())
                 {

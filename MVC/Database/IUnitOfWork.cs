@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FrontendMVC.Database.Repositories;
+using MVC.Database.Repositories;
 
-namespace FrontendMVC.Database
+namespace MVC.Database
 
 {
     public interface IUnitOfWork : IDisposable

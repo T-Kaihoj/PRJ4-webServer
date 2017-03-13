@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FrontendMVC.Database.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Data.Entity;
+using MVC.Database.Models;
 
-namespace FrontendMVC.Database.Data
+namespace MVC.Database.Data
 {
     public class Context : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options)
+        //public Context(DbContextOptions<Context> options) : base(options)
+        public Context() : base()
         {
         }
 
@@ -17,7 +14,7 @@ namespace FrontendMVC.Database.Data
         public DbSet<Bet> Bets { get; set; }
         public DbSet<Lobby> Lobbies { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Bet>().ToTable("Bets");

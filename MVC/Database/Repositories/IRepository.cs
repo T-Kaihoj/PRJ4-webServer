@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Threading.Tasks;
 
-namespace FrontendMVC.Database.Repositories
+namespace MVC.Database.Repositories
 { 
     public interface IRepository<TEntity> where TEntity : class
     {

@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FrontendMVC.Database.Models;
-using FrontendMVC.Database.Repositories;
-using FrontendMVC.Database.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Data.Entity;
+using MVC.Database.Data;
+using MVC.Database.Models;
+using MVC.Database.Repositories;
 
-namespace FrontendMVC.Database.Persistence
+namespace MVC.Database.Persistence
 {
     public class UserRepository : Repository<User>, IUserRepository
     {

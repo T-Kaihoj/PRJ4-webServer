@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FrontendMVC.Database.Models;
+﻿using MVC.Database.Models;
 
-namespace FrontendMVC.Database.Repositories
+namespace MVC.Database.Repositories
 { 
     public interface IUserRepository : IRepository<User>
     {

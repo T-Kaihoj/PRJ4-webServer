@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FrontendMVC.Database.Repositories;
-using FrontendMVC.Database.Data;
-using FrontendMVC.Database.Persistence;
+using MVC.Database.Data;
+using MVC.Database.Persistence;
+using MVC.Database.Repositories;
 
-namespace FrontendMVC.Database
+namespace MVC.Database
 {
     public class UnitOfWork : IUnitOfWork
     {
