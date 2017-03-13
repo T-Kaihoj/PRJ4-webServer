@@ -1,31 +1,42 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
 namespace MVC
 {
     public class BundleConfig
     {
-        // For more information on bundling, visit https://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            // JavaScript for libraries.
+            var bundleJsLibs = new ScriptBundle("~/bundles/javascript-libs").Include(
+                "~/Content/assets/js/jquery.js",
+                "~/Content/assets/js/jquery.validate.js",
+                "~/Content/assets/js/moment.js",
+                "~/Content/assets/js/bootstrap.js",
+                "~/Content/assets/js/bootstrap-datetimepicker.js",
+                "~/Content/assets/js/material.js",
+                "~/Content/assets/js/ripples.js"
+            );
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+            // We need to specify the load order, so we overload the ordering.
+            bundleJsLibs.Orderer = new PassthruBundleOrderer();
 
-            // Use the development version of Modernizr to develop with and learn from. Then, when you're
-            // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+            // Add to the global list of bundles.
+            bundles.Add(bundleJsLibs);
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            // JavaScript for the site.
+            bundles.Add(new ScriptBundle("~/bundles/javascript-site").Include(
+                "~/Content/js/site.js"
+            ));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+            // Stylesheets for the libraries.
+            bundles.Add(new StyleBundle("~/bundles/css-libs").Include(
+                "~/Content/assets/css/*.css"
+            ));
+            
+            // Stylesheets for the site.
+            bundles.Add(new StyleBundle("~/bundles/css-site").Include(
+                "~/Content/site.css"
+            ));
         }
     }
 }
