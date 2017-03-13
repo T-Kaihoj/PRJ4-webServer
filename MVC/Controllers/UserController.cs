@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FrontendMVC.ViewModels;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
+using MVC.ViewModels;
 
-namespace FrontendMVC.Controllers
+namespace MVC.Controllers
 {
     public class UserController : Controller
     {
         // GET: /UserController/
         [HttpGet]
-        public IActionResult Get()
+        public ActionResult Get()
         {
             // TODO: Get the user from the identity.
             var user = new UserViewModel();
@@ -33,7 +33,7 @@ namespace FrontendMVC.Controllers
 
         // PATCH: /UserController/
         [HttpPatch]
-        public IActionResult Patch(UserViewModel model)
+        public ActionResult Patch(UserViewModel model)
         {
             // Validate the model.
             if (!TryValidateModel(model))
@@ -49,7 +49,7 @@ namespace FrontendMVC.Controllers
 
         // POST: /UserController/CreateUser
         [HttpPost]
-        public IActionResult CreateUser(UserViewModel model)
+        public ActionResult CreateUser(UserViewModel model)
         {
             // Validate the model.
             if (!TryValidateModel(model))

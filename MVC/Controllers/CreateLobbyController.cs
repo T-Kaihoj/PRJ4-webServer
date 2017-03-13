@@ -3,22 +3,23 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using FrontendMVC.ViewModels;
-using Microsoft.AspNetCore.Mvc;
+using System.Web.Mvc;
+using MVC.ViewModels;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace FrontendMVC.Controllers
+namespace MVC.Controllers
 {
     public class CreateLobbyController : Controller
     {
         // GET: /<controller>/
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
 
-        public IActionResult post(CreateLobbyViewModel objLobby)
+        public ActionResult post(CreateLobbyViewModel objLobby)
         {
             Debug.WriteLine("Create lobby" + objLobby.Name + " ");
 
