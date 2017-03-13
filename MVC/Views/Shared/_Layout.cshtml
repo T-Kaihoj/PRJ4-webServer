@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Test</title>
-
+    @Scripts.Render("~/bundles/js-essential")
     @Styles.Render("~/bundles/css-libs")
     @Styles.Render("~/bundles/css-site")
 </head>
@@ -38,8 +38,8 @@
     <div class="container body-content">
         @RenderBody()
     </div>
-    @Scripts.Render("~/bundles/javascripts-libs")
-@Scripts.Render("~/bundles/javascripts-site")
+    @Scripts.Render("~/bundles/js-libs")
+    @Scripts.Render("~/bundles/js-site")
     @RenderSection("scripts", required: false)
 </body>
 </html>

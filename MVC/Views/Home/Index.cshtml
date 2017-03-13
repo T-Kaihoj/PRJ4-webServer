@@ -12,7 +12,7 @@
             <h3>
                 LocalBet helps you make bets with your friends.
             </h3>
-            <img src="~/images/handshake-icon.png" width="100" />
+            <img src="~/Content/images/handshake-icon.png" width="100" />
         </div>
         <div class="col-md-6">
             <form asp-controller="User" asp-action="CreateUser" id="createUserForm" method="post">
@@ -76,54 +76,56 @@
             </form>
             <script>
                 // Setup validation of the "createUserForm"
-                $("#createUserForm").validate({
-                    rules: {
-                        FirstName: {
-                            required: true
+                $(document).ready(function() {
+                    $("#createUserForm").validate({
+                        rules: {
+                            FirstName: {
+                                required: true
+                            },
+                            LastName: {
+                                required: true
+                            },
+                            UserName: {
+                                required: true
+                            },
+                            Email: {
+                                required: true
+                            },
+                            Password1: {
+                                required: true
+                            },
+                            Password2: {
+                                required: true,
+                                equalTo: "#Password1"
+                            }
                         },
-                        LastName: {
-                            required: true
-                        },
-                        UserName: {
-                            required: true
-                        },
-                        Email: {
-                            required: true
-                        },
-                        Password1: {
-                            required: true
-                        },
-                        Password2: {
-                            required: true,
-                            equalTo: "#Password1"
-                        }
-                    },
 
-                    messages: {
-                        FirstName: {
-                            required: "@Html.Raw(UserViewModelErrors.ErrorFirstNameRequired)"
+                        messages: {
+                            FirstName: {
+                                required: "@Html.Raw(UserViewModelErrors.ErrorFirstNameRequired)"
+                            },
+                            LastName: {
+                                required: "@Html.Raw(UserViewModelErrors.ErrorLastNameRequired)"
+                            },
+                            UserName: {
+                                required: "@Html.Raw(UserViewModelErrors.ErrorUserNameRequired)"
+                            },
+                            Email: {
+                                required: "@Html.Raw(UserViewModelErrors.ErrorEmailRequired)"
+                            },
+                            Password1: {
+                                required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired1)"
+                            },
+                            Password2: {
+                                required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired2)",
+                                equalto: "@Html.Raw(UserViewModelErrors.ErrorPasswordNotIdentical)"
+                            }
                         },
-                        LastName: {
-                            required: "@Html.Raw(UserViewModelErrors.ErrorLastNameRequired)"
-                        },
-                        UserName: {
-                            required: "@Html.Raw(UserViewModelErrors.ErrorUserNameRequired)"
-                        },
-                        Email: {
-                            required: "@Html.Raw(UserViewModelErrors.ErrorEmailRequired)"
-                        },
-                        Password1: {
-                            required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired1)"
-                        },
-                        Password2: {
-                            required: "@Html.Raw(UserViewModelErrors.ErrorPasswordRequired2)",
-                            equalto: "@Html.Raw(UserViewModelErrors.ErrorPasswordNotIdentical)"
-                        }
-                    },
 
-                    submitHandler: function (form) {
-                        form.submit();
-                    }
+                        submitHandler: function(form) {
+                            form.submit();
+                        }
+                    });
                 });
             </script>
         </div>
