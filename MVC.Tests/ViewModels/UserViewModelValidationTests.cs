@@ -1,24 +1,22 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.ComponentModel.DataAnnotations;
 using MVC.ViewModels;
 using NUnit.Framework;
 
 namespace MVC.Tests.ViewModels
 {
     [TestFixture]
-    public class UserViewModelValidationTests
+    public class UserViewModelValidationTests : ValidationHelper
     {
         private UserViewModel uut;
-        private ValidationContext context;
-        private List<ValidationResult> results;
 
         [SetUp]
-        public void Setup()
+        public new void Setup()
         {
+            // Let the base handle common setup tasks.
+            base.Setup();
+
             uut = new UserViewModel();
-            context = new ValidationContext(uut, null, null);
-            results = new List<ValidationResult>();
+            Context = new ValidationContext(uut, null, null);
 
             // Setup a valid state for all properties.
             uut.Email = "a@a.a";
@@ -35,7 +33,7 @@ namespace MVC.Tests.ViewModels
         public void Validate_WithSetup_ReturnsValid()
         {
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(isStateValid, Is.EqualTo(true));
         }
@@ -51,7 +49,7 @@ namespace MVC.Tests.ViewModels
             uut.Email = value;
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(isStateValid, Is.EqualTo(expected));
         }
@@ -65,7 +63,7 @@ namespace MVC.Tests.ViewModels
             uut.FirstName = value;
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(isStateValid, Is.EqualTo(expected));
         }
@@ -79,7 +77,7 @@ namespace MVC.Tests.ViewModels
             uut.LastName = value;
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(isStateValid, Is.EqualTo(expected));
         }
@@ -94,7 +92,7 @@ namespace MVC.Tests.ViewModels
             uut.Password2 = value;
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(isStateValid, Is.EqualTo(expected));
         }
@@ -108,7 +106,7 @@ namespace MVC.Tests.ViewModels
             uut.UserName = value;
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(isStateValid, Is.EqualTo(expected));
         }
@@ -123,7 +121,7 @@ namespace MVC.Tests.ViewModels
             uut.Password2 = b;
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(isStateValid, Is.EqualTo(expected));
         }
@@ -139,12 +137,9 @@ namespace MVC.Tests.ViewModels
             uut.Email = "";
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            Validator.TryValidateObject(uut, Context, Results, true);
 
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorEmailRequired));
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorEmailRequired));
         }
 
         [TestCase("a")]
@@ -157,12 +152,9 @@ namespace MVC.Tests.ViewModels
             uut.Email = value;
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            Validator.TryValidateObject(uut, Context, Results, true);
 
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorEmailInvalid));
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorEmailInvalid));
         }
 
         [Test]
@@ -172,12 +164,9 @@ namespace MVC.Tests.ViewModels
             uut.FirstName = "";
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
-
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorFirstNameRequired));
+            Validator.TryValidateObject(uut, Context, Results, true);
+            
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorFirstNameRequired));
         }
 
         [Test]
@@ -187,12 +176,9 @@ namespace MVC.Tests.ViewModels
             uut.LastName = "";
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            Validator.TryValidateObject(uut, Context, Results, true);
 
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorLastNameRequired));
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorLastNameRequired));
         }
 
         [Test]
@@ -202,12 +188,9 @@ namespace MVC.Tests.ViewModels
             uut.Password1 = "";
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
-
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorPasswordRequired1));
+            Validator.TryValidateObject(uut, Context, Results, true);
+            
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorPasswordRequired1));
         }
 
         [Test]
@@ -217,12 +200,9 @@ namespace MVC.Tests.ViewModels
             uut.Password2 = "";
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            Validator.TryValidateObject(uut, Context, Results, true);
 
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorPasswordRequired2));
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorPasswordRequired2));
         }
 
         [Test]
@@ -233,12 +213,9 @@ namespace MVC.Tests.ViewModels
             uut.Password2 = "b";
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            Validator.TryValidateObject(uut, Context, Results, true);
 
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorPasswordNotIdentical));
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorPasswordNotIdentical));
         }
 
         [Test]
@@ -248,12 +225,9 @@ namespace MVC.Tests.ViewModels
             uut.UserName = "";
 
             // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, context, results, true);
+            Validator.TryValidateObject(uut, Context, Results, true);
 
-            // Extract the error messages.
-            var messages = results.Select(r => r.ErrorMessage);
-
-            Assert.That(messages, Contains.Item(UserViewModelErrors.ErrorUserNameRequired));
+            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorUserNameRequired));
         }
 
         #endregion
