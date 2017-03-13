@@ -128,6 +128,21 @@
     <Compile Include="Controllers\InviteToLobbyController.cs" />
     <Compile Include="Controllers\LobbyPageController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Database\Data\Context.cs" />
+    <Compile Include="Database\Data\DbInitializer.cs" />
+    <Compile Include="Database\IUnitOfWork.cs" />
+    <Compile Include="Database\Models\Bet.cs" />
+    <Compile Include="Database\Models\Lobby.cs" />
+    <Compile Include="Database\Models\User.cs" />
+    <Compile Include="Database\Persistence\BetRepository.cs" />
+    <Compile Include="Database\Persistence\LobbyRepository.cs" />
+    <Compile Include="Database\Persistence\Repository.cs" />
+    <Compile Include="Database\Persistence\UserRepository.cs" />
+    <Compile Include="Database\Repositories\IBetRepository.cs" />
+    <Compile Include="Database\Repositories\ILobbyRepository.cs" />
+    <Compile Include="Database\Repositories\IRepository.cs" />
+    <Compile Include="Database\Repositories\IUserRepository.cs" />
+    <Compile Include="Database\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
