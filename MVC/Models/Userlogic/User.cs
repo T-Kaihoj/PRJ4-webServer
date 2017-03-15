@@ -1,4 +1,4 @@
-﻿namespace UserLogic
+﻿namespace MVC.Models.Userlogic
 {
     public class User
     {

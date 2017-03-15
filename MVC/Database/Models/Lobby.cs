@@ -10,8 +10,9 @@ namespace MVC.Database.Models
 
         public string Name { get; set; }
         public string Description { get; set; }
-        public List<Bet> Bets { get; set; }
-        public List<User> Members { get; set; }
-        public List<User> Invited { get; set; }
+        public ICollection<Bet> Bets { get; set; }
+        public ICollection<UserLobbyMember> Members { get; set; }
+        //[Column("InvitedLobbies")]
+        //public ICollection<User> Invited { get; set; }
     }
 }

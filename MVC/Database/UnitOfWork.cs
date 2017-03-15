@@ -7,6 +7,7 @@ namespace MVC.Database
 {
     public class UnitOfWork : IUnitOfWork
     {
+
         private readonly Context _context;
 
         public UnitOfWork(Context context)

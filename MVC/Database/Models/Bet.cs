@@ -15,9 +15,8 @@ namespace MVC.Database.Models
         public DateTime StopDate { get; set; }
         public Decimal BuyIn { get; set; }
         public Decimal Pot { get; set; }
-        public string Description { get; set; }
-        public List<User> Participants { get; set; }
-        public List<User> Invited { get; set; }
+        public string Description { get; set; } 
+        public virtual ICollection<User> Participants { get; set; }
         public User Judge { get; set; }
     }
 }

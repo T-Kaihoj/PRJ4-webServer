@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MVC.Database.Models
@@ -15,5 +16,6 @@ namespace MVC.Database.Models
         public decimal Balance { get; set; }
         public string Hash { get; set; }
         public string Salt { get; set; }
+        public ICollection<UserLobbyMember> MemberOfLobbies { get; set; }
     }
 }

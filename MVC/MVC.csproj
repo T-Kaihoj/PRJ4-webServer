@@ -140,6 +140,7 @@
     <Compile Include="Database\Models\Bet.cs" />
     <Compile Include="Database\Models\Lobby.cs" />
     <Compile Include="Database\Models\User.cs" />
+    <Compile Include="Database\Models\UserLobbyMember.cs" />
     <Compile Include="Database\Persistence\BetRepository.cs" />
     <Compile Include="Database\Persistence\LobbyRepository.cs" />
     <Compile Include="Database\Persistence\Repository.cs" />
