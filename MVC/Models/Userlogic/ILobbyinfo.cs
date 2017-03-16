@@ -46,7 +46,6 @@ namespace MVC.Models.Userlogic
         //Returner en liste af Users som er medlem af lobbyen.
         List<User> getParticipants(long lobbyID);
 
-
-
+        void Persist();
     }
 }

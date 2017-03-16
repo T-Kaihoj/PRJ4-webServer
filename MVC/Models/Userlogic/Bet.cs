@@ -1,4 +1,6 @@
-﻿namespace BetLogic
+﻿using UserLogic;
+
+namespace BetLogic
 {
     public class Bet
     {
