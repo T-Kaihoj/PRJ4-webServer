@@ -158,6 +158,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703161853230_LocalBet.cs" />
+    <Compile Include="Migrations\201703161853230_LocalBet.Designer.cs">
+      <DependentUpon>201703161853230_LocalBet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\User.cs" />
     <Compile Include="Models\Userlogic\IUserEdit.cs" />
@@ -208,6 +213,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703161853230_LocalBet.resx">
+      <DependentUpon>201703161853230_LocalBet.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Data;
 using System.Linq;
+using System.Data.Entity;
 using MVC.Database.Models;
 
 namespace MVC.Database.Data
 {
-    public static class DbInitializer
+    public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<Context>
     {
-        public static void Initialize(Context context)
+        protected override void Seed(Context context)
         {
             using (var unitOfWork = new UnitOfWork(context))
             {
@@ -29,6 +30,7 @@ namespace MVC.Database.Data
                     {
                         unitOfWork.User.Add(user);
                     }
+                    Console.WriteLine("Users added!!!");
                     Debug.WriteLine("Users added!!!");
                 }
 
@@ -46,6 +48,7 @@ namespace MVC.Database.Data
                     {
                         unitOfWork.Bet.Add(bet);
                     }
+                    Console.WriteLine("Bets added!!!");
                     Debug.WriteLine("Bets added!!!");
                 }
 
@@ -91,6 +94,7 @@ namespace MVC.Database.Data
 
                 unitOfWork.Complete();
 
+                Console.WriteLine("Initialization done!!!");
                 Debug.WriteLine("Initialization done!!!");
             }
         }
