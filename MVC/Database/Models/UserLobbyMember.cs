@@ -12,6 +12,7 @@ namespace MVC.Database.Models
 
     public class UserLobbyMember
     {
+        // Sammensat primærnøgle
         [Key]
         [Column(Order = 1)]
         public string UserName { get; set; }
