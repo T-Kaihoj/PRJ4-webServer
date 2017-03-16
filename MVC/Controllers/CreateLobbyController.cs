@@ -29,9 +29,8 @@ namespace MVC.Controllers
             {
                 return View("Index", viewModel);
             }
-            
-            var lobby = new Lobby();
-            lobby.LobbyName = viewModel.Name;
+
+            var lobby = new Lobby(viewModel.Name);
             lobby.Describtion = viewModel.Description;
 
             lobby.Persist();
