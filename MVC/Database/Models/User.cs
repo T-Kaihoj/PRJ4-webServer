@@ -16,6 +16,6 @@ namespace MVC.Database.Models
         public decimal Balance { get; set; }
         public string Hash { get; set; }
         public string Salt { get; set; }
-        public ICollection<UserLobbyMember> MemberOfLobbies { get; set; }
+        public virtual ICollection<UserLobbyMember> MemberOfLobbies { get; set; }
     }
 }

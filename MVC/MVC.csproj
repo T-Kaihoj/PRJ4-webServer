@@ -141,14 +141,17 @@
     <Compile Include="Database\IUnitOfWork.cs" />
     <Compile Include="Database\Models\Bet.cs" />
     <Compile Include="Database\Models\Lobby.cs" />
+    <Compile Include="Database\Models\Outcome.cs" />
     <Compile Include="Database\Models\User.cs" />
     <Compile Include="Database\Models\UserLobbyMember.cs" />
     <Compile Include="Database\Persistence\BetRepository.cs" />
     <Compile Include="Database\Persistence\LobbyRepository.cs" />
+    <Compile Include="Database\Persistence\OutcomeRepository.cs" />
     <Compile Include="Database\Persistence\Repository.cs" />
     <Compile Include="Database\Persistence\UserRepository.cs" />
     <Compile Include="Database\Repositories\IBetRepository.cs" />
     <Compile Include="Database\Repositories\ILobbyRepository.cs" />
+    <Compile Include="Database\Repositories\IOutcomeRepository.cs" />
     <Compile Include="Database\Repositories\IRepository.cs" />
     <Compile Include="Database\Repositories\IUserRepository.cs" />
     <Compile Include="Database\UnitOfWork.cs" />
