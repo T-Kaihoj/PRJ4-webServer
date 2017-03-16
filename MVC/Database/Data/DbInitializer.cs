@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Data;
+using System.Linq;
 using MVC.Database.Models;
 
 namespace MVC.Database.Data
@@ -11,8 +13,9 @@ namespace MVC.Database.Data
         {
             using (var unitOfWork = new UnitOfWork(context))
             {
-                context.Database.EnsureCreated(); // noget her der også er broken efter skiftet til normal entity
+               // context.Database.EnsureCreated(); // noget her der også er broken efter skiftet til normal entity
 
+                // Laver flere useres og tilføjer dem til databasen hvis der ikke findes nogen
                 if (!context.Users.Any())
                 {
                     var users = new User[]
@@ -29,6 +32,7 @@ namespace MVC.Database.Data
                     Debug.WriteLine("Users added!!!");
                 }
 
+                // Laver flere bets og tilføjer dem til databasen hvis der ikke findes nogen
                 if (!context.Bets.Any())
                 {
                     var bets = new Bet[]
@@ -46,6 +50,7 @@ namespace MVC.Database.Data
                 }
 
 
+                // Laver flere Lobbies og tilføjer dem til databasen hvis der ikke findes nogen
                 if (!context.Lobbies.Any())
                 {
                     var lobbies = new Lobby[]
