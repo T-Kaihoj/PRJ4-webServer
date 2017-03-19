@@ -143,7 +143,6 @@
     <Compile Include="Database\Models\Lobby.cs" />
     <Compile Include="Database\Models\Outcome.cs" />
     <Compile Include="Database\Models\User.cs" />
-    <Compile Include="Database\Models\UserLobbyMember.cs" />
     <Compile Include="Database\Persistence\BetRepository.cs" />
     <Compile Include="Database\Persistence\LobbyRepository.cs" />
     <Compile Include="Database\Persistence\OutcomeRepository.cs" />
@@ -158,9 +157,45 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703161853230_LocalBet.cs" />
-    <Compile Include="Migrations\201703161853230_LocalBet.Designer.cs">
-      <DependentUpon>201703161853230_LocalBet.cs</DependentUpon>
+    <Compile Include="Migrations\201703191550583_Initial.cs" />
+    <Compile Include="Migrations\201703191550583_Initial.Designer.cs">
+      <DependentUpon>201703191550583_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191559554_testmigrat..cs" />
+    <Compile Include="Migrations\201703191559554_testmigrat..Designer.cs">
+      <DependentUpon>201703191559554_testmigrat..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191611588_testtest.cs" />
+    <Compile Include="Migrations\201703191611588_testtest.Designer.cs">
+      <DependentUpon>201703191611588_testtest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191615468_Lidt mere hygge.cs" />
+    <Compile Include="Migrations\201703191615468_Lidt mere hygge.Designer.cs">
+      <DependentUpon>201703191615468_Lidt mere hygge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191619442_Mange til mange test.cs" />
+    <Compile Include="Migrations\201703191619442_Mange til mange test.Designer.cs">
+      <DependentUpon>201703191619442_Mange til mange test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191640362_Test til column navne.cs" />
+    <Compile Include="Migrations\201703191640362_Test til column navne.Designer.cs">
+      <DependentUpon>201703191640362_Test til column navne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191646212_samme som før.cs" />
+    <Compile Include="Migrations\201703191646212_samme som før.Designer.cs">
+      <DependentUpon>201703191646212_samme som før.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191649435_samme som før2.cs" />
+    <Compile Include="Migrations\201703191649435_samme som før2.Designer.cs">
+      <DependentUpon>201703191649435_samme som før2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703192002445_mange til mange mellem bet og user.cs" />
+    <Compile Include="Migrations\201703192002445_mange til mange mellem bet og user.Designer.cs">
+      <DependentUpon>201703192002445_mange til mange mellem bet og user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703192035382_Endnu en mange til mange igen igen.cs" />
+    <Compile Include="Migrations\201703192035382_Endnu en mange til mange igen igen.Designer.cs">
+      <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
@@ -215,8 +250,35 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703161853230_LocalBet.resx">
-      <DependentUpon>201703161853230_LocalBet.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703191550583_Initial.resx">
+      <DependentUpon>201703191550583_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191559554_testmigrat..resx">
+      <DependentUpon>201703191559554_testmigrat..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191611588_testtest.resx">
+      <DependentUpon>201703191611588_testtest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191615468_Lidt mere hygge.resx">
+      <DependentUpon>201703191615468_Lidt mere hygge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191619442_Mange til mange test.resx">
+      <DependentUpon>201703191619442_Mange til mange test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191640362_Test til column navne.resx">
+      <DependentUpon>201703191640362_Test til column navne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191646212_samme som før.resx">
+      <DependentUpon>201703191646212_samme som før.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191649435_samme som før2.resx">
+      <DependentUpon>201703191649435_samme som før2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703192002445_mange til mange mellem bet og user.resx">
+      <DependentUpon>201703192002445_mange til mange mellem bet og user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703192035382_Endnu en mange til mange igen igen.resx">
+      <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

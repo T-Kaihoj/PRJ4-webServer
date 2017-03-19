@@ -1,6 +1,6 @@
-using System.Collections.Generic;
 using System.Diagnostics;
 using MVC.Database;
+using MVC.Database.Data;
 using MVC.Database.Models;
 
 namespace MVC.Migrations
@@ -73,6 +73,7 @@ namespace MVC.Migrations
                     {
                         unitOfWork.User.Add(user);
                     }
+                    Console.WriteLine("Users added!!!");
                     Debug.WriteLine("Users added!!!");
                 }
 
@@ -91,7 +92,7 @@ namespace MVC.Migrations
                             Judge = null,
                             StartDate = DateTime.Now,
                             StopDate = DateTime.Today,
-                            Winner = null
+                            Outcomes = null
                         },
                         new Bet
                         {
@@ -103,7 +104,7 @@ namespace MVC.Migrations
                             Judge = null,
                             StartDate = DateTime.Now,
                             StopDate = DateTime.Today,
-                            Winner = null
+                            Outcomes = null
                         },
                         new Bet
                         {
@@ -115,7 +116,7 @@ namespace MVC.Migrations
                             Judge = null,
                             StartDate = DateTime.Now,
                             StopDate = DateTime.Today,
-                            Winner = null
+                            Outcomes = null
                         },
                         new Bet
                         {
@@ -127,13 +128,14 @@ namespace MVC.Migrations
                             Judge = null,
                             StartDate = DateTime.Now,
                             StopDate = DateTime.Today,
-                            Winner = null
+                            Outcomes = null
                         }
                     };
                     foreach (var bet in bets)
                     {
                         unitOfWork.Bet.Add(bet);
                     }
+                    Console.WriteLine("Bets added!!!");
                     Debug.WriteLine("Bets added!!!");
                 }
 
@@ -154,62 +156,24 @@ namespace MVC.Migrations
                 }
 
 
-                // test af mange til mange mellem lobby og user
-                var etBet = new Bet
-                {
-                    Name = "YourBet",
-                    Description = "best bet ever",
-                    Pot = 50,
-                    BuyIn = 50,
-                    Participants = null,
-                    Judge = null,
-                    StartDate = DateTime.Now,
-                    StopDate = DateTime.Today,
-                    Winner = null
-                };
-                var User1 = new User
-                {
-                    FirstName = "Thomas",
-                    LastName = "Nielsen",
-                    Username = "TN",
-                    Email = "tn@emila",
-                    Balance = 50,
-                    Salt = "Salt",
-                    Hash = "Hash"
-                };
-                var User2 = new User
-                {
-                    FirstName = "Brian",
-                    LastName = "Hansen",
-                    Username = "BH",
-                    Email = "tn@emila",
-                    Balance = 50,
-                    Salt = "Salt",
-                    Hash = "Hash"
-                };
-                var enLobby = new Lobby {Description = "hygge", Name = "HyggeLobby", Bets = new List<Bet>() {etBet}};
-                var LobbyMember1 = new UserLobbyMember {Lobby = enLobby, User = User1};
-                var LobbyMember2 = new UserLobbyMember {Lobby = enLobby, User = User2};
-                enLobby.Members = new List<UserLobbyMember>() {LobbyMember1, LobbyMember2};
-
-                unitOfWork.Lobby.Add(enLobby);
-                unitOfWork.User.Add(User1);
-                unitOfWork.User.Add(User2);
-                unitOfWork.Bet.Add(etBet);
-
-                // her bruges context direkte, hvilket dem udefra selvfølgelig ikke skal, det er bare til test
-                context.UserLobbyMember.Add(LobbyMember1);
-                context.UserLobbyMember.Add(LobbyMember2);
-
                 unitOfWork.Complete();
 
-                // Lad os sige at brugeren "TN" smutter fra lobbien.
-                context.UserLobbyMember.Remove(LobbyMember1);
+                //  This method will be called after migrating to the latest version.
 
-                unitOfWork.Complete();
+                //System.Data.Entity.Database.SetInitializer(new DbInitializer());
 
-                Debug.WriteLine("Initialization done!!!");
+                //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+                //  to avoid creating duplicate seed data. E.g.
+                //
+                //    context.People.AddOrUpdate(
+                //      p => p.FullName,
+                //      new Person { FullName = "Andrew Peters" },
+                //      new Person { FullName = "Brice Lambson" },
+                //      new Person { FullName = "Rowan Miller" }
+                //    );
+                //
             }
+
         }
     }
 }
