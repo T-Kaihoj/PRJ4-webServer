@@ -5,7 +5,7 @@ namespace MVC.Database.Data
 {
     public class Context : DbContext
     {
-        public Context() : base("name=LocalBet_Localdb") // stod før: public Context(DbContextOptions<Context> options) : base(options)
+        public Context() : base("name=LocalBet") // stod før: public Context(DbContextOptions<Context> options) : base(options)
         {
         }
 
