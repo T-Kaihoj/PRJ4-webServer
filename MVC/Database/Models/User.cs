@@ -14,7 +14,7 @@ namespace MVC.Database.Models
         [Required]
         public string LastName { get; set; }
         [Required]
-        [Index(IsUnique = true)]
+        // [Index(IsUnique = true)]
         public string Email { get; set; }
         [Required]
         public decimal Balance { get; set; }
