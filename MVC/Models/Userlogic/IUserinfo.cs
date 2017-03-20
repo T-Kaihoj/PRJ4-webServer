@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace UserLogic
+namespace MVC.Models.Userlogic
 {
-
     public interface IUserinfo
     {
         //PREcondition:
@@ -13,8 +12,6 @@ namespace UserLogic
         //Postcondition:
         //True, hvis en user er blevet tilføjet i databasen. False, hvis Username er optaget.
         bool createUser(string firstName, string lastName, string email, string username, string password);
-
-
 
         // INFO ___________________________________________
         //Preconditon:
@@ -35,6 +32,11 @@ namespace UserLogic
         //Returner User som ikke er forbundet til database, hvis username eksisterer, ellers null.
         User getUser(string username);
 
+        //Precondition:
+        //Modtager et UserID
+        //Postcondition
+        //Returner de bets som User deltager i.
+        List<Bet> getBets(long userID);
 
     }
 }

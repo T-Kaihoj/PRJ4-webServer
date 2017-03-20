@@ -153,9 +153,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Userlogic\Bet.cs" />
+    <Compile Include="Models\Userlogic\IBetinfo.cs" />
+    <Compile Include="Models\Userlogic\IBetJudge.cs" />
+    <Compile Include="Models\Userlogic\IBetLogic.cs" />
     <Compile Include="Models\Userlogic\ILobbyinfo.cs" />
+    <Compile Include="Models\Userlogic\ILobbyLogic.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
+    <Compile Include="Models\Userlogic\IUserLogic.cs" />
     <Compile Include="Models\Userlogic\Lobby.cs" />
+    <Compile Include="Models\Userlogic\Outcome.cs" />
     <Compile Include="Models\Userlogic\User.cs" />
     <Compile Include="Models\Userlogic\IUserEdit.cs" />
     <Compile Include="Others\PassthruBundleOrderer.cs" />

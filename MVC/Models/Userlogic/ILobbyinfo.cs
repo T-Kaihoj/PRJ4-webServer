@@ -19,34 +19,21 @@ namespace MVC.Models.Userlogic
         //Preconditon:
         //Modtager et LobbyID
         //Postcondition
-        //Returner lobby deskribtionLobbyID.
+        //Returner lobby describtion.
         string getDescribtion(long lobbyID);
 
-        //Precondition:
-        //Modtager et lobbyID
-        //Postcondition:
-        //Returner lobbyens startdato
-        string getStartDate(long lobbyID);
-
-        //Precondition:
-        //Modtager et lobbyID
-        //Postcondition:
-        //Returner lobbyens startdato
-        string getEndDate(long lobbyID);
-
-        //Precondition:
-        //Modtager et lobbyID
-        //Postcondition:
-        //Returner lobbyens Judge
-        User getJudge(long lobbyID);
-
+       
         //Precondition:
         //Modtager et LobbyID
         //Postcondition
         //Returner en liste af Users som er medlem af lobbyen.
         List<User> getParticipants(long lobbyID);
 
-
+        //Precondition:
+        //Modtager et LobbyID
+        //Postcondition
+        //Returner en liste af Users som er medlem af lobbyen.
+        List<Bet> getBets(long lobbyID);
 
     }
 }

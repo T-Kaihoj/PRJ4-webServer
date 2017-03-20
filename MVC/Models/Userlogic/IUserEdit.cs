@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UserLogic
+namespace MVC.Models.Userlogic
 {
     interface IUserEdit
     {
@@ -26,9 +26,10 @@ namespace UserLogic
         //Postcondition:
         //Retunerer true, hvis delete af user lykkedes, eller false.
         bool deleteUser(string currentUsername);
+        //Postcondition:
+        //Har tilføjet sum til Users balance.
+        void depositMoney(decimal sum, long UserID);
 
-        //Lobby funktionaliteter
-
-
+        
     }
 }

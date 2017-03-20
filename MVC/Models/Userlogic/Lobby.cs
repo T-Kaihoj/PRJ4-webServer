@@ -2,16 +2,17 @@
 using UserLogic;
 
 
-namespace LobbyLogic
+namespace MVC.Models.Userlogic
 {
     public class Lobby
     {
-        public long LobbyID { get; set; }
-        public string Describtion { get; set; }
         public string LobbyName { get; set; }
-        public List<User> Participants { get; set; }
+        public string Description { get; set; }
+        public List<User> Members { get; set; }
         //Måske laves om til en liste af BetID'er?
+        public List<User> Invited { get; set; }
         public List<Bet> Bets { get; set; }
 
     }
 }
+
