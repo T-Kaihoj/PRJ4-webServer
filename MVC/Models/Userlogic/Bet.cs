@@ -1,7 +1,14 @@
-﻿namespace MVC.Models.Userlogic
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MVC.Models.Userlogic
 { 
     public class Bet
     {
+        public long BetID { get; set; }
         public string BetName { get; set; }
         public string Description { get; set; }
         public User Judge { get; set; }
@@ -11,13 +18,13 @@
         public List<Outcome> Outcomes { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public List<Outcome> Outcomes { get; set; }
 
-        public static Bet getBet(int id)
+
+        public static Bet getBet(long id)
         {
             var bet = new Bet();
             bet.BetID = id;
-            bet.BetTitle = "Marcs weightloss";
+            bet.BetName = "Marcs weightloss";
             bet.Description = "Can Marc lose 20 pounds in 2 weeks?";
             bet.StartDate = "16-03-2017 15:38";
             bet.EndDate = "30-03-2017 15:30";

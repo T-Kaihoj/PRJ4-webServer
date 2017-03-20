@@ -24,9 +24,9 @@ namespace MVC.Controllers
             var betPage = new BetViewModel();
 
             var bet = Bet.getBet(id);
-                
 
-            betPage.Title = bet.BetTitle;
+
+            betPage.Title = bet.BetName;
             betPage.Description = bet.Description;
             betPage.StartDate = bet.StartDate;
             betPage.EndDate = bet.EndDate;

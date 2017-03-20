@@ -31,7 +31,7 @@ namespace MVC.Controllers
             }
 
             var bet = new Bet();
-            bet.BetTitle = viewModel.Title;
+            bet.BetName = viewModel.Title;
             bet.Description = viewModel.Description;
             bet.EndDate = viewModel.EndDate;
             bet.StartDate = viewModel.StartDate;
