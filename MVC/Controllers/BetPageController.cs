@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using BetLogic;
 using MVC.ViewModels;
-using UserLogic;
+using MVC.Models.Userlogic;
+
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -24,6 +24,7 @@ namespace MVC.Controllers
             var betPage = new BetViewModel();
 
             var bet = Bet.getBet(id);
+                
 
             betPage.Title = bet.BetTitle;
             betPage.Description = bet.Description;

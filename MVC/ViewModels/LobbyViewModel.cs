@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using MVC.Database.Models;
-using Bet = BetLogic.Bet;
 
 namespace MVC.ViewModels
 {

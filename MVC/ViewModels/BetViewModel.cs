@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using UserLogic;
 
-namespace MVC.ViewModels
+
+namespace MVC.Models.Userlogic
 {
     public class BetViewModel
     {

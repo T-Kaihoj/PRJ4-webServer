@@ -18,6 +18,12 @@ namespace MVC.Database.Models
         public string Description { get; set; }
         public List<User> Participants { get; set; }
         public List<User> Invited { get; set; }
+
+        internal static object getBet(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public User Judge { get; set; }
     }
 }
