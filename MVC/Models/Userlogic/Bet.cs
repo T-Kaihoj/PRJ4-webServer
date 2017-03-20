@@ -34,6 +34,14 @@ namespace BetLogic
 
             return bet;
         }
+
+        static public implicit operator Bet(MVC.Database.Models.Bet dbbet)
+        {
+            var bet = new Bet();
+            
+
+            return bet;
+        }
         public void Persist()
         {
             //throw new System.NotImplementedException();
