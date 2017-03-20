@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using BetLogic;
+
 using MVC.Database;
 using MVC.Database.Data;
 using MVC.Models.Userlogic;
-using UserLogic;
+
 
 
 namespace MVC.Models.Userlogic

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using UserLogic;
+
 
 namespace MVC.Models.Userlogic
 {
@@ -23,12 +23,6 @@ namespace MVC.Models.Userlogic
         string getDescribtion(long lobbyID);
 
        
-        //Precondition:
-        //Modtager et LobbyID
-        //Postcondition
-        //Returner en liste af Users som er medlem af lobbyen.
-        List<User> getParticipants(long lobbyID);
-
         //Precondition:
         //Modtager et LobbyID
         //Postcondition

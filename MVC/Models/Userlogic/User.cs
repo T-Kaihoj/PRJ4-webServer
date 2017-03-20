@@ -1,4 +1,6 @@
-﻿namespace MVC.Models.Userlogic
+﻿using System.Collections.Generic;
+
+namespace MVC.Models.Userlogic
 {
     public class User
     {

@@ -31,7 +31,7 @@ namespace MVC.Controllers
             }
 
             var bet = new Bet();
-            bet.BetTitle = viewModel.Title;
+            //bet.BetTitle = viewModel.Title;
             bet.Description = viewModel.Description;
             bet.EndDate = viewModel.EndDate;
             bet.StartDate = viewModel.StartDate;
@@ -45,7 +45,8 @@ namespace MVC.Controllers
             }*/
 
             //Send return to home page 
-            return Redirect($"/CreateBet/Show/{bet.BetID}");
+            //return Redirect($"/CreateBet/Show/{bet.BetID}");
+            return Redirect($"/CreateBet/Show/0");
         }
     }
 }

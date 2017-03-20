@@ -19,8 +19,8 @@ namespace MVC.Database.Models
         public virtual ICollection<User> Participants { get; set; }
         public virtual ICollection<Outcome> Outcomes { get; set; }
         public virtual User Judge { get; set; }
-        public string Description { get; set; }
-        public List<User> Participants { get; set; }
+        
+        
         public List<User> Invited { get; set; }
 
         internal static object getBet(int id)
@@ -28,6 +28,6 @@ namespace MVC.Database.Models
             throw new NotImplementedException();
         }
 
-        public User Judge { get; set; }
+        
     }
 }

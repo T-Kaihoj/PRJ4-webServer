@@ -234,7 +234,9 @@
     <Content Include="Content\assets\**" />
     <Content Include="bower.json" />
     <None Include="Properties\PublishProfiles\ASEProject4 - Web Deploy.pubxml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
