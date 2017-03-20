@@ -21,13 +21,25 @@ namespace MVC.Controllers
 
         public ActionResult Show(int id)
         {
-            var l = Lobby.Get(id);
-            
-            var viewModel = new LobbyViewModel();
-            viewModel.ID = (int)l.LobbyID;
-            viewModel.Name = "Hello Tobias";
+            try
+            {
+                var l = Lobby.Get(id);
+                if (l == null)
+                {
+                    return Redirect("Lobby");
+                }
+                var viewModel = new LobbyViewModel();
+                viewModel.ID = (int)l.LobbyID;
+                viewModel.Name = "Hello Tobias";
 
-            return View(viewModel);
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return Redirect("/Lobby");
+                
+            }
+
         }
     }
 }
