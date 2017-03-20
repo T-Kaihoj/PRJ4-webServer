@@ -27,6 +27,8 @@ namespace UserLogic
         //Retunerer true, hvis delete af user lykkedes, eller false.
         bool deleteUser(string currentUsername);
 
+        //Lobby funktionaliteter
+
 
     }
 }

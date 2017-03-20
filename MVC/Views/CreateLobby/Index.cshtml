@@ -4,7 +4,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 @model CreateLobbyViewModel
 
 <div class="container">
@@ -16,8 +15,9 @@
 
             <form method="post" action="/CreateLobby/post" >
                 <div class="row form-group label-floating">
-                    <label for="LobbyName" class="control-label">Lobby name</label>
-                    <input type="text" id="LobbyName" name="Name" class="form-control" />
+                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block" })
                 </div>
                 <div class="row form-group label-floating">
                     <label for="LobbyDescription" class="control-label">Describe your lobby</label>

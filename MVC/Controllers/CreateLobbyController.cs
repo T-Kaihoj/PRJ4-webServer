@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using LobbyLogic;
 using MVC.ViewModels;
 
 
@@ -16,20 +17,33 @@ namespace MVC.Controllers
         // GET: /<controller>/
         public ActionResult Index()
         {
-            return View();
+            return View(new CreateLobbyViewModel());
         }
 
-        public ActionResult post(CreateLobbyViewModel objLobby)
+        [HttpPost]
+        public ActionResult post(CreateLobbyViewModel viewModel)
         {
-            Debug.WriteLine("Create lobby" + objLobby.Name + " ");
+            Debug.WriteLine("Create lobby" + viewModel.Name + " ");
 
-            if (objLobby.Name == null || objLobby.Description== null )
+            if (!TryValidateModel(viewModel))
             {
-                return Redirect("/404");
+                return View("Index", viewModel);
             }
 
+            var lobby = new Lobby(viewModel.Name);
+            lobby.Describtion = viewModel.Description;
+
+            lobby.Persist();
+
+            
+
+            /*if (objLobby.Name == null || objLobby.Description== null )
+            {
+                return Redirect("/404");
+            }*/
+
             //Send return to home page 
-            return Redirect("/") ;
+            return Redirect($"/Lobby/Show/{lobby.LobbyID}") ;
 
         }
 

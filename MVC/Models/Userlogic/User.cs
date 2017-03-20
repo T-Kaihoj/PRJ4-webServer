@@ -7,5 +7,15 @@
         public string LastName { get; set; }
         public string Email { get; set; }
         public decimal Balance { get; set; }
+
+        public void Persist()
+        {
+            
+        }
+
+        public void Delete()
+        {
+            
+        }
     }
 }

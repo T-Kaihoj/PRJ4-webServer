@@ -132,7 +132,7 @@
     <Compile Include="Controllers\CreateLobbyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InviteToLobbyController.cs" />
-    <Compile Include="Controllers\LobbyPageController.cs" />
+    <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Database\Data\Context.cs" />
     <Compile Include="Database\Data\DbInitializer.cs" />
@@ -152,13 +152,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Userlogic\Bet.cs" />
+    <Compile Include="Models\Userlogic\ILobbyinfo.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
+    <Compile Include="Models\Userlogic\Lobby.cs" />
+    <Compile Include="Models\Userlogic\Outcome.cs" />
     <Compile Include="Models\Userlogic\User.cs" />
     <Compile Include="Models\Userlogic\IUserEdit.cs" />
     <Compile Include="Others\PassthruBundleOrderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\BetViewModel.cs" />
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
+    <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\UserViewModel.cs" />
     <Compile Include="ViewModels\UserViewModelErrors.cs" />
   </ItemGroup>
@@ -189,13 +195,15 @@
     <Content Include="Views\CreateBet\Index.cshtml" />
     <Content Include="Views\CreateLobby\Index.cshtml" />
     <Content Include="Views\InviteToLobby\Index.cshtml" />
-    <Content Include="Views\LobbyPage\Index.cshtml" />
+    <Content Include="Views\Lobby\Index.cshtml" />
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\User\UserCreated.cshtml" />
     <Content Include="Views\Shared\LoginBox.cshtml" />
     <Content Include="Views\Shared\MenuBox.cshtml" />
     <Content Include="Views\Shared\UserBox.cshtml" />
+    <Content Include="Views\Lobby\Show.cshtml" />
+    <Content Include="Views\BetPage\Show.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
