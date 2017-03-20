@@ -33,6 +33,8 @@ namespace MVC.Tests.Database
             _uut = new UserRepository(_context);
         }
 
+        // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
+        // Bruges som eksempel på en test. 
         [Test]
         public void Get_InsertedPersonIsRetrieved_BothPersonsIdentical()
         {
@@ -52,9 +54,11 @@ namespace MVC.Tests.Database
                 LastName = "Soerensen"
             };
 
+            // Add user to database
             _uut.Add(user1);
             _context.SaveChanges();
 
+            // Retrieve user from database
             var user2 = _uut.Get(user1.Username);
 
             Assert.That(user1, Is.EqualTo(user2));
