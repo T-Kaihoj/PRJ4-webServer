@@ -33,6 +33,9 @@ namespace MVC.Models.Userlogic
         //Modtager et LobbyID
         //Postcondition
         //Returner en liste af Users som er medlem af lobbyen.
+        List<User> getParticipants(long lobbyID);
+
+        void Persist();
         List<Bet> getBets(long lobbyID);
 
     }

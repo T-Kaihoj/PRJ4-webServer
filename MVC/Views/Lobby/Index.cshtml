@@ -1,0 +1,56 @@
+﻿@using MVC.ViewModels;
+
+@{
+    ViewData["Title"] = "LobbyPage";
+}
+
+@model CreateLobbyViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="header">
+                Lobby1 - Marcs venner
+            </h1>
+
+            <form method="post" asp-controller="CreateLobby" asp-action="post">
+                <div class="row" align="left">
+                    <p class="lead">
+
+                         <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
+                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                         </label>
+                        Weightloss
+                        <button type="submit" class="btn btn-primary pull-right"disabled>Join Bet</button>
+                        <button type="submit" class="btn btn-primary pull-right">Info</button>
+
+                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee 100$">
+                            100$
+                        </label>
+                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="5 minutes left">
+                            <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+                        </label>
+
+                    </p>
+                    <p class="lead">
+                        <label type="button" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Not joined">
+                            <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                        </label>
+                        100m run
+                        
+                        <button type="submit" class="btn btn-primary pull-right">Join Bet</button>
+                        <button type="submit" class="btn btn-primary pull-right">Info</button>
+                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee 50$">
+                            50$
+                        </label>
+                    </p>
+                    <p class="lead">
+
+                        <button type="submit" class="btn btn-primary pull-left">Create new bet</button>
+
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

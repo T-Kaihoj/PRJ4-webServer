@@ -15,5 +15,15 @@
         public List<Outcome> Outcomes { get; set; }
 
 
+
+        public void Persist()
+        {
+            
+        }
+
+        public void Delete()
+        {
+            
+        }
     }
 }
