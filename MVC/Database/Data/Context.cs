@@ -13,9 +13,9 @@ namespace MVC.Database.Data
         public  DbSet<User> Users { get; set; }
         public  DbSet<Bet> Bets { get; set; }
         public  DbSet<Lobby> Lobbies { get; set; }
+        public DbSet<Outcome> Outcomes { get; set; }
 
 
-        
         protected override void OnModelCreating(DbModelBuilder modelBuilder) // 
         {
 
@@ -62,7 +62,6 @@ namespace MVC.Database.Data
                     cs.MapRightKey("OutcomeId");
                     cs.ToTable("UserOutcome");
                 });
-
         }
     }
 }

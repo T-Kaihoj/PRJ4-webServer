@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201703192035382_Endnu en mange til mange igen igen.Designer.cs">
       <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703201204050_repository test.cs" />
+    <Compile Include="Migrations\201703201204050_repository test.Designer.cs">
+      <DependentUpon>201703201204050_repository test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\User.cs" />
@@ -279,6 +283,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703192035382_Endnu en mange til mange igen igen.resx">
       <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703201204050_repository test.resx">
+      <DependentUpon>201703201204050_repository test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

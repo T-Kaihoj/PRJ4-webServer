@@ -156,7 +156,13 @@ namespace MVC.Migrations
                 }
 
 
+
                 unitOfWork.Complete();
+
+                var enUser = unitOfWork.User.Get("ThomasSwager");
+                Debug.WriteLine(enUser.FirstName);
+
+
 
                 //  This method will be called after migrating to the latest version.
 

@@ -9,7 +9,6 @@ namespace MVC.Database.Models
     {
         [Key]
         public long BetId { get; set; }
-
         public string Name { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
