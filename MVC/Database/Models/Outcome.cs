@@ -9,10 +9,9 @@ namespace MVC.Database.Models
     public class Outcome
     {
         [Key]
-        public long OutcomID { get; set; }
-
+        public long OutcomeId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public virtual ICollection<User> Winner { get; set; }
+        public virtual ICollection<User> Participants { get; set; }
     }
 }

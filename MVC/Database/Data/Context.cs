@@ -7,42 +7,62 @@ namespace MVC.Database.Data
     {
         public Context() : base("name=LocalBet") // stod før: public Context(DbContextOptions<Context> options) : base(options)
         {
+            
         }
 
         public  DbSet<User> Users { get; set; }
         public  DbSet<Bet> Bets { get; set; }
         public  DbSet<Lobby> Lobbies { get; set; }
 
-        public DbSet<UserLobbyMember> UserLobbyMember { get; set; }
 
         
         protected override void OnModelCreating(DbModelBuilder modelBuilder) // 
         {
-            modelBuilder.Entity<User>().ToTable("Users");
-            modelBuilder.Entity<Bet>().ToTable("Bets");
-            modelBuilder.Entity<Lobby>().ToTable("Lobbies");
 
-            /*
-            // nedestående til mange til mange forhold mellem lobby og User (når man er MEDLEM af lobbien)
-            // Nedenstående måde at lave mange til mange forhold virker hvis kun i entity core ..
-            // http://www.entityframeworktutorial.net/code-first/configure-many-to-many-relationship-in-code-first.aspx 
-            modelBuilder.Entity<UserLobbyMember>()
-            .HasKey(t => new { t.UserName, t.LobbyId });
+            // mange til mange opsætning mellem User og Lobby (member)
+            modelBuilder.Entity<User>()
+                .HasMany<Lobby>(s => s.MemberOfLobbies)
+                .WithMany(c => c.MemberList)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("Username");
+                    cs.MapRightKey("LobbyId");
+                    cs.ToTable("UserLobbyMember");
+                });
 
-            modelBuilder.Entity<UserLobbyMember>()
-                .HasOne(pt => pt.Lobby)
-                .WithMany(p => p.Members)
-                .HasForeignKey(pt => pt.LobbyId);
+            // mange til mange opsætning mellem User og Lobby (invited)
+            modelBuilder.Entity<User>()
+                .HasMany<Lobby>(s => s.InvitedToLobbies)
+                .WithMany(c => c.InvitedList)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("Username");
+                    cs.MapRightKey("LobbyId");
+                    cs.ToTable("UserLobbyInvited");
+                });
 
-            modelBuilder.Entity<UserLobbyMember>()
-                .HasOne(pt => pt.User)
-                .WithMany(t => t.MemberOfLobbies)
-                .HasForeignKey(pt => pt.UserName);
+            // mange til mange opsætning mellem User og Bet
+            modelBuilder.Entity<User>()
+                .HasMany<Bet>(s => s.Bets)
+                .WithMany(c => c.Participants)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("Username");
+                    cs.MapRightKey("BetId");
+                    cs.ToTable("UserBet");
+                });
 
-            // Under her skal der tilføjes nogen lignede det ovenstående der også er mellem lobby og user, men nu i forbindelse med invitationer
-            */
+            // mange til mange opsætning mellem User og Outcome
+            modelBuilder.Entity<User>()
+                .HasMany<Outcome>(s => s.Outcomes)
+                .WithMany(c => c.Participants)
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("Username");
+                    cs.MapRightKey("OutcomeId");
+                    cs.ToTable("UserOutcome");
+                });
 
         }
-    
     }
 }

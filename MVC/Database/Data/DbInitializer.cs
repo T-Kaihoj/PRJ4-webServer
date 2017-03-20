@@ -8,7 +8,8 @@ using MVC.Database.Models;
 
 namespace MVC.Database.Data
 {
-    public class DbInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<Context>
+    // Virker ikke mere
+    public class DbInitializer : DropCreateDatabaseIfModelChanges<Context>
     {
         protected override void Seed(Context context)
         {
@@ -39,10 +40,10 @@ namespace MVC.Database.Data
                 {
                     var bets = new Bet[]
                     {
-                        new Bet{ Name = "MyBet",  Description = "best bet ever", Pot = 0, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Winner = null },
-                        new Bet{ Name = "ThisBet", Description = "best bet ever",  Pot = 150, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Winner = null },
-                        new Bet{ Name = "BestBet",  Description = "best bet ever", Pot = 50, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Winner = null },
-                        new Bet{ Name = "YourBet", Description = "best bet ever", Pot = 50, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Winner = null }
+                        new Bet{ Name = "MyBet",  Description = "best bet ever", Pot = 0, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Outcomes = null },
+                        new Bet{ Name = "ThisBet", Description = "best bet ever",  Pot = 150, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Outcomes = null },
+                        new Bet{ Name = "BestBet",  Description = "best bet ever", Pot = 50, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Outcomes = null },
+                        new Bet{ Name = "YourBet", Description = "best bet ever", Pot = 50, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Outcomes = null }
                     };
                     foreach (var bet in bets)
                     {
@@ -69,28 +70,28 @@ namespace MVC.Database.Data
                 }
 
 
-                // test af mange til mange mellem lobby og user
-                var etBet = new Bet { Name = "YourBet", Description = "best bet ever", Pot = 50, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Winner = null };
-                var User1 = new User { FirstName = "Thomas", LastName = "Nielsen", Username = "TN", Email = "tn@emila", Balance = 50, Salt = "Salt", Hash = "Hash" };
-                var User2 = new User { FirstName = "Brian", LastName = "Hansen", Username = "BH", Email = "tn@emila", Balance = 50, Salt = "Salt", Hash = "Hash" };
-                var enLobby = new Lobby {Description = "hygge", Name = "HyggeLobby", Bets = new List<Bet>() {etBet}};
-                var LobbyMember1 = new UserLobbyMember {Lobby = enLobby, User = User1};
-                var LobbyMember2 = new UserLobbyMember { Lobby = enLobby, User = User2 };
-                enLobby.Members = new List<UserLobbyMember>() {LobbyMember1, LobbyMember2};
+                //// test af mange til mange mellem lobby og user
+                //var etBet = new Bet { Name = "YourBet", Description = "best bet ever", Pot = 50, BuyIn = 50, Participants = null, Judge = null, StartDate = DateTime.Now, StopDate = DateTime.Today, Winner = null };
+                //var User1 = new User { FirstName = "Thomas", LastName = "Nielsen", Username = "TN", Email = "tn@emila", Balance = 50, Salt = "Salt", Hash = "Hash" };
+                //var User2 = new User { FirstName = "Brian", LastName = "Hansen", Username = "BH", Email = "tn@emila", Balance = 50, Salt = "Salt", Hash = "Hash" };
+                //var enLobby = new Lobby {Description = "hygge", Name = "HyggeLobby", Bets = new List<Bet>() {etBet}};
+                //var LobbyMember1 = new UserLobbyMember {Lobby = enLobby, User = User1};
+                //var LobbyMember2 = new UserLobbyMember { Lobby = enLobby, User = User2 };
+                //enLobby.Members = new List<UserLobbyMember>() {LobbyMember1, LobbyMember2};
 
-                unitOfWork.Lobby.Add(enLobby);
-                unitOfWork.User.Add(User1);
-                unitOfWork.User.Add(User2);
-                unitOfWork.Bet.Add(etBet);
+                //unitOfWork.Lobby.Add(enLobby);
+                //unitOfWork.User.Add(User1);
+                //unitOfWork.User.Add(User2);
+                //unitOfWork.Bet.Add(etBet);
 
-                // her bruges context direkte, hvilket dem udefra selvfølgelig ikke skal, det er bare til test
-                context.UserLobbyMember.Add(LobbyMember1);
-                context.UserLobbyMember.Add(LobbyMember2);
+                //// her bruges context direkte, hvilket dem udefra selvfølgelig ikke skal, det er bare til test
+                //context.UserLobbyMember.Add(LobbyMember1);
+                //context.UserLobbyMember.Add(LobbyMember2);
 
-                unitOfWork.Complete();
+                //unitOfWork.Complete();
 
-                // Lad os sige at brugeren "TN" smutter fra lobbien.
-                context.UserLobbyMember.Remove(LobbyMember1);
+                //// Lad os sige at brugeren "TN" smutter fra lobbien.
+                //context.UserLobbyMember.Remove(LobbyMember1);
 
                 unitOfWork.Complete();
 
