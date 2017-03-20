@@ -45,7 +45,8 @@ namespace MVC.Controllers
             }*/
 
             //Send return to home page 
-            return Redirect($"/CreateBet/Show/{bet.BetID}");
+            //return Redirect($"/CreateBet/Show/{bet.BetID}");
+            return Redirect($"/CreateBet/Show/0");
         }
     }
 }

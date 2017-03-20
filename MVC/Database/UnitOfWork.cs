@@ -7,6 +7,7 @@ namespace MVC.Database
 {
     public class UnitOfWork : IUnitOfWork
     {
+
         private readonly Context _context;
 
         public UnitOfWork(Context context)
@@ -15,6 +16,8 @@ namespace MVC.Database
             Bet = new BetRepository(_context);
             Lobby = new LobbyRepository(_context);
             User = new UserRepository(_context);
+            Outcome = new OutcomeRepository(_context);
+
         }
 
         public void Dispose()
@@ -33,6 +36,7 @@ namespace MVC.Database
         public IBetRepository Bet { get; }
         public ILobbyRepository Lobby { get; }
         public IUserRepository User { get; }
+        public IOutcomeRepository Outcome { get;}
 
         public int Complete()
         {
