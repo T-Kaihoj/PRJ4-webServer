@@ -14,7 +14,6 @@ namespace FrontendMVC.Database.Persistence
         public UserRepository(DbContext context) : base(context)
         {
         }
-
         public Context OurContext
         {
             get { return _context as Context; }
