@@ -16,20 +16,27 @@ namespace MVC.Tests.Database
     class UserRepositoryTests
     {
         private IUserRepository _uut;
-        private readonly Context _context;
+        private Context _context;
 
         [SetUp]
         public void Setup()
         {
-            _uut = new UserRepository(_context);
-            //_context.Database.Delete();
+            // Create a new context.
+            _context = new Context();
 
+            // Reset the database.
+            _context.Database.Delete();
+
+            // Insert dummy data.
+            
+            // Create the repository.
+            _uut = new UserRepository(_context);
         }
 
         [Test]
         public void Get_InsertedPersonIsRetrieved_BothPersonsIdentical()
         {
-            
+            // Create a new user.
             var user1 = new User()
             {
                 Username = "The_KilL3rrrr",
@@ -51,8 +58,6 @@ namespace MVC.Tests.Database
             var user2 = _uut.Get(user1.Username);
 
             Assert.That(user1, Is.EqualTo(user2));
-
         }
-
     }
 }
