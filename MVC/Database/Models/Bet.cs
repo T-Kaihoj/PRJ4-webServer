@@ -26,4 +26,5 @@ namespace MVC.Database.Models
 
         public User Judge { get; set; }
     }
+
 }
