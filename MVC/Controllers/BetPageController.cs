@@ -27,11 +27,14 @@ namespace MVC.Controllers
 
 
             betPage.Title = bet.BetName;
+
+            //betPage.Title = bet.BetTitle;
+
             betPage.Description = bet.Description;
             betPage.StartDate = bet.StartDate;
             betPage.EndDate = bet.EndDate;
             betPage.Judge = bet.Judge;
-            for (int i =0; i< bet.Outcomes.Count ;i++)
+            for (int i =0; i < bet.Outcomes.Count() ;i++)
             {
                 betPage.Outcomes[i] = bet.Outcomes[i].Name;
             }
