@@ -6,7 +6,7 @@ namespace BetLogic
 {
     public class Bet
     {
-        private Bet()
+        public Bet()
         {
             Outcomes = new List<Outcome>();
         }

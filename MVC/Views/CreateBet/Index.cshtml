@@ -2,8 +2,12 @@
     ViewData["Title"] = "Create Bet";
 }
 
+
+
+@model MVC.ViewModels.BetViewModel
+
 <div class="container">
-    <form asp-controller="CreateLobby" asp-action="post">
+    <form method="post" action="/CreateBet/post">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="header">
@@ -14,36 +18,41 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row form-group label-floating">
-                    <label for="betName" class="control-label">Bet name</label>
-                    <input type="text" id="betName" name="betName" class="form-control" />
+                    @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
                 </div>
                 <div class="row form-group label-floating">
-                    <label for="BetDescription" class="control-label">Describe your bet</label>
-                    <textarea rows="5" id="BetDescription" name="BetDescription" class="form-control"></textarea>
+                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group label-floating">
-                    <label for="judgeName" class="control-label">Judge</label>
-                    <input type="text" id="judgeName" class="form-control" />
+                    @Html.LabelFor(m => m.Judge, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Judge, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Judge, null, new { @class = "help-block" })
                 </div>
                 <div class="form-group label-floating">
-                    <label for="datetimepickerstart" class="control-label">Start date</label>
+                    @Html.LabelFor(m => m.StartDate, new { @class = "control-label" })
+                    @Html.ValidationMessageFor(m => m.StartDate, null, new { @class = "help-block" })
                     <div class="input-group date" id="datetimepickerstart">
-                        <input type="text" class="form-control" />
+                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div>                    
                 </div>
                 <div class="form-group label-floating">
-                    <label for="datetimepickerend" class="control-label">End date</label>
+                    @Html.LabelFor(m => m.EndDate, new { @class = "control-label" })
+                    @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "help-block" })
                     <div class="input-group date" id="datetimepickerend">
-                        <input type="text" class="form-control" />
+                       @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control" })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
-                    </div>
+                    </div> 
                 </div>
             </div>
         </div>

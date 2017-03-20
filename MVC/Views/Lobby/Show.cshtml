@@ -22,6 +22,7 @@
                              <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                          </label>
                         Weightloss
+                        @Html.DisplayFor(m => m.Bets[0])
                         <button type="submit" class="btn btn-primary pull-right"disabled>Join Bet</button>
                         <button type="submit" class="btn btn-primary pull-right">Info</button>
 
@@ -38,8 +39,7 @@
                             <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                         </label>
                         100m run
-
-                        
+                        @Html.DisplayFor(m => m.Bets[1])
                         <button type="submit" class="btn btn-primary pull-right">Join Bet</button>
                         <button type="submit" class="btn btn-primary pull-right">Info</button>
                         <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee 50$">
