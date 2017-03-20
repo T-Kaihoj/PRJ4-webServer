@@ -33,7 +33,7 @@ namespace MVC.Migrations
                             FirstName = "Thomas",
                             LastName = "Nielsen",
                             Username = "ThomasSwager",
-                            Email = "tn@emila",
+                            Email = "tn@email",
                             Balance = 50,
                             Salt = "Salt",
                             Hash = "Hash"
@@ -43,7 +43,7 @@ namespace MVC.Migrations
                             FirstName = "Stinne",
                             LastName = "Kristensen",
                             Username = "BeutyQueen",
-                            Email = "sn@emila",
+                            Email = "sk@email",
                             Balance = 200,
                             Salt = "Salt",
                             Hash = "Hash"
@@ -53,7 +53,7 @@ namespace MVC.Migrations
                             FirstName = "Mads",
                             LastName = "Hansen",
                             Username = "M4dsMe",
-                            Email = "mh@emila",
+                            Email = "mh@email",
                             Balance = 456,
                             Salt = "Salt",
                             Hash = "Hash"
@@ -63,7 +63,7 @@ namespace MVC.Migrations
                             FirstName = "Sten",
                             LastName = "Nielsen",
                             Username = "StenNielsen",
-                            Email = "sn@emila",
+                            Email = "sn@email",
                             Balance = 132,
                             Salt = "Salt",
                             Hash = "Hash"

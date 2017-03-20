@@ -35,6 +35,20 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="LocalBet" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=%28localdb%29\MSSQLLocalDB%3bInitial Catalog=LocalBet%3bIntegrated Security=True%3bConnect Timeout=60%3bEncrypt=False%3bTrustServerCertificate=True%3bApplicationIntent=ReadWrite%3bMultiSubnetFailover=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\LocalBet_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="Azure" Order="3">
+          <Destination Path="Data Source=tcp:localbet.database.windows.net,1433%3bInitial Catalog=LocalBet%3bUser ID=my_admin%40localbet%3bPassword=Root1234567890" />
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -208,6 +222,10 @@
     <Compile Include="Migrations\201703201204050_repository test.Designer.cs">
       <DependentUpon>201703201204050_repository test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703201458360_MyMigration.cs" />
+    <Compile Include="Migrations\201703201458360_MyMigration.Designer.cs">
+      <DependentUpon>201703201458360_MyMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\IUserLogic.cs" />
@@ -305,10 +323,23 @@
     <EmbeddedResource Include="Migrations\201703201204050_repository test.resx">
       <DependentUpon>201703201204050_repository test.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703201458360_MyMigration.resx">
+      <DependentUpon>201703201458360_MyMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Publish|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

@@ -9,17 +9,24 @@ namespace MVC.Database.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Username { get; set; }
+
         [Required]
         public string FirstName { get; set; }
+
         [Required]
         public string LastName { get; set; }
-        [Required]
+
+        //[Required]
         [Index(IsUnique = true)]
+        [StringLength(200)]
         public string Email { get; set; }
+
         [Required]
         public decimal Balance { get; set; }
+
         [Required]
         public string Hash { get; set; }
+
         [Required]
         public string Salt { get; set; }
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
