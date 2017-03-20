@@ -22,10 +22,10 @@ namespace MVC.Database.Data
                 {
                     var users = new User[]
                     {
-                        new User{ FirstName = "Thomas", LastName = "Nielsen", Username = "ThomasSwager", Email = "tn@emila", Balance = 50, Salt = "Salt", Hash = "Hash"},
-                        new User{ FirstName = "Stinne", LastName = "Kristensen", Username = "BeutyQueen", Email = "sn@emila", Balance = 200, Salt = "Salt", Hash = "Hash"},
-                        new User{ FirstName = "Mads", LastName = "Hansen", Username = "M4dsMe", Email = "mh@emila", Balance = 456, Salt = "Salt", Hash = "Hash"},
-                        new User{ FirstName = "Sten", LastName = "Nielsen", Username = "StenNielsen", Email = "sn@emila", Balance = 132, Salt = "Salt", Hash = "Hash"}
+                        new User{ FirstName = "Thomas", LastName = "Nielsen", Username = "ThomasSwager", Email = "tn@email", Balance = 50, Salt = "Salt", Hash = "Hash"},
+                        new User{ FirstName = "Stinne", LastName = "Kristensen", Username = "BeutyQueen", Email = "sk@email", Balance = 200, Salt = "Salt", Hash = "Hash"},
+                        new User{ FirstName = "Mads", LastName = "Hansen", Username = "M4dsMe", Email = "mh@email", Balance = 456, Salt = "Salt", Hash = "Hash"},
+                        new User{ FirstName = "Sten", LastName = "Nielsen", Username = "StenNielsen", Email = "sn@email", Balance = 132, Salt = "Salt", Hash = "Hash"}
                     };
                     foreach (var user in users)
                     {
