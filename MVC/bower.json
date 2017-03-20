@@ -1,0 +1,26 @@
+{
+  "name": "mvc",
+  "homepage": "https://github.com/THKIHA/PRJ4-webServer",
+  "authors": [
+    "Magnus Aagaard Sørensen <20053175@post.au.dk>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "3.3.7",
+    "bootstrap-material-design": "0.5.9",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "font-awesome": "4.7.0",
+    "jquery": "2.1.4",
+    "jquery-validation": "1.15.0"
+  }
+}
