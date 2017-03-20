@@ -11,6 +11,11 @@ namespace MVC.Database.Persistence
         {
         }
 
+        public User Get(string username)
+        {
+            return _context.Set<User>().Find(username);
+        }
+
         public Context OurContext
         {
             get { return _context as Context; }
