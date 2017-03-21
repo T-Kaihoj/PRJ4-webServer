@@ -209,6 +209,7 @@
       <DependentUpon>201703201204050_repository test.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Userlogic\IModels.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\IUserLogic.cs" />
     <Compile Include="Models\Userlogic\Lobby.cs" />

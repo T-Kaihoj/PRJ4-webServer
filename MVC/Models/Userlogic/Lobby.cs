@@ -77,14 +77,14 @@ namespace MVC.Models.Userlogic
             lobby.Describtion = dbLobby.Description;
 
 
-            foreach (var item in dbLobby.Members)
+            foreach (var item in dbLobby.MemberList)
             {
-                lobby.Participants.Add(item);
+                lobby.Members.Add(item);
             }
 
-            foreach (var item in dbLobby.Invited)
+            foreach (var item in dbLobby.InvitedList)
             {
-                lobby.Participants.Add(item);
+                lobby.Invited.Add(item);
             }
 
             return lobby;
@@ -132,4 +132,6 @@ namespace MVC.Models.Userlogic
         }
     }
 }
+
+
 
