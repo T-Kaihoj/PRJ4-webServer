@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Diagnostics;
 using System.Web.Mvc;
 using MVC.Models.Userlogic;
 using MVC.ViewModels;
-
-
-
-// For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MVC.Controllers
 {
@@ -20,6 +14,38 @@ namespace MVC.Controllers
             return View();
         }
 
+        // GET: /<controller>/Create
+        public ActionResult Create()
+        {
+            return View(new CreateLobbyViewModel());
+        }
+
+        [HttpPost]
+        // POST: /<controller>/Create
+        public ActionResult Create(CreateLobbyViewModel viewModel)
+        {
+            // Perform data validation.
+            if (!TryValidateModel(viewModel))
+            {
+                // Errors, return and let the user handle it.
+                return View(viewModel);
+            }
+
+            // Create the domain lobby object.
+            var lobby = new Lobby(viewModel.Name)
+            {
+                Description = viewModel.Description
+            };
+
+            // Save to the database.
+            lobby.Persist();
+
+            // Show the newly created lobby.
+            return Redirect($"/Lobby/Show/{lobby.LobbyID}");
+
+        }
+
+        // GET: /<controller>/Show/<id>
         public ActionResult Show(int id)
         {
             try

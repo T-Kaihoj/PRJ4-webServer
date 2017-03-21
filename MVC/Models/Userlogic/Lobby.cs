@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using DAL;
 using DAL.Data;
-using MVC.Models.Userlogic;
-
-
 
 namespace MVC.Models.Userlogic
 {
@@ -12,25 +9,24 @@ namespace MVC.Models.Userlogic
     {
         public Lobby(string lobbyName)
         {
-            this.LobbyName = lobbyName;
+            // Persist properties.
+            LobbyName = lobbyName;
 
+            var dbLobby = new Common.Models.Lobby()
+            {
+                Name = this.LobbyName,
+                Description = this.Description
+            };
+
+            // Since the constructor was called, and not the GET method, create a new lobby in the database.
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
-                var dbLobby = new Common.Models.Lobby();
-
-
-                 
-                //lobby.Bets = dbLobby.Bets;
-                dbLobby.Name = this.LobbyName;
-                dbLobby.LobbyId = this.LobbyID;
-                dbLobby.Description = this.Description;
-                //lobby.Participants = dbLobby.Members;
-                //lobby.Participants = dbLobby.Invited;
-
                 myWork.Lobby.Add(dbLobby);
                 myWork.Complete();
             }
 
+            // Remeber to extract the info regarding ID from the database.
+            LobbyID = dbLobby.LobbyId;
         }
 
         private Lobby()
@@ -63,10 +59,8 @@ namespace MVC.Models.Userlogic
             return lobby;
         }
 
-        static public implicit operator Lobby(Common.Models.Lobby dbLobby)
+        public static implicit operator Lobby(Common.Models.Lobby dbLobby)
         {
-            
-
             var lobby = new Lobby();
 
             if (dbLobby == null)
