@@ -145,7 +145,6 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\LobbiesController.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BetPageController.cs" />
     <Compile Include="Controllers\CreateBetController.cs" />
@@ -216,8 +215,8 @@
     <Content Include="Views\Shared\UserBox.cshtml" />
     <Content Include="Views\Lobby\Show.cshtml" />
     <Content Include="Views\BetPage\Show.cshtml" />
-    <Content Include="Views\Lobbies\Index.cshtml" />
     <Content Include="Views\Lobby\Create.cshtml" />
+    <Content Include="Views\Lobby\List.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

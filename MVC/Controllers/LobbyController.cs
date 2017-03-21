@@ -44,6 +44,21 @@ namespace MVC.Controllers
             return Redirect($"/Lobby/Show/{lobby.LobbyID}");
         }
 
+        // GET: /<controller>/List
+        public ActionResult List()
+        {
+            // Get all lobbies.
+            var lobbies = Lobby.GetAll();
+
+            // Display the lobbies.
+            var viewModel = new LobbiesViewModel()
+            {
+                MemberOfLobbies = lobbies
+            };
+
+            return View(viewModel);
+        }
+
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {

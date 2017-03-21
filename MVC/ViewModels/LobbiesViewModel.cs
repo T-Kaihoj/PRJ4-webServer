@@ -12,8 +12,8 @@ namespace MVC.ViewModels
         public int ID { get; set; }
         public string Name { get; set; }
 
-        public List<Lobby> MemberOfLobbies { get; set; }
-        public List<Lobby> InvitedToLobbies { get; set; }
+        public IList<Lobby> MemberOfLobbies { get; set; }
+        public IList<Lobby> InvitedToLobbies { get; set; }
 
         public LobbiesViewModel()
         {

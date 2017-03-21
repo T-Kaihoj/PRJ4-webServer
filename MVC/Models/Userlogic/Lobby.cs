@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using DAL;
 using DAL.Data;
 
@@ -57,6 +58,25 @@ namespace MVC.Models.Userlogic
             
             
             return lobby;
+        }
+
+        public static IList<Lobby> GetAll()
+        {
+            List<Lobby> lobbies = new List<Lobby>();
+
+            // Extract data.
+            using (UnitOfWork myWork = new UnitOfWork(new Context()))
+            {
+                var dbLobbies = myWork.Lobby.GetAll();
+
+                // Convert data.
+                foreach (var l in dbLobbies)
+                {
+                    lobbies.Add(l);
+                }
+            }
+            
+            return lobbies;
         }
 
         public static implicit operator Lobby(Common.Models.Lobby dbLobby)
