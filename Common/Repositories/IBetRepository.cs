@@ -2,7 +2,7 @@
 
 namespace DAL.Repositories
 {
-    public interface IBetRepository : IRepository<IBet>
+    public interface IBetRepository : IRepository<Bet>
     {
     }
 }

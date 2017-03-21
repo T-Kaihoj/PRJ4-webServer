@@ -7,7 +7,7 @@ using DAL.Models;
 
 namespace DAL.Repositories
 {
-    public interface IOutcomeRepository : IRepository<IOutcome>
+    public interface IOutcomeRepository : IRepository<Outcome>
     {
     }
 }

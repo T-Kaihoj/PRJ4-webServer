@@ -35,7 +35,7 @@ namespace TestApp
                     FirstName = "Jeppe",
                     MemberOfLobbies = null,
                     Balance = 50,
-                    Bets = new List<IBet>() { etBet },
+                    Bets = new List<Bet>() { etBet },
                     Email = "J.TrabergS@gmail.com",
                     Hash = "sdkjfldfkdf",
                     Salt = "dsfdfsfdsfsfd",

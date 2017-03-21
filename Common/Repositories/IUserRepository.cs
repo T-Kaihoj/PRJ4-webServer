@@ -2,8 +2,8 @@
 
 namespace DAL.Repositories
 { 
-    public interface IUserRepository : IRepository<IUser>
+    public interface IUserRepository : IRepository<User>
     {
-        IUser Get(string username);
+        User Get(string username);
     }
 }

@@ -5,13 +5,13 @@ using DAL.Repositories;
 
 namespace DAL.Persistence
 {
-    public class UserRepository : Repository<IUser>, IUserRepository
+    public class UserRepository : Repository<User>, IUserRepository
     {
         public UserRepository(DbContext context) : base(context)
         {
         }
 
-        public IUser Get(string username)
+        public User Get(string username)
         {
             return _context.Set<User>().Find(username);
         }

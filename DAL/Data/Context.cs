@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using DAL.Models;
 
 namespace DAL.Data
@@ -18,10 +19,9 @@ namespace DAL.Data
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) // 
         {
-
             // mange til mange opsætning mellem User og Lobby (member)
-            modelBuilder.Entity<IUser>()
-                .HasMany<ILobby>(s => s.MemberOfLobbies)
+            modelBuilder.Entity<User>()
+                .HasMany(s => s.MemberOfLobbies)
                 .WithMany(c => c.MemberList)
                 .Map(cs =>
                 {
@@ -31,8 +31,8 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Lobby (invited)
-            modelBuilder.Entity<IUser>()
-                .HasMany<ILobby>(s => s.InvitedToLobbies)
+            modelBuilder.Entity<User>()
+                .HasMany<Lobby>(s => s.InvitedToLobbies)
                 .WithMany(c => c.InvitedList)
                 .Map(cs =>
                 {
@@ -42,8 +42,8 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Bet
-            modelBuilder.Entity<IUser>()
-                .HasMany<IBet>(s => s.Bets)
+            modelBuilder.Entity<User>()
+                .HasMany(s => s.Bets)
                 .WithMany(c => c.Participants)
                 .Map(cs =>
                 {
@@ -53,8 +53,8 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Outcome
-            modelBuilder.Entity<IUser>()
-                .HasMany<IOutcome>(s => s.Outcomes)
+            modelBuilder.Entity<User>()
+                .HasMany(s => s.Outcomes)
                 .WithMany(c => c.Participants)
                 .Map(cs =>
                 {

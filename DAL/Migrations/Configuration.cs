@@ -80,7 +80,7 @@ namespace MVC.Migrations
                 // Laver flere bets og tilføjer dem til databasen hvis der ikke findes nogen
                 if (!context.Bets.Any())
                 {
-                    var bets = new Bet[]
+                    /*var bets = new Bet[]
                     {
                         new Bet
                         {
@@ -136,7 +136,7 @@ namespace MVC.Migrations
                         unitOfWork.Bet.Add(bet);
                     }
                     Console.WriteLine("Bets added!!!");
-                    Debug.WriteLine("Bets added!!!");
+                    Debug.WriteLine("Bets added!!!");*/
                 }
 
 
