@@ -156,6 +156,7 @@
     <Compile Include="Models\Userlogic\Bet.cs" />
     <Compile Include="Models\Userlogic\ILobbyinfo.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
+    <Compile Include="Models\Userlogic\Lobbies.cs" />
     <Compile Include="Models\Userlogic\Lobby.cs" />
     <Compile Include="Models\Userlogic\Outcome.cs" />
     <Compile Include="Models\Userlogic\User.cs" />

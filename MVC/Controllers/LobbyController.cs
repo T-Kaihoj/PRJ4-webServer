@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using BetLogic;
 using LobbyLogic;
 using MVC.ViewModels;
 
@@ -31,6 +32,14 @@ namespace MVC.Controllers
                 var viewModel = new LobbyViewModel();
                 viewModel.ID = (int)l.LobbyID;
                 viewModel.Name = "Hello Tobias";
+                Bet bet = new Bet();
+
+                bet.BetTitle = "100 meter run";
+                Bet bet1 = new Bet();
+
+                bet.BetTitle = "weightloss";
+                viewModel.Bets.Add(bet1);
+
 
                 return View(viewModel);
             }
