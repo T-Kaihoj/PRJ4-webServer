@@ -9,7 +9,7 @@ using UserLogic;
 
 namespace LobbyLogic
 {
-    public class Lobby
+    public class Lobby : MVC.Models.IModels
     {
         public Lobby(string lobbyName)
         {
@@ -54,19 +54,41 @@ namespace LobbyLogic
 
                
                 var dbLobby = myWork.Lobby.Get(id);
-                //lobby.Bets = dbLobby.Bets;
-                lobby.LobbyName = dbLobby.Name;
-                lobby.LobbyID = dbLobby.LobbyId;
-                lobby.Describtion = dbLobby.Description;
-                //lobby.Participants = dbLobby.Members;
-                //lobby.Participants = dbLobby.Invited;
 
+                lobby = dbLobby;
             }
  
             
             
             return lobby;
         }
+
+        static public implicit operator Lobby(MVC.Database.Models.Lobby dbLobby)
+        {
+            var lobby = new Lobby();
+            
+            foreach (var item in dbLobby.Bets)
+            {
+                lobby.Bets.Add(item);
+            }
+            lobby.LobbyName = dbLobby.Name;
+            lobby.LobbyID = dbLobby.LobbyId;
+            lobby.Describtion = dbLobby.Description;
+
+
+            foreach (var item in dbLobby.Members)
+            {
+                lobby.Participants.Add(item);
+            }
+
+            foreach (var item in dbLobby.Invited)
+            {
+                lobby.Participants.Add(item);
+            }
+
+            return lobby;
+        }
+
 
         public void Persist()
         {
@@ -87,7 +109,25 @@ namespace LobbyLogic
 
             }
 
+
             //throw new System.NotImplementedException();
+        }
+
+        public void Delete()
+        {
+            using (UnitOfWork myWork = new UnitOfWork(new Context()))
+            {
+
+
+                var dbLobby = myWork.Lobby.Get(this.LobbyID);
+                
+                if (dbLobby == null)
+                    throw new NotImplementedException("DB");
+                myWork.Lobby.Remove(dbLobby);
+                myWork.Complete();
+
+            }
+
         }
     }
 }

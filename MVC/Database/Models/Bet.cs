@@ -20,4 +20,5 @@ namespace MVC.Database.Models
         public List<User> Invited { get; set; }
         public User Judge { get; set; }
     }
+
 }
