@@ -42,39 +42,29 @@ namespace MVC.Controllers
 
             // Show the newly created lobby.
             return Redirect($"/Lobby/Show/{lobby.LobbyID}");
-
         }
 
         // GET: /<controller>/Show/<id>
-        public ActionResult Show(int id)
+        public ActionResult Show(long id)
         {
-            try
+            // Get the lobby from the database.
+            var lobby = Lobby.Get(id);
+
+            if (lobby == null)
             {
-                var l = Lobby.Get(id);
-                if (l == null)
-                {
-                    return Redirect("Lobby");
-                }
-                var viewModel = new LobbyViewModel();
-                viewModel.ID = (int)l.LobbyID;
-                viewModel.Name = "Hello Tobias";
-                Bet bet = new Bet("100 meter run");
-
-                
-                Bet bet1 = new Bet("weightloss");
-
-              
-                viewModel.Bets.Add(bet1);
-
-
-                return View(viewModel);
-            }
-            catch (Exception)
-            {
-                return Redirect("/Lobby");
-                
+                // Error.
+                throw new Exception("No such lobby");
             }
 
+            // Create a viewmodel for the lobby.
+            var viewModel = new LobbyViewModel()
+            {
+                ID = lobby.LobbyID,
+                Name = lobby.LobbyName,
+                Description = lobby.Description
+            };
+
+            return View(viewModel);
         }
     }
 }
