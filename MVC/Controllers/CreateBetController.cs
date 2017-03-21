@@ -21,14 +21,15 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult post(BetViewModel viewModel)
+        public ActionResult post(BetPageViewModel viewModel)
         {
             Debug.WriteLine("Create bet" + viewModel.Title + " ");
-
+            /*
             if (!TryValidateModel(viewModel))
             {
                 return View("Index", viewModel);
             }
+            */
 
             var bet = new Bet();
             bet.BetName = viewModel.Title;
@@ -46,7 +47,7 @@ namespace MVC.Controllers
 
             //Send return to home page 
             //return Redirect($"/CreateBet/Show/{bet.BetID}");
-            return Redirect($"/CreateBet/Show/0");
+            return Redirect($"/BetPage/Show/0");
         }
     }
 }

@@ -21,7 +21,7 @@ namespace MVC.Controllers
 
         public ActionResult Show(int id)
         {
-            var betPage = new BetViewModel();
+            var betPage = new BetPageViewModel();
 
             var bet = Bet.getBet(id);
 

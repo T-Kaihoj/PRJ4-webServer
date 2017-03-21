@@ -6,9 +6,9 @@ using System.Web;
 
 namespace MVC.Models.Userlogic
 {
-    public class BetViewModel
+    public class BetPageViewModel
     {
-        public BetViewModel()
+        public BetPageViewModel()
         {
             Outcomes = new string[2];
         }

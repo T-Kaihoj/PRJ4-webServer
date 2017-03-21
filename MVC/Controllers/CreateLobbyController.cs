@@ -32,7 +32,8 @@ namespace MVC.Controllers
             }
 
             var lobby = new Lobby(viewModel.Name);
-            lobby.Describtion = viewModel.Description;
+            lobby.Description = viewModel.Description;
+            
 
             lobby.Persist();
 

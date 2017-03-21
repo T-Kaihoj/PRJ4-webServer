@@ -39,7 +39,6 @@ namespace MVC.Models.Userlogic
         }
 
         public long LobbyID { get; set; }
-        public string Describtion { get; set; }
         public string LobbyName { get; set; }
         public string Description { get; set; }
         public List<User> Members { get; set; }
