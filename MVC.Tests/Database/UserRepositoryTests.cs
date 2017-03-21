@@ -32,7 +32,7 @@ namespace MVC.Tests.Database
             // Create the repository.
             _uut = new UserRepository(_context);
         }
-
+        /*
         [Test]
         public void Get_InsertedPersonIsRetrieved_BothPersonsIdentical()
         {
@@ -58,6 +58,6 @@ namespace MVC.Tests.Database
             var user2 = _uut.Get(user1.Username);
 
             Assert.That(user1, Is.EqualTo(user2));
-        }
+        }*/
     }
 }

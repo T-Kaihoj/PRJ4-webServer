@@ -1,13 +1,15 @@
 ﻿
-namespace MVC.Models
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-namespace MVC.Models.Userlogic
+using MVC.Models.Userlogic;
+
+namespace MVC.Models
 {
-    public class User : IModels
+    public class User
     {
         public string Username { get; set; }
         public string FirstName { get; set; }

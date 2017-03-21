@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using BetLogic;
-using LobbyLogic;
-using MVC.ViewModels;
 using MVC.Models.Userlogic;
+using MVC.ViewModels;
+
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
@@ -35,10 +34,10 @@ namespace MVC.Controllers
                 viewModel.Name = "Hello Tobias";
                 Bet bet = new Bet();
 
-                bet.BetTitle = "100 meter run";
+                bet.BetName = "100 meter run";
                 Bet bet1 = new Bet();
 
-                bet.BetTitle = "weightloss";
+                bet.BetName = "weightloss";
                 viewModel.Bets.Add(bet1);
 
 

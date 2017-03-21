@@ -14,8 +14,8 @@ namespace MVC.Controllers
         {
             var LobbiesPage = new LobbiesViewModel();
 
-            var lobby = Lobbies.getLobby(1);
-            LobbiesPage.MemberOfLobbies = lobby.MemberOfLobbies;
+            var lobby = Lobby.Get(1);
+            //LobbiesPage.MemberOfLobbies = lobby.Members;
 
             return View(LobbiesPage);
         }

@@ -172,6 +172,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703211213223_TestMigration.cs" />
+    <Compile Include="Migrations\201703211213223_TestMigration.Designer.cs">
+      <DependentUpon>201703211213223_TestMigration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Userlogic\Bet.cs" />
     <Compile Include="Models\Userlogic\IBetinfo.cs" />
     <Compile Include="Models\Userlogic\IBetJudge.cs" />
@@ -229,7 +233,6 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\IUserLogic.cs" />
-    <Compile Include="Models\Userlogic\Lobbies.cs" />
     <Compile Include="Models\Userlogic\Lobby.cs" />
     <Compile Include="Models\Userlogic\Outcome.cs" />
     <Compile Include="Models\Userlogic\User.cs" />
@@ -326,6 +329,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703201458360_MyMigration.resx">
       <DependentUpon>201703201458360_MyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703211213223_TestMigration.resx">
+      <DependentUpon>201703211213223_TestMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

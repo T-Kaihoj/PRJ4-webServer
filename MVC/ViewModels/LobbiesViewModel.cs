@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using LobbyLogic;
+
+using MVC.Models.Userlogic;
 
 namespace MVC.ViewModels
 {

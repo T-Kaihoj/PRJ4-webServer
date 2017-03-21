@@ -8,7 +8,7 @@ using MVC.Models.Userlogic;
 
 namespace MVC.Models.Userlogic
 {
-    public class Lobby : MVC.Models.IModels
+    public class Lobby
     {
         public Lobby(string lobbyName)
         {
@@ -66,9 +66,16 @@ namespace MVC.Models.Userlogic
 
         static public implicit operator Lobby(MVC.Database.Models.Lobby dbLobby)
         {
-            var lobby = new Lobby();
             
-            foreach (var item in dbLobby.Bets)
+
+            var lobby = new Lobby();
+
+            if (dbLobby == null)
+            {
+                return lobby;
+            }
+
+                foreach (var item in dbLobby.Bets)
             {
                 lobby.Bets.Add(item);
             }
@@ -77,14 +84,14 @@ namespace MVC.Models.Userlogic
             lobby.Describtion = dbLobby.Description;
 
 
-            foreach (var item in dbLobby.Members)
+            foreach (var item in dbLobby.MemberList)
             {
-                lobby.Participants.Add(item);
+                lobby.Members.Add(item);
             }
 
-            foreach (var item in dbLobby.Invited)
+            foreach (var item in dbLobby.InvitedList)
             {
-                lobby.Participants.Add(item);
+                lobby.Members.Add(item);
             }
 
             return lobby;
