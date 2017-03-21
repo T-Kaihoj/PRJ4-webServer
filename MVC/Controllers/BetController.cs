@@ -1,4 +1,6 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using MVC.Models.Userlogic;
@@ -7,18 +9,33 @@ namespace MVC.Controllers
 {
     public class BetController : Controller
     {
+        // GET: /<controller>/Join/<id>
+        public ActionResult Join(long id)
+        {
+            throw new Exception("Not implemented");
+        }
+
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {
-            var betPage = new BetPageViewModel();
-
             var bet = Bet.getBet(id);
 
+            var betPage = new BetPageViewModel()
+            {
+                Description = bet.Description,
+                EndDate = bet.EndDate,
+                //Judge = "",
+                //LobbyID = 0,
+                //Users = new List<User>(),
+                Title = bet.BetName,
+                StartDate = bet.StartDate,
+                Outcomes = bet.Outcomes.Select(o => o.Name).ToList(),
+                MoneyPool = bet.Pot
+            };
+
+            /*
 
             betPage.Title = bet.BetName;
-
-            //betPage.Title = bet.BetTitle;
-
             betPage.Description = bet.Description;
             betPage.StartDate = bet.StartDate;
             betPage.EndDate = bet.EndDate;
@@ -26,8 +43,7 @@ namespace MVC.Controllers
             for (int i = 0; i < bet.Outcomes.Count(); i++)
             {
                 betPage.Outcomes[i] = bet.Outcomes[i].Name;
-            }
-
+            }*/
 
             return View(betPage);
         }

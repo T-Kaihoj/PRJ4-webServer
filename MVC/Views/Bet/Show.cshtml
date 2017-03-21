@@ -6,7 +6,7 @@
     ViewData["Title"] = "Lobby Page";
 }
 
-@model BetViewModel
+@model MVC.Models.Userlogic.BetPageViewModel
 
 <div class="container">
         <div class="row">
@@ -98,7 +98,7 @@
                     Current Judge(s)
                 </p>
                 <ul>
-                    <li>@Html.DisplayFor(m => m.Judge.Username)</li>
+                    <li>@Html.DisplayFor(m => m.Judge)</li>
                 </ul>
             </div>
         </div>
