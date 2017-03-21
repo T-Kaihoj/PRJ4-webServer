@@ -64,7 +64,7 @@ namespace MVC.Models.Userlogic
             return lobby;
         }
 
-        static public implicit operator Lobby(MVC.Database.Models.Lobby dbLobby)
+        static public implicit operator Lobby(Common.Models.Lobby dbLobby)
         {
             
 
@@ -75,9 +75,9 @@ namespace MVC.Models.Userlogic
                 return lobby;
             }
 
-                foreach (var item in dbLobby.Bets)
+            foreach (var item in dbLobby.Bets)
             {
-                lobby.Bets.Add(item);
+               // lobby.Bets.Add(item);
             }
             lobby.LobbyName = dbLobby.Name;
             lobby.LobbyID = dbLobby.LobbyId;
