@@ -229,6 +229,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\IUserLogic.cs" />
+    <Compile Include="Models\Userlogic\Lobbies.cs" />
     <Compile Include="Models\Userlogic\Lobby.cs" />
     <Compile Include="Models\Userlogic\Outcome.cs" />
     <Compile Include="Models\Userlogic\User.cs" />
