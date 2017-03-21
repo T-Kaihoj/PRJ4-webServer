@@ -1,7 +1,7 @@
 using System.Diagnostics;
-using MVC.Database;
-using MVC.Database.Data;
-using MVC.Database.Models;
+using DAL;
+using DAL.Data;
+using DAL.Models;
 
 namespace MVC.Migrations
 {
@@ -10,14 +10,14 @@ namespace MVC.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MVC.Database.Data.Context>
+    internal sealed class Configuration : DbMigrationsConfiguration<DAL.Data.Context>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(MVC.Database.Data.Context context)
+        protected override void Seed(DAL.Data.Context context)
         {
             using (var unitOfWork = new UnitOfWork(context))
             {

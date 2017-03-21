@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using MVC.Database.Models;
+using DAL.Models;
 
 namespace MVC.ViewModels
 {

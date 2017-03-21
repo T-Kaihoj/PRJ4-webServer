@@ -1,7 +1,7 @@
 ﻿using System;
-using MVC.Database.Repositories;
+using DAL.Repositories;
 
-namespace MVC.Database
+namespace DAL
 
 {
     public interface IUnitOfWork : IDisposable

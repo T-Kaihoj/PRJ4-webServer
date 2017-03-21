@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Data;
 using System.Linq;
 using System.Data.Entity;
-using MVC.Database.Models;
+using DAL.Models;
 
-namespace MVC.Database.Data
+namespace DAL.Data
 {
     // Virker ikke mere
     public class DbInitializer : DropCreateDatabaseIfModelChanges<Context>

@@ -1,6 +1,6 @@
-﻿using MVC.Database.Models;
+﻿using DAL.Models;
 
-namespace MVC.Database.Repositories
+namespace DAL.Repositories
 { 
     public interface IUserRepository : IRepository<User>
     {

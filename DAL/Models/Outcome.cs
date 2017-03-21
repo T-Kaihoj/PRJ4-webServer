@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace MVC.Database.Models
+namespace DAL.Models
 {
     public class Outcome
     {

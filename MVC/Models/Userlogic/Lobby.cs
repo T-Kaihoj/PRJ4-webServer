@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using MVC.Database;
-using MVC.Database.Data;
+using DAL;
+using DAL.Data;
 using MVC.Models.Userlogic;
 
 
@@ -16,7 +16,7 @@ namespace MVC.Models.Userlogic
 
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
-                var dbLobby = new MVC.Database.Models.Lobby();
+                var dbLobby = new DAL.Models.Lobby();
 
 
                  

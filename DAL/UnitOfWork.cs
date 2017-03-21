@@ -1,9 +1,9 @@
 ﻿using System;
-using MVC.Database.Data;
-using MVC.Database.Persistence;
-using MVC.Database.Repositories;
+using DAL.Data;
+using DAL.Persistence;
+using DAL.Repositories;
 
-namespace MVC.Database
+namespace DAL
 {
     public class UnitOfWork : IUnitOfWork
     {

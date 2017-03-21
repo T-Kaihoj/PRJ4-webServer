@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
-namespace MVC.Database.Repositories
+namespace DAL.Repositories
 { 
     public interface IRepository<TEntity> where TEntity : class
     {

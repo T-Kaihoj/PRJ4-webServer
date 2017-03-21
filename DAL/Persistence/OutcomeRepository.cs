@@ -4,11 +4,11 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
-using MVC.Database.Data;
-using MVC.Database.Models;
-using MVC.Database.Repositories;
+using DAL.Data;
+using DAL.Models;
+using DAL.Repositories;
 
-namespace MVC.Database.Persistence
+namespace DAL.Persistence
 {
     public class OutcomeRepository : Repository<Outcome>, IOutcomeRepository
     {

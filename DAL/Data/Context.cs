@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
-using MVC.Database.Models;
+using DAL.Models;
 
-namespace MVC.Database.Data
+namespace DAL.Data
 {
     public class Context : DbContext
     {
