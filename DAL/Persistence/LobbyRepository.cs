@@ -5,7 +5,7 @@ using DAL.Repositories;
 
 namespace DAL.Persistence
 {
-    public class LobbyRepository : Repository<Lobby>, ILobbyRepository
+    public class LobbyRepository : Repository<ILobby>, ILobbyRepository
     {
         public LobbyRepository(DbContext context) : base(context)
         {

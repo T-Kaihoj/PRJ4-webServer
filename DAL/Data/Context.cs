@@ -20,8 +20,8 @@ namespace DAL.Data
         {
 
             // mange til mange opsætning mellem User og Lobby (member)
-            modelBuilder.Entity<User>()
-                .HasMany<Lobby>(s => s.MemberOfLobbies)
+            modelBuilder.Entity<IUser>()
+                .HasMany<ILobby>(s => s.MemberOfLobbies)
                 .WithMany(c => c.MemberList)
                 .Map(cs =>
                 {
@@ -31,8 +31,8 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Lobby (invited)
-            modelBuilder.Entity<User>()
-                .HasMany<Lobby>(s => s.InvitedToLobbies)
+            modelBuilder.Entity<IUser>()
+                .HasMany<ILobby>(s => s.InvitedToLobbies)
                 .WithMany(c => c.InvitedList)
                 .Map(cs =>
                 {
@@ -42,8 +42,8 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Bet
-            modelBuilder.Entity<User>()
-                .HasMany<Bet>(s => s.Bets)
+            modelBuilder.Entity<IUser>()
+                .HasMany<IBet>(s => s.Bets)
                 .WithMany(c => c.Participants)
                 .Map(cs =>
                 {
@@ -53,8 +53,8 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Outcome
-            modelBuilder.Entity<User>()
-                .HasMany<Outcome>(s => s.Outcomes)
+            modelBuilder.Entity<IUser>()
+                .HasMany<IOutcome>(s => s.Outcomes)
                 .WithMany(c => c.Participants)
                 .Map(cs =>
                 {

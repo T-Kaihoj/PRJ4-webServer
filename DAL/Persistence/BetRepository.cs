@@ -5,7 +5,7 @@ using DAL.Repositories;
 
 namespace DAL.Persistence
 {
-    public class BetRepository : Repository<Bet>, IBetRepository
+    public class BetRepository : Repository<IBet>, IBetRepository
     {
         public BetRepository(DbContext context) : base(context)
         {

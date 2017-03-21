@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DAL.Models
 {
-    public class User
+    public class User : IUser
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -29,9 +29,9 @@ namespace DAL.Models
 
         [Required]
         public string Salt { get; set; }
-        public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
-        public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
-        public virtual ICollection<Bet> Bets { get; set; } 
-        public virtual ICollection<Outcome> Outcomes { get; set; }
+        public virtual ICollection<ILobby> MemberOfLobbies { get; set; }
+        public virtual ICollection<ILobby> InvitedToLobbies { get; set; }
+        public virtual ICollection<IBet> Bets { get; set; } 
+        public virtual ICollection<IOutcome> Outcomes { get; set; }
     }
 }

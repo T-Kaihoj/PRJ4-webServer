@@ -10,7 +10,7 @@ using DAL.Repositories;
 
 namespace DAL.Persistence
 {
-    public class OutcomeRepository : Repository<Outcome>, IOutcomeRepository
+    public class OutcomeRepository : Repository<IOutcome>, IOutcomeRepository
     {
         public OutcomeRepository(DbContext context) : base(context)
         {

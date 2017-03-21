@@ -49,7 +49,59 @@
   <ItemGroup>
     <Compile Include="Data\Context.cs" />
     <Compile Include="Data\DbInitializer.cs" />
-    <Compile Include="IUnitOfWork.cs" />
+    <Compile Include="Migrations\201703191550583_Initial.cs" />
+    <Compile Include="Migrations\201703191550583_Initial.Designer.cs">
+      <DependentUpon>201703191550583_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191559554_testmigrat..cs" />
+    <Compile Include="Migrations\201703191559554_testmigrat..Designer.cs">
+      <DependentUpon>201703191559554_testmigrat..cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191611588_testtest.cs" />
+    <Compile Include="Migrations\201703191611588_testtest.Designer.cs">
+      <DependentUpon>201703191611588_testtest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191615468_Lidt mere hygge.cs" />
+    <Compile Include="Migrations\201703191615468_Lidt mere hygge.Designer.cs">
+      <DependentUpon>201703191615468_Lidt mere hygge.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191619442_Mange til mange test.cs" />
+    <Compile Include="Migrations\201703191619442_Mange til mange test.Designer.cs">
+      <DependentUpon>201703191619442_Mange til mange test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191640362_Test til column navne.cs" />
+    <Compile Include="Migrations\201703191640362_Test til column navne.Designer.cs">
+      <DependentUpon>201703191640362_Test til column navne.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191646212_samme som før.cs" />
+    <Compile Include="Migrations\201703191646212_samme som før.Designer.cs">
+      <DependentUpon>201703191646212_samme som før.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703191649435_samme som før2.cs" />
+    <Compile Include="Migrations\201703191649435_samme som før2.Designer.cs">
+      <DependentUpon>201703191649435_samme som før2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703192002445_mange til mange mellem bet og user.cs" />
+    <Compile Include="Migrations\201703192002445_mange til mange mellem bet og user.Designer.cs">
+      <DependentUpon>201703192002445_mange til mange mellem bet og user.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703192035382_Endnu en mange til mange igen igen.cs" />
+    <Compile Include="Migrations\201703192035382_Endnu en mange til mange igen igen.Designer.cs">
+      <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703201204050_repository test.cs" />
+    <Compile Include="Migrations\201703201204050_repository test.Designer.cs">
+      <DependentUpon>201703201204050_repository test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703201458360_MyMigration.cs" />
+    <Compile Include="Migrations\201703201458360_MyMigration.Designer.cs">
+      <DependentUpon>201703201458360_MyMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703201916311_UserChanges.cs" />
+    <Compile Include="Migrations\201703201916311_UserChanges.Designer.cs">
+      <DependentUpon>201703201916311_UserChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Bet.cs" />
     <Compile Include="Models\Lobby.cs" />
     <Compile Include="Models\Outcome.cs" />
@@ -60,16 +112,58 @@
     <Compile Include="Persistence\Repository.cs" />
     <Compile Include="Persistence\UserRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\IBetRepository.cs" />
-    <Compile Include="Repositories\ILobbyRepository.cs" />
-    <Compile Include="Repositories\IOutcomeRepository.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="UnitOfWork.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f525c1c4-a75e-44ae-ae6a-39857d1cb298}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703191550583_Initial.resx">
+      <DependentUpon>201703191550583_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191559554_testmigrat..resx">
+      <DependentUpon>201703191559554_testmigrat..cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191611588_testtest.resx">
+      <DependentUpon>201703191611588_testtest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191615468_Lidt mere hygge.resx">
+      <DependentUpon>201703191615468_Lidt mere hygge.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191619442_Mange til mange test.resx">
+      <DependentUpon>201703191619442_Mange til mange test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191640362_Test til column navne.resx">
+      <DependentUpon>201703191640362_Test til column navne.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191646212_samme som før.resx">
+      <DependentUpon>201703191646212_samme som før.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703191649435_samme som før2.resx">
+      <DependentUpon>201703191649435_samme som før2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703192002445_mange til mange mellem bet og user.resx">
+      <DependentUpon>201703192002445_mange til mange mellem bet og user.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703192035382_Endnu en mange til mange igen igen.resx">
+      <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703201204050_repository test.resx">
+      <DependentUpon>201703201204050_repository test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703201458360_MyMigration.resx">
+      <DependentUpon>201703201458360_MyMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703201916311_UserChanges.resx">
+      <DependentUpon>201703201916311_UserChanges.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
