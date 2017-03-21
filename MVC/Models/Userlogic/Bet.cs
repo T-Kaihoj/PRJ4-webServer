@@ -36,7 +36,7 @@ namespace MVC.Models.Userlogic
             return bet;
         }
 
-        static public implicit operator Bet(MVC.Database.Models.Bet dbbet)
+        static public implicit operator Bet(Common.Models.Bet dbbet)
         {
             var bet = new Bet();
             

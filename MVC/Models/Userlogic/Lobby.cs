@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using MVC.Database;
-using MVC.Database.Data;
+using DAL;
+using DAL.Data;
 using MVC.Models.Userlogic;
 
 
@@ -16,7 +16,7 @@ namespace MVC.Models.Userlogic
 
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
-                var dbLobby = new MVC.Database.Models.Lobby();
+                var dbLobby = new Common.Models.Lobby();
 
 
                  
@@ -63,7 +63,7 @@ namespace MVC.Models.Userlogic
             return lobby;
         }
 
-        static public implicit operator Lobby(MVC.Database.Models.Lobby dbLobby)
+        static public implicit operator Lobby(Common.Models.Lobby dbLobby)
         {
             
 
@@ -74,9 +74,9 @@ namespace MVC.Models.Userlogic
                 return lobby;
             }
 
-                foreach (var item in dbLobby.Bets)
+            foreach (var item in dbLobby.Bets)
             {
-                lobby.Bets.Add(item);
+               // lobby.Bets.Add(item);
             }
             lobby.LobbyName = dbLobby.Name;
             lobby.LobbyID = dbLobby.LobbyId;
