@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 namespace MVC.Models.Userlogic
 {
-    public class User
+    public class User : IModels
     {
         public string Username { get; set; }
         public string FirstName { get; set; }
@@ -26,20 +26,25 @@ namespace MVC.Models.Userlogic
             
         }
 
+
         public void Delete()
         {
-            
+           
+
+              
         }
 
-        public void Assignment(MVC.Database.Models.User db)
+     
+        static public implicit operator User(MVC.Database.Models.User db)
         {
-            this.FirstName = db.FirstName;
-            this.LastName = db.LastName;
-            this.Username = db.Username;
-            this.Email = db.Email;
-            this.Balance = db.Balance;
+            var user = new User();
+            user.FirstName = db.FirstName;
+            user.LastName = db.LastName;
+            user.Username = db.Username;
+            user.Email = db.Email;
+            user.Balance = db.Balance;
 
-
+            return user;
         }
     }
 }
