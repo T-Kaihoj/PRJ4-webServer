@@ -52,6 +52,14 @@
     <Compile Include="Migrations\201703211051481_Initial.Designer.cs">
       <DependentUpon>201703211051481_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703211307235_Test.cs" />
+    <Compile Include="Migrations\201703211307235_Test.Designer.cs">
+      <DependentUpon>201703211307235_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703211317267_rolledback.cs" />
+    <Compile Include="Migrations\201703211317267_rolledback.Designer.cs">
+      <DependentUpon>201703211317267_rolledback.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -74,6 +82,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703211051481_Initial.resx">
       <DependentUpon>201703211051481_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703211307235_Test.resx">
+      <DependentUpon>201703211307235_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703211317267_rolledback.resx">
+      <DependentUpon>201703211317267_rolledback.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
