@@ -92,10 +92,23 @@ namespace MVC.Models.Userlogic
             return bet;
         }
 
-        static public implicit operator Bet(Common.Models.Bet dbbet)
+        public static implicit operator Bet(Common.Models.Bet dbBet)
         {
-            var bet = new Bet();
-            
+            var bet = new Bet()
+            {
+                BetID = dbBet.BetId,
+                BetName = dbBet.Name,
+                BuyIn = dbBet.BuyIn,
+                Description = dbBet.Description,
+                EndDate = dbBet.StopDate.ToString(),
+                //Judge = dbBet.Judge,
+                //JudgeEndable = false,
+                //Outcomes = new List<Outcome>(),
+                //Participants = new List<User>(),
+                Pot = dbBet.Pot,
+                //Result = new Outcome(),
+                StartDate = dbBet.StartDate.ToString()
+            };
 
             return bet;
         }

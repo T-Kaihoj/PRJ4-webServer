@@ -82,6 +82,7 @@ namespace MVC.Models.Userlogic
         public static implicit operator Lobby(Common.Models.Lobby dbLobby)
         {
             var lobby = new Lobby();
+            lobby.Bets = new List<Bet>();
 
             if (dbLobby == null)
             {
@@ -90,7 +91,7 @@ namespace MVC.Models.Userlogic
 
             foreach (var item in dbLobby.Bets)
             {
-               // lobby.Bets.Add(item);
+               lobby.Bets.Add(item);
             }
             lobby.LobbyName = dbLobby.Name;
             lobby.LobbyID = dbLobby.LobbyId;
