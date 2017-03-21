@@ -23,7 +23,7 @@ namespace MVC.Models.Userlogic
                 //lobby.Bets = dbLobby.Bets;
                 dbLobby.Name = this.LobbyName;
                 dbLobby.LobbyId = this.LobbyID;
-                dbLobby.Description = this.Describtion;
+                dbLobby.Description = this.Description;
                 //lobby.Participants = dbLobby.Members;
                 //lobby.Participants = dbLobby.Invited;
 
@@ -80,7 +80,7 @@ namespace MVC.Models.Userlogic
             }
             lobby.LobbyName = dbLobby.Name;
             lobby.LobbyID = dbLobby.LobbyId;
-            lobby.Describtion = dbLobby.Description;
+            lobby.Description = dbLobby.Description;
 
 
             foreach (var item in dbLobby.MemberList)
@@ -109,7 +109,7 @@ namespace MVC.Models.Userlogic
                 throw new NotImplementedException("DB");
                 dbLobby.Name = this.LobbyName;
                 dbLobby.LobbyId = this.LobbyID;
-                dbLobby.Description= this.Describtion;
+                dbLobby.Description= this.Description;
                 //lobby.Participants = dbLobby.Members;
                 //lobby.Participants = dbLobby.Invited;
                 myWork.Complete();

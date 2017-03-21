@@ -7,9 +7,7 @@ using System.Text;
 using DAL;
 using DAL.Data;
 
-using MVC.Database;
-using MVC.Database.Data;
-using MVC.Models.Userlogic;
+
 
 namespace MVC.Models.Userlogic
 {
@@ -24,16 +22,15 @@ namespace MVC.Models.Userlogic
         public List<Lobby> InvitedToLobbies { get; set; }
         public List<Bet> Bets { get; set; }
         public List<Outcome> Outcomes { get; set; }
+        public string Hash { get; private set; }
+        public string Salt { get; private set; }
 
         public static User Get(string username)
         {
             var user = new User();
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
-
-
                 var dbUser = myWork.User.Get(username);
-
                 user = dbUser;
             }
 
@@ -56,20 +53,7 @@ namespace MVC.Models.Userlogic
             
         }
 
-        public static User Get(string userName)
-        {
-            
-            User user;
-
-            using (var context = new Context())
-            {
-                user = context.Users.Find(userName);
-            }
-
-            return user;
-            
-        }
-
+      
         private void CreateSalt()
         {
             // Get a new random generator.
@@ -86,7 +70,7 @@ namespace MVC.Models.Userlogic
         public bool Authenticate(string password)
         {
             // Get the hash, using the password and the salt.
-            return (HashPassword(password) == Hash);
+            return (HashPassword(password) ==  Hash);
         }
 
         public bool SetPassword(string password)

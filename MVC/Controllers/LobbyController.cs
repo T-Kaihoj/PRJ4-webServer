@@ -32,12 +32,12 @@ namespace MVC.Controllers
                 var viewModel = new LobbyViewModel();
                 viewModel.ID = (int)l.LobbyID;
                 viewModel.Name = "Hello Tobias";
-                Bet bet = new Bet();
+                Bet bet = new Bet("100 meter run");
 
-                bet.BetName = "100 meter run";
-                Bet bet1 = new Bet();
+                
+                Bet bet1 = new Bet("weightloss");
 
-                bet.BetName = "weightloss";
+              
                 viewModel.Bets.Add(bet1);
 
 

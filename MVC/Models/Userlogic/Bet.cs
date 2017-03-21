@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MVC.Database;
-using MVC.Database.Data;
 using System.Threading.Tasks;
+using DAL;
+using DAL.Data;
 
 namespace MVC.Models.Userlogic
 {
@@ -27,7 +27,7 @@ namespace MVC.Models.Userlogic
 
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
-                var dbBet = new MVC.Database.Models.Bet();
+                var dbBet = new Common.Models.Bet();
 
                 //lobby.Bets = dbLobby.Bets;
                 dbBet.Name = this.BetName;
@@ -49,6 +49,11 @@ namespace MVC.Models.Userlogic
 
             }
 
+        }
+
+        public Bet(string betname)
+        {
+            this.BetName = betname;
         }
 
         public long BetID { get; set; }

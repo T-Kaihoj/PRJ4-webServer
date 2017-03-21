@@ -167,6 +167,10 @@
     <Compile Include="ViewModels\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{F525C1C4-A75E-44AE-AE6A-39857D1CB298}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MVC\MVC.csproj">
       <Project>{7d69b74a-ccf9-4a53-a6e4-a7c1cd01f371}</Project>
       <Name>MVC</Name>

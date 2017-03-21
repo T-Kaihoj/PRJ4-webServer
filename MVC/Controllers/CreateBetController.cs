@@ -25,6 +25,7 @@ namespace MVC.Controllers
         {
             Debug.WriteLine("Create bet" + viewModel.Title + " ");
             long LobbyID = 2; // HARDCODE
+            /*
             if (!TryValidateModel(viewModel))
             {
                 return View("Index", viewModel);
