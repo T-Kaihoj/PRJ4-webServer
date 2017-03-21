@@ -1,6 +1,6 @@
-﻿using DAL.Models;
+﻿using Common.Models;
 
-namespace DAL.Repositories
+namespace Common.Repositories
 {
     public interface ILobbyRepository : IRepository<Lobby>
     {

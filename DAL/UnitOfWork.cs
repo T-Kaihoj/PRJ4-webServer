@@ -1,7 +1,8 @@
 ﻿using System;
+using Common;
+using Common.Repositories;
 using DAL.Data;
 using DAL.Persistence;
-using DAL.Repositories;
 
 namespace DAL
 {

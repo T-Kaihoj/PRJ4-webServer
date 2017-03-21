@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
+using Common.Models;
+using Common.Repositories;
 using DAL.Data;
-using DAL.Models;
-using DAL.Repositories;
 
 namespace DAL.Persistence
 {

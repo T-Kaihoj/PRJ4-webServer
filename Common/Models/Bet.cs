@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DAL.Models
+namespace Common.Models
 {
     public class Bet
     {

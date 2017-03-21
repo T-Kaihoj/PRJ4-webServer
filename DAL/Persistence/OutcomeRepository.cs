@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Common.Models;
+using Common.Repositories;
 using DAL.Data;
-using DAL.Models;
-using DAL.Repositories;
 
 namespace DAL.Persistence
 {

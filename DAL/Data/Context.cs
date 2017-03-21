@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 using System.Linq;
-using DAL.Models;
+using Common.Models;
 
 namespace DAL.Data
 {

@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Models;
 using DAL;
 using DAL.Data;
-using DAL.Models;
 
 namespace TestApp
 {

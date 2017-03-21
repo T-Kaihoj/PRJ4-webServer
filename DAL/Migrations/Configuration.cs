@@ -1,9 +1,9 @@
 using System.Diagnostics;
+using Common.Models;
 using DAL;
 using DAL.Data;
-using DAL.Models;
 
-namespace MVC.Migrations
+namespace DAL.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -19,7 +19,8 @@ namespace MVC.Migrations
 
         protected override void Seed(DAL.Data.Context context)
         {
-            using (var unitOfWork = new UnitOfWork(context))
+            context = new Context();
+            using (var unitOfWork = new UnitOfWork(new Context()))
             {
                 // context.Database.EnsureCreated(); // noget her der også er broken efter skiftet til normal entity
 

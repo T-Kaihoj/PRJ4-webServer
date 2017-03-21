@@ -16,7 +16,7 @@ namespace MVC.Models.Userlogic
 
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
-                var dbLobby = new DAL.Models.Lobby();
+                var dbLobby = new Common.Models.Lobby();
 
 
                  

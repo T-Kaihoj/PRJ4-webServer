@@ -37,6 +37,7 @@ namespace MVC.Models.Userlogic
 
         public static User Get(string userName)
         {
+            
             User user;
 
             using (var context = new Context())
@@ -45,6 +46,7 @@ namespace MVC.Models.Userlogic
             }
 
             return user;
+            
         }
 
         private void CreateSalt()
@@ -102,7 +104,7 @@ namespace MVC.Models.Userlogic
             return Convert.ToBase64String(hashedBytes);
         }
 
-        public static implicit operator User(DAL.Models.User db)
+        public static implicit operator User(Common.Models.User db)
         {
             User user = new User();
 
