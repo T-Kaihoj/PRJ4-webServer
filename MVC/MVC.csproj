@@ -35,6 +35,20 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="LocalBet" Order="1">
+          <Destination Path="" />
+          <Object Type="DbFullSql">
+            <PreSource Path="Data Source=%28localdb%29\MSSQLLocalDB%3bInitial Catalog=LocalBet%3bIntegrated Security=True%3bConnect Timeout=60%3bEncrypt=False%3bTrustServerCertificate=True%3bApplicationIntent=ReadWrite%3bMultiSubnetFailover=False" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Debug\AutoScripts\LocalBet_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+        <ObjectGroup Name="Azure" Order="3">
+          <Destination Path="Data Source=tcp:localbet.database.windows.net,1433%3bInitial Catalog=LocalBet%3bUser ID=my_admin%40localbet%3bPassword=Root1234567890" />
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -62,6 +76,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -137,24 +154,6 @@
     <Compile Include="Controllers\InviteToLobbyController.cs" />
     <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Database\Data\Context.cs" />
-    <Compile Include="Database\Data\DbInitializer.cs" />
-    <Compile Include="Database\IUnitOfWork.cs" />
-    <Compile Include="Database\Models\Bet.cs" />
-    <Compile Include="Database\Models\Lobby.cs" />
-    <Compile Include="Database\Models\Outcome.cs" />
-    <Compile Include="Database\Models\User.cs" />
-    <Compile Include="Database\Persistence\BetRepository.cs" />
-    <Compile Include="Database\Persistence\LobbyRepository.cs" />
-    <Compile Include="Database\Persistence\OutcomeRepository.cs" />
-    <Compile Include="Database\Persistence\Repository.cs" />
-    <Compile Include="Database\Persistence\UserRepository.cs" />
-    <Compile Include="Database\Repositories\IBetRepository.cs" />
-    <Compile Include="Database\Repositories\ILobbyRepository.cs" />
-    <Compile Include="Database\Repositories\IOutcomeRepository.cs" />
-    <Compile Include="Database\Repositories\IRepository.cs" />
-    <Compile Include="Database\Repositories\IUserRepository.cs" />
-    <Compile Include="Database\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -162,54 +161,9 @@
     <Compile Include="Models\Userlogic\IBetinfo.cs" />
     <Compile Include="Models\Userlogic\IBetJudge.cs" />
     <Compile Include="Models\Userlogic\IBetLogic.cs" />
+    <Compile Include="Models\Userlogic\IEntity.cs" />
     <Compile Include="Models\Userlogic\ILobbyinfo.cs" />
     <Compile Include="Models\Userlogic\ILobbyLogic.cs" />
-    <Compile Include="Migrations\201703191550583_Initial.cs" />
-    <Compile Include="Migrations\201703191550583_Initial.Designer.cs">
-      <DependentUpon>201703191550583_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191559554_testmigrat..cs" />
-    <Compile Include="Migrations\201703191559554_testmigrat..Designer.cs">
-      <DependentUpon>201703191559554_testmigrat..cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191611588_testtest.cs" />
-    <Compile Include="Migrations\201703191611588_testtest.Designer.cs">
-      <DependentUpon>201703191611588_testtest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191615468_Lidt mere hygge.cs" />
-    <Compile Include="Migrations\201703191615468_Lidt mere hygge.Designer.cs">
-      <DependentUpon>201703191615468_Lidt mere hygge.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191619442_Mange til mange test.cs" />
-    <Compile Include="Migrations\201703191619442_Mange til mange test.Designer.cs">
-      <DependentUpon>201703191619442_Mange til mange test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191640362_Test til column navne.cs" />
-    <Compile Include="Migrations\201703191640362_Test til column navne.Designer.cs">
-      <DependentUpon>201703191640362_Test til column navne.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191646212_samme som før.cs" />
-    <Compile Include="Migrations\201703191646212_samme som før.Designer.cs">
-      <DependentUpon>201703191646212_samme som før.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703191649435_samme som før2.cs" />
-    <Compile Include="Migrations\201703191649435_samme som før2.Designer.cs">
-      <DependentUpon>201703191649435_samme som før2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703192002445_mange til mange mellem bet og user.cs" />
-    <Compile Include="Migrations\201703192002445_mange til mange mellem bet og user.Designer.cs">
-      <DependentUpon>201703192002445_mange til mange mellem bet og user.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703192035382_Endnu en mange til mange igen igen.cs" />
-    <Compile Include="Migrations\201703192035382_Endnu en mange til mange igen igen.Designer.cs">
-      <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703201204050_repository test.cs" />
-    <Compile Include="Migrations\201703201204050_repository test.Designer.cs">
-      <DependentUpon>201703201204050_repository test.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Userlogic\IModels.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\IUserLogic.cs" />
     <Compile Include="Models\Userlogic\Lobby.cs" />
@@ -219,7 +173,7 @@
     <Compile Include="Others\PassthruBundleOrderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
-    <Compile Include="ViewModels\BetViewModel.cs" />
+    <Compile Include="ViewModels\CreateBetViewModel.cs" />
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
@@ -268,48 +222,34 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703191550583_Initial.resx">
-      <DependentUpon>201703191550583_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191559554_testmigrat..resx">
-      <DependentUpon>201703191559554_testmigrat..cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191611588_testtest.resx">
-      <DependentUpon>201703191611588_testtest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191615468_Lidt mere hygge.resx">
-      <DependentUpon>201703191615468_Lidt mere hygge.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191619442_Mange til mange test.resx">
-      <DependentUpon>201703191619442_Mange til mange test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191640362_Test til column navne.resx">
-      <DependentUpon>201703191640362_Test til column navne.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191646212_samme som før.resx">
-      <DependentUpon>201703191646212_samme som før.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703191649435_samme som før2.resx">
-      <DependentUpon>201703191649435_samme som før2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703192002445_mange til mange mellem bet og user.resx">
-      <DependentUpon>201703192002445_mange til mange mellem bet og user.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703192035382_Endnu en mange til mange igen igen.resx">
-      <DependentUpon>201703192035382_Endnu en mange til mange igen igen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703201204050_repository test.resx">
-      <DependentUpon>201703201204050_repository test.cs</DependentUpon>
-    </EmbeddedResource>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{f525c1c4-a75e-44ae-ae6a-39857d1cb298}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{84dedd26-4186-4c8e-af5d-012a459dabab}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Publish|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

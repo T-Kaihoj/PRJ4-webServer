@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using MVC.Database;
-using MVC.Database.Data;
+using DAL;
+using DAL.Data;
 using MVC.Models.Userlogic;
 
 
 
 namespace MVC.Models.Userlogic
 {
-    public class Lobby : MVC.Models.IModels
+    public class Lobby
     {
         public Lobby(string lobbyName)
         {
@@ -16,7 +16,7 @@ namespace MVC.Models.Userlogic
 
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
-                var dbLobby = new MVC.Database.Models.Lobby();
+                var dbLobby = new Common.Models.Lobby();
 
 
                  
@@ -39,7 +39,6 @@ namespace MVC.Models.Userlogic
         }
 
         public long LobbyID { get; set; }
-        public string Describtion { get; set; }
         public string LobbyName { get; set; }
         public string Description { get; set; }
         public List<User> Members { get; set; }
@@ -64,13 +63,20 @@ namespace MVC.Models.Userlogic
             return lobby;
         }
 
-        static public implicit operator Lobby(MVC.Database.Models.Lobby dbLobby)
+        static public implicit operator Lobby(Common.Models.Lobby dbLobby)
         {
-            var lobby = new Lobby();
             
+
+            var lobby = new Lobby();
+
+            if (dbLobby == null)
+            {
+                return lobby;
+            }
+
             foreach (var item in dbLobby.Bets)
             {
-                lobby.Bets.Add(item);
+               // lobby.Bets.Add(item);
             }
             lobby.LobbyName = dbLobby.Name;
             lobby.LobbyID = dbLobby.LobbyId;

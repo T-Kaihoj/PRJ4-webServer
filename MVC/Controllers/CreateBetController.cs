@@ -21,7 +21,7 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult post(BetViewModel viewModel)
+        public ActionResult post(BetPageViewModel viewModel)
         {
             Debug.WriteLine("Create bet" + viewModel.Title + " ");
             long LobbyID = 2; // HARDCODE
@@ -29,6 +29,7 @@ namespace MVC.Controllers
             {
                 return View("Index", viewModel);
             }
+            */
 
             var bet = new Bet(viewModel.Title, viewModel.Description, LobbyID, viewModel.Judge.Username, viewModel.StartDate, viewModel.EndDate);
            
@@ -42,7 +43,7 @@ namespace MVC.Controllers
 
             //Send return to home page 
             //return Redirect($"/CreateBet/Show/{bet.BetID}");
-            return Redirect($"/CreateBet/Show/0");
+            return Redirect($"/BetPage/Show/0");
         }
     }
 }
