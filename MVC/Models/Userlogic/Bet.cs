@@ -2,12 +2,55 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MVC.Database;
+using MVC.Database.Data;
 using System.Threading.Tasks;
 
 namespace MVC.Models.Userlogic
-{ 
+{
     public class Bet
     {
+        private Bet()
+        {
+        }
+
+        public Bet(string betname, string description, long lobbyID, string judge, string startDate, string endDate)
+        {
+
+            this.BetName = betname;
+            this.Description = description;
+            this.StartDate = "16-03-2017 15:38";
+            this.Judge = User.Get(judge);
+            this.EndDate = endDate;
+            this.StartDate = startDate;
+            this.JudgeEndable = false;
+
+            using (UnitOfWork myWork = new UnitOfWork(new Context()))
+            {
+                var dbBet = new MVC.Database.Models.Bet();
+
+                //lobby.Bets = dbLobby.Bets;
+                dbBet.Name = this.BetName;
+                dbBet.Description = this.Description;
+                dbBet.Judge = myWork.User.Get(judge);
+                dbBet.StartDate = System.DateTime.Parse( this.StartDate);
+                dbBet.StopDate = System.DateTime.Parse(this.EndDate);
+                //dbBet.BuyIn = this.BuyIn;
+                
+
+                //lobby.Participants = dbLobby.Members;
+                //lobby.Participants = dbLobby.Invited;
+
+                myWork.Bet.Add(dbBet);
+                myWork.Complete();
+                
+                
+
+
+            }
+
+        }
+
         public long BetID { get; set; }
         public string BetName { get; set; }
         public string Description { get; set; }
@@ -18,9 +61,11 @@ namespace MVC.Models.Userlogic
         public List<Outcome> Outcomes { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
+        public bool JudgeEndable { get; set; }
+    
 
 
-        public static Bet getBet(long id)
+    public static Bet getBet(long id)
         {
             var bet = new Bet();
             bet.BetID = id;

@@ -26,5 +26,7 @@ namespace MVC.Database.Models
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
         public virtual ICollection<Bet> Bets { get; set; } 
         public virtual ICollection<Outcome> Outcomes { get; set; }
+
+
     }
 }

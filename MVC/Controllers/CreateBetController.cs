@@ -24,18 +24,14 @@ namespace MVC.Controllers
         public ActionResult post(BetViewModel viewModel)
         {
             Debug.WriteLine("Create bet" + viewModel.Title + " ");
-
+            long LobbyID = 2; // HARDCODE
             if (!TryValidateModel(viewModel))
             {
                 return View("Index", viewModel);
             }
 
-            var bet = new Bet();
-            bet.BetName = viewModel.Title;
-            bet.Description = viewModel.Description;
-            bet.EndDate = viewModel.EndDate;
-            bet.StartDate = viewModel.StartDate;
-
+            var bet = new Bet(viewModel.Title, viewModel.Description, LobbyID, viewModel.Judge.Username, viewModel.StartDate, viewModel.EndDate);
+           
             bet.Persist();
 
 

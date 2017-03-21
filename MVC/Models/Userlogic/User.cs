@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MVC.Database;
+using MVC.Database.Data;
+using MVC.Models.Userlogic;
+
 namespace MVC.Models.Userlogic
 {
     public class User : IModels
@@ -19,7 +20,22 @@ namespace MVC.Models.Userlogic
         public List<Bet> Bets { get; set; }
         public List<Outcome> Outcomes { get; set; }
 
+        public static User Get(string username)
+        {
+            var user = new User();
+            using (UnitOfWork myWork = new UnitOfWork(new Context()))
+            {
 
+
+                var dbUser = myWork.User.Get(username);
+
+                user = dbUser;
+            }
+
+
+
+            return user;
+        }
 
         public void Persist()
         {
@@ -34,7 +50,6 @@ namespace MVC.Models.Userlogic
               
         }
 
-     
         static public implicit operator User(MVC.Database.Models.User db)
         {
             var user = new User();
@@ -43,7 +58,8 @@ namespace MVC.Models.Userlogic
             user.Username = db.Username;
             user.Email = db.Email;
             user.Balance = db.Balance;
-
+            
+            //todo
             return user;
         }
     }

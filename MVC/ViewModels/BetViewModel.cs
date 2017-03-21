@@ -23,6 +23,6 @@ namespace MVC.Models.Userlogic
         //public List<Outcome> Outcomes { get; set; }
 
         public User Judge { get; set; }
-
+       
     }
 }
