@@ -17,13 +17,13 @@ namespace MVC.Models.Userlogic
         public Bet(string betname, string description, long lobbyID, string judge, string startDate, string endDate)
         {
 
-            this.BetName = betname;
-            this.Description = description;
-            this.StartDate = "16-03-2017 15:38";
-            this.Judge = User.Get(judge);
-            this.EndDate = endDate;
-            this.StartDate = startDate;
-            this.JudgeEndable = false;
+            BetName = betname;
+            Description = description;
+            StartDate = "16-03-2017 15:38";
+            //Judge = User.Get(judge);
+            EndDate = "26-03-2017 15:38"; ;
+            //StartDate = startDate;
+            JudgeEndable = false;
 
             using (UnitOfWork myWork = new UnitOfWork(new Context()))
             {
@@ -32,7 +32,7 @@ namespace MVC.Models.Userlogic
                 //lobby.Bets = dbLobby.Bets;
                 dbBet.Name = this.BetName;
                 dbBet.Description = this.Description;
-                dbBet.Judge = myWork.User.Get(judge);
+                //dbBet.Judge = myWork.User.Get(judge);
                 dbBet.StartDate = System.DateTime.Parse( this.StartDate);
                 dbBet.StopDate = System.DateTime.Parse(this.EndDate);
                 //dbBet.BuyIn = this.BuyIn;
@@ -42,6 +42,11 @@ namespace MVC.Models.Userlogic
                 //lobby.Participants = dbLobby.Invited;
 
                 myWork.Bet.Add(dbBet);
+
+                // Get the corresponding lobby, and add the bet.
+                var dbLobby = myWork.Lobby.Get(lobbyID);
+                dbLobby.Bets.Add(dbBet);
+
                 myWork.Complete();
                 
                 
@@ -80,6 +85,7 @@ namespace MVC.Models.Userlogic
             bet.EndDate = "30-03-2017 15:30";
             bet.Judge = new User();
             bet.Judge.Username = "Snake";
+            bet.Outcomes = new List<Outcome>();
             bet.Outcomes.Add(new Outcome("Han taber sig"));
             bet.Outcomes.Add(new Outcome("Han når det ikke"));
 

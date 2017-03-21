@@ -14,7 +14,7 @@
                 
             </h1>
 
-            <form method="post" asp-controller="CreateLobby" asp-action="post">
+            
                 <div class="row" align="left">
                     <p class="lead">
 
@@ -48,11 +48,11 @@
                     </p>
                     <p class="lead">
 
-                        <button type="submit" class="btn btn-primary pull-left">Create new bet</button>
+                        <a class="btn btn-primary pull-left" href="/Bet/Create/@Model.ID">Create new bet</a>
 
                     </p>
                 </div>
-            </form>
+            
         </div>
     </div>
 </div>

@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 
 namespace MVC.Models.Userlogic
 {
@@ -22,7 +19,9 @@ namespace MVC.Models.Userlogic
         
         //public List<Outcome> Outcomes { get; set; }
 
-        public User Judge { get; set; }
-       
+        public string Judge { get; set; }
+
+        [HiddenInput]
+        public long LobbyID { get; set; }
     }
 }
