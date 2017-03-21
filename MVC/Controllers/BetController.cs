@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
 using MVC.Models.Userlogic;
+using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
@@ -20,7 +19,7 @@ namespace MVC.Controllers
         {
             var bet = Bet.getBet(id);
 
-            var betPage = new BetPageViewModel()
+            var betPage = new BetViewModel()
             {
                 Description = bet.Description,
                 EndDate = bet.EndDate,
@@ -52,7 +51,7 @@ namespace MVC.Controllers
         [HttpGet]
         public ActionResult Create(long id)
         {
-            BetPageViewModel viewModel = new BetPageViewModel()
+            var viewModel = new BetViewModel()
             {
                 LobbyID = id
             };
@@ -62,7 +61,7 @@ namespace MVC.Controllers
 
         // POST: /<controller>/Create
         [HttpPost]
-        public ActionResult Create(BetPageViewModel viewModel)
+        public ActionResult Create(BetViewModel viewModel)
         {
             /*if (!TryValidateModel(viewModel))
             {

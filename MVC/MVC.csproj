@@ -170,7 +170,8 @@
     <Compile Include="Others\PassthruBundleOrderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
-    <Compile Include="ViewModels\CreateBetViewModel.cs" />
+    <Compile Include="ViewModels\Bets\BetViewModel.cs" />
+    <Compile Include="ViewModels\Bets\CreateBetViewModel.cs" />
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
@@ -202,7 +203,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Authentication\InvalidCredentials.cshtml" />
     <Content Include="Views\Authentication\ValidCredentials.cshtml" />
-    <Content Include="Views\BetPage\Index.cshtml" />
     <Content Include="Views\CreateBet\Index.cshtml" />
     <Content Include="Views\InviteToLobby\Index.cshtml" />
     <Content Include="Views\Lobby\Index.cshtml" />
@@ -213,7 +213,6 @@
     <Content Include="Views\Shared\MenuBox.cshtml" />
     <Content Include="Views\Shared\UserBox.cshtml" />
     <Content Include="Views\Lobby\Show.cshtml" />
-    <Content Include="Views\BetPage\Show.cshtml" />
     <Content Include="Views\Lobby\Create.cshtml" />
     <Content Include="Views\Lobby\List.cshtml" />
     <Content Include="Views\Bet\Create.cshtml" />
