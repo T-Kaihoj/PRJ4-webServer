@@ -24,8 +24,8 @@ namespace DAL.Tests
             _context = new DAL.Data.Context();
 
             // Reset the database.
-            _context.Database.Delete();
-            
+            _context.Database.ExecuteSqlCommand("DELETE FROM Users");
+
             // Insert dummy data.
             
             // Create the repository.
@@ -36,7 +36,7 @@ namespace DAL.Tests
         public void Dispose()
         {
             // Reset the database.
-            _context.Database.Delete();
+            _context.Database.ExecuteSqlCommand("DELETE FROM Users");
         }
 
         // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
