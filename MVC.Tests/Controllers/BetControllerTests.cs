@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Common.Models;
 using MVC.Controllers;
@@ -62,10 +63,17 @@ namespace MVC.Tests.Controllers
 
             LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
 
+            string startDate = "25/03/2017 12:40";
+            string stopDate = "25/04/2017 12:40";
+            decimal buyIn = new decimal(14);
+
             // Create the viewmodel.
             var viewModel = new CreateBetViewModel()
             {
+                BuyIn = buyIn.ToString(),
                 Description = "Description",
+                StopDate = stopDate,
+                StartDate = startDate,
                 Title = "Name"
             };
 
@@ -77,8 +85,11 @@ namespace MVC.Tests.Controllers
             uut.Create(viewModel);
 
             // Assert that the object passed to the repository, matches our data.
+            Assert.That(bet.BuyIn, Is.EqualTo(buyIn));
             Assert.That(bet.Description, Is.EqualTo(viewModel.Description));
             Assert.That(bet.Name , Is.EqualTo(viewModel.Title));
+            Assert.That(bet.StartDate, Is.EqualTo(DateTime.Parse(startDate)));
+            Assert.That(bet.StopDate, Is.EqualTo(DateTime.Parse(stopDate)));
             // TODO: Extend.
         }
 

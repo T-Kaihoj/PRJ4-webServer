@@ -2,8 +2,6 @@
 $(document).ready(function () {
     // Initialize Material Design.
     $.material.init();
-
-    
 });
 
 // Setup jQuery Validate for Bootstrap integration.
@@ -36,6 +34,8 @@ function registerDateTimePicker(datetimepicker) {
         });
 
         // Start the datetime picker.
-        item.datetimepicker();
+        item.datetimepicker({
+            locale: 'da'
+        });
     });
 }

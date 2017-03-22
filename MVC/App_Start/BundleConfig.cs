@@ -14,7 +14,7 @@ namespace MVC
             // JavaScript for libraries.
             var bundleJsLibs = new ScriptBundle("~/bundles/js-libs").Include(
                 "~/Content/assets/js/jquery.validate.js",
-                "~/Content/assets/js/moment.js",
+                "~/Content/assets/js/moment-with-locales.js",
                 "~/Content/assets/js/bootstrap.js",
                 "~/Content/assets/js/bootstrap-datetimepicker.js",
                 "~/Content/assets/js/material.js",

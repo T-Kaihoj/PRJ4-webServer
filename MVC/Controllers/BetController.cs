@@ -66,7 +66,7 @@ namespace MVC.Controllers
                 betPage.Title = bet.BetName;
                 betPage.Description = bet.Description;
                 betPage.StartDate = bet.StartDate;
-                betPage.EndDate = bet.EndDate;
+                betPage.StopDate = bet.StopDate;
                 betPage.Judge = bet.Judge.Username;
                 for (int i = 0; i < bet.Outcomes.Count(); i++)
                 {
@@ -93,7 +93,6 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Create(CreateBetViewModel viewModel)
         {
-
             // TODO: Fix validation.
             if (!TryValidateModel(viewModel))
             {
@@ -105,10 +104,11 @@ namespace MVC.Controllers
                 // Create the bet.
                 var bet = new Bet()
                 {
+                    BuyIn = Decimal.Parse(viewModel.BuyIn),
                     Description = viewModel.Description,
                     Name = viewModel.Title,
-                    StartDate = DateTime.Today,
-                    StopDate = DateTime.Now
+                    StartDate = DateTime.Parse(viewModel.StartDate),
+                    StopDate = DateTime.Parse(viewModel.StopDate)
                 };
 
                 myWork.Bet.Add(bet);
