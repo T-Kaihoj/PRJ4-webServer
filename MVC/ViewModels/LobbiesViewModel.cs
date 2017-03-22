@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+
+using Common.Models;
 
 namespace MVC.ViewModels
 {
@@ -9,5 +8,14 @@ namespace MVC.ViewModels
     {
         public int ID { get; set; }
         public string Name { get; set; }
+
+        public IEnumerable<Lobby> MemberOfLobbies { get; set; }
+        public IEnumerable<Lobby> InvitedToLobbies { get; set; }
+
+        public LobbiesViewModel()
+        {
+            MemberOfLobbies = new List<Lobby>();
+            InvitedToLobbies = new List<Lobby>();
+        }
     }
 }

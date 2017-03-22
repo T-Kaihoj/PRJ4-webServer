@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Common.Models;
 
 namespace MVC.Models.Userlogic
 {

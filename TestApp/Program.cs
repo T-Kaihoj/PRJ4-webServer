@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MVC.Database;
-using MVC.Database.Data;
-using MVC.Database.Models;
+using Common.Models;
+using DAL;
+using DAL.Data;
 
 namespace TestApp
 {
@@ -26,7 +26,7 @@ namespace TestApp
                     StopDate = new DateTime(2933,10,10)
                 };
 
-
+                
                 var enUser = new User()
                 {
                     Username = "The_KilL3r",
