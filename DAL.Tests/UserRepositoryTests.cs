@@ -4,11 +4,14 @@ using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Models;
+using Common.Repositories;
+using DAL.Persistence;
 using NUnit.Framework;
 
 namespace DAL.Tests
 {
-   /* [TestFixture]
+    [TestFixture]
     class UserRepositoryTests
     {
         private IUserRepository _uut;
@@ -27,6 +30,13 @@ namespace DAL.Tests
             
             // Create the repository.
             _uut = new UserRepository(_context);
+        }
+
+        [TearDown]
+        public void Dispose()
+        {
+            // Reset the database.
+            _context.Database.Delete();
         }
 
         // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
@@ -59,5 +69,5 @@ namespace DAL.Tests
 
             Assert.That(user1, Is.EqualTo(user2));
         }
-    }*/
+    }
 }

@@ -52,6 +52,10 @@
     <Compile Include="Migrations\201703211051481_Initial.Designer.cs">
       <DependentUpon>201703211051481_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703221152395_test.cs" />
+    <Compile Include="Migrations\201703221152395_test.Designer.cs">
+      <DependentUpon>201703221152395_test.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -74,6 +78,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703211051481_Initial.resx">
       <DependentUpon>201703211051481_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703221152395_test.resx">
+      <DependentUpon>201703221152395_test.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
