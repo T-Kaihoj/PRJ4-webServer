@@ -86,8 +86,8 @@ namespace MVC.Models.Userlogic
             bet.Judge = new User();
             bet.Judge.Username = "Snake";
             bet.Outcomes = new List<Outcome>();
-            bet.Outcomes.Add(new Outcome("Han taber sig"));
-            bet.Outcomes.Add(new Outcome("Han når det ikke"));
+            bet.Outcomes.Add(new Outcome(){Description = "Han taber sig"});
+            bet.Outcomes.Add(new Outcome() { Description = "Han når det ikke" });
 
             return bet;
         }

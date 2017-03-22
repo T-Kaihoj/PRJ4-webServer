@@ -42,15 +42,28 @@ namespace MVC.Tests.Models.Conversions
         public void DomainToDb()
         {
             // Create the domain model.
-            /*MVC.Models.Userlogic.Outcome domain = new MVC.Models.Userlogic.Outcome()
+            MVC.Models.Userlogic.Outcome domain = new MVC.Models.Userlogic.Outcome()
             {
-                
-            };*/
+                Description = _description,
+                ID = _id,
+                Name = _name,
+                Participants = new List<MVC.Models.Userlogic.User>()
+            };
 
             // Attempt to converto to db model.
-            //Common.Models.Outcome db = domain;
+            Common.Models.Outcome db = domain;
 
-            Assert.That(true, Is.EqualTo(false));
+            // Check the values. None may be null.
+            Assert.That(db.Description, Is.Not.Null);
+            Assert.That(db.Name, Is.Not.Null);
+            Assert.That(db.OutcomeId, Is.Not.Null);
+            Assert.That(db.Participants, Is.Not.Null);
+
+            // The values should match those of the database model.
+            Assert.That(db.Description, Is.EqualTo(_description));
+            Assert.That(db.Name, Is.EqualTo(_name));
+            Assert.That(db.OutcomeId, Is.EqualTo(_id));
+            Assert.That(db.Participants, Has.Count.EqualTo(0));
         }
     }
 }

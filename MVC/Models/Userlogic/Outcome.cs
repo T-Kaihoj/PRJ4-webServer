@@ -1,7 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
 
 namespace MVC.Models.Userlogic
 {
@@ -27,20 +24,22 @@ namespace MVC.Models.Userlogic
             return outcome;
         }
 
+        public static implicit operator Common.Models.Outcome(Outcome domain)
+        {
+            Common.Models.Outcome db = new Common.Models.Outcome()
+            {
+                Description = domain.Description,
+                Name = domain.Name,
+                OutcomeId = domain.ID,
+                Participants = new List<Common.Models.User>()
+            };
+
+            return db;
+        }
+
         #endregion
 
-        public Outcome(string outcomeName)
-        {
-            Name = outcomeName;
-        }
-
-        private Outcome()
-        {
-            
-        }
-        
-
-        public static Outcome getOutcome(int id)
+        public static Outcome Get(long id)
         {
             return new Outcome();
         }
