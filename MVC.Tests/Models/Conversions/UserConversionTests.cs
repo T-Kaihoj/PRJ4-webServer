@@ -83,5 +83,11 @@ namespace MVC.Tests.Models.Conversions
             Assert.That(domain.Salt, Is.EqualTo(_salt));
             Assert.That(domain.Username, Is.EqualTo(_usermame));
         }
+
+        [Test]
+        public void DomainToDb()
+        {
+            Assert.That(true, Is.EqualTo(false));
+        }
     }
 }

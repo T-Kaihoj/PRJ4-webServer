@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Common.Models;
 using NUnit.Framework;
 
 namespace MVC.Tests.Models.Conversions
@@ -20,7 +19,7 @@ namespace MVC.Tests.Models.Conversions
                 Description = _description,
                 Name = _name,
                 OutcomeId = _id,
-                Participants = new List<User>()
+                Participants = new List<Common.Models.User>()
             };
 
             // Attempt to converto to domain model.
@@ -37,6 +36,21 @@ namespace MVC.Tests.Models.Conversions
             Assert.That(domain.ID, Is.EqualTo(_id));
             Assert.That(domain.Name, Is.EqualTo(_name));
             Assert.That(domain.Participants, Has.Count.EqualTo(0));
+        }
+
+        [Test]
+        public void DomainToDb()
+        {
+            // Create the domain model.
+            /*MVC.Models.Userlogic.Outcome domain = new MVC.Models.Userlogic.Outcome()
+            {
+                
+            };*/
+
+            // Attempt to converto to db model.
+            //Common.Models.Outcome db = domain;
+
+            Assert.That(true, Is.EqualTo(false));
         }
     }
 }
