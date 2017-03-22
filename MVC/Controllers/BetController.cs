@@ -1,13 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using MVC.Models.Userlogic;
+using Common;
+using Common.Models;
+using DAL;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
     public class BetController : Controller
     {
+        private IFactory _factory;
+
+        public BetController()
+        {
+            Setup();
+        }
+
+        public BetController(IFactory factory = null)
+        {
+            Setup(factory);
+        }
+
+        private void Setup(IFactory factory = null)
+        {
+            // If no factory passed, create a default factory.
+            _factory = factory ?? new Factory();
+        }
+
         // GET: /<controller>/Join/<id>
         public ActionResult Join(long id)
         {
@@ -17,34 +38,43 @@ namespace MVC.Controllers
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {
-            var bet = Bet.getBet(id);
-
-            var betPage = new BetViewModel()
+            using (var myWork = _factory.GetUOF())
             {
-                Description = bet.Description,
-                EndDate = bet.EndDate,
-                //Judge = "",
-                //LobbyID = 0,
-                //Users = new List<User>(),
-                Title = bet.BetName,
-                StartDate = bet.StartDate,
-                Outcomes = bet.Outcomes.Select(o => o.Name).ToList(),
-                MoneyPool = bet.Pot
-            };
+                var bet = myWork.Bet.Get(id);
 
-            /*
+                // TODO: Remove hardcode.
+                List<Outcome> outcomes = new List<Outcome>();
 
-            betPage.Title = bet.BetName;
-            betPage.Description = bet.Description;
-            betPage.StartDate = bet.StartDate;
-            betPage.EndDate = bet.EndDate;
-            betPage.Judge = bet.Judge.Username;
-            for (int i = 0; i < bet.Outcomes.Count(); i++)
-            {
-                betPage.Outcomes[i] = bet.Outcomes[i].Name;
-            }*/
+                outcomes.Add(new Outcome() { Description = "Han taber sig" });
+                outcomes.Add(new Outcome() { Description = "Han når det ikke" });
 
-            return View(betPage);
+                var betPage = new BetViewModel()
+                {
+                    Description = bet.Description,
+                    EndDate = bet.StopDate.ToString(),
+                    //Judge = "",
+                    //LobbyID = 0,
+                    //Users = new List<User>(),
+                    Title = bet.Name,
+                    StartDate = bet.StartDate.ToString(),
+                    Outcomes = outcomes.Select(o => o.Name).ToList(),
+                    MoneyPool = bet.Pot
+                };
+
+                /*
+
+                betPage.Title = bet.BetName;
+                betPage.Description = bet.Description;
+                betPage.StartDate = bet.StartDate;
+                betPage.EndDate = bet.EndDate;
+                betPage.Judge = bet.Judge.Username;
+                for (int i = 0; i < bet.Outcomes.Count(); i++)
+                {
+                    betPage.Outcomes[i] = bet.Outcomes[i].Name;
+                }*/
+
+                return View(betPage);
+            }
         }
 
         // GET: /<controller>/Create/<id>
@@ -61,20 +91,37 @@ namespace MVC.Controllers
 
         // POST: /<controller>/Create
         [HttpPost]
-        public ActionResult Create(BetViewModel viewModel)
+        public ActionResult Create(CreateBetViewModel viewModel)
         {
-            /*if (!TryValidateModel(viewModel))
+
+            // TODO: Fix validation.
+            if (!TryValidateModel(viewModel))
             {
                 return View(viewModel);
-            }*/
+            }
 
-            // Create the bet.
-            var bet = new Bet(viewModel.Title, viewModel.Description, viewModel.LobbyID, viewModel.Judge, viewModel.StartDate, viewModel.EndDate);
-           
-            bet.Persist();
+            using (var myWork = _factory.GetUOF())
+            {
+                // Create the bet.
+                var bet = new Bet()
+                {
+                    Description = viewModel.Description,
+                    Name = viewModel.Title,
+                    StartDate = DateTime.Today,
+                    StopDate = DateTime.Now
+                };
 
-            // Redirect to the bet page.
-            return Redirect($"/Bet/Show/{bet.BetID}");
+                myWork.Bet.Add(bet);
+
+                // Get the lobby.
+                var lobby = myWork.Lobby.Get(viewModel.LobbyID);
+                lobby.Bets.Add(bet);
+                
+                myWork.Complete();
+
+                // Redirect to the bet page.
+                return Redirect($"/Bet/Show/{bet.BetId}");
+            }
         }
     }
 }
