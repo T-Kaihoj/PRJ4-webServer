@@ -25,7 +25,7 @@ namespace DAL.Tests
 
             // Reset the database.
             _context.Database.Delete();
-
+            
             // Insert dummy data.
             
             // Create the repository.
@@ -156,6 +156,38 @@ namespace DAL.Tests
             _uut.Add(user2);
 
             Assert.That(() => _context.SaveChanges(), Throws.Exception);
+        }
+
+        [Test]
+        public void Get_RetrievesOneUser_UserFound()
+        {
+            string username = "The_Killer";
+
+            var user = new User()
+            {
+                Username = username,
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = "fsdfff@dfdfdf.com",
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+
+            _uut.Add(user);
+            _context.SaveChanges();
+
+            Assert.That(_uut.Get(username), Is.EqualTo(user));
+        }
+
+        [Test]
+        public void Get_TryReceiveUserNotInDatabase_ThrowsException()
+        {
+            Assert.That( _uut.Get("NotThere"), Is.EqualTo(null));
         }
     }
 }
