@@ -1,5 +1,7 @@
-﻿using MVC.Models.Userlogic;
+﻿
+using MVC.Models.Userlogic;
 using NUnit.Framework;
+
 
 namespace MVC.Tests.Models
 {

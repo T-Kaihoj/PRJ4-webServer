@@ -12,13 +12,13 @@ namespace MVC.Models.Userlogic
         //Modtager et UserID
         //Postcondition
         //Tilføjer User til Lobby Members.
-        void addUserToLobby(long userID);
+        void AddUserToLobby(long userID);
 
         //Preconditon:
         //Modtager et UserID
         //Postcondition
         //Tilføjer User til Lobbys Invited og Lobby til Users InvitedToLobbies.
-        void inviteUsersToLobby(List<long> userIDs);
+        void InviteUsersToLobby(List<long> userIDs);
 
     }
 }

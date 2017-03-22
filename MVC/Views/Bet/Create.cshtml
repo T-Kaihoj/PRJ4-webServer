@@ -2,10 +2,10 @@
     ViewData["Title"] = "Create Bet";
 }
 
-@model MVC.Models.Userlogic.BetPageViewModel
+@model MVC.ViewModels.CreateBetViewModel
 
 <div class="container">
-    <form method="post" action="/CreateBet/post">
+    <form method="post" action="/Bet/Create">
         <div class="row">
             <div class="col-md-12">
                 <h1 class="header">
@@ -24,6 +24,11 @@
                     @Html.LabelFor(m => m.Description, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
+                </div>
+                <div class="row form-group label-floating">
+                    @Html.LabelFor(m => m.BuyIn, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.BuyIn, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.BuyIn, null, new { @class = "help-block" })
                 </div>
             </div>
             <div class="col-md-6">
@@ -69,13 +74,16 @@
                 </div>
             </div>
             <div class="col-md-6">
-                <button type="submit" class="btn btn-primary" style="margin-left: auto;">Create lobby</button>
+                @Html.HiddenFor(m => m.LobbyID)
+                <button type="submit" class="btn btn-primary" style="margin-left: auto;">Create bet</button>
             </div>
         </div>
     </form>
 </div>
 
 <script>
-    registerDateTimePicker("#datetimepickerstart");
-    registerDateTimePicker("#datetimepickerend");
+    $(document).ready(function () {
+        registerDateTimePicker("#datetimepickerstart");
+        registerDateTimePicker("#datetimepickerend");
+    });
 </script>

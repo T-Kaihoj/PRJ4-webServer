@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using Common.Models;
 using DAL;
 using DAL.Data;
 
@@ -18,9 +19,68 @@ namespace MVC.Models.Userlogic
         public List<Lobby> InvitedToLobbies { get; set; }
         public List<Bet> Bets { get; set; }
         public List<Outcome> Outcomes { get; set; }
+        public string Hash { get; private set; }
+        public string Salt { get; private set; }
 
-        public string Hash { get; set; }
-        public string Salt { get; set; }
+        #region Conversions.
+
+        public static implicit operator User(Common.Models.User db)
+        {
+            // Create a new user, and copy over the valuetypes.
+            User user = new User()
+            {
+                Balance = db.Balance,
+                Bets = new List<Bet>(),
+                Email = db.Email,
+                FirstName = db.FirstName,
+                Hash = db.Hash,
+                InvitedToLobbies = new List<Lobby>(),
+                LastName = db.LastName,
+                MemberOfLobbies = new List<Lobby>(),
+                Outcomes = new List<Outcome>(),
+                Salt = db.Salt,
+                Username = db.Username
+            };
+
+            // Convert the complex types.
+            foreach (var b in db.Bets)
+            {
+                user.Bets.Add(b);
+            }
+
+            foreach (var l in db.InvitedToLobbies)
+            {
+                user.InvitedToLobbies.Add(l);
+            }
+
+            foreach (var l in db.MemberOfLobbies)
+            {
+                user.MemberOfLobbies.Add(l);
+            }
+
+            foreach (var o in db.Outcomes)
+            {
+                user.Outcomes.Add(o);
+            }
+
+            return user;
+        }
+
+        #endregion
+
+        public static User Get(string username)
+        {
+            var user = new User();
+            using (UnitOfWork myWork = new UnitOfWork(new Context()))
+            {
+                var dbUser = myWork.User.Get(username);
+                user = dbUser;
+            }
+
+
+
+            return user;
+        }
 
         public void Persist()
         {
@@ -30,25 +90,13 @@ namespace MVC.Models.Userlogic
             }
         }
 
+
         public void Delete()
         {
             
         }
 
-        public static User Get(string userName)
-        {
-            
-            User user;
-
-            using (var context = new Context())
-            {
-                user = context.Users.Find(userName);
-            }
-
-            return user;
-            
-        }
-
+      
         private void CreateSalt()
         {
             // Get a new random generator.
@@ -65,7 +113,7 @@ namespace MVC.Models.Userlogic
         public bool Authenticate(string password)
         {
             // Get the hash, using the password and the salt.
-            return (HashPassword(password) == Hash);
+            return (HashPassword(password) ==  Hash);
         }
 
         public bool SetPassword(string password)
@@ -102,21 +150,6 @@ namespace MVC.Models.Userlogic
             }
 
             return Convert.ToBase64String(hashedBytes);
-        }
-
-        public static implicit operator User(Common.Models.User db)
-        {
-            User user = new User();
-
-            user.Balance = db.Balance;
-            user.Email = db.Email;
-            user.FirstName = db.FirstName;
-            user.Hash = db.Hash;
-            user.LastName = db.LastName;
-            user.Salt = db.Salt;
-            user.Username = db.Username;
-
-            return user;
         }
     }
 }

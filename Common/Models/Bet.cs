@@ -18,12 +18,6 @@ namespace Common.Models
         public virtual ICollection<User> Participants { get; set; }
         public virtual ICollection<Outcome> Outcomes { get; set; }
         public virtual User Judge { get; set; }
-        
         public List<User> Invited { get; set; }
-
-        internal static object getBet(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
