@@ -111,7 +111,6 @@ namespace MVC.Models.Userlogic
             return lobby;
         }
 
-
         public void Persist()
         {
             using (UnitOfWork myWork = new UnitOfWork(new Context()))

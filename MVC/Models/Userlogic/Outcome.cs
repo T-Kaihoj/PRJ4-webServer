@@ -38,15 +38,5 @@ namespace MVC.Models.Userlogic
         }
 
         #endregion
-
-        public static Outcome Get(long id)
-        {
-            return new Outcome();
-        }
-
-        public void Persist()
-        {
-            //throw new System.NotImplementedException();
-        }
     }
 }

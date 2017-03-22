@@ -1,13 +1,32 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Web.Mvc;
-using MVC.Models.Userlogic;
+using Common;
+using Common.Models;
+using DAL;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
     public class LobbyController : Controller
     {
+        private IFactory _factory;
+
+        public LobbyController()
+        {
+            Setup();
+        }
+
+        public LobbyController(IFactory factory = null)
+        {
+            Setup(factory);
+        }
+
+        private void Setup(IFactory factory = null)
+        {
+            // If no factory passed, create a default factory.
+            _factory = factory ?? new Factory();
+        }
+
         // GET: /<controller>/
         public ActionResult Index()
         {
@@ -24,63 +43,76 @@ namespace MVC.Controllers
         // POST: /<controller>/Create
         public ActionResult Create(CreateLobbyViewModel viewModel)
         {
-            // Perform data validation.
-            if (!TryValidateModel(viewModel))
+            using (var myWork = _factory.GetUOF())
             {
-                // Errors, return and let the user handle it.
-                return View(viewModel);
+                // Perform data validation.
+                if (!TryValidateModel(viewModel))
+                {
+                    // Errors, return and let the user handle it.
+                    return View(viewModel);
+                }
+
+                // Create the domain lobby object.
+                var lobby = new Lobby()
+                {
+                    Name = viewModel.Name,
+                    Description = viewModel.Description,
+                };
+
+                // Save to the database.
+                myWork.Lobby.Add(lobby);
+                myWork.Complete();
+
+                // Show the newly created lobby.
+                return Redirect($"/Lobby/Show/{lobby.LobbyId}");
             }
 
-            // Create the domain lobby object.
-            var lobby = new Lobby(viewModel.Name)
-            {
-                Description = viewModel.Description
-            };
-
-            // Save to the database.
-            lobby.Persist();
-
-            // Show the newly created lobby.
-            return Redirect($"/Lobby/Show/{lobby.LobbyID}");
+            //TODO: Return error.
         }
 
         // GET: /<controller>/List
         public ActionResult List()
         {
-            // Get all lobbies.
-            var lobbies = Lobby.GetAll();
-
-            // Display the lobbies.
-            var viewModel = new LobbiesViewModel()
+            using (var myWork = _factory.GetUOF())
             {
-                MemberOfLobbies = lobbies
-            };
+                // Get all lobbies, and convert to the domain model.
+                var lobbies = myWork.Lobby.GetAll();
 
-            return View(viewModel);
+                // Display the lobbies.
+                var viewModel = new LobbiesViewModel()
+                {
+                    MemberOfLobbies = lobbies
+                };
+
+                return View(viewModel);
+            }   
         }
 
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {
-            // Get the lobby from the database.
-            var lobby = Lobby.Get(id);
-
-            if (lobby == null)
+            using (var myWork = _factory.GetUOF())
             {
-                // Error.
-                throw new Exception("No such lobby");
+                // Get the lobby from the database.
+                var lobby = myWork.Lobby.Get(id);
+
+                if (lobby == null)
+                {
+                    // Error.
+                    throw new Exception("No such lobby");
+                }
+
+                // Create a viewmodel for the lobby.
+                var viewModel = new LobbyViewModel()
+                {
+                    ID = lobby.LobbyId,
+                    Name = lobby.Name,
+                    Description = lobby.Description,
+                    Bets = lobby.Bets
+                };
+
+                return View(viewModel);
             }
-
-            // Create a viewmodel for the lobby.
-            var viewModel = new LobbyViewModel()
-            {
-                ID = lobby.LobbyID,
-                Name = lobby.LobbyName,
-                Description = lobby.Description,
-                Bets = lobby.Bets
-            };
-
-            return View(viewModel);
         }
     }
 }

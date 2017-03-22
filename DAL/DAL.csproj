@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\Context.cs" />
+    <Compile Include="Factory.cs" />
     <Compile Include="Migrations\201703211051481_Initial.cs" />
     <Compile Include="Migrations\201703211051481_Initial.Designer.cs">
       <DependentUpon>201703211051481_Initial.cs</DependentUpon>

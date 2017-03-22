@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MVC.Models.Userlogic;
+using Common.Models;
 
 namespace MVC.ViewModels
 {
@@ -9,8 +9,8 @@ namespace MVC.ViewModels
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public List<User> Participants { get; set; }
+        public ICollection<User> Participants { get; set; }
         //Måske laves om til en liste af BetID'er?
-        public List<Bet> Bets { get; set; }
+        public ICollection<Bet> Bets { get; set; }
     }
 }

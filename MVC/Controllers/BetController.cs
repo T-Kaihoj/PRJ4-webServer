@@ -51,7 +51,7 @@ namespace MVC.Controllers
         [HttpGet]
         public ActionResult Create(long id)
         {
-            var viewModel = new BetViewModel()
+            var viewModel = new CreateBetViewModel()
             {
                 LobbyID = id
             };
