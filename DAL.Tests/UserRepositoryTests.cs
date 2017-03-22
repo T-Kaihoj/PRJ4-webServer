@@ -69,5 +69,93 @@ namespace DAL.Tests
 
             Assert.That(user1, Is.EqualTo(user2));
         }
+
+        [Test]
+        public void Add_EmailAddressAlreadyExists_ThrowsException()
+        {
+
+            // Create 2 users with identical emails
+            string identicalMail = "anAdress@aHost.com";
+
+            var user = new User()
+            {
+                Username = "etbrugernavn",
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = identicalMail,
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+
+            var user2 = new User()
+            {
+                Username = "enbrugernavn2",
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = identicalMail,
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+
+
+            // Add users to database (repository)
+            _uut.Add(user);
+            _uut.Add(user2);
+
+            Assert.That(() => _context.SaveChanges(), Throws.Exception);
+        }
+
+        [Test]
+        public void Add_UsernameAlreadyExists_ThrowsException()
+        {
+            string identicalUsername = "The_Killer";
+
+            var user = new User()
+            {
+                Username = identicalUsername,
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = "fsdfff@dfdfdf.com",
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+
+            var user2 = new User()
+            {
+                Username = identicalUsername,
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = "sdfsdfsdff@eeeeeee.com",
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+
+
+            // Add users to database (repository)
+            _uut.Add(user);
+            _uut.Add(user2);
+
+            Assert.That(() => _context.SaveChanges(), Throws.Exception);
+        }
     }
 }
