@@ -41,5 +41,14 @@ namespace Common.Models
             }
             
         }
+
+        public void AcceptLobby(User user)
+        {
+            if (!this.InvitedList.Remove(user))
+                return;
+
+            MemberList.Add(user);
+            
+        }
     }
 }

@@ -16,7 +16,7 @@ namespace Common.Models
         //Tilføjer User til Lobbys Invited og Lobby til Users InvitedToLobbies.
         void InviteUserToLobby(List<User> Users);
 
-        void AcceptLobby(List<User> Users);
+        void AcceptLobby(User User);
 
 
 
