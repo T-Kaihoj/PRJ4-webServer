@@ -7,14 +7,9 @@ namespace Common.Models
     {
         private string _name;
         private string _description;
-        private bool winnerOutcome;
+        
 
-        public Outcome(string name, string description)
-        {
-            winnerOutcome = false;
-            this.Name = name;
-            this.Description = description;
-        }
+      
         [Key]
         public long OutcomeId { get; set; }
 
@@ -32,14 +27,5 @@ namespace Common.Models
 
         public virtual ICollection<User> Participants { get; set; }
 
-        public bool GetWinnerOutcome()
-        {
-            return winnerOutcome;
-        }
-
-        public void SetAsWinnerOutcome()
-        {
-            winnerOutcome = true;
-        }
     }
 }
