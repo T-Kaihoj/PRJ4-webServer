@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace Common.Models
 {
-    public class Bet
+    public class Bet : IBetJudge
     {
         private string _name;
         private string _description;
@@ -17,7 +18,6 @@ namespace Common.Models
             get { return _name; }
             set { _name = Utility.DatabaseSecure(value) ; }
         }
-
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
         public Outcome Result { get; set; }
@@ -34,5 +34,16 @@ namespace Common.Models
         public virtual ICollection<Outcome> Outcomes { get; set; }
         public virtual User Judge { get; set; }
         public List<User> Invited { get; set; }
-    }
+
+        private void Payout(List<User> winners)
+        {
+            uint numberOfWinners = winners.Count;
+            uint payout 
+        }
+
+        public void ChooseWinner(long userID)
+        {
+            throw new NotImplementedException();
+        }
+     }
 }
