@@ -52,26 +52,17 @@ namespace MVC.Controllers
                 {
                     Description = bet.Description,
                     EndDate = bet.StopDate.ToString(),
-                    //Judge = "",
+                    Judge = bet.Judge?.Username,//bet.Judge.Username,
                     //LobbyID = 0,
                     //Users = new List<User>(),
                     Title = bet.Name,
                     StartDate = bet.StartDate.ToString(),
-                    Outcomes = outcomes.Select(o => o.Name).ToList(),
                     MoneyPool = bet.Pot
                 };
-
-                /*
-
-                betPage.Title = bet.BetName;
-                betPage.Description = bet.Description;
-                betPage.StartDate = bet.StartDate;
-                betPage.StopDate = bet.StopDate;
-                betPage.Judge = bet.Judge.Username;
-                for (int i = 0; i < bet.Outcomes.Count(); i++)
+                foreach (var outcome in bet.Outcomes)
                 {
-                    betPage.Outcomes[i] = bet.Outcomes[i].Name;
-                }*/
+                    betPage.Outcomes.Add(outcome.Name);
+                }
 
                 return View(betPage);
             }
@@ -99,17 +90,35 @@ namespace MVC.Controllers
                 return View(viewModel);
             }
 
+            
             using (var myWork = _factory.GetUOF())
             {
+                
                 // Create the bet.
                 var bet = new Bet()
                 {
                     BuyIn = Decimal.Parse(viewModel.BuyIn),
                     Description = viewModel.Description,
                     Name = viewModel.Title,
+                    Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = DateTime.Parse(viewModel.StartDate),
                     StopDate = DateTime.Parse(viewModel.StopDate)
+                    
                 };
+                /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
+                
+                var outcome1 = new Common.Models.Outcome()
+                {
+                    Name = viewModel.Outcome1,
+                    Description = viewModel.Outcome1
+                };
+                var outcome2 = new Common.Models.Outcome()
+                {
+                    Name = viewModel.Outcome2,
+                    Description = viewModel.Outcome2
+                };
+                bet.Outcomes.Add(outcome1);
+                bet.Outcomes.Add(outcome2);
 
                 myWork.Bet.Add(bet);
 

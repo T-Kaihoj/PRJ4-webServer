@@ -11,7 +11,7 @@ namespace MVC.ViewModels
         public List<string> Users { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
-        public List<string> Outcomes { get; set; }
+        public List<string> Outcomes { get; set; } = new List<string>();
         
         //public List<Outcome> Outcomes { get; set; }
 
