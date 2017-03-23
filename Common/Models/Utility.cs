@@ -11,6 +11,8 @@ namespace Common.Models
     {
         public static string DatabaseSecure(string toDB)
         {
+            if (toDB == null)
+                return null;
             //todo db
             if (toDB.Contains("'")||toDB.Contains("[")||toDB.Contains("]"))
             {
