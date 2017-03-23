@@ -45,27 +45,17 @@ namespace DAL.Tests
         [Test]
         public void Get_InsertedUserIsRetrieved_UserInDBIsIdentical()
         {
-            string username = "The_Killer";
+            // Create a new user.
+            var user1 = Utility.CreateUser();
 
-            var user = new User()
-            {
-                Username = username,
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "fsdfff@dfdfdf.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-
-            _uut.Add(user);
+            // Add user to database
+            _uut.Add(user1);
             _context.SaveChanges();
 
-            Assert.That(_uut.Get(username), Is.EqualTo(user));
+            // Retrieve user from database
+            var user2 = _uut.Get(user1.Username);
+
+            Assert.That(user1, Is.EqualTo(user2));
         }
 
         [Test]
@@ -77,35 +67,9 @@ namespace DAL.Tests
         [Test]
         public void GetAll_RetreiveAllUsers_AllUsersFound()
         {
-           
-            User user1 = new User()
-            {
-                Username = "The_KilL3rrrr",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "J.TrabergS@gmail.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-            User user2 = new User()
-            {
-                Username = "Hoho",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Santa",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "santa@jingels.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Cluase"
-            };
+
+            User user1 = Utility.CreateUser("ThisUser", "thisEmail@email.com");
+            User user2 = Utility.CreateUser("ThatUser", "thatEmail@email.com");
 
             _uut.Add(user1);
             _uut.Add(user2);
@@ -134,37 +98,10 @@ namespace DAL.Tests
             // Create 2 users with identical emails
             string identicalMail = "anAdress@aHost.com";
 
-            var user = new User()
-            {
-                Username = "etbrugernavn",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = identicalMail,
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
+            var user = Utility.CreateUser("thisUsername", identicalMail);
 
-            var user2 = new User()
-            {
-                Username = "enbrugernavn2",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = identicalMail,
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-
-
+            var user2 = Utility.CreateUser("ThatUsername", identicalMail);
+            
             // Add users to database (repository)
             _uut.Add(user);
             _uut.Add(user2);
@@ -177,36 +114,8 @@ namespace DAL.Tests
         {
             string identicalUsername = "The_Killer";
 
-            var user = new User()
-            {
-                Username = identicalUsername,
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "fsdfff@dfdfdf.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-
-            var user2 = new User()
-            {
-                Username = identicalUsername,
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "sdfsdfsdff@eeeeeee.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-
+            var user = Utility.CreateUser(identicalUsername, "ThisEmail@email.com");
+            var user2 = Utility.CreateUser(identicalUsername, "ThatEmail@email.com");
 
             // Add users to database (repository)
             _uut.Add(user);
@@ -220,34 +129,8 @@ namespace DAL.Tests
         {
             User[] users =
             {
-                new User()
-                {
-                    Username = "The_KilL3rrrr",
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Jeppe",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "J.TrabergS@gmail.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Soerensen"
-                },
-                new User()
-                {
-                    Username = "Hoho",
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Santa",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "santa@jingels.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Cluase"
-                }
+                Utility.CreateUser("ThisUsername", "ThisEmail@email.com"),
+                Utility.CreateUser("ThatUsername", "ThatEmail@email.com")
             };
 
             _uut.AddRange(users);
@@ -265,34 +148,8 @@ namespace DAL.Tests
 
             User[] users =
             {
-                new User()
-                {
-                    Username = identicalUsername,
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Jeppe",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "J.TrabergS@gmail.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Soerensen"
-                },
-                new User()
-                {
-                    Username = identicalUsername,
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Santa",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "santa@jingels.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Cluase"
-                }
+                Utility.CreateUser(identicalUsername, "ThisEmail@email.com"),
+                Utility.CreateUser(identicalUsername, "ThatUser@email.com")
             };
 
             _uut.AddRange(users);
@@ -314,20 +171,7 @@ namespace DAL.Tests
         [Test]
         public void Remove_RemoveUserInDB_UserRemoved()
         {
-            var user = new User()
-            {
-                Username = "The_KilL3rrrr",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "J.TrabergS@gmail.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
+            var user = Utility.CreateUser();
 
             _uut.Add(user);
 
@@ -343,20 +187,7 @@ namespace DAL.Tests
         [Test]
         public void Remove_RemoveUserNotInDB_ThrowException()
         {
-            var user = new User()
-            {
-                Username = "The_KilL3rrrr",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "J.TrabergS@gmail.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
+            var user = Utility.CreateUser();
 
             Assert.That(() => _uut.Remove(user), Throws.Exception);
         }
@@ -366,34 +197,8 @@ namespace DAL.Tests
         {
             User[] users =
             {
-                new User()
-                {
-                    Username = "username",
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Jeppe",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "J.TrabergS@gmail.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Soerensen"
-                },
-                new User()
-                {
-                    Username = "username2",
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Santa",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "santa@jingels.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Cluase"
-                }
+                Utility.CreateUser("ThisUsername", "ThisEmail@email.com"),
+                Utility.CreateUser("ThatUsername", "ThatEmail@email.com")
             };
 
             _uut.AddRange(users);
@@ -410,53 +215,12 @@ namespace DAL.Tests
         [Test]
         public void RemoveRange_RemoveUserNotInDB_ThrowException()
         {
-            string identicalUsername = "username";
-
-            User user = new User
-            {
-                Username = identicalUsername,
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "J.TrabergS@gmail.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
+            User user = Utility.CreateUser();
 
             User[] users =
             {
-                new User()
-                {
-                    Username = identicalUsername,
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Jeppe",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "J.TrabergS@gmail.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Soerensen"
-                },
-                new User()
-                {
-                    Username = "Santa",
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Santa",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "santa@jingels.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Cluase"
-                }
+                user,
+                Utility.CreateUser("ThisUsername", "ThisEmail@email.com")
             };
 
             _uut.Add(user);
@@ -465,6 +229,40 @@ namespace DAL.Tests
 
             Assert.That(() => _uut.RemoveRange(users), Throws.Exception );
         }
-        
+
+        [Test]
+        public void Find_FindUserInDatabase_UserFound()
+        {
+            string email = "ThisUser@email.com";
+
+            var user = Utility.CreateUser("ThisUsername", email);
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.Find(c => c.Email == email), Is.EqualTo(user));
+        }
+
+        [Test]
+        public void Find_FindUsersInDatabase_UsersFound()
+        {
+            User[] users =
+            {
+                Utility.CreateUser("ThisUsername", "ThisUser@email.com"),
+                Utility.CreateUser("ThatUsername", "ThatEmail@email.com")
+            };
+            
+           _uut.AddRange(users);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.Find(c => c.FirstName == users[0].FirstName), Is.EqualTo(users));
+        }
+
+        [Test]
+        public void Find_FindUserNotInDatabase_NoUserFound()
+        {
+            
+        }
     }
 }
