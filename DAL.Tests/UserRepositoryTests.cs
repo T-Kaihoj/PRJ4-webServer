@@ -45,30 +45,27 @@ namespace DAL.Tests
         [Test]
         public void Get_InsertedUserIsRetrieved_UserInDBIsIdentical()
         {
-            // Create a new user.
-            var user1 = new User()
+            string username = "The_Killer";
+
+            var user = new User()
             {
-                Username = "The_KilL3rrrr",
+                Username = username,
                 Outcomes = null,
                 InvitedToLobbies = null,
                 FirstName = "Jeppe",
                 MemberOfLobbies = null,
                 Balance = 50,
                 Bets = null,
-                Email = "J.TrabergS@gmail.com",
+                Email = "fsdfff@dfdfdf.com",
                 Hash = "sdkjfldfkdf",
                 Salt = "dsfdfsfdsfsfd",
                 LastName = "Soerensen"
             };
 
-            // Add user to database
-            _uut.Add(user1);
+            _uut.Add(user);
             _context.SaveChanges();
 
-            // Retrieve user from database
-            var user2 = _uut.Get(user1.Username);
-
-            Assert.That(user1, Is.EqualTo(user2));
+            Assert.That(_uut.Get(username), Is.EqualTo(user));
         }
 
         [Test]
