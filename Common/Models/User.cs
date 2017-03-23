@@ -6,20 +6,41 @@ namespace Common.Models
 {
     public class User
     {
+        private string _username;
+        private string _firstName;
+        private string _lastName;
+        private string _email;
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Username { get; set; }
+        public string Username
+        {
+            get { return _username; }
+            set { _username = Utility.DatabaseSecure( value); }
+        }
 
         [Required]
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get { return _firstName; }
+            set { _firstName = Utility.DatabaseSecure(value); }
+        }
 
         [Required]
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get { return _lastName; }
+            set { _lastName = Utility.DatabaseSecure(value); }
+        }
 
         //[Required]
         [Index(IsUnique = true)]
         [StringLength(200)]
-        public string Email { get; set; }
+        public string Email
+        {
+            get { return _email; }
+            set { _email = Utility.DatabaseSecure(value); }
+        }
 
         [Required]
         public decimal Balance { get; set; }
