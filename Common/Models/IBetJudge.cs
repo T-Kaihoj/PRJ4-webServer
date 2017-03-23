@@ -8,12 +8,11 @@ namespace Common.Models
 {
     interface IBetJudge
     {
-
         //Preconditon:
-        //Modtager et ÚserID
+        //Et outcome er sat af Judge
         //Postcondition
-        //Sætter en User som vinder.
-        void chooseWinner(long userID);
+        //Vindere har fået deres del af bettets Pot
+        void FindAndPayWinners();
 
     }
 }

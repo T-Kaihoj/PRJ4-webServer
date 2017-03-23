@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -16,8 +17,9 @@ namespace Common.Models
         public string Name
         {
             get { return _name; }
-            set { _name = Utility.DatabaseSecure(value) ; }
+            set { _name = Utility.DatabaseSecure(value); }
         }
+
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
         public Outcome Result { get; set; }
@@ -25,7 +27,7 @@ namespace Common.Models
         public string Description
         {
             get { return _description; }
-            set { _description = Utility.DatabaseSecure( value); }
+            set { _description = Utility.DatabaseSecure(value); }
         }
 
         public Decimal BuyIn { get; set; }
@@ -35,15 +37,28 @@ namespace Common.Models
         public virtual User Judge { get; set; }
         public List<User> Invited { get; set; }
 
-        private void Payout(List<User> winners)
+        private void Payout(ICollection<User> winners)
         {
-            uint numberOfWinners = winners.Count;
-            uint payout 
+            var numberOfWinners = winners.Count;
+            var payout = Decimal.ToInt32(Pot) / numberOfWinners;
+            foreach (var player in winners)
+            {
+                player.Balance += (decimal) payout;
+            }
         }
 
-        public void ChooseWinner(long userID)
+        public void FindAndPayWinners()
         {
-            throw new NotImplementedException();
+            ICollection<User> winner;
+
+            foreach (var outcome in Outcomes)
+            {
+                if (outcome.GetWinnerOutcome())
+                {
+                    winner = outcome.Participants;
+                    Payout(winner);
+                }
+            }
         }
-     }
+    }
 }
