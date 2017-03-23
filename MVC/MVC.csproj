@@ -160,6 +160,7 @@
     <Compile Include="Models\Userlogic\IEntity.cs" />
     <Compile Include="Models\Userlogic\ILobbyinfo.cs" />
     <Compile Include="Models\Userlogic\ILobbyLogic.cs" />
+    <Compile Include="Models\Userlogic\IOutcome.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\IUserLogic.cs" />
     <Compile Include="Models\Userlogic\Outcome.cs" />

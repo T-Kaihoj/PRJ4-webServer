@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
-namespace MVC.Models.Userlogic
+namespace Common.Models
 {
     interface ILobbyLogic
     {
@@ -12,13 +8,17 @@ namespace MVC.Models.Userlogic
         //Modtager et UserID
         //Postcondition
         //Tilføjer User til Lobby Members.
-        void AddUserToLobby(string userID);
+        void InviteUserToLobby(User User);
 
         //Preconditon:
         //Modtager et UserID
         //Postcondition
         //Tilføjer User til Lobbys Invited og Lobby til Users InvitedToLobbies.
-        void InviteUsersToLobby(List<string> userIDs);
+        void InviteUserToLobby(List<User> Users);
+
+        void AcceptLobby(User User);
+
+
 
     }
 }
