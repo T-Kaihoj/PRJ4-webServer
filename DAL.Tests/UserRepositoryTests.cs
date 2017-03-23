@@ -8,6 +8,7 @@ using Common.Models;
 using Common.Repositories;
 using DAL.Persistence;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace DAL.Tests
 {
@@ -42,7 +43,7 @@ namespace DAL.Tests
         // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
         // Bruges som eksempel på en test. 
         [Test]
-        public void Get_InsertedPersonIsRetrieved_BothPersonsIdentical()
+        public void Get_InsertedUserIsRetrieved_UserInDBIsIdentical()
         {
             // Create a new user.
             var user1 = new User()
@@ -68,6 +69,65 @@ namespace DAL.Tests
             var user2 = _uut.Get(user1.Username);
 
             Assert.That(user1, Is.EqualTo(user2));
+        }
+
+        [Test]
+        public void Get_TryReceiveUserNotInDatabase_ReturnsNUll()
+        {
+            Assert.That(_uut.Get("NotThere"), Is.EqualTo(null));
+        }
+
+        [Test]
+        public void GetAll_RetreiveAllUsers_AllUsersFound()
+        {
+           
+            User user1 = new User()
+            {
+                Username = "The_KilL3rrrr",
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = "J.TrabergS@gmail.com",
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+            User user2 = new User()
+            {
+                Username = "Hoho",
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Santa",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = "santa@jingels.com",
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Cluase"
+            };
+
+            _uut.Add(user1);
+            _uut.Add(user2);
+
+            _context.SaveChanges();
+
+            IEnumerable<User> users = _uut.GetAll();
+
+            Assert.That(users, Contains.Item(user2));
+            Assert.That(users, Contains.Item(user1));
+
+        }
+
+        [Test]
+        public void GetAll_NoUsersInDB_IsEmpty()
+        {
+            IEnumerable<User> users = _uut.GetAll();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
         }
 
         [Test]
@@ -159,35 +219,255 @@ namespace DAL.Tests
         }
 
         [Test]
-        public void Get_RetrievesOneUser_UserFound()
+        public void AddRange_AddDifferentUsers_AllUsersAdded()
         {
-            string username = "The_Killer";
+            User[] users =
+            {
+                new User()
+                {
+                    Username = "The_KilL3rrrr",
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Jeppe",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "J.TrabergS@gmail.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Soerensen"
+                },
+                new User()
+                {
+                    Username = "Hoho",
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Santa",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "santa@jingels.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Cluase"
+                }
+            };
 
+            _uut.AddRange(users);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetAll(), Contains.Item(users[0]));
+            Assert.That(_uut.GetAll(), Contains.Item(users[1]));
+        }
+
+        [Test]
+        public void AddRange_AddTwoIdenticalUsers_ThrowException()
+        {
+            string identicalUsername = "username";
+
+            User[] users =
+            {
+                new User()
+                {
+                    Username = identicalUsername,
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Jeppe",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "J.TrabergS@gmail.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Soerensen"
+                },
+                new User()
+                {
+                    Username = identicalUsername,
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Santa",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "santa@jingels.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Cluase"
+                }
+            };
+
+            _uut.AddRange(users);
+
+            Assert.That(() =>_context.SaveChanges(), Throws.Exception);
+        }
+
+        [Test]
+        public void AddRange_AddEmtpyList_NothingAdded()
+        {
+            User[] users = {};
+
+            _uut.AddRange(users);
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
+        }
+
+        [Test]
+        public void Remove_RemoveUserInDB_UserRemoved()
+        {
             var user = new User()
             {
-                Username = username,
+                Username = "The_KilL3rrrr",
                 Outcomes = null,
                 InvitedToLobbies = null,
                 FirstName = "Jeppe",
                 MemberOfLobbies = null,
                 Balance = 50,
                 Bets = null,
-                Email = "fsdfff@dfdfdf.com",
+                Email = "J.TrabergS@gmail.com",
                 Hash = "sdkjfldfkdf",
                 Salt = "dsfdfsfdsfsfd",
                 LastName = "Soerensen"
             };
 
             _uut.Add(user);
+
             _context.SaveChanges();
 
-            Assert.That(_uut.Get(username), Is.EqualTo(user));
+            _uut.Remove(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
         }
 
         [Test]
-        public void Get_TryReceiveUserNotInDatabase_ThrowsException()
+        public void Remove_RemoveUserNotInDB_ThrowException()
         {
-            Assert.That( _uut.Get("NotThere"), Is.EqualTo(null));
+            var user = new User()
+            {
+                Username = "The_KilL3rrrr",
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = "J.TrabergS@gmail.com",
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+
+            Assert.That(() => _uut.Remove(user), Throws.Exception);
         }
+
+        [Test]
+        public void RemoveRange_RemoveUsersInDB_UsersRemoved()
+        {
+            User[] users =
+            {
+                new User()
+                {
+                    Username = "username",
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Jeppe",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "J.TrabergS@gmail.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Soerensen"
+                },
+                new User()
+                {
+                    Username = "username2",
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Santa",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "santa@jingels.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Cluase"
+                }
+            };
+
+            _uut.AddRange(users);
+
+            _context.SaveChanges();
+
+            _uut.RemoveRange(users);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
+        }
+
+        [Test]
+        public void RemoveRange_RemoveUserNotInDB_ThrowException()
+        {
+            string identicalUsername = "username";
+
+            User user = new User
+            {
+                Username = identicalUsername,
+                Outcomes = null,
+                InvitedToLobbies = null,
+                FirstName = "Jeppe",
+                MemberOfLobbies = null,
+                Balance = 50,
+                Bets = null,
+                Email = "J.TrabergS@gmail.com",
+                Hash = "sdkjfldfkdf",
+                Salt = "dsfdfsfdsfsfd",
+                LastName = "Soerensen"
+            };
+
+            User[] users =
+            {
+                new User()
+                {
+                    Username = identicalUsername,
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Jeppe",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "J.TrabergS@gmail.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Soerensen"
+                },
+                new User()
+                {
+                    Username = "Santa",
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Santa",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "santa@jingels.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Cluase"
+                }
+            };
+
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(() => _uut.RemoveRange(users), Throws.Exception );
+        }
+        
     }
 }
