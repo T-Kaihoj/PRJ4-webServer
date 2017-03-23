@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Web.Mvc;
 using Common.Models;
+using DAL;
+using DAL.Persistence;
 using MVC.Controllers;
 using MVC.ViewModels;
 using NSubstitute;
@@ -9,6 +11,7 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    
     [TestFixture]
     public class BetControllerTests : BaseRepositoryTest
     {
@@ -21,7 +24,7 @@ namespace MVC.Tests.Controllers
             uut = new BetController(Factory);
             uut.ControllerContext = new ControllerContext();
         }
-
+        
         #region Create functions.
 
         [Test]
@@ -51,7 +54,7 @@ namespace MVC.Tests.Controllers
             BetRepository.Received(1).Add(Arg.Any<Bet>());
             MyWork.Received(1).Complete();
         }
-
+        
         [Test]
         public void Create_InputFromViewModel_StoredInRepository()
         {
@@ -92,7 +95,6 @@ namespace MVC.Tests.Controllers
             Assert.That(bet.StopDate, Is.EqualTo(DateTime.Parse(stopDate)));
             // TODO: Extend.
         }
-
         #endregion
 
         #region Show functions.

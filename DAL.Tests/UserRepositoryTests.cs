@@ -24,10 +24,10 @@ namespace DAL.Tests
             _context = new DAL.Data.Context();
 
             // Reset the database.
-            _context.Database.ExecuteSqlCommand("DELETE FROM Users");
+            Dispose();
 
             // Insert dummy data.
-            
+
             // Create the repository.
             _uut = new UserRepository(_context);
         }

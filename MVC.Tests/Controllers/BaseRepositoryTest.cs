@@ -5,7 +5,6 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
-    [SetUpFixture]
     public abstract class BaseRepositoryTest
     {
         protected IFactory Factory;
