@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
 {
-    public class Lobby
+    public class Lobby :ILobbyLogic
     {
         private string _name;
         private string _description;
@@ -26,5 +26,20 @@ namespace Common.Models
         public virtual ICollection<Bet> Bets { get; set; }
         public virtual ICollection<User> MemberList { get; set; }
         public virtual ICollection<User> InvitedList { get; set; }
+        public void InviteUserToLobby(User user)
+        {
+            //TODO sede meg to user
+            //user.meg("InvitetoLobby",this)
+            InvitedList.Add(user);
+        }
+
+        public void InviteUserToLobby(List<User> users)
+        {
+            foreach (var i in users)
+            {
+                InviteUserToLobby(i);
+            }
+            
+        }
     }
 }
