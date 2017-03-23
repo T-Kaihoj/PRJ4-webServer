@@ -46,7 +46,7 @@ namespace Common.Models
             }
         }
 
-        public void ConcludeBet(Outcome winnerOutcome)
+        public void ConcludeBet(long outcomeID)
         {
             Payout(Result.Participants);
         }

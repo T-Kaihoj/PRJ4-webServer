@@ -12,7 +12,7 @@ namespace Common.Models
         //Et outcome er sat af Judge
         //Postcondition
         //Vindere har fået deres del af bettets Pot
-        void ConcludeBet(Outcome winnerOutcome);
+        void ConcludeBet(long outcomeID);
 
         //Preconditon:
         //Et outcome er sat af Judge
