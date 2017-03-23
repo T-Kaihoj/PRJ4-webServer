@@ -8,6 +8,7 @@ namespace Common
         IBetRepository Bet { get; }
         ILobbyRepository Lobby { get; }
         IUserRepository User { get; }
+        IOutcomeRepository Outcome { get; }
 
         int Complete();
     }

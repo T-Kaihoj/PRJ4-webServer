@@ -43,10 +43,10 @@
                     </div>                    
                 </div>
                 <div class="form-group label-floating">
-                    @Html.LabelFor(m => m.EndDate, new { @class = "control-label" })
-                    @Html.ValidationMessageFor(m => m.EndDate, null, new { @class = "help-block" })
+                    @Html.LabelFor(m => m.StopDate, new { @class = "control-label" })
+                    @Html.ValidationMessageFor(m => m.StopDate, null, new { @class = "help-block" })
                     <div class="input-group date" id="datetimepickerend">
-                       @Html.TextBoxFor(m => m.EndDate, new { @class = "form-control" })
+                       @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control" })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>

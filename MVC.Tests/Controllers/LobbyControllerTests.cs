@@ -10,26 +10,25 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    
     [TestFixture]
-    public class LobbyControllerTests
+    public class LobbyControllerTests : BaseRepositoryTest
     {
-        private LobbyController _uut;
-        private IFactory _factory;
-        private IUnitOfWork _myWork;
-        private ILobbyRepository _lobbyRepository;
+        private LobbyController uut;
 
         private Lobby _lobby1;
         private Lobby _lobby2;
+        private int _numberOfLobies;
 
         [SetUp]
         public void Setup()
         {
-            _factory = Substitute.For<IFactory>();
-            _myWork = Substitute.For<IUnitOfWork>();
-            _lobbyRepository = Substitute.For<ILobbyRepository>();
+            Factory = Substitute.For<IFactory>();
+            MyWork = Substitute.For<IUnitOfWork>();
+            LobbyRepository = Substitute.For<ILobbyRepository>();
 
-            _factory.GetUOF().Returns(_myWork);
-            _myWork.Lobby.Returns(_lobbyRepository);
+            Factory.GetUOF().Returns(MyWork);
+            MyWork.Lobby.Returns(LobbyRepository);
 
             // Setup the mock.
             _lobby1 = new Lobby()
@@ -55,12 +54,13 @@ namespace MVC.Tests.Controllers
             {
                 _lobby1, _lobby2
             };
-            _lobbyRepository.GetAll().Returns(lobbies);
-            _lobbyRepository.Get(0).Returns(_lobby1);
+            _numberOfLobies = lobbies.Count;
+            LobbyRepository.GetAll().Returns(lobbies);
+            LobbyRepository.Get(0).Returns(_lobby1);
 
             // Create the controller.
-            _uut = new LobbyController(_factory);
-            _uut.ControllerContext = new ControllerContext();
+            uut = new LobbyController(Factory);
+            uut.ControllerContext = new ControllerContext();
         }
 
         #region Create functions.
@@ -69,8 +69,8 @@ namespace MVC.Tests.Controllers
         public void Create_CallsRepositoryAdd()
         {
             // Assert that we hit the repository.
-            _lobbyRepository.DidNotReceive().Add(Arg.Any<Lobby>());
-            _myWork.DidNotReceive().Complete();
+            LobbyRepository.DidNotReceive().Add(Arg.Any<Lobby>());
+            MyWork.DidNotReceive().Complete();
 
             var viewModel = new CreateLobbyViewModel()
             {
@@ -78,32 +78,57 @@ namespace MVC.Tests.Controllers
                 Name = "Name"
             };
 
-            _uut.Create(viewModel);
+            uut.Create(viewModel);
 
             // Assert that we hit the repository.
-            _lobbyRepository.Received(1).Add(Arg.Any<Lobby>());
-            _myWork.Received(1).Complete();
+            LobbyRepository.Received(1).Add(Arg.Any<Lobby>());
+            MyWork.Received(1).Complete();
+        }
+        
+        [Test]
+        public void Create_InputFromViewModel_StoredInRepository()
+        {
+            // Create the viewmodel.
+            var viewModel = new CreateLobbyViewModel()
+            {
+                Description = "Description",
+                Name = "Name"
+            };
+
+            // Setup storing retrieved calls.
+            Lobby lobby = new Lobby();
+            LobbyRepository.Add(Arg.Do<Lobby>(l => lobby = l));
+
+            // Perform the action.
+            uut.Create(viewModel);
+
+            // Assert that the object passed to the repository, matches our data.
+            Assert.That(lobby.Description, Is.EqualTo(viewModel.Description));
+            Assert.That(lobby.Name, Is.EqualTo(viewModel.Name));
+            // TODO: Extend.
         }
 
         #endregion
+        
+        #region List functions.
 
         [Test]
         public void List_CallsRepositoryGetAll()
         {
             // Assert that we hit the repository.
-            _lobbyRepository.DidNotReceive().GetAll();
+            LobbyRepository.DidNotReceive().GetAll();
 
-            _uut.List();
+            uut.List();
 
             // Assert that we hit the repository.
-            _lobbyRepository.Received(1).GetAll();
+            LobbyRepository.Received(1).GetAll();
         }
-
+        
         [Test]
         public void List_ReturnsCorrectLobbies()
         {
             // Get the result.
-            var result = _uut.List();
+            var result = uut.List();
 
             // Assert that we got the right result type.
             Assert.That(result, Is.TypeOf<ViewResult>());
@@ -117,20 +142,49 @@ namespace MVC.Tests.Controllers
             // Continue testing on the model.
             var model = data.ViewData.Model as LobbiesViewModel;
 
-            // Assert that we hit the repository.
-            Assert.That(model.MemberOfLobbies, Has.Count.EqualTo(2));
+            // Did we get the right data back?
+            Assert.That(model.MemberOfLobbies, Has.Count.EqualTo(_numberOfLobies));
+
+            // TODO: Check against the supplied lobbies.
         }
+
+        #endregion
+        
+        #region Show functions.
 
         [Test]
         public void Show_CallsRepositoryGet()
         {
             // Assert that we hit the repository.
-            _lobbyRepository.DidNotReceive().Get(Arg.Any<long>());
+            LobbyRepository.DidNotReceive().Get(Arg.Any<long>());
 
-            _uut.Show(0);
+            uut.Show(0);
 
             // Assert that we hit the repository.
-            _lobbyRepository.Received(1).Get(Arg.Any<long>());
+            LobbyRepository.Received(1).Get(Arg.Any<long>());
         }
+        
+        [Test]
+        public void Show_WithInputId_CallsCorrectGet()
+        {
+            // Register a bet with the mock.
+            var lobby = new Lobby();
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+
+            // Setup capture of the argument.
+            long key = 0;
+            LobbyRepository.Get(Arg.Do<long>(i => key = i));
+
+            long passedKey = 100;
+
+            // Act.
+            uut.Show(passedKey);
+
+            // Assert that we passed the correct id.
+            Assert.That(key, Is.EqualTo(passedKey));
+        }
+
+        #endregion
     }
+    
 }

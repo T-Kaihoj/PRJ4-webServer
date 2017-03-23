@@ -1,18 +1,28 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Web.Mvc;
 
 namespace MVC.ViewModels
 {
     public class CreateBetViewModel
     {
-        public string Title { get; set; }
+        [DisplayName("Buy in")]
+        public string BuyIn { get; set; }
+
+        [DisplayName("Description")]
         public string Description { get; set; }
-        public decimal MoneyPool { get; set; }
+
+        [DisplayName("Start date")]
         public string StartDate { get; set; }
-        public string EndDate { get; set; }
+
+        [DisplayName("Stop date")]
+        public string StopDate { get; set; }
+
+        [DisplayName("Title")]
+        public string Title { get; set; }
+        
         public List<string> Outcomes { get; set; }
         //public List<Outcome> Outcomes { get; set; }
-
         public string Judge { get; set; }
 
         [HiddenInput]
