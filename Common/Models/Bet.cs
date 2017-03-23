@@ -22,8 +22,7 @@ namespace Common.Models
 
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
-        public Outcome Result { get; set; }
-
+        public virtual Outcome Result { get; set; }
         public string Description
         {
             get { return _description; }
@@ -47,18 +46,9 @@ namespace Common.Models
             }
         }
 
-        public void FindAndPayWinners()
+        public void ConcludeBet(Outcome winnerOutcome)
         {
-            ICollection<User> winner;
-
-            foreach (var outcome in Outcomes)
-            {
-                if (outcome.GetWinnerOutcome())
-                {
-                    winner = outcome.Participants;
-                    Payout(winner);
-                }
-            }
+            Payout(Result.Participants);
         }
     }
 }
