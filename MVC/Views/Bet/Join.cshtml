@@ -1,0 +1,56 @@
+﻿@using MVC.ViewModels;
+
+@{
+    ViewData["Title"] = "Lobby Page";
+}
+
+@model BetViewModel
+
+<div class="container">
+        <div class="row">
+            <div class="col-md-8">
+
+                <h1 class="header">
+                    @Html.DisplayFor(m => m.Title)
+                </h1>
+                <dl>
+                    <dt>
+                        Decription
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(m => m.Description)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4 text-md-right">
+                <h2>Money pool</h2><br />
+                @Html.DisplayFor(m => m.MoneyPool)
+            </div>
+        </div>
+    <div class="row">
+        <form method="post">
+            <div class="col-md-5">
+                <h2 class="pull-left">
+                    <b>
+                        @Html.DisplayFor(m => m.Outcomes[0])
+                        #1
+                    </b>
+                </h2>
+                <button type="submit" class="btn btn-primary" style="margin-left: auto;">JOIN</button>
+
+            </div>
+            <div class="col-md-2">
+                <h1 class="text-center">VS</h1>
+            </div>
+            <div class="col-md-5">
+                <h2 class="text-md-right">
+                    <b>
+                        @Html.DisplayFor(m => m.Outcomes[1])
+                        #2
+                    </b>
+                </h2>
+                <button type="submit" class="btn btn-primary" style="margin-left: auto;">JOIN</button>
+            </div>
+        </form>
+    </div>
+</div>
