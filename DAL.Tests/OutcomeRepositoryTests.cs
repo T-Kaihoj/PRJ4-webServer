@@ -36,4 +36,5 @@ namespace DAL.Tests
             // Reset the database.
             _context.Database.ExecuteSqlCommand("DELETE FROM Outcomes");
         }
+    }
 }

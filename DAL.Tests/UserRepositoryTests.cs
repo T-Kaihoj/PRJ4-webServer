@@ -28,7 +28,7 @@ namespace DAL.Tests
             Dispose();
 
             // Insert dummy data.
-
+            
             // Create the repository.
             _uut = new UserRepository(_context);
         }
@@ -41,7 +41,7 @@ namespace DAL.Tests
         }
 
         // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
-        // Bruges som eksempel på en test. 
+        // Bruges mest som eksempel på en test. 
         [Test]
         public void Get_InsertedUserIsRetrieved_UserInDBIsIdentical()
         {
@@ -77,7 +77,6 @@ namespace DAL.Tests
         [Test]
         public void GetAll_RetreiveAllUsers_AllUsersFound()
         {
-           
             User user1 = new User()
             {
                 Username = "The_KilL3rrrr",
@@ -410,11 +409,10 @@ namespace DAL.Tests
         [Test]
         public void RemoveRange_RemoveUserNotInDB_ThrowException()
         {
-            string identicalUsername = "username";
 
-            User user = new User
+            User singleUserInDatabase = new User
             {
-                Username = identicalUsername,
+                Username = "dood",
                 Outcomes = null,
                 InvitedToLobbies = null,
                 FirstName = "Jeppe",
@@ -427,22 +425,15 @@ namespace DAL.Tests
                 LastName = "Soerensen"
             };
 
+            // Add single user to database
+            _uut.Add(singleUserInDatabase);
+            _context.SaveChanges();
+
+            // Make list of users to remove, including a user not present in the database
             User[] users =
             {
-                new User()
-                {
-                    Username = identicalUsername,
-                    Outcomes = null,
-                    InvitedToLobbies = null,
-                    FirstName = "Jeppe",
-                    MemberOfLobbies = null,
-                    Balance = 50,
-                    Bets = null,
-                    Email = "J.TrabergS@gmail.com",
-                    Hash = "sdkjfldfkdf",
-                    Salt = "dsfdfsfdsfsfd",
-                    LastName = "Soerensen"
-                },
+                singleUserInDatabase,
+
                 new User()
                 {
                     Username = "Santa",
@@ -459,10 +450,7 @@ namespace DAL.Tests
                 }
             };
 
-            _uut.Add(user);
-
-            _context.SaveChanges();
-
+            
             Assert.That(() => _uut.RemoveRange(users), Throws.Exception );
         }
         

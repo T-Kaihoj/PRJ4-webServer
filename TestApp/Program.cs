@@ -17,16 +17,6 @@ namespace TestApp
             var context = new Context();
             using (var unitOfWork = new UnitOfWork(context))
             {
-
-                var etBet = new Bet()
-                {
-                    BuyIn = 1000,
-                    Description = "test",
-                    StartDate = DateTime.Today,
-                    StopDate = new DateTime(2933,10,10)
-                };
-
-                
                 var enUser = new User()
                 {
                     Username = "The_KilL3r",
@@ -35,14 +25,39 @@ namespace TestApp
                     FirstName = "Jeppe",
                     MemberOfLobbies = null,
                     Balance = 50,
-                    Bets = new List<Bet>() { etBet },
+                    Bets = null,
                     Email = "J.TrabergS@gmail.com",
                     Hash = "sdkjfldfkdf",
                     Salt = "dsfdfsfdsfsfd",
                     LastName = "Soerensen"
                 };
+
+                var enUser2 = new User()
+                {
+                    Username = "The_KilL33333r",
+                    Outcomes = null,
+                    InvitedToLobbies = null,
+                    FirstName = "Jeppe",
+                    MemberOfLobbies = null,
+                    Balance = 50,
+                    Bets = null,
+                    Email = "J.TrabergS@gmaifdfdfl.com",
+                    Hash = "sdkjfldfkdf",
+                    Salt = "dsfdfsfdsfsfd",
+                    LastName = "Soerensen"
+                };
+
                 unitOfWork.User.Add(enUser);
+                unitOfWork.User.Add(enUser2);
+
                 unitOfWork.Complete();
+
+                var enuser = unitOfWork.User.Find(s => s.FirstName == "Jeppe");
+
+                foreach (var user in enuser)
+                {
+                    Console.WriteLine(user.Username);
+                }
 
                 //var enUser = unitOfWork.User.Get("ThomasSwager");
                 //Console.WriteLine(enUser.FirstName);
