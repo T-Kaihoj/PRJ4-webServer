@@ -10,6 +10,7 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    
     [TestFixture]
     public class LobbyControllerTests : BaseRepositoryTest
     {
@@ -83,7 +84,7 @@ namespace MVC.Tests.Controllers
             LobbyRepository.Received(1).Add(Arg.Any<Lobby>());
             MyWork.Received(1).Complete();
         }
-
+        
         [Test]
         public void Create_InputFromViewModel_StoredInRepository()
         {
@@ -108,7 +109,7 @@ namespace MVC.Tests.Controllers
         }
 
         #endregion
-
+        
         #region List functions.
 
         [Test]
@@ -122,7 +123,7 @@ namespace MVC.Tests.Controllers
             // Assert that we hit the repository.
             LobbyRepository.Received(1).GetAll();
         }
-
+        
         [Test]
         public void List_ReturnsCorrectLobbies()
         {
@@ -148,7 +149,7 @@ namespace MVC.Tests.Controllers
         }
 
         #endregion
-
+        
         #region Show functions.
 
         [Test]
@@ -162,7 +163,7 @@ namespace MVC.Tests.Controllers
             // Assert that we hit the repository.
             LobbyRepository.Received(1).Get(Arg.Any<long>());
         }
-
+        
         [Test]
         public void Show_WithInputId_CallsCorrectGet()
         {
@@ -185,4 +186,5 @@ namespace MVC.Tests.Controllers
 
         #endregion
     }
+    
 }
