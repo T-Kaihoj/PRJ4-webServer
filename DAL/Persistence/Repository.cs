@@ -47,6 +47,11 @@ namespace DAL.Persistence
             _context.Set<TEntity>().AddRange(entities);
         }
 
+        public void AddOrUpdate(TEntity entity)
+        {
+            _context.Set<TEntity>().AddOrUpdate(entity);
+        }
+
         public void Remove(TEntity entity)
         {
             _context.Set<TEntity>().Remove(entity);
@@ -55,11 +60,6 @@ namespace DAL.Persistence
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().RemoveRange(entities);
-        }
-
-        public void AddOrUpdate(TEntity entity)
-        {
-            _context.Set<TEntity>().AddOrUpdate(entity);
         }
     }
 }

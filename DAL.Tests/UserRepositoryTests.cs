@@ -240,7 +240,8 @@ namespace DAL.Tests
 
             _context.SaveChanges();
 
-            Assert.That(_uut.Find(c => c.Email == email), Is.EqualTo(user));
+            Assert.That(_uut.Find(c => c.Email == email), Contains.Item(user));
+            Assert.That(_uut.Find(c => c.Email == email).Count(), Is.EqualTo(1));
         }
 
         [Test]
@@ -256,13 +257,75 @@ namespace DAL.Tests
 
             _context.SaveChanges();
 
-            Assert.That(_uut.Find(c => c.FirstName == users[0].FirstName), Is.EqualTo(users));
+            string firstname = users.ElementAt(0).FirstName;
+
+            Assert.That(_uut.Find(c => c.FirstName == firstname), Is.EqualTo(_uut.GetAll()));
+            Assert.That(_uut.Find(c => c.FirstName == firstname).Count(), Is.EqualTo(users.Length));
         }
 
         [Test]
         public void Find_FindUserNotInDatabase_NoUserFound()
         {
-            
+            Assert.That(_uut.Find(c => c.FirstName == "NotAFirstName"), Is.Empty);
+        }
+
+        [Test]
+        public void SingleOrDefault_FindUserInDatabase_Userfound()
+        {
+            var user = Utility.CreateUser();
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.SingleOrDefault(c => c.FirstName == user.FirstName), Is.EqualTo(user));
+        }
+
+        [Test]
+        public void SingleOrDefault_FindUserInDataBaseWithMoreUsersWithSameProperties_ThrowExeception()
+        {
+            var user = Utility.CreateUser();
+            _uut.Add(Utility.CreateUser("ThisUsername", "ThisMail@email.com"));
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(() => _uut.SingleOrDefault(c => c.FirstName == user.FirstName), Throws.Exception);
+        }
+
+        [Test]
+        public void SingleOrDefault_FindUserNotInDatabase_ReturnsNull()
+        {
+            Assert.That(_uut.SingleOrDefault(c => c.FirstName == "NotAFirstName"), Is.Null);
+        }
+
+        [Test]
+        public void AddOrUpdate_NoUserInDatabase_AddsUser()
+        {
+
+            var user = Utility.CreateUser();
+
+            _uut.AddOrUpdate(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.Get(user.Username), Is.EqualTo(user));
+        }
+
+        [Test]
+        public void AddOrUpdate_UpdateUserInDatabase_UserUpdated()
+        {
+            var user = Utility.CreateUser();
+
+            _uut.AddOrUpdate(user);
+
+            _context.SaveChanges();
+
+            user.FirstName = "ThisFirstName";
+
+            _uut.AddOrUpdate(user);
+
+            Assert.That(_uut.GetAll().Count(), Is.EqualTo(1));
+            Assert.That(_uut.Get(user.Username).FirstName, Is.EqualTo(user.FirstName));
         }
     }
 }
