@@ -28,7 +28,7 @@ namespace DAL.Tests
             Dispose();
 
             // Insert dummy data.
-
+            
             // Create the repository.
             _uut = new UserRepository(_context);
         }
@@ -41,7 +41,7 @@ namespace DAL.Tests
         }
 
         // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
-        // Bruges som eksempel på en test. 
+        // Bruges mest som eksempel på en test. 
         [Test]
         public void Get_InsertedUserIsRetrieved_UserInDBIsIdentical()
         {
