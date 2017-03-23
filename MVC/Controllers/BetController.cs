@@ -32,6 +32,7 @@ namespace MVC.Controllers
         // GET: /<controller>/Join/<id>
         public ActionResult Join(long id)
         {
+           
             throw new Exception("Not implemented");
         }
 

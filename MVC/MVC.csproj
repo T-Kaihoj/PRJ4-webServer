@@ -163,8 +163,6 @@
     <Compile Include="Models\Userlogic\IOutcome.cs" />
     <Compile Include="Models\Userlogic\IUserinfo.cs" />
     <Compile Include="Models\Userlogic\IUserLogic.cs" />
-    <Compile Include="Models\Userlogic\Outcome.cs" />
-    <Compile Include="Models\Userlogic\User.cs" />
     <Compile Include="Models\Userlogic\IUserEdit.cs" />
     <Compile Include="Others\PassthruBundleOrderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

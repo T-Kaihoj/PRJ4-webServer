@@ -8,8 +8,6 @@ namespace Common.Models
         private string _name;
         private string _description;
         
-
-      
         [Key]
         public long OutcomeId { get; set; }
 

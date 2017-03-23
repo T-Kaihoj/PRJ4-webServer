@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Common.Models
 {
     public class User
@@ -55,6 +56,7 @@ namespace Common.Models
         public virtual ICollection<Bet> Bets { get; set; } 
         public virtual ICollection<Outcome> Outcomes { get; set; }
 
+       
 
     }
 }
