@@ -7,7 +7,8 @@ namespace Common.Tests.Models
     class UtilityTest
     {
 
-        // Ingen setup eller lignende da Utility er statisk
+        // Ingen setup eller lignende da Utility er statisk.
+
 
         [TestCase("Tobias")]
         [TestCase("sscdAW")]
