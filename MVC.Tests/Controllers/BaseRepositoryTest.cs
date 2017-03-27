@@ -7,7 +7,7 @@ using NUnit.Framework;
 namespace MVC.Tests.Controllers
 {
     [ExcludeFromCodeCoverage]
-    [SetUpFixture]
+    [TestFixture]
     public abstract class BaseRepositoryTest
     {
         protected IFactory Factory;
