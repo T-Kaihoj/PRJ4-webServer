@@ -3,7 +3,7 @@
         <a href="javascript:{}" onclick="document.getElementById('LoginForm').submit(); return false;">Login</a>
     </li>
 </ul>
-<form id="LoginForm" asp-controller="Authentication" asp-action="Post"  class="navbar-form navbar-right">
+<form id="LoginForm" action="/Authentication/SignIn" method="post" class="navbar-form navbar-right">
     <div class="form-group">
         <input name="UserName" type="text" class="form-control col-sm-6" placeholder="User name">
     </div>
