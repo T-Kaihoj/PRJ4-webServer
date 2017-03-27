@@ -28,12 +28,6 @@ namespace MVC.ViewModels
         [DisplayName("Outcome #2")]
         public string Outcome2 { get; set; }
 
-        //public List<Outcome> Outcomes { get; set; }
-        [DisplayName("Outcome #1")]
-        public string Outcome1 { get; set; }
-        [DisplayName("Outcome #2")]
-        public string Outcome2 { get; set; }
-
         public string Judge { get; set; }
 
         [HiddenInput]
