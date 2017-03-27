@@ -202,7 +202,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Authentication\InvalidCredentials.cshtml" />
     <Content Include="Views\Authentication\ValidCredentials.cshtml" />
-    <Content Include="Views\CreateBet\Index.cshtml" />
     <Content Include="Views\InviteToLobby\Index.cshtml" />
     <Content Include="Views\Lobby\Index.cshtml" />
     <Content Include="Views\_ViewImports.cshtml" />
