@@ -8,6 +8,7 @@ using Common.Models;
 using Common.Repositories;
 using DAL.Persistence;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace DAL.Tests
 {
@@ -27,7 +28,7 @@ namespace DAL.Tests
             Dispose();
 
             // Insert dummy data.
-
+            
             // Create the repository.
             _uut = new UserRepository(_context);
         }
@@ -40,25 +41,12 @@ namespace DAL.Tests
         }
 
         // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
-        // Bruges som eksempel på en test. 
+        // Bruges mest som eksempel på en test. 
         [Test]
-        public void Get_InsertedPersonIsRetrieved_BothPersonsIdentical()
+        public void Get_InsertedUserIsRetrieved_UserInDBIsIdentical()
         {
             // Create a new user.
-            var user1 = new User()
-            {
-                Username = "The_KilL3rrrr",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "J.TrabergS@gmail.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
+            var user1 = Utility.CreateUser();
 
             // Add user to database
             _uut.Add(user1);
@@ -71,43 +59,49 @@ namespace DAL.Tests
         }
 
         [Test]
+        public void Get_TryReceiveUserNotInDatabase_ReturnsNUll()
+        {
+            Assert.That(_uut.Get("NotThere"), Is.EqualTo(null));
+        }
+
+        [Test]
+        public void GetAll_RetreiveAllUsers_AllUsersFound()
+        {
+
+            User user1 = Utility.CreateUser("ThisUser", "thisEmail@email.com");
+            User user2 = Utility.CreateUser("ThatUser", "thatEmail@email.com");
+
+            _uut.Add(user1);
+            _uut.Add(user2);
+
+            _context.SaveChanges();
+
+            IEnumerable<User> users = _uut.GetAll();
+
+            Assert.That(users, Contains.Item(user2));
+            Assert.That(users, Contains.Item(user1));
+
+        }
+
+        [Test]
+        public void GetAll_NoUsersInDB_IsEmpty()
+        {
+            IEnumerable<User> users = _uut.GetAll();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
+        }
+
+        [Test]
         public void Add_EmailAddressAlreadyExists_ThrowsException()
         {
 
             // Create 2 users with identical emails
             string identicalMail = "anAdress@aHost.com";
 
-            var user = new User()
-            {
-                Username = "etbrugernavn",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = identicalMail,
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
+            var user = Utility.CreateUser("thisUsername", identicalMail);
 
-            var user2 = new User()
-            {
-                Username = "enbrugernavn2",
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = identicalMail,
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-
-
+            var user2 = Utility.CreateUser("ThatUsername", identicalMail);
+            
             // Add users to database (repository)
             _uut.Add(user);
             _uut.Add(user2);
@@ -120,36 +114,8 @@ namespace DAL.Tests
         {
             string identicalUsername = "The_Killer";
 
-            var user = new User()
-            {
-                Username = identicalUsername,
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "fsdfff@dfdfdf.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-
-            var user2 = new User()
-            {
-                Username = identicalUsername,
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "sdfsdfsdff@eeeeeee.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
-            };
-
+            var user = Utility.CreateUser(identicalUsername, "ThisEmail@email.com");
+            var user2 = Utility.CreateUser(identicalUsername, "ThatEmail@email.com");
 
             // Add users to database (repository)
             _uut.Add(user);
@@ -159,35 +125,207 @@ namespace DAL.Tests
         }
 
         [Test]
-        public void Get_RetrievesOneUser_UserFound()
+        public void AddRange_AddDifferentUsers_AllUsersAdded()
         {
-            string username = "The_Killer";
-
-            var user = new User()
+            User[] users =
             {
-                Username = username,
-                Outcomes = null,
-                InvitedToLobbies = null,
-                FirstName = "Jeppe",
-                MemberOfLobbies = null,
-                Balance = 50,
-                Bets = null,
-                Email = "fsdfff@dfdfdf.com",
-                Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
-                LastName = "Soerensen"
+                Utility.CreateUser("ThisUsername", "ThisEmail@email.com"),
+                Utility.CreateUser("ThatUsername", "ThatEmail@email.com")
             };
 
-            _uut.Add(user);
+            _uut.AddRange(users);
+
             _context.SaveChanges();
 
-            Assert.That(_uut.Get(username), Is.EqualTo(user));
+            Assert.That(_uut.GetAll(), Contains.Item(users[0]));
+            Assert.That(_uut.GetAll(), Contains.Item(users[1]));
         }
 
         [Test]
-        public void Get_TryReceiveUserNotInDatabase_ThrowsException()
+        public void AddRange_AddTwoIdenticalUsers_ThrowException()
         {
-            Assert.That( _uut.Get("NotThere"), Is.EqualTo(null));
+            string identicalUsername = "username";
+
+            User[] users =
+            {
+                Utility.CreateUser(identicalUsername, "ThisEmail@email.com"),
+                Utility.CreateUser(identicalUsername, "ThatUser@email.com")
+            };
+
+            _uut.AddRange(users);
+
+            Assert.That(() =>_context.SaveChanges(), Throws.Exception);
+        }
+
+        [Test]
+        public void AddRange_AddEmtpyList_NothingAdded()
+        {
+            User[] users = {};
+
+            _uut.AddRange(users);
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
+        }
+
+        [Test]
+        public void Remove_RemoveUserInDB_UserRemoved()
+        {
+            var user = Utility.CreateUser();
+
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            _uut.Remove(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
+        }
+
+        [Test]
+        public void Remove_RemoveUserNotInDB_ThrowException()
+        {
+            var user = Utility.CreateUser();
+
+            Assert.That(() => _uut.Remove(user), Throws.Exception);
+        }
+
+        [Test]
+        public void RemoveRange_RemoveUsersInDB_UsersRemoved()
+        {
+            User[] users =
+            {
+                Utility.CreateUser("ThisUsername", "ThisEmail@email.com"),
+                Utility.CreateUser("ThatUsername", "ThatEmail@email.com")
+            };
+
+            _uut.AddRange(users);
+
+            _context.SaveChanges();
+
+            _uut.RemoveRange(users);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetAll(), Is.Empty);
+        }
+
+        [Test]
+        public void RemoveRange_RemoveUserNotInDB_ThrowException()
+        {
+            User user = Utility.CreateUser();
+
+            User[] users =
+            {
+                user,
+                Utility.CreateUser("ThisUsername", "ThisEmail@email.com")
+            };
+
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(() => _uut.RemoveRange(users), Throws.Exception );
+        }
+
+        [Test]
+        public void Find_FindUserInDatabase_UserFound()
+        {
+            string email = "ThisUser@email.com";
+
+            var user = Utility.CreateUser("ThisUsername", email);
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.Find(c => c.Email == email), Contains.Item(user));
+            Assert.That(_uut.Find(c => c.Email == email).Count(), Is.EqualTo(1));
+        }
+
+        [Test]
+        public void Find_FindUsersInDatabase_UsersFound()
+        {
+            User[] users =
+            {
+                Utility.CreateUser("ThisUsername", "ThisUser@email.com"),
+                Utility.CreateUser("ThatUsername", "ThatEmail@email.com")
+            };
+            
+           _uut.AddRange(users);
+
+            _context.SaveChanges();
+
+            string firstname = users.ElementAt(0).FirstName;
+
+            Assert.That(_uut.Find(c => c.FirstName == firstname), Is.EqualTo(_uut.GetAll()));
+            Assert.That(_uut.Find(c => c.FirstName == firstname).Count(), Is.EqualTo(users.Length));
+        }
+
+        [Test]
+        public void Find_FindUserNotInDatabase_NoUserFound()
+        {
+            Assert.That(_uut.Find(c => c.FirstName == "NotAFirstName"), Is.Empty);
+        }
+
+        [Test]
+        public void SingleOrDefault_FindUserInDatabase_Userfound()
+        {
+            var user = Utility.CreateUser();
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.SingleOrDefault(c => c.FirstName == user.FirstName), Is.EqualTo(user));
+        }
+
+        [Test]
+        public void SingleOrDefault_FindUserInDataBaseWithMoreUsersWithSameProperties_ThrowExeception()
+        {
+            var user = Utility.CreateUser();
+            _uut.Add(Utility.CreateUser("ThisUsername", "ThisMail@email.com"));
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(() => _uut.SingleOrDefault(c => c.FirstName == user.FirstName), Throws.Exception);
+        }
+
+        [Test]
+        public void SingleOrDefault_FindUserNotInDatabase_ReturnsNull()
+        {
+            Assert.That(_uut.SingleOrDefault(c => c.FirstName == "NotAFirstName"), Is.Null);
+        }
+
+        [Test]
+        public void AddOrUpdate_NoUserInDatabase_AddsUser()
+        {
+
+            var user = Utility.CreateUser();
+
+            _uut.AddOrUpdate(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.Get(user.Username), Is.EqualTo(user));
+        }
+
+        [Test]
+        public void AddOrUpdate_UpdateUserInDatabase_UserUpdated()
+        {
+            var user = Utility.CreateUser();
+
+            _uut.AddOrUpdate(user);
+
+            _context.SaveChanges();
+
+            user.FirstName = "ThisFirstName";
+
+            _uut.AddOrUpdate(user);
+
+            Assert.That(_uut.GetAll().Count(), Is.EqualTo(1));
+            Assert.That(_uut.Get(user.Username).FirstName, Is.EqualTo(user.FirstName));
         }
     }
 }

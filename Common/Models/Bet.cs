@@ -34,8 +34,7 @@ namespace Common.Models
         public virtual ICollection<User> Participants { get; set; }
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
         public virtual User Judge { get; set; }
-        public List<User> Invited { get; set; }
-
+        
         private void Payout(ICollection<User> winners)
         {
             var numberOfWinners = winners.Count;
