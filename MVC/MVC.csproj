@@ -171,6 +171,7 @@
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Bets\BetViewModel.cs" />
     <Compile Include="ViewModels\Bets\CreateBetViewModel.cs" />
+    <Compile Include="ViewModels\Bets\JoinViewModel.cs" />
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
@@ -202,7 +203,6 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Authentication\InvalidCredentials.cshtml" />
     <Content Include="Views\Authentication\ValidCredentials.cshtml" />
-    <Content Include="Views\CreateBet\Index.cshtml" />
     <Content Include="Views\InviteToLobby\Index.cshtml" />
     <Content Include="Views\Lobby\Index.cshtml" />
     <Content Include="Views\_ViewImports.cshtml" />
@@ -216,6 +216,7 @@
     <Content Include="Views\Lobby\List.cshtml" />
     <Content Include="Views\Bet\Create.cshtml" />
     <Content Include="Views\Bet\Show.cshtml" />
+    <Content Include="Views\Bet\Join.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

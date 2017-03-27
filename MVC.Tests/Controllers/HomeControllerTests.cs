@@ -1,10 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Mvc;
 using MVC.Controllers;
 using MVC.ViewModels;
 using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class HomeControllerTests
     {

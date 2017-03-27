@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
@@ -10,7 +11,7 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
-    
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class LobbyControllerTests : BaseRepositoryTest
     {

@@ -29,12 +29,6 @@ namespace MVC.Controllers
             _factory = factory ?? new Factory();
         }
 
-        // GET: /<controller>/Join/<id>
-        public ActionResult Join(long id)
-        {
-            throw new Exception("Not implemented");
-        }
-
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {
@@ -103,7 +97,6 @@ namespace MVC.Controllers
                     Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = DateTime.Parse(viewModel.StartDate),
                     StopDate = DateTime.Parse(viewModel.StopDate)
-                    
                 };
                 /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
                 
@@ -130,6 +123,41 @@ namespace MVC.Controllers
 
                 // Redirect to the bet page.
                 return Redirect($"/Bet/Show/{bet.BetId}");
+            }
+        }
+        // GET: /<controller>/Create/<id>
+        [HttpGet]
+        public ActionResult Join(long id)
+        {
+
+            var viewModel = new BetViewModel();
+            using (var myWork = _factory.GetUOF())
+            {
+                var myBet = myWork.Bet.Get(id);
+                foreach (var outcomes in myBet.Outcomes)
+                {
+                    viewModel.Outcomes.Add(outcomes.Name);
+                }
+                viewModel.Title = myBet.Name;
+                viewModel.Description = myBet.Description;
+                viewModel.MoneyPool = myBet.BuyIn;
+
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Join(JoinViewModel model)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                //throw new NotImplementedException();
+                //TODO tep
+                var user = myWork.User.Get(model.TemporaryUsername);
+                myWork.Bet.Get(model.MyBet.BetId).Participants.Add(user);
+                myWork.Complete();
+
+                return View(new LobbyViewModel());
             }
         }
     }

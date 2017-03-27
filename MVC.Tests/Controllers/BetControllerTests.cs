@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common.Models;
 using DAL;
@@ -11,7 +12,7 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
-    
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class BetControllerTests : BaseRepositoryTest
     {
