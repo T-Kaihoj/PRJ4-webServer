@@ -69,7 +69,18 @@ namespace MVC.Identity
 
         public Task SetPasswordHashAsync(IdentityUser user, string passwordHash)
         {
-            throw new NotImplementedException();
+            using (var myWork = _factory.GetUOF())
+            {
+                var dbUser = myWork.User.Get(user.UserName);
+
+                if (dbUser != null)
+                {
+                    dbUser.Hash = passwordHash;
+                    myWork.Complete();
+                }
+            }
+
+            return Task.FromResult<object>(null);
         }
 
         public Task<string> GetPasswordHashAsync(IdentityUser user)
@@ -77,6 +88,11 @@ namespace MVC.Identity
             using (var myWork = _factory.GetUOF())
             {
                 var dbUser = myWork.User.Get(user.UserName);
+
+                if (dbUser == null)
+                {
+                    return Task.FromResult<string>(null);
+                }
 
                 return Task.FromResult(dbUser.Hash);
             }

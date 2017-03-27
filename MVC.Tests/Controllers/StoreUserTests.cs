@@ -8,7 +8,7 @@ namespace MVC.Tests.Controllers
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class StoreTests : BaseRepositoryTest
+    public class StoreUserTests : BaseRepositoryTest
     {
         private Store uut;
 
@@ -24,11 +24,13 @@ namespace MVC.Tests.Controllers
             string userName = "test";
 
             UserRepository.DidNotReceive().Get(Arg.Any<string>());
+            MyWork.DidNotReceive().Complete();
 
             var result = uut.FindByIdAsync(userName).Result;
 
             // Check the the correct calls were received.
             UserRepository.Received(1).Get(Arg.Is(userName));
+            MyWork.DidNotReceive().Complete();
         }
 
         [Test]
@@ -37,11 +39,13 @@ namespace MVC.Tests.Controllers
             string userName = "test";
 
             UserRepository.DidNotReceive().Get(Arg.Any<string>());
+            MyWork.DidNotReceive().Complete();
 
             var result = uut.FindByNameAsync(userName).Result;
 
             // Check the the correct calls were received.
             UserRepository.Received(1).Get(Arg.Is(userName));
+            MyWork.DidNotReceive().Complete();
         }
 
         [Test]
