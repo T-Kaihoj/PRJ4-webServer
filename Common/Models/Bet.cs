@@ -31,7 +31,7 @@ namespace Common.Models
 
         public Decimal BuyIn { get; set; }
         public Decimal Pot { get; set; }
-        public virtual ICollection<User> Participants { get; set; }
+        public virtual ICollection<User> Participants { get; set; } = new List<User>();
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
         public virtual User Judge { get; set; }
         

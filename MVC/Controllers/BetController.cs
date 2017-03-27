@@ -141,23 +141,25 @@ namespace MVC.Controllers
                 viewModel.Title = myBet.Name;
                 viewModel.Description = myBet.Description;
                 viewModel.MoneyPool = myBet.BuyIn;
+                viewModel.Id = id;
 
                 return View(viewModel);
             }
         }
 
         [HttpPost]
-        public ActionResult Join(JoinViewModel model)
+        public ActionResult Join(BetViewModel model)
         {
             using (var myWork = _factory.GetUOF())
             {
                 //throw new NotImplementedException();
                 //TODO tep
                 var user = myWork.User.Get(model.TemporaryUsername);
-                myWork.Bet.Get(model.MyBet.BetId).Participants.Add(user);
+                var bet = myWork.Bet.Get(model.Id);
+                bet.Outcomes.First().Participants.Add(user);
                 myWork.Complete();
 
-                return View(new LobbyViewModel());
+                return Redirect("/Lobby/List");
             }
         }
     }
