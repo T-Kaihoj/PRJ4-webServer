@@ -66,9 +66,8 @@ namespace MVC.Controllers
 
 
 
-            //todo Authentication
-            var authentication = new AuthenticationController();
-            authentication.SignIn(model.UserName, model.Password1);
+            // TODO: Authentication
+            
 
 
 

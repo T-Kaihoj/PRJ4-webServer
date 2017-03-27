@@ -15,6 +15,18 @@ namespace MVC.Controllers
 {
     public class AuthenticationController : Controller
     {
+        private UserManager<IdentityUser, string> _userManager;
+        private IAuthenticationManager _authenticationManager;
+        private SignInManager<IdentityUser, string> _signInManager;
+
+        public AuthenticationController(UserManager<IdentityUser, string> userManager, IAuthenticationManager authenticationManager)
+        {
+            _userManager = userManager;
+            _authenticationManager = authenticationManager;
+
+            _signInManager = new SignInManager<IdentityUser, string>(_userManager, _authenticationManager);
+        }
+
         // POST
         [HttpPost]
         public ActionResult SignIn(string userName, string password)
@@ -24,11 +36,7 @@ namespace MVC.Controllers
                 return View("InvalidCredentials");
             }
 
-            var uManager = new UserManager<IdentityUser, string>(new Store(new Factory()));
-            IAuthenticationManager aManager = HttpContext.Request.GetOwinContext().Authentication;
-            var manager = new SignInManager<IdentityUser, string>(uManager, aManager);
-
-            var result = manager.PasswordSignIn(userName, password, true, false);
+            var result = _signInManager.PasswordSignIn(userName, password, true, false);
 
             // Check the data.
             if (userName != password)

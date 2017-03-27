@@ -179,7 +179,12 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Identity\IdentityUser.cs" />
-    <Compile Include="Identity\Store.cs" />
+    <Compile Include="Identity\Store\IStore.cs" />
+    <Compile Include="Identity\Store\StorePartialTwoFactor.cs" />
+    <Compile Include="Identity\Store\StorePartialLockout.cs" />
+    <Compile Include="Identity\Store\StorePartialUser.cs" />
+    <Compile Include="Identity\Store\StorePartialPassword.cs" />
+    <Compile Include="Identity\Store\StorePartial.cs" />
     <Compile Include="Models\Userlogic\IBetinfo.cs" />
     <Compile Include="Models\Userlogic\IBetJudge.cs" />
     <Compile Include="Models\Userlogic\IBetLogic.cs" />
