@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.CodeDom;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
@@ -48,7 +49,15 @@ namespace Common.Models
                 return;
 
             MemberList.Add(user);
-            
+        }
+
+        public void RemoveMember(User user)
+        {
+            foreach (var member in MemberList)
+            {
+                if (member.Username == user.Username)
+                    MemberList.Remove(user);
+            }
         }
     }
 }
