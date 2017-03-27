@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace MVC.Tests.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     public abstract class ValidationHelper
     {
         protected ValidationContext Context;

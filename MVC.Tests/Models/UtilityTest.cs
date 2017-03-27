@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using NUnit.Framework;
 using Common.Models;
 
 namespace MVC.Tests.Models
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     class UtilityTest
     {

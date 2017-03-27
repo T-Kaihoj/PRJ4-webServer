@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using MVC.ViewModels;
 using NUnit.Framework;
 
 namespace MVC.Tests.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class UserViewModelValidationTests : ValidationHelper
     {

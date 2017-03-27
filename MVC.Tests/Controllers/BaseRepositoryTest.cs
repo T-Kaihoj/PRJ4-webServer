@@ -1,10 +1,12 @@
-﻿using Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Common;
 using Common.Repositories;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [SetUpFixture]
     public abstract class BaseRepositoryTest
     {
