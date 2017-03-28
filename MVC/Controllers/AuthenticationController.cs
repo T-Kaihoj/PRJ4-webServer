@@ -39,16 +39,7 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult SignIn(string userName, string password)
         {
-            SignInManager<IdentityUser, string> signInManager;
-
-            if (_authenticationManager == null)
-            {
-                signInManager = new SignInManager<IdentityUser, string>(_userManager, HttpContext.GetOwinContext().Authentication);
-            }
-            else
-            {
-                signInManager = new SignInManager<IdentityUser, string>(_userManager, _authenticationManager);
-            }
+            var signInManager = GetSignInManager();
 
             if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
             {
@@ -60,10 +51,33 @@ namespace MVC.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return View("ValidCredentials");
+                    return Redirect("/");
             }
 
             return View("InvalidCredentials");
+        }
+
+        // GET /AuthenticationController/SignOut
+        [HttpGet]
+        public RedirectResult SignOut()
+        {
+            var signInManager = GetSignInManager();
+
+            signInManager.AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+
+            return Redirect("/");
+        }
+
+        private SignInManager<IdentityUser, string> GetSignInManager()
+        {
+            if (_authenticationManager == null)
+            {
+                return new SignInManager<IdentityUser, string>(_userManager, HttpContext.GetOwinContext().Authentication);
+            }
+            else
+            {
+                return new SignInManager<IdentityUser, string>(_userManager, _authenticationManager);
+            }
         }
     }
 }
