@@ -199,6 +199,7 @@
     <Compile Include="Controllers\StoreTwoFactorTests.cs" />
     <Compile Include="Controllers\StorePasswordTests.cs" />
     <Compile Include="Controllers\StoreLockoutTests.cs" />
+    <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Models\UtilityTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\StoreUserTests.cs" />

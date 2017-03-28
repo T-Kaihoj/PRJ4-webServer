@@ -9,7 +9,7 @@ namespace MVC.Tests.ViewModels
     [TestFixture]
     public class UserViewModelValidationTests : ValidationHelper
     {
-        private UserViewModel uut;
+        private CreateUserViewModel uut;
 
         [SetUp]
         public new void Setup()
@@ -17,7 +17,7 @@ namespace MVC.Tests.ViewModels
             // Let the base handle common setup tasks.
             base.Setup();
 
-            uut = new UserViewModel();
+            uut = new CreateUserViewModel();
             Context = new ValidationContext(uut, null, null);
 
             // Setup a valid state for all properties.

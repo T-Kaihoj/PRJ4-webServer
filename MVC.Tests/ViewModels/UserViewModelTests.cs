@@ -8,12 +8,12 @@ namespace MVC.Tests.ViewModels
     [TestFixture]
     public class UserViewModelTests
     {
-        private UserViewModel uut;
+        private CreateUserViewModel uut;
 
         [SetUp]
         public void Setup()
         {
-            uut = new UserViewModel();
+            uut = new CreateUserViewModel();
         }
 
         #region Constructor.

@@ -207,7 +207,7 @@
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
-    <Compile Include="ViewModels\UserViewModel.cs" />
+    <Compile Include="ViewModels\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\UserViewModelErrors.cs" />
   </ItemGroup>
   <ItemGroup>
