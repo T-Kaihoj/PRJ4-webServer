@@ -19,36 +19,51 @@ namespace MVC.Controllers
         private IAuthenticationManager _authenticationManager;
         private SignInManager<IdentityUser, string> _signInManager;
 
+        public AuthenticationController() : this(null, null)
+        {
+            
+        }
+
         public AuthenticationController(UserManager<IdentityUser, string> userManager, IAuthenticationManager authenticationManager)
         {
+            if (userManager == null)
+            {
+                userManager = new UserManager<IdentityUser, string>(new Store(new Factory()));
+            }
+
             _userManager = userManager;
             _authenticationManager = authenticationManager;
-
-            _signInManager = new SignInManager<IdentityUser, string>(_userManager, _authenticationManager);
         }
 
         // POST
         [HttpPost]
         public ActionResult SignIn(string userName, string password)
         {
-            if(string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+            SignInManager<IdentityUser, string> signInManager;
+
+            if (_authenticationManager == null)
+            {
+                signInManager = new SignInManager<IdentityUser, string>(_userManager, HttpContext.GetOwinContext().Authentication);
+            }
+            else
+            {
+                signInManager = new SignInManager<IdentityUser, string>(_userManager, _authenticationManager);
+            }
+
+            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
             {
                 return View("InvalidCredentials");
             }
 
-            var result = _signInManager.PasswordSignIn(userName, password, true, false);
+            var result = signInManager.PasswordSignIn(userName, password, true, false);
 
-            // Check the data.
-            if (userName != password)
+            switch (result)
             {
-                return View("InvalidCredentials");
+                case SignInStatus.Success:
+                    return View("ValidCredentials");
             }
 
-            // Login the user.
-
-            return View("ValidCredentials");
+            return View("InvalidCredentials");
         }
-
-        
     }
 }

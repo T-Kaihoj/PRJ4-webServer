@@ -14,22 +14,22 @@ namespace MVC.Identity
 
         public Task SetLockoutEndDateAsync(IdentityUser user, DateTimeOffset lockoutEnd)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<object>(null);
         }
 
         public Task<int> IncrementAccessFailedCountAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(0);
         }
 
         public Task ResetAccessFailedCountAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<object>(null);
         }
 
         public Task<int> GetAccessFailedCountAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(0);
         }
 
         public Task<bool> GetLockoutEnabledAsync(IdentityUser user)
@@ -39,7 +39,7 @@ namespace MVC.Identity
 
         public Task SetLockoutEnabledAsync(IdentityUser user, bool enabled)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<object>(null);
         }
     }
 }
