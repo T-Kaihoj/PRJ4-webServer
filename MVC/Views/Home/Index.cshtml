@@ -55,7 +55,7 @@
                     <div class="col-md-12">
                         <div class="form-group label-floating">
                             @Html.LabelFor(m => m.Password1, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Password1, new { @class = "form-control" })
+                            @Html.PasswordFor(m => m.Password1, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Password1, null, new { @class = "help-block" })
                         </div>
                     </div>
@@ -64,7 +64,7 @@
                     <div class="col-md-12">
                         <div class="form-group label-floating">
                             @Html.LabelFor(m => m.Password2, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Password2, new { @class = "form-control" })
+                            @Html.PasswordFor(m => m.Password2, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "help-block" })
                         </div>
                     </div>
