@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC.ViewModels
 {
-    public class UserProfile
+    public class UserProfileViewModel
     {
         // Private backing fields.
         private string _email = string.Empty;

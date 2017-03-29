@@ -209,7 +209,7 @@
     <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\UserViewModelErrors.cs" />
-    <Compile Include="ViewModels\User\UserProfile.cs" />
+    <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\User\EditProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

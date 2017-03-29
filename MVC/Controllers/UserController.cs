@@ -55,7 +55,7 @@ namespace MVC.Controllers
             }
 
             // Populate the viewmodel.
-            var viewModel = new UserProfile()
+            var viewModel = new UserProfileViewModel()
             {
                 Email = user.Email,
                 FirstName = user.FirstName,
