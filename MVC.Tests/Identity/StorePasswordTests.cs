@@ -125,7 +125,7 @@ namespace MVC.Tests.Identity
             UserRepository.DidNotReceive().Get(Arg.Any<string>());
             MyWork.DidNotReceive().Complete();
 
-            var result = uut.SetPasswordHashAsync(iUser, updatedHash);
+            uut.SetPasswordHashAsync(iUser, updatedHash).Wait();
 
             // Check the the correct calls were received.
             UserRepository.Received(1).Get(Arg.Is(userName));
