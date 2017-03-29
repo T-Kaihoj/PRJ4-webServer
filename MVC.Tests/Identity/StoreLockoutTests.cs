@@ -45,7 +45,7 @@ namespace MVC.Tests.Identity
                 UserName = userName
             };
 
-            uut.GetLockoutEnabledAsync(user).Wait();
+            uut.SetLockoutEndDateAsync(user, DateTimeOffset.Now).Wait();
 
             Assert.That(UserRepository.ReceivedCalls(), Is.Empty);
         }
@@ -114,8 +114,9 @@ namespace MVC.Tests.Identity
             Assert.That(result, Is.False);
         }
 
-        [Test]
-        public void SetLockoutEnabled_NoMatterTheInput_DoesNothing()
+        [TestCase(false)]
+        [TestCase(true)]
+        public void SetLockoutEnabled_NoMatterTheInput_DoesNothing(bool input)
         {
             string userName = "test";
 
@@ -125,7 +126,7 @@ namespace MVC.Tests.Identity
                 UserName = userName
             };
 
-            uut.GetLockoutEnabledAsync(user).Wait();
+            uut.SetLockoutEnabledAsync(user, input).Wait();
 
             Assert.That(UserRepository.ReceivedCalls(), Is.Empty);
         }

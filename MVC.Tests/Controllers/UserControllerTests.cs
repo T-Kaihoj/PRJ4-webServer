@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Mvc;
 using Common.Models;
 using MVC.Controllers;
 using MVC.Identity;
@@ -8,6 +9,7 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class UserControllerTests : BaseRepositoryTest
     {

@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using Common;
-using Microsoft.AspNet.Identity;
 
 namespace MVC.Identity
 {
@@ -13,6 +12,7 @@ namespace MVC.Identity
             _factory = factory;
         }
 
+        [ExcludeFromCodeCoverage]
         public void Dispose()
         {
             // We do not care about dispose, as all work is done in using clauses with the unit of work.

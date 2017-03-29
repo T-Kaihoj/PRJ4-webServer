@@ -17,8 +17,9 @@ namespace MVC.Tests.Identity
             uut = new Store(Factory);
         }
 
-        [Test]
-        public void SetTwoFactorEnabled_NoMatterTheInput_DoesNothing()
+        [TestCase(false)]
+        [TestCase(true)]
+        public void SetTwoFactorEnabled_NoMatterTheInput_DoesNothing(bool input)
         {
             string userName = "test";
 
@@ -28,7 +29,7 @@ namespace MVC.Tests.Identity
                 UserName = userName
             };
 
-            uut.GetTwoFactorEnabledAsync(user).Wait();
+            uut.SetTwoFactorEnabledAsync(user, input).Wait();
 
             Assert.That(UserRepository.ReceivedCalls(), Is.Empty);
         }
