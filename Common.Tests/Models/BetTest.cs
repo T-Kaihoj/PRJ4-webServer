@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Common.Models;
 using Common.Tests;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace Common.Tests.Models
 {
@@ -34,7 +35,11 @@ namespace Common.Tests.Models
         [Test]
         public void Name_SetInvalidName_ThrowException()
         {
-            
+            foreach (var name in UtilityCommen.invalidNames)
+            {
+                Assert.That(() => _uut.Name = name, Throws.Exception);
+            }
         }
+
     }
 }
