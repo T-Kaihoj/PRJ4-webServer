@@ -1,14 +1,12 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using Common.Models;
 using MVC.Identity;
-using NSubstitute;
 using NUnit.Framework;
 
-namespace MVC.Tests.Controllers
+namespace MVC.Tests.Identity
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class StoreLockoutTests : BaseRepositoryTest
+    public class StoreTwoFactorTests : BaseRepositoryTest
     {
         private Store uut;
 
@@ -20,7 +18,7 @@ namespace MVC.Tests.Controllers
         
 
         [Test]
-        public void GetLockoutEnabled_NoMatterTheInput_ReturnsTrue()
+        public void GetTwoFactorEnabled_NoMatterTheInput_ReturnsTrue()
         {
             string userName = "test";
 
@@ -30,7 +28,7 @@ namespace MVC.Tests.Controllers
                 UserName = userName
             };
 
-            var result = uut.GetLockoutEnabledAsync(user).Result;
+            var result = uut.GetTwoFactorEnabledAsync(user).Result;
 
             Assert.That(result, Is.False);
         }

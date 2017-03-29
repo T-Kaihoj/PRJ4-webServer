@@ -4,7 +4,7 @@ using MVC.Identity;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace MVC.Tests.Controllers
+namespace MVC.Tests.Identity
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]

@@ -9,7 +9,9 @@ namespace MVC.Identity
     {
         public Task<DateTimeOffset> GetLockoutEndDateAsync(IdentityUser user)
         {
-            throw new NotImplementedException();
+            DateTimeOffset offset = DateTimeOffset.MinValue;
+
+            return Task.FromResult(offset);
         }
 
         public Task SetLockoutEndDateAsync(IdentityUser user, DateTimeOffset lockoutEnd)
