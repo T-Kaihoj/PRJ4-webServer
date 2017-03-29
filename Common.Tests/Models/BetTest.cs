@@ -24,7 +24,7 @@ namespace Common.Tests.Models
         [Test]
         public void Name_SetValidName_ValidNames()
         {
-            foreach (var name in UtilityCommen.validNames)
+            foreach (var name in UtilityCommen.validCharacters)
             {
                 _uut.Name = name;
 
@@ -35,7 +35,7 @@ namespace Common.Tests.Models
         [Test]
         public void Name_SetInvalidName_ThrowException()
         {
-            foreach (var name in UtilityCommen.invalidNames)
+            foreach (var name in UtilityCommen.invalidCharacters)
             {
                 Assert.That(() => _uut.Name = name, Throws.Exception);
             }
