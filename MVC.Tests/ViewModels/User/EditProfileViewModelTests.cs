@@ -6,14 +6,14 @@ namespace MVC.Tests.ViewModels
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class UserViewModelTests
+    public class EditProfileViewModelTests
     {
-        private CreateUserViewModel uut;
+        private EditProfileViewModel uut;
 
         [SetUp]
         public void Setup()
         {
-            uut = new CreateUserViewModel();
+            uut = new EditProfileViewModel();
         }
 
         #region Constructor.
@@ -34,18 +34,6 @@ namespace MVC.Tests.ViewModels
         public void Constructor_GetLastName_ReturnsEmptyString()
         {
             Assert.That(uut.LastName, Is.EqualTo(string.Empty));
-        }
-
-        [Test]
-        public void Constructor_GetPassword1_ReturnsEmptyString()
-        {
-            Assert.That(uut.Password1, Is.EqualTo(string.Empty));
-        }
-
-        [Test]
-        public void Constructor_GetPassword2_ReturnsEmptyString()
-        {
-            Assert.That(uut.Password2, Is.EqualTo(string.Empty));
         }
 
         [Test]
@@ -86,26 +74,6 @@ namespace MVC.Tests.ViewModels
             uut.LastName = value;
 
             Assert.That(uut.LastName, Is.EqualTo(expected));
-        }
-
-        [TestCase("a", "a")]
-        [TestCase("a ", "a")]
-        [TestCase(" a", "a")]
-        public void SetPassword1_GetPassword1_ReturnsValue(string value, string expected)
-        {
-            uut.Password1 = value;
-
-            Assert.That(uut.Password1, Is.EqualTo(expected));
-        }
-
-        [TestCase("a", "a")]
-        [TestCase("a ", "a")]
-        [TestCase(" a", "a")]
-        public void SetPassword2_GetPassword2_ReturnsValue(string value, string expected)
-        {
-            uut.Password2 = value;
-
-            Assert.That(uut.Password2, Is.EqualTo(expected));
         }
 
         [TestCase("a", "a")]

@@ -45,11 +45,17 @@ namespace MVC.Tests.Controllers
 
             var viewModel = new CreateBetViewModel()
             {
+                BuyIn = "0",
                 Description = "Description",
+                LobbyID = 0,
+                StartDate = DateTime.Now.ToLongDateString(),
+                StopDate = DateTime.Now.ToLongDateString(),
                 Title = "Name"
             };
 
             uut.Create(viewModel);
+
+            Assert.That(uut.ModelState.IsValid);
 
             // Assert that we hit the repository.
             BetRepository.Received(1).Add(Arg.Any<Bet>());

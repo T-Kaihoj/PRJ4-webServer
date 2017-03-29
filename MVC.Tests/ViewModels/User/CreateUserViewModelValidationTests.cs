@@ -7,16 +7,13 @@ namespace MVC.Tests.ViewModels
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class UserViewModelValidationTests : ValidationHelper
+    public class CreateUserViewModelValidationTests : ValidationHelper
     {
         private CreateUserViewModel uut;
 
         [SetUp]
-        public new void Setup()
+        public void Setup()
         {
-            // Let the base handle common setup tasks.
-            base.Setup();
-
             uut = new CreateUserViewModel();
             Context = new ValidationContext(uut, null, null);
 

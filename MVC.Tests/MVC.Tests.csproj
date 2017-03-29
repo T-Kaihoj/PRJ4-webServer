@@ -202,8 +202,11 @@
     <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Identity\StoreUserTests.cs" />
-    <Compile Include="ViewModels\UserViewModelTests.cs" />
-    <Compile Include="ViewModels\UserViewModelValidationTests.cs" />
+    <Compile Include="ViewModels\Bets\CreateBetViewModelTests.cs" />
+    <Compile Include="ViewModels\User\EditProfileViewModelTests.cs" />
+    <Compile Include="ViewModels\User\CreateUserViewModelTests.cs" />
+    <Compile Include="ViewModels\User\EditProfileViewModelViewModelValidationTests.cs" />
+    <Compile Include="ViewModels\User\CreateUserViewModelValidationTests.cs" />
     <Compile Include="ViewModels\ValidationHelper.cs" />
   </ItemGroup>
   <ItemGroup>

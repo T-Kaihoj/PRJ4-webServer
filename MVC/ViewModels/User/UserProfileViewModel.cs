@@ -13,8 +13,6 @@ namespace MVC.ViewModels
         #region Accessors.
 
         [Display(ResourceType = typeof(Resources.User), Name = "DisplayFirstName")]
-        [Required(ErrorMessageResourceType = typeof(Resources.User),
-            ErrorMessageResourceName = "ErrorFirstNameRequired")]
         public string FirstName
         {
             get
@@ -28,8 +26,6 @@ namespace MVC.ViewModels
         }
 
         [Display(ResourceType = typeof(Resources.User), Name = "DisplayLastName")]
-        [Required(ErrorMessageResourceType = typeof(Resources.User),
-            ErrorMessageResourceName = "ErrorLastNameRequired")]
         public string LastName
         {
             get
@@ -43,10 +39,6 @@ namespace MVC.ViewModels
         }
 
         [Display(ResourceType = typeof(Resources.User), Name = "DisplayEmail")]
-        [EmailAddress(ErrorMessageResourceType = typeof(Resources.User),
-            ErrorMessageResourceName = "ErrorEmailInvalid")]
-        [Required(ErrorMessageResourceType = typeof(Resources.User),
-            ErrorMessageResourceName = "ErrorEmailRequired")]
         public string Email
         {
             get
@@ -60,8 +52,6 @@ namespace MVC.ViewModels
         }
 
         [Display(ResourceType = typeof(Resources.User), Name = "DisplayUserName")]
-        [Required(ErrorMessageResourceType = typeof(Resources.User),
-            ErrorMessageResourceName = "ErrorUserNameRequired")]
         public string UserName
         {
             get
