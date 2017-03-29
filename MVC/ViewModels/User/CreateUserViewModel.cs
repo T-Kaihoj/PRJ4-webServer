@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MVC.ViewModels
 {
@@ -15,7 +14,7 @@ namespace MVC.ViewModels
 
         #region Accessors.
 
-        [DisplayName("First name")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayFirstName")]
         [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorFirstNameRequired")]
         public string FirstName
@@ -30,7 +29,7 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Last name")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayLastName")]
         [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorLastNameRequired")]
         public string LastName
@@ -45,7 +44,7 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Email")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayEmail")]
         [EmailAddress(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorEmailInvalid")]
         [Required(ErrorMessageResourceType = typeof(Resources.User),
@@ -62,7 +61,7 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("User name")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayUserName")]
         [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorUserNameRequired")]
         public string UserName
@@ -77,7 +76,7 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Password")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayPassword1")]
         [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorPassword1Required")]
         public string Password1
@@ -92,7 +91,7 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Repeat password")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayPassword2")]
         [Compare("Password1",
             ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorPasswordsNotIdentical")]

@@ -61,6 +61,60 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string DisplayEmail {
+            get {
+                return ResourceManager.GetString("DisplayEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First name.
+        /// </summary>
+        public static string DisplayFirstName {
+            get {
+                return ResourceManager.GetString("DisplayFirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name.
+        /// </summary>
+        public static string DisplayLastName {
+            get {
+                return ResourceManager.GetString("DisplayLastName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        public static string DisplayPassword1 {
+            get {
+                return ResourceManager.GetString("DisplayPassword1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Repeat password.
+        /// </summary>
+        public static string DisplayPassword2 {
+            get {
+                return ResourceManager.GetString("DisplayPassword2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name.
+        /// </summary>
+        public static string DisplayUserName {
+            get {
+                return ResourceManager.GetString("DisplayUserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter a valid email.
         /// </summary>
         public static string ErrorEmailInvalid {

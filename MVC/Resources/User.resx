@@ -117,6 +117,24 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DisplayEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="DisplayFirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="DisplayLastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="DisplayPassword1" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="DisplayPassword2" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="DisplayUserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
   <data name="ErrorEmailInvalid" xml:space="preserve">
     <value>You must enter a valid email</value>
   </data>
