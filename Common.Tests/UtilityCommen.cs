@@ -46,7 +46,7 @@ namespace Common.Tests
             @"§"
         };
 
-        public static string[] invalidharacters =
+        public static string[] invalidCharacters =
         {
             @"'",
             @"[",
