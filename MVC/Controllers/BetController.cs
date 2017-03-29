@@ -9,6 +9,7 @@ using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class BetController : Controller
     {
         private IFactory _factory;
@@ -152,9 +153,12 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 //throw new NotImplementedException();
-                //TODO tep
-                var user = myWork.User.Get(model.TemporaryUsername);
-                myWork.Bet.Get(model.MyBet.BetId).Participants.Add(user);
+                //TODO BetController JoinViewModel NullReference
+
+                var user = myWork.User.Get(User.Identity.Name);
+
+
+                myWork.Bet.Get(model.MyBet.BetId).joinBet(user,model.SelectedOutcome);
                 myWork.Complete();
 
                 return View(new LobbyViewModel());
