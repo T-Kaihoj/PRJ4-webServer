@@ -141,7 +141,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
 
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorEmailRequired));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorEmailRequired));
         }
 
         [TestCase("a")]
@@ -156,7 +156,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
 
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorEmailInvalid));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorEmailInvalid));
         }
 
         [Test]
@@ -168,7 +168,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
             
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorFirstNameRequired));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorFirstNameRequired));
         }
 
         [Test]
@@ -180,7 +180,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
 
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorLastNameRequired));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorLastNameRequired));
         }
 
         [Test]
@@ -192,7 +192,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
             
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorPasswordRequired1));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorPassword1Required));
         }
 
         [Test]
@@ -204,7 +204,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
 
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorPasswordRequired2));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorPassword2Required));
         }
 
         [Test]
@@ -217,7 +217,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
 
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorPasswordNotIdentical));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorPasswordsNotIdentical));
         }
 
         [Test]
@@ -229,7 +229,7 @@ namespace MVC.Tests.ViewModels
             // Perform validation.
             Validator.TryValidateObject(uut, Context, Results, true);
 
-            Assert.That(GetErrors, Contains.Item(UserViewModelErrors.ErrorUserNameRequired));
+            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorUserNameRequired));
         }
 
         #endregion

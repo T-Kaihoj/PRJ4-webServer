@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MVC.ViewModels
 {
@@ -15,8 +14,8 @@ namespace MVC.ViewModels
 
         #region Accessors.
 
-        [DisplayName("First name")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayFirstName")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorFirstNameRequired")]
         public string FirstName
         {
@@ -30,8 +29,8 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Last name")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayLastName")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorLastNameRequired")]
         public string LastName
         {
@@ -45,10 +44,10 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Email")]
-        [EmailAddress(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayEmail")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorEmailInvalid")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorEmailRequired")]
         public string Email
         {
@@ -62,8 +61,8 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("User name")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayUserName")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorUserNameRequired")]
         public string UserName
         {
@@ -77,9 +76,9 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Password")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
-            ErrorMessageResourceName = "ErrorPasswordRequired1")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayPassword1")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
+            ErrorMessageResourceName = "ErrorPassword1Required")]
         public string Password1
         {
             get
@@ -92,12 +91,12 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Repeat password")]
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayPassword2")]
         [Compare("Password1",
-            ErrorMessageResourceType = typeof(UserViewModelErrors),
-            ErrorMessageResourceName = "ErrorPasswordNotIdentical")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
-            ErrorMessageResourceName = "ErrorPasswordRequired2")]
+            ErrorMessageResourceType = typeof(Resources.User),
+            ErrorMessageResourceName = "ErrorPasswordsNotIdentical")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
+            ErrorMessageResourceName = "ErrorPassword2Required")]
         public string Password2
         {
             get

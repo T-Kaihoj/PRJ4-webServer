@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MVC.ViewModels
 {
@@ -13,8 +12,8 @@ namespace MVC.ViewModels
 
         #region Accessors.
 
-        [DisplayName("First name")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayFirstName")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorFirstNameRequired")]
         public string FirstName
         {
@@ -28,8 +27,8 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Last name")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayLastName")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorLastNameRequired")]
         public string LastName
         {
@@ -43,10 +42,10 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("Email")]
-        [EmailAddress(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayEmail")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorEmailInvalid")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorEmailRequired")]
         public string Email
         {
@@ -60,8 +59,8 @@ namespace MVC.ViewModels
             }
         }
 
-        [DisplayName("User name")]
-        [Required(ErrorMessageResourceType = typeof(UserViewModelErrors),
+        [Display(ResourceType = typeof(Resources.User), Name = "DisplayUserName")]
+        [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorUserNameRequired")]
         public string UserName
         {
