@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using MVC.Identity;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace MVC.Tests.Identity
@@ -15,10 +16,25 @@ namespace MVC.Tests.Identity
         {
             uut = new Store(Factory);
         }
-        
 
         [Test]
-        public void GetTwoFactorEnabled_NoMatterTheInput_ReturnsTrue()
+        public void SetTwoFactorEnabled_NoMatterTheInput_DoesNothing()
+        {
+            string userName = "test";
+
+            // Setup the repository.
+            var user = new IdentityUser()
+            {
+                UserName = userName
+            };
+
+            uut.GetTwoFactorEnabledAsync(user).Wait();
+
+            Assert.That(UserRepository.ReceivedCalls(), Is.Empty);
+        }
+
+        [Test]
+        public void GetTwoFactorEnabled_NoMatterTheInput_ReturnsFalse()
         {
             string userName = "test";
 

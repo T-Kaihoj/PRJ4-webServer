@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using Common;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 
 namespace MVC.Identity
@@ -9,7 +7,7 @@ namespace MVC.Identity
     {
         public Task SetTwoFactorEnabledAsync(IdentityUser user, bool enabled)
         {
-            throw new NotImplementedException();
+            return Task.FromResult<object>(null);
         }
 
         public Task<bool> GetTwoFactorEnabledAsync(IdentityUser user)
