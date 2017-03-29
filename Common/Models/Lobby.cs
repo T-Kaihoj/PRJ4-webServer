@@ -23,9 +23,9 @@ namespace Common.Models
             set { _description = Utility.DatabaseSecure( value); }
         }
 
-        public virtual ICollection<Bet> Bets { get; set; }
-        public virtual ICollection<User> MemberList { get; set; }
-        public virtual ICollection<User> InvitedList { get; set; }
+        public virtual ICollection<Bet> Bets { get; set; } = new List<Bet>();
+        public virtual ICollection<User> MemberList { get; set; } = new List<User>();
+        public virtual ICollection<User> InvitedList { get; set; } = new List<User>();
         public void InviteUserToLobby(User user)
         {
             //TODO sede meg to user
