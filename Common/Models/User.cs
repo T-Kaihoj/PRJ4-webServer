@@ -43,13 +43,13 @@ namespace Common.Models
         }
 
         [Required]
-        public decimal Balance { get; set; }
+        public decimal Balance { get; set; } = new decimal(0);
 
         [Required]
         public string Hash { get; set; }
 
-        [Required]
         public string Salt { get; set; }
+
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
         public virtual ICollection<Bet> Bets { get; set; } 

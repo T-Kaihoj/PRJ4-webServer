@@ -1,10 +1,12 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Mvc;
 using MVC.Controllers;
 using MVC.ViewModels;
 using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class HomeControllerTests
     {
@@ -29,10 +31,10 @@ namespace MVC.Tests.Controllers
             var vResult = result as ViewResult;
 
             // Check that the viewmodel is correct.
-            Assert.That(vResult.ViewData.Model, Is.TypeOf<UserViewModel>());
+            Assert.That(vResult.ViewData.Model, Is.TypeOf<CreateUserViewModel>());
 
             // Continue testing on the model.
-            var model = vResult.ViewData.Model as UserViewModel;
+            var model = vResult.ViewData.Model as CreateUserViewModel;
 
             // All fields should be empty.
             Assert.That(model.Email, Is.Empty);

@@ -5,7 +5,7 @@
 }
 
 
-@model UserViewModel
+@model CreateUserViewModel
 
 <div class="container">
     <div class="row">
@@ -16,56 +16,56 @@
             <img src="~/Content/images/handshake-icon.png" width="100" />
         </div>
         <div class="col-md-6">
-            <form asp-controller="User" asp-action="CreateUser" id="createUserForm" method="post">
+            <form action="/User/Create" id="createUserForm" method="post">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group label-floating">
-                            <label asp-for="FirstName" class="control-label">First name</label>
-                            <input asp-for="FirstName" type="text" value="@Model.FirstName" class="form-control" />
-                            <span asp-validation-for="FirstName" class="help-block"></span>
+                            @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "help-block" })
                         </div>
                     </div>
                     <div class="col-md-6 ">
                         <div class="form-group label-floating">
-                            <label asp-for="LastName" class="control-label">Last name</label>
-                            <input asp-for="LastName" type="text" value="@Model.LastName" class="form-control" />
-                            <span asp-validation-for="LastName" class="help-block"></span>
+                            @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "help-block" })
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group label-floating">
-                            <label asp-for="UserName" class="control-label">User name</label>
-                            <input asp-for="UserName" type="text" value="@Model.UserName" class="form-control" />
-                            <span asp-validation-for="UserName" class="help-block"></span>
+                            @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "help-block" })
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group label-floating">
-                            <label asp-for="Email" class="control-label">Email</label>
-                            <input asp-for="Email" type="email" value="@Model.Email" class="form-control" />
-                            <span asp-validation-for="Email" class="help-block"></span>
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group label-floating">
-                            <label asp-for="Password1" class="control-label">Password</label>
-                            <input asp-for="Password1" type="password" value="@Model.Password1" class="form-control" />
-                            <span asp-validation-for="Password1" class="help-block"></span>
+                            @Html.LabelFor(m => m.Password1, new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.Password1, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password1, null, new { @class = "help-block" })
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group label-floating">
-                            <label asp-for="Password2" class="control-label">Repeat password</label>
-                            <input asp-for="Password2" type="password" value="@Model.Password2" class="form-control" />
-                            <span asp-validation-for="Password2" class="help-block"></span>
+                            @Html.LabelFor(m => m.Password2, new { @class = "control-label" })
+                            @Html.PasswordFor(m => m.Password2, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "help-block" })
                         </div>
                     </div>
                 </div>

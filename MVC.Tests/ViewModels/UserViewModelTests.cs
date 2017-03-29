@@ -1,17 +1,19 @@
-﻿using MVC.ViewModels;
+﻿using System.Diagnostics.CodeAnalysis;
+using MVC.ViewModels;
 using NUnit.Framework;
 
 namespace MVC.Tests.ViewModels
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class UserViewModelTests
     {
-        private UserViewModel uut;
+        private CreateUserViewModel uut;
 
         [SetUp]
         public void Setup()
         {
-            uut = new UserViewModel();
+            uut = new CreateUserViewModel();
         }
 
         #region Constructor.
