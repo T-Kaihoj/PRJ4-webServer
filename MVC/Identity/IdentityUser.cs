@@ -4,7 +4,7 @@ namespace MVC.Identity
 {
     public class IdentityUser : IUser
     {
-        private string _userName;
+        private string _userName = string.Empty;
 
         public string Id
         {

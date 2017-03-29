@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNet.Identity;
+﻿using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
@@ -7,6 +8,7 @@ using Owin;
 
 namespace MVC
 {
+    [ExcludeFromCodeCoverage]
     public class OwinStartup
     {
         public void Configuration(IAppBuilder app)
