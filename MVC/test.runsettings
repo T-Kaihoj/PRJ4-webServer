@@ -24,7 +24,7 @@
         <Configuration>  
           <CodeCoverage>  
             <ModulePaths>  
-              <Exclude>  
+              <Exclude>
                 <ModulePath>.*Tests.dll</ModulePath>
                 <Modulepath>DAL.Migrations</Modulepath>
               </Exclude>  
