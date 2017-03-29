@@ -8,10 +8,10 @@ namespace Common.Tests
 {
     public static class UtilityCommen
     {
-        public static string[] validNames =
+        public static string[] validCharacters =
         {
-            "asdhjjh",
-            "ØÆÅ",
+            "a", "z", "æ", "ø", "å",
+            "A", "Z", "Æ", "Ø", "Å",
             @"<",
             @">",
             @"\",
@@ -46,11 +46,13 @@ namespace Common.Tests
             @"§"
         };
 
-        public static string[] invalidNames =
+        public static string[] invalidharacters =
         {
             @"'",
             @"[",
             @"]"
         };
+
+
     }
 }
