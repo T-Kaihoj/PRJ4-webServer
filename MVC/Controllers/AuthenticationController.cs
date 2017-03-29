@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 using DAL;
 using Microsoft.AspNet.Identity;
@@ -16,15 +11,10 @@ namespace MVC.Controllers
     public class AuthenticationController : Controller
     {
         private UserManager<IdentityUser, string> _userManager;
-        private IAuthenticationManager _authenticationManager;
+        private IAuthenticationManager _authenticationManager = null;
         private SignInManager<IdentityUser, string> _signInManager;
 
-        public AuthenticationController() : this(null, null)
-        {
-            
-        }
-
-        public AuthenticationController(UserManager<IdentityUser, string> userManager, IAuthenticationManager authenticationManager)
+        public AuthenticationController(UserManager<IdentityUser, string> userManager = null)
         {
             if (userManager == null)
             {
@@ -32,7 +22,6 @@ namespace MVC.Controllers
             }
 
             _userManager = userManager;
-            _authenticationManager = authenticationManager;
         }
 
         // POST

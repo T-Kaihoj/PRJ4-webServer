@@ -2,12 +2,8 @@
 using System.Web.Mvc;
 using Common;
 using Common.Models;
-using DAL;
-using Microsoft.AspNet.Identity;
 using MVC.Identity;
 using MVC.ViewModels;
-
-
 
 namespace MVC.Controllers
 {
@@ -15,21 +11,12 @@ namespace MVC.Controllers
     public class LobbyController : Controller
     {
         private IFactory _factory;
+        private IUserContext _userContext;
 
-        public LobbyController()
+        public LobbyController(IFactory factory, IUserContext userContext)
         {
-            Setup();
-        }
-
-        public LobbyController(IFactory factory = null)
-        {
-            Setup(factory);
-        }
-
-        private void Setup(IFactory factory = null)
-        {
-            // If no factory passed, create a default factory.
-            _factory = factory ?? new Factory();
+            _factory = factory;
+            _userContext = userContext;
         }
 
         // GET: /<controller>/
@@ -66,7 +53,7 @@ namespace MVC.Controllers
 
                 // Save to the database.
                 myWork.Lobby.Add(lobby);
-                var aUser = myWork.User.Get(User.Identity.Name);
+                var aUser = myWork.User.Get(_userContext.Identity.Name);
                 lobby.MemberList.Add(aUser);
                 myWork.Complete();
 
@@ -86,7 +73,7 @@ namespace MVC.Controllers
                 var hej = User.Identity.Name;
                 ;
 
-                var aUser = myWork.User.Get(User.Identity.Name);
+                var aUser = myWork.User.Get(_userContext.Identity.Name);
 
                 // Display the lobbies.
                 var viewModel = new LobbiesViewModel()

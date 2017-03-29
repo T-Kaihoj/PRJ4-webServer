@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
-using DAL;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -14,20 +12,9 @@ namespace MVC.Controllers
     {
         private IFactory _factory;
 
-        public BetController()
-        {
-            Setup();
-        }
-
         public BetController(IFactory factory = null)
         {
-            Setup(factory);
-        }
-
-        private void Setup(IFactory factory = null)
-        {
-            // If no factory passed, create a default factory.
-            _factory = factory ?? new Factory();
+            _factory = factory;
         }
 
         // GET: /<controller>/Show/<id>

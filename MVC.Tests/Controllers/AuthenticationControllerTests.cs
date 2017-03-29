@@ -26,7 +26,6 @@ namespace MVC.Tests.Controllers
     {
         private AuthenticationController uut;
 
-        private IAuthenticationManager _authenticationManager;
         private UserManager<IdentityUser, string> _userManager;
         private IPasswordHasher _passwordHasher;
         private IStore _store;
@@ -37,12 +36,11 @@ namespace MVC.Tests.Controllers
             _store = Substitute.For<IStore>();
 
             _userManager = new UserManager<IdentityUser, string>(_store);
-            _authenticationManager = Substitute.For<IAuthenticationManager>();
             _passwordHasher = Substitute.For<IPasswordHasher>();
             _userManager.PasswordHasher = _passwordHasher;
 
             // Create the unit under test.
-            uut = new AuthenticationController(_userManager, _authenticationManager);
+            uut = new AuthenticationController(_userManager);
 
             // Create and set the controller context.
             var controllerContext = new ControllerContext();
@@ -107,10 +105,6 @@ namespace MVC.Tests.Controllers
             {
                 Console.WriteLine(v.GetMethodInfo().Name);
             }
-            foreach (var v in _authenticationManager.ReceivedCalls())
-            {
-                Console.WriteLine(v.GetMethodInfo().Name);
-            }
             /*
              * 
 FindByNameAsync
@@ -145,11 +139,7 @@ SignIn
             var result = uut.SignIn(userName, password);
 
             Assert.That(uut.ModelState.IsValid, Is.True);
-
-            foreach (var v in _authenticationManager.ReceivedCalls())
-            {
-                Console.WriteLine(v.GetMethodInfo().Name);
-            }
+            
 
             Assert.That(result, Is.AssignableFrom<RedirectResult>());
         }

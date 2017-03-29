@@ -15,16 +15,12 @@ namespace MVC.Controllers
         private UserManager<IdentityUser> _userManager;
         private IStore _store;
 
-        public UserController() : this(null)
-        {
-            
-        }
-
         public UserController(IFactory factory = null, IStore store = null)
         {
             if (factory == null)
             {
                 factory = new Factory();
+                throw new Exception("No factory");
             }
 
             if (store == null)
