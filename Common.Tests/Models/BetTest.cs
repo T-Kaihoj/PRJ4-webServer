@@ -32,7 +32,7 @@ namespace Common.Tests.Models
             }
         }
 
-        /*
+        
         [Test]
         public void Name_SetInvalidName_ThrowException()
         {
@@ -41,6 +41,5 @@ namespace Common.Tests.Models
                 Assert.That(() => _uut.Name = name, Throws.Exception);
             }
         }
-        */
     }
 }
