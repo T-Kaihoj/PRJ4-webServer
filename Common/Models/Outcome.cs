@@ -25,7 +25,6 @@ namespace Common.Models
             set { _description = Utility.DatabaseSecure( value); }
         }
 
-        public virtual ICollection<User> Participants { get; set; }
-
+        public virtual ICollection<User> Participants { get; set; } = new List<User>();
     }
 }

@@ -1,8 +1,10 @@
-﻿using Common.Models;
+﻿using System.Diagnostics.CodeAnalysis;
+using Common.Models;
 using NUnit.Framework;
 
 namespace Common.Tests.Models
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     class UtilityTest
     {

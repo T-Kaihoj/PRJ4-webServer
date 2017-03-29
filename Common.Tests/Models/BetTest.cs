@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using NUnit.Framework.Constraints;
 
 namespace Common.Tests.Models
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     class BetTest
     {
@@ -24,7 +26,7 @@ namespace Common.Tests.Models
         [Test]
         public void Name_SetValidName_ValidCharacters()
         {
-            foreach (var name in UtilityCommen.validCharacters)
+            foreach (var name in UtilityCommen.ValidCharacters)
             {
                 _uut.Name = name;
 
@@ -36,7 +38,7 @@ namespace Common.Tests.Models
         [Test]
         public void Name_SetInvalidName_ThrowException()
         {
-            foreach (var name in UtilityCommen.invalidCharacters)
+            foreach (var name in UtilityCommen.InvalidCharacters)
             {
                 Assert.That(() => _uut.Name = name, Throws.Exception);
             }

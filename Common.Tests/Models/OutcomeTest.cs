@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +9,7 @@ using NUnit.Framework;
 
 namespace Common.Tests.Models
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     class OutcomeTest
     {
@@ -18,5 +20,102 @@ namespace Common.Tests.Models
         {
             _uut = new Outcome();
         }
+
+        [Test]
+        public void OutcomeId_SetOutcomeId_OutcomeIdSet()
+        {
+            foreach (var id in UtilityCommen.ValidIds)
+            {
+                Assert.That(() => _uut.OutcomeId = id, Throws.Nothing);
+            }
+        }
+
+        [Test]
+        public void OutcomeId_GetOutcomeId_OutComeIdReturned()
+        {
+            foreach (var id in UtilityCommen.ValidIds)
+            {
+                _uut.OutcomeId = id;
+                Assert.That(_uut.OutcomeId, Is.EqualTo(id));
+            }
+        }
+
+        [Test]
+        public void Name_SetValidName_ValidNameSet()
+        {
+            foreach (var chars in UtilityCommen.ValidCharacters)
+            {
+                Assert.That(() => _uut.Name = chars, Throws.Nothing);
+            }
+        }
+
+        [Test]
+        public void Name_GetName_NameReturened()
+        {
+            foreach (var name in UtilityCommen.ValidCharacters)
+            {
+                _uut.Name = name;
+                Assert.That(_uut.Name, Is.EqualTo(name));
+            }
+        }
+
+        [Test]
+        public void Name_SetInvalidName_ThrowsException()
+        {
+            foreach (var chars in UtilityCommen.InvalidCharacters)
+            {
+                Assert.That(() => _uut.Name = chars, Throws.Exception);
+            }
+        }
+
+        [Test]
+        public void Description_SetValidDescription_DescriptionSet()
+        {
+            foreach (var chars in UtilityCommen.ValidCharacters)
+            {
+                Assert.That(() => _uut.Description = chars, Throws.Nothing);
+            }
+        }
+
+        [Test]
+        public void Description_GetValidDescription_DescriptionReturned()
+        {
+            foreach (var chars in UtilityCommen.ValidCharacters)
+            {
+                _uut.Description = chars;
+                Assert.That(_uut.Description, Is.EqualTo(chars));
+            }
+        }
+
+        [Test]
+        public void Description_SetInvalidDescription_ThrowExecption()
+        {
+            foreach (var chars in UtilityCommen.InvalidCharacters)
+            {
+                Assert.That(() => _uut.Description = chars, Throws.Exception);
+            }
+        }
+
+        [Test]
+        public void Participants_SetParticipants_ParticipantsSet()
+        {
+            foreach (var user in UtilityCommen.ValidUsers)
+            {
+                Assert.That(() => _uut.Participants = UtilityCommen.ValidUsers, Throws.Nothing);
+            }
+            
+        }
+
+        [Test]
+        public void Participants_GetParticipants_ParticipantsReturned()
+        {
+            foreach (var user in UtilityCommen.ValidUsers)
+            {
+                _uut.Participants.Add(user);
+                Assert.That(_uut.Participants, Contains.Item(user));
+            }
+            
+        }
+
     }
 }

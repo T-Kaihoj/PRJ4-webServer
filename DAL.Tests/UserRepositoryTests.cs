@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Text;
@@ -12,6 +13,7 @@ using NUnit.Framework.Constraints;
 
 namespace DAL.Tests
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     class UserRepositoryTests
     {
