@@ -256,6 +256,7 @@
     <Content Include="Views\Bet\Show.cshtml" />
     <Content Include="Views\Bet\Join.cshtml" />
     <Content Include="Views\User\EditProfile.cshtml" />
+    <Content Include="test.runsettings" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
