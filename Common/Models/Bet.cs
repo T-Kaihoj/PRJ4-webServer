@@ -49,5 +49,18 @@ namespace Common.Models
         {
             Payout(Result.Participants);
         }
+
+        public bool joinBet(User user, Outcome outcome)
+        {
+           
+            if (!Outcomes.Contains(outcome)) //todo needs to check the uses in Lobby
+                return false;
+
+            user.Balance = -BuyIn;
+            outcome.Participants.Add(user);
+
+
+                return true;
+        }
     }
 }
