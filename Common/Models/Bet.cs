@@ -2,15 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Common.Models
 {
-    public class Bet : IBetJudge
+    public class Bet : IBetLogic
     {
         private string _name;
         private string _description;
         private readonly IUtility _utility;
+        private Outcome _result;
+
+        public Bet()
+        {
+            _utility = Utility.Instance;
+
+        }
 
         public Bet(IUtility util = null)
         {
@@ -32,10 +40,22 @@ namespace Common.Models
             get { return _name; }
             set { _name = _utility.DatabaseSecure(value); }
         }
-
+         
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
-        public virtual Outcome Result { get; set; }
+
+        public virtual Outcome Result
+        {
+            get { return _result; }
+            set
+            {
+                if (_result != null)
+                    return;
+                _result = value;
+                Payout();
+            }
+        }
+
         public string Description
         {
             get { return _description; }
@@ -48,19 +68,17 @@ namespace Common.Models
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
         public virtual User Judge { get; set; }
         
-        private void Payout(ICollection<User> winners)
+        public ICollection<User> Invited { get; set; }
+
+        
+        private void Payout()
         {
-            var numberOfWinners = winners.Count;
+            var numberOfWinners = Result.Participants.Count;
             var payout = Decimal.ToInt32(Pot) / numberOfWinners;
-            foreach (var player in winners)
+            foreach (var player in Result.Participants)
             {
                 player.Balance += (decimal) payout;
             }
-        }
-
-        public void ConcludeBet(long outcomeID)
-        {
-            Payout(Result.Participants);
         }
 
         public bool joinBet(User user, Outcome outcome)
