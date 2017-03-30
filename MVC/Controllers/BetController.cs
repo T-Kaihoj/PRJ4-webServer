@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
+using MVC.Identity;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -11,10 +12,12 @@ namespace MVC.Controllers
     public class BetController : Controller
     {
         private IFactory _factory;
+        private IUserContext _userContext;
 
-        public BetController(IFactory factory = null)
+        public BetController(IFactory factory, IUserContext userContext)
         {
             _factory = factory;
+            _userContext = userContext;
         }
 
         // GET: /<controller>/Show/<id>
@@ -143,10 +146,10 @@ namespace MVC.Controllers
                 //throw new NotImplementedException();
                 //TODO BetController JoinViewModel NullReference
 
-                var user = myWork.User.Get(User.Identity.Name);
+                var user = myWork.User.Get(_userContext.Identity.Name);
 
                 //Retrieves Bet from DB using BetId, then calls joinBet on retrieved Bet and adds user+selected outcome to Bet.
-                myWork.Bet.Get(model.MyBet.BetId).joinBet(user,model.SelectedOutcome);
+                myWork.Bet.Get(model.Id).joinBet(user, model.SelectedOutcome);
                 myWork.Complete();
 
                 return Redirect("/Lobby/List");

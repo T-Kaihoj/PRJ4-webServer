@@ -16,6 +16,8 @@ namespace MVC.ViewModels
         public string EndDate { get; set; }
         public List<string> Outcomes { get; set; } = new List<string>();
 
+        public Outcome SelectedOutcome { get; set; }
+
         //public List<Outcome> Outcomes { get; set; }
         public string TemporaryUsername { get; set; }
 
