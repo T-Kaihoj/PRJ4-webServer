@@ -10,7 +10,7 @@ namespace Common.Models
         private readonly IUtility _utility;
 
 
-        public Lobby(IUtility util = null)
+        public Lobby(IUtility util )
         {
             if (util == null)
             {
