@@ -93,6 +93,7 @@ namespace MVC.Controllers
 
                 if(lobby != null) 
                     myWork.Lobby.Get(id).AcceptLobby(myWork.User.Get(_userContext.Identity.Name));
+                myWork.Complete();
             }
             //TODO: More error handling?
             return Redirect("Lobby/List");
