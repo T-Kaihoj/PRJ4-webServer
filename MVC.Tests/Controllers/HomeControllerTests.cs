@@ -1,7 +1,9 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using MVC.Controllers;
+using MVC.Identity;
 using MVC.ViewModels;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
@@ -11,11 +13,14 @@ namespace MVC.Tests.Controllers
     public class HomeControllerTests
     {
         private HomeController uut;
+        private IUserContext context;
 
         [SetUp]
         public void Setup()
         {
-            uut = new HomeController();
+            context = Substitute.For<IUserContext>();
+
+            uut = new HomeController(context);
         }
 
         [Test]
