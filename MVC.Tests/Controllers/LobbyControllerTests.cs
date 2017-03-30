@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
@@ -188,6 +189,36 @@ namespace MVC.Tests.Controllers
             Assert.That(key, Is.EqualTo(passedKey));
         }
 
+        #endregion
+
+        #region Accept Invitation to lobby
+
+        [Test]
+        public void AcceptInvitationToLobby_LobbyInInvitedToLobbies_LobbyIsFoundInMemberOfLobbies()
+        {
+            //setup
+            var lobby = new Lobby();
+            var user = new User()
+            {
+                InvitedToLobbies = new List<Lobby>(),
+                MemberOfLobbies = new List<Lobby>()
+            };
+
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+            UserRepository.Get(Arg.Any<string>()).Returns(user);
+
+            MyWork.DidNotReceive().Complete();
+
+            user.InvitedToLobbies.Add(lobby);
+
+            uut.Accept(1);
+
+            //Assert repository was hit
+            Assert.That(user.MemberOfLobbies.Contains(lobby), Is.EqualTo(true));
+            Assert.That(user.InvitedToLobbies.Contains(lobby), Is.EqualTo(false));
+            MyWork.Received(1).Complete();
+        }
+        
         #endregion
     }
     
