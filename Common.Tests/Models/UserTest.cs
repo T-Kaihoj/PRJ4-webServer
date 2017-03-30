@@ -34,6 +34,21 @@ namespace Common.Tests.Models
             Assert.That(_uut.Username, Is.EqualTo(username));
         }
 
+        [Test]
+        public void WithdrawMoney_ValidWithdrawal_CorrectBalanceReturned()
+        {
+            _uut.Balance = 5000;
+            Assert.That(_uut.WithdrawMoney(1000),Is.EqualTo(1000));
+        }
+
+        [Test]
+        public void WithdrawMoney_InvalidWithdrawal_ThrowsException()
+        {
+            _uut.Balance = 5000;
+            Assert.That(() => _uut.WithdrawMoney(6000), Throws.Exception.TypeOf<ArithmeticException>());
+        }
+
+        
 
     }
 }

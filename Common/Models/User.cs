@@ -85,7 +85,7 @@ namespace Common.Models
         public virtual ICollection<Outcome> Outcomes { get; set; }
         
 
-        public decimal RedrawMoney(decimal amount)
+        public decimal WithdrawMoney(decimal amount)
         {
             if (Balance < amount)
             {
