@@ -73,6 +73,10 @@
     <Compile Include="Migrations\201703301245333_update.Designer.cs">
       <DependentUpon>201703301245333_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703301257300_Why.cs" />
+    <Compile Include="Migrations\201703301257300_Why.Designer.cs">
+      <DependentUpon>201703301257300_Why.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -110,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703301245333_update.resx">
       <DependentUpon>201703301245333_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703301257300_Why.resx">
+      <DependentUpon>201703301257300_Why.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
