@@ -1,19 +1,26 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Mvc;
 using MVC.Controllers;
+using MVC.Identity;
 using MVC.ViewModels;
+using NSubstitute;
 using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class HomeControllerTests
     {
         private HomeController uut;
+        private IUserContext context;
 
         [SetUp]
         public void Setup()
         {
-            uut = new HomeController();
+            context = Substitute.For<IUserContext>();
+
+            uut = new HomeController(context);
         }
 
         [Test]
@@ -29,10 +36,10 @@ namespace MVC.Tests.Controllers
             var vResult = result as ViewResult;
 
             // Check that the viewmodel is correct.
-            Assert.That(vResult.ViewData.Model, Is.TypeOf<UserViewModel>());
+            Assert.That(vResult.ViewData.Model, Is.TypeOf<CreateUserViewModel>());
 
             // Continue testing on the model.
-            var model = vResult.ViewData.Model as UserViewModel;
+            var model = vResult.ViewData.Model as CreateUserViewModel;
 
             // All fields should be empty.
             Assert.That(model.Email, Is.Empty);

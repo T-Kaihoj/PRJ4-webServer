@@ -1,4 +1,4 @@
-namespace MVC.Migrations
+namespace DAL.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

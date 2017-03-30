@@ -52,6 +52,7 @@
     <Compile Include="Models\Bet.cs" />
     <Compile Include="Models\IBetJudge.cs" />
     <Compile Include="Models\ILobbyLogic.cs" />
+    <Compile Include="Models\IUtility.cs" />
     <Compile Include="Models\Lobby.cs" />
     <Compile Include="Models\Outcome.cs" />
     <Compile Include="Models\User.cs" />

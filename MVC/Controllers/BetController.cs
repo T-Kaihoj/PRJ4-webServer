@@ -1,32 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
-using DAL;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class BetController : Controller
     {
         private IFactory _factory;
 
-        public BetController()
-        {
-            Setup();
-        }
-
         public BetController(IFactory factory = null)
         {
-            Setup(factory);
-        }
-
-        private void Setup(IFactory factory = null)
-        {
-            // If no factory passed, create a default factory.
-            _factory = factory ?? new Factory();
+            _factory = factory;
         }
 
         // GET: /<controller>/Show/<id>
@@ -153,10 +141,12 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 //throw new NotImplementedException();
-                //TODO tep
-                var user = myWork.User.Get(model.TemporaryUsername);
-                var bet = myWork.Bet.Get(model.Id);
-                bet.Outcomes.First().Participants.Add(user);
+                //TODO BetController JoinViewModel NullReference
+
+                var user = myWork.User.Get(User.Identity.Name);
+
+                //Retrieves Bet from DB using BetId, then calls joinBet on retrieved Bet and adds user+selected outcome to Bet.
+                myWork.Bet.Get(model.MyBet.BetId).joinBet(user,model.SelectedOutcome);
                 myWork.Complete();
 
                 return Redirect("/Lobby/List");

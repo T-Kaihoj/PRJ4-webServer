@@ -16,16 +16,15 @@ namespace Common.Models
         public string Name
         {
             get { return _name; }
-            set { _name = Utility.DatabaseSecure( value); }
+            set { _name = Utility.Instance.DatabaseSecure( value); }
         }
 
         public string Description
         {
             get { return _description; }
-            set { _description = Utility.DatabaseSecure( value); }
+            set { _description = Utility.Instance.DatabaseSecure( value); }
         }
 
-        public virtual ICollection<User> Participants { get; set; }
-
+        public virtual ICollection<User> Participants { get; set; } = new List<User>();
     }
 }

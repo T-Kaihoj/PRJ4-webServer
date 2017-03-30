@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
 using Common.Repositories;
 using MVC.Controllers;
+using MVC.Identity;
 using MVC.ViewModels;
 using NSubstitute;
 using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
 {
-    
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class LobbyControllerTests : BaseRepositoryTest
     {
@@ -19,6 +21,7 @@ namespace MVC.Tests.Controllers
         private Lobby _lobby1;
         private Lobby _lobby2;
         private int _numberOfLobies;
+        private IUserContext _userContext;
 
         [SetUp]
         public void Setup()
@@ -26,6 +29,7 @@ namespace MVC.Tests.Controllers
             Factory = Substitute.For<IFactory>();
             MyWork = Substitute.For<IUnitOfWork>();
             LobbyRepository = Substitute.For<ILobbyRepository>();
+            _userContext = Substitute.For<IUserContext>();
 
             Factory.GetUOF().Returns(MyWork);
             MyWork.Lobby.Returns(LobbyRepository);
@@ -59,7 +63,7 @@ namespace MVC.Tests.Controllers
             LobbyRepository.Get(0).Returns(_lobby1);
 
             // Create the controller.
-            uut = new LobbyController(Factory);
+            uut = new LobbyController(Factory, _userContext);
             uut.ControllerContext = new ControllerContext();
         }
 

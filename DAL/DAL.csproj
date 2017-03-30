@@ -61,6 +61,14 @@
     <Compile Include="Migrations\201703231427428_NoBetIDInUser.Designer.cs">
       <DependentUpon>201703231427428_NoBetIDInUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703281801367_ChangeDefaultsAndRequiredFields.cs" />
+    <Compile Include="Migrations\201703281801367_ChangeDefaultsAndRequiredFields.Designer.cs">
+      <DependentUpon>201703281801367_ChangeDefaultsAndRequiredFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703301038072_New Migration.cs" />
+    <Compile Include="Migrations\201703301038072_New Migration.Designer.cs">
+      <DependentUpon>201703301038072_New Migration.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -89,6 +97,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703231427428_NoBetIDInUser.resx">
       <DependentUpon>201703231427428_NoBetIDInUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703281801367_ChangeDefaultsAndRequiredFields.resx">
+      <DependentUpon>201703281801367_ChangeDefaultsAndRequiredFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703301038072_New Migration.resx">
+      <DependentUpon>201703301038072_New Migration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
