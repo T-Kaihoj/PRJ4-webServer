@@ -79,7 +79,8 @@ namespace MVC.Controllers
                 // Display the lobbies.
                 var viewModel = new LobbiesViewModel()
                 {
-                    MemberOfLobbies = aUser.MemberOfLobbies
+                    MemberOfLobbies = aUser.MemberOfLobbies,
+                    InvitedToLobbies = aUser.InvitedToLobbies
                 };
 
                 return View(viewModel);
