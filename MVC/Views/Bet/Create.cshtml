@@ -30,6 +30,12 @@
                     @Html.TextBoxFor(m => m.BuyIn, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.BuyIn, null, new { @class = "help-block" })
                 </div>
+                <div class="row form-group label-floating">
+                    @Html.LabelFor(m => m.Outcome1, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Outcome1, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Outcome1, null, new { @class = "help-block" })
+                </div>
+
             </div>
             <div class="col-md-6">
                 <div class="form-group label-floating">
@@ -51,11 +57,16 @@
                     @Html.LabelFor(m => m.StopDate, new { @class = "control-label" })
                     @Html.ValidationMessageFor(m => m.StopDate, null, new { @class = "help-block" })
                     <div class="input-group date" id="datetimepickerend">
-                       @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control" })
+                        @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control" })
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                     </div> 
+                </div>
+                <div class="row form-group label-floating">
+                    @Html.LabelFor(m => m.Outcome2, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Outcome2, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Outcome2, null, new { @class = "help-block" })
                 </div>
             </div>
         </div>

@@ -1,0 +1,87 @@
+﻿@using MVC.ViewModels
+
+@model MVC.ViewModels.EditProfileViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>
+                What should we write here?
+            </h3>
+        </div>
+        <div class="col-md-6">
+            <form action="/User/EditProfile" id="updateUserForm" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "help-block" })
+                        </div>
+                    </div>
+                    <div class="col-md-6 ">
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "help-block" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group label-floating">
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-primary pull-right">Update</button>
+                    </div>
+                </div>
+            </form>
+            <script>
+                // Setup validation of the "createUserForm"
+                $(document).ready(function() {
+                    $("#updateUserForm").validate({
+                        rules: {
+                            FirstName: {
+                                required: true
+                            },
+                            LastName: {
+                                required: true
+                            },
+                            UserName: {
+                                required: true
+                            },
+                            Email: {
+                                required: true
+                            }
+                        },
+
+                        messages: {
+                            FirstName: {
+                                required: "@Resources.User.ErrorFirstNameRequired"
+                            },
+                            LastName: {
+                                required: "@Resources.User.ErrorLastNameRequired"
+                            },
+                            UserName: {
+                                required: "@Resources.User.ErrorUserNameRequired"
+                            },
+                            Email: {
+                                required: "@Resources.User.ErrorEmailRequired"
+                            }
+                        },
+
+                        submitHandler: function(form) {
+                            form.submit();
+                        }
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>

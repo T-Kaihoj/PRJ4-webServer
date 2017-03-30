@@ -2,29 +2,21 @@
 using System.Web.Mvc;
 using Common;
 using Common.Models;
-using DAL;
+using MVC.Identity;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class LobbyController : Controller
     {
         private IFactory _factory;
+        private IUserContext _userContext;
 
-        public LobbyController()
+        public LobbyController(IFactory factory, IUserContext userContext)
         {
-            Setup();
-        }
-
-        public LobbyController(IFactory factory = null)
-        {
-            Setup(factory);
-        }
-
-        private void Setup(IFactory factory = null)
-        {
-            // If no factory passed, create a default factory.
-            _factory = factory ?? new Factory();
+            _factory = factory;
+            _userContext = userContext;
         }
 
         // GET: /<controller>/
@@ -61,6 +53,8 @@ namespace MVC.Controllers
 
                 // Save to the database.
                 myWork.Lobby.Add(lobby);
+                var aUser = myWork.User.Get(_userContext.Identity.Name);
+                lobby.MemberList.Add(aUser);
                 myWork.Complete();
 
                 // Show the newly created lobby.
@@ -76,12 +70,15 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 // Get all lobbies, and convert to the domain model.
-                var lobbies = myWork.Lobby.GetAll();
+                var hej = User.Identity.Name;
+                ;
+
+                var aUser = myWork.User.Get(_userContext.Identity.Name);
 
                 // Display the lobbies.
                 var viewModel = new LobbiesViewModel()
                 {
-                    MemberOfLobbies = lobbies
+                    MemberOfLobbies = aUser.MemberOfLobbies
                 };
 
                 return View(viewModel);

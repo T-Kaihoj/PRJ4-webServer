@@ -1,26 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
-using DAL;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
+    [Authorize]
     public class BetController : Controller
     {
         private IFactory _factory;
 
-        public BetController()
-        {
-            Setup();
-        }
-
         public BetController(IFactory factory = null)
         {
-            Setup(factory);
+            _factory = factory;
         }
 
         private void Setup(IFactory factory = null)
@@ -53,26 +47,17 @@ namespace MVC.Controllers
                 {
                     Description = bet.Description,
                     EndDate = bet.StopDate.ToString(),
-                    //Judge = "",
+                    Judge = bet.Judge?.Username,//bet.Judge.Username,
                     //LobbyID = 0,
                     //Users = new List<User>(),
                     Title = bet.Name,
                     StartDate = bet.StartDate.ToString(),
-                    Outcomes = outcomes.Select(o => o.Name).ToList(),
                     MoneyPool = bet.Pot
                 };
-
-                /*
-
-                betPage.Title = bet.BetName;
-                betPage.Description = bet.Description;
-                betPage.StartDate = bet.StartDate;
-                betPage.StopDate = bet.StopDate;
-                betPage.Judge = bet.Judge.Username;
-                for (int i = 0; i < bet.Outcomes.Count(); i++)
+                foreach (var outcome in bet.Outcomes)
                 {
-                    betPage.Outcomes[i] = bet.Outcomes[i].Name;
-                }*/
+                    betPage.Outcomes.Add(outcome.Name);
+                }
 
                 return View(betPage);
             }
@@ -100,17 +85,34 @@ namespace MVC.Controllers
                 return View(viewModel);
             }
 
+            
             using (var myWork = _factory.GetUOF())
             {
+                
                 // Create the bet.
                 var bet = new Bet()
                 {
                     BuyIn = Decimal.Parse(viewModel.BuyIn),
                     Description = viewModel.Description,
                     Name = viewModel.Title,
+                    Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = DateTime.Parse(viewModel.StartDate),
                     StopDate = DateTime.Parse(viewModel.StopDate)
                 };
+                /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
+                
+                var outcome1 = new Common.Models.Outcome()
+                {
+                    Name = viewModel.Outcome1,
+                    Description = viewModel.Outcome1
+                };
+                var outcome2 = new Common.Models.Outcome()
+                {
+                    Name = viewModel.Outcome2,
+                    Description = viewModel.Outcome2
+                };
+                bet.Outcomes.Add(outcome1);
+                bet.Outcomes.Add(outcome2);
 
                 myWork.Bet.Add(bet);
 
@@ -122,6 +124,44 @@ namespace MVC.Controllers
 
                 // Redirect to the bet page.
                 return Redirect($"/Bet/Show/{bet.BetId}");
+            }
+        }
+        // GET: /<controller>/Create/<id>
+        [HttpGet]
+        public ActionResult Join(long id)
+        {
+
+            var viewModel = new BetViewModel();
+            using (var myWork = _factory.GetUOF())
+            {
+                var myBet = myWork.Bet.Get(id);
+                foreach (var outcomes in myBet.Outcomes)
+                {
+                    viewModel.Outcomes.Add(outcomes.Name);
+                }
+                viewModel.Title = myBet.Name;
+                viewModel.Description = myBet.Description;
+                viewModel.MoneyPool = myBet.BuyIn;
+
+                return View(viewModel);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Join(JoinViewModel model)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                //throw new NotImplementedException();
+                //TODO BetController JoinViewModel NullReference
+
+                var user = myWork.User.Get(User.Identity.Name);
+
+                //Retrieves Bet from DB using BetId, then calls joinBet on retrieved Bet and adds user+selected outcome to Bet.
+                myWork.Bet.Get(model.MyBet.BetId).joinBet(user,model.SelectedOutcome);
+                myWork.Complete();
+
+                return View(new LobbyViewModel());
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Linq.Expressions;
 using Common.Repositories;
@@ -44,6 +45,11 @@ namespace DAL.Persistence
         public void AddRange(IEnumerable<TEntity> entities)
         {
             _context.Set<TEntity>().AddRange(entities);
+        }
+
+        public void AddOrUpdate(TEntity entity)
+        {
+            _context.Set<TEntity>().AddOrUpdate(entity);
         }
 
         public void Remove(TEntity entity)

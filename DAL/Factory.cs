@@ -5,9 +5,9 @@ namespace DAL
 {
     public class Factory : IFactory
     {
-        private Factory _instance;
+        private static Factory _instance;
 
-        public Factory Instance
+        public static Factory Instance
         {
             get
             {

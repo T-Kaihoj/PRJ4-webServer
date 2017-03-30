@@ -11,7 +11,25 @@ namespace Common.Models
     {
         private string _name;
         private string _description;
-        private Outcome _result;
+        private readonly IUtility _utility;
+
+        public Bet()
+        {
+            _utility = Utility.Instance;
+
+        }
+
+        public Bet(IUtility util = null)
+        {
+            if (util == null)
+            {
+                _utility = Utility.Instance;
+            }
+            else
+            {
+                _utility = util;
+            }
+        }
 
         [Key]
         public long BetId { get; set; }
@@ -19,7 +37,7 @@ namespace Common.Models
         public string Name
         {
             get { return _name; }
-            set { _name = Utility.DatabaseSecure(value); }
+            set { _name = _utility.DatabaseSecure(value); }
         }
          
         public DateTime StartDate { get; set; }
@@ -40,14 +58,16 @@ namespace Common.Models
         public string Description
         {
             get { return _description; }
-            set { _description = Utility.DatabaseSecure(value); }
+            set { _description = _utility.DatabaseSecure(value); }
         }
 
         public Decimal BuyIn { get; set; }
         public Decimal Pot { get; set; }
         public virtual ICollection<User> Participants { get; set; }
-        public virtual ICollection<Outcome> Outcomes { get; set; }
+        public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
         public virtual User Judge { get; set; }
+        
+        private void Payout(ICollection<User> winners)
         public ICollection<User> Invited { get; set; }
 
         
@@ -59,6 +79,19 @@ namespace Common.Models
             {
                 player.Balance += (decimal) payout;
             }
+        }
+
+        public bool joinBet(User user, Outcome outcome)
+        {
+           
+            if (!Outcomes.Contains(outcome)) //todo needs to check the uses in Lobby
+                return false;
+
+            user.Balance = -BuyIn;
+            outcome.Participants.Add(user);
+
+
+                return true;
         }
     }
 }

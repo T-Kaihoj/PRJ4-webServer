@@ -7,10 +7,30 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
-    public class Utility
+    public class Utility : IUtility
     {
-        public static string DatabaseSecure(string toDB)
+        private static Utility _instance;
+
+        public Utility()
+        { }
+
+        public static Utility Instance
         {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Utility();
+                }
+
+                return _instance;
+            }
+        }
+
+        public string DatabaseSecure(string toDB)
+        {
+            if (toDB == null)
+                return null;
             //todo db
             if (toDB.Contains("'")||toDB.Contains("[")||toDB.Contains("]"))
             {
