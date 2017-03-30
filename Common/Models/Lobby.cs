@@ -70,6 +70,17 @@ namespace Common.Models
             MemberList.Add(user);
         }
 
+        public void RemoveLobby()
+        {
+            foreach (var member in MemberList)
+            {
+                RemoveMemberFromLobby(member);
+            }
+            foreach (var member in InvitedList)
+            {
+                RemoveMemberFromLobby(member);
+            }
+        }
         public void RemoveMemberFromLobby(User user)
         {
             foreach (var bet in this.Bets)
