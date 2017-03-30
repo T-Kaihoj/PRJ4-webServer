@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.CodeDom;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Common.Models
@@ -66,7 +68,47 @@ namespace Common.Models
                 return;
 
             MemberList.Add(user);
-            
         }
+
+        public void RemoveMemberFromLobby(User user)
+        {
+            foreach (var bet in this.Bets)
+            {
+                foreach (var outcome in bet.Outcomes)
+                {
+                    foreach (var participant in outcome.Participants)
+                    {
+                        if(user.Username == participant.Username)
+                            outcome.Participants.Remove(participant);
+                    }
+                }
+            }
+            
+            foreach (var member in MemberList)
+            {
+                if (member.Username == user.Username)
+                    MemberList.Remove(user);
+            }
+            foreach (var member in InvitedList)
+            {
+                if (member.Username == user.Username)
+                    InvitedList.Remove(user);
+            }
+            user.MemberOfLobbies.Remove(this);
+        }
+
+        public void RemoveLobbyFromLists()
+        {
+            foreach (var member in MemberList)
+            {
+                member.MemberOfLobbies.Remove(this);
+            }
+            foreach (var member in InvitedList)
+            {
+                member.InvitedToLobbies.Remove(this);
+            }
+        }
+
+
     }
 }

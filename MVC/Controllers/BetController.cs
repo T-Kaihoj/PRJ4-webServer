@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
+using DAL;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -17,6 +18,13 @@ namespace MVC.Controllers
             _factory = factory;
         }
 
+        private void Setup(IFactory factory = null)
+        {
+            // If no factory passed, create a default factory.
+            _factory = factory ?? new Factory();
+        }
+
+        
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {
