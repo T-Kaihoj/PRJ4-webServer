@@ -101,6 +101,7 @@ namespace MVC.Controllers
                     // Error.
                     throw new Exception("No such lobby");
                 }
+                
 
                 // Create a viewmodel for the lobby.
                 var viewModel = new LobbyViewModel()
