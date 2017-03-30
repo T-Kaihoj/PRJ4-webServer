@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace Common.Models
@@ -47,7 +48,7 @@ namespace Common.Models
         public virtual ICollection<User> Participants { get; set; }
         public virtual ICollection<Outcome> Outcomes { get; set; }
         public virtual User Judge { get; set; }
-        public List<User> Invited { get; set; }
+        public ICollection<User> Invited { get; set; }
 
         
         private void Payout()
@@ -59,7 +60,5 @@ namespace Common.Models
                 player.Balance += (decimal) payout;
             }
         }
-
-        
     }
 }

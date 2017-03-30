@@ -40,7 +40,6 @@ namespace Common.Models
             {
                 InviteUserToLobby(i);
             }
-            
         }
 
         public void AcceptLobby(User user)
@@ -59,5 +58,19 @@ namespace Common.Models
                     MemberList.Remove(user);
             }
         }
+
+        public void RemoveLobbyFromLists()
+        {
+            foreach (var member in MemberList)
+            {
+                member.MemberOfLobbies.Remove(this);
+            }
+            foreach (var member in InvitedList)
+            {
+                member.InvitedToLobbies.Remove(this);
+            }
+        }
+
+
     }
 }
