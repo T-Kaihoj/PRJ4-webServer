@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using Common.Models;
 
 namespace DAL.Tests
 {
+    [ExcludeFromCodeCoverage]
     public static class Utility
     {
         public static User CreateUser(string username = "TheKillerrr", string email = "BestMail@email.com")
