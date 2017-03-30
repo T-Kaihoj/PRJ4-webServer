@@ -4,6 +4,8 @@ using System.Web.Mvc;
 using Common;
 using Common.Models;
 using MVC.ViewModels;
+using MVC.Identity;
+
 
 namespace MVC.Controllers
 {
@@ -11,10 +13,12 @@ namespace MVC.Controllers
     public class BetController : Controller
     {
         private IFactory _factory;
+        private IUserContext _userContext;
 
-        public BetController(IFactory factory = null)
+        public BetController(IFactory factory , IUserContext userContext)
         {
             _factory = factory;
+            _userContext = userContext;
         }
 
         // GET: /<controller>/Show/<id>
@@ -150,6 +154,26 @@ namespace MVC.Controllers
 
                 return View(new LobbyViewModel());
             }
+        }
+
+        public ActionResult Conclude(JoinViewModel model)
+        {
+            
+            using (var myWork = _factory.GetUOF())
+            {
+                //throw new NotImplementedException();
+                //TODO BetController JoinViewModel NullReference
+
+                var user = myWork.User.Get(User.Identity.Name);
+
+                myWork.Bet.Get(model.MyBet.BetId).ConcludeBet(user,model.SelectedOutcome);
+                myWork.Complete();
+
+                return View(new LobbyViewModel());
+            }
+
+
+            return Redirect("/");
         }
     }
 }

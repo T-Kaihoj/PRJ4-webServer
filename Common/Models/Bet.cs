@@ -58,9 +58,16 @@ namespace Common.Models
             }
         }
 
-        public void ConcludeBet(long outcomeID)
+        public bool ConcludeBet(User user, Outcome outcome)
         {
-            Payout(Result.Participants);
+            if (Judge == user)
+            {
+                Payout(Result.Participants);
+                return true;
+            }
+            return false;
+
+
         }
 
         public bool joinBet(User user, Outcome outcome)
@@ -75,5 +82,7 @@ namespace Common.Models
 
                 return true;
         }
+
+       
     }
 }
