@@ -16,13 +16,14 @@ namespace Common.Tests.Models
     class UserTest
     {
         private User _uut;
+        private IUtility _utility;
 
         [SetUp]
         public void Setup()
         {
-            var util = Substitute.For<IUtility>();
-            util.DatabaseSecure(Arg.Any<string>()).Returns(callinfo => callinfo.ArgAt<string>(0));
-            _uut = new User(util);
+            _utility = Substitute.For<IUtility>();
+            _utility.DatabaseSecure(Arg.Any<string>()).Returns(callinfo => callinfo.ArgAt<string>(0));
+            _uut = new User(_utility);
         }
 
         // Eksempel på en test - testen i sig selv er unødvendig. 

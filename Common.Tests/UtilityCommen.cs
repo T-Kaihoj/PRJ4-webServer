@@ -52,13 +52,12 @@ namespace Common.Tests
             @"+",
             @"?",
             @"½",
-            @"§",
-            null
+            @"§"
         };
 
         public static string[] InvalidCharacters =
         {
-            @"'", @"[", @"]"
+            @"'", @"[", @"]", null
         };
 
         public static long[] ValidIds =
