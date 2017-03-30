@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Common;
 using Common.Models;
 using DAL;
+using MVC.Identity;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -12,10 +13,12 @@ namespace MVC.Controllers
     public class BetController : Controller
     {
         private IFactory _factory;
+        private IUserContext _userContext;
 
-        public BetController(IFactory factory = null)
+        public BetController(IFactory factory, IUserContext userContext)
         {
             _factory = factory;
+            _userContext = userContext;
         }
 
         private void Setup(IFactory factory = null)
@@ -137,26 +140,27 @@ namespace MVC.Controllers
                 viewModel.Title = myBet.Name;
                 viewModel.Description = myBet.Description;
                 viewModel.MoneyPool = myBet.BuyIn;
+                viewModel.Id = id;
 
                 return View(viewModel);
             }
         }
 
         [HttpPost]
-        public ActionResult Join(JoinViewModel model)
+        public ActionResult Join(BetViewModel model)
         {
             using (var myWork = _factory.GetUOF())
             {
                 //throw new NotImplementedException();
                 //TODO BetController JoinViewModel NullReference
 
-                var user = myWork.User.Get(User.Identity.Name);
+                var user = myWork.User.Get(_userContext.Identity.Name);
 
                 //Retrieves Bet from DB using BetId, then calls joinBet on retrieved Bet and adds user+selected outcome to Bet.
-                myWork.Bet.Get(model.MyBet.BetId).joinBet(user,model.SelectedOutcome);
+                myWork.Bet.Get(model.Id).joinBet(user, model.SelectedOutcome);
                 myWork.Complete();
 
-                return View(new LobbyViewModel());
+                return Redirect("/Lobby/List");
             }
         }
     }

@@ -70,6 +70,17 @@ namespace Common.Models
             MemberList.Add(user);
         }
 
+        public void RemoveLobby()
+        {
+            foreach (var member in MemberList)
+            {
+                RemoveMemberFromLobby(member);
+            }
+            foreach (var member in InvitedList)
+            {
+                RemoveMemberFromLobby(member);
+            }
+        }
         public void RemoveMemberFromLobby(User user)
         {
             foreach (var bet in this.Bets)
@@ -83,17 +94,8 @@ namespace Common.Models
                     }
                 }
             }
-            
-            foreach (var member in MemberList)
-            {
-                if (member.Username == user.Username)
                     MemberList.Remove(user);
-            }
-            foreach (var member in InvitedList)
-            {
-                if (member.Username == user.Username)
-                    InvitedList.Remove(user);
-            }
+                    
             user.MemberOfLobbies.Remove(this);
         }
 

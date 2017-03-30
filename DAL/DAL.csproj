@@ -77,6 +77,10 @@
     <Compile Include="Migrations\201703301257300_Why.Designer.cs">
       <DependentUpon>201703301257300_Why.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703301349452_Added lobby reference to bet entity.cs" />
+    <Compile Include="Migrations\201703301349452_Added lobby reference to bet entity.Designer.cs">
+      <DependentUpon>201703301349452_Added lobby reference to bet entity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -118,6 +122,12 @@
     <EmbeddedResource Include="Migrations\201703301257300_Why.resx">
       <DependentUpon>201703301257300_Why.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703301349452_Added lobby reference to bet entity.resx">
+      <DependentUpon>201703301349452_Added lobby reference to bet entity.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\201703301249207_\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
