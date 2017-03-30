@@ -85,6 +85,20 @@ namespace MVC.Controllers
                 return View(viewModel);
             }   
         }
+        //GET: /<controller/Accept/<id>
+        public ActionResult Accept(long id)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var lobby = myWork.Lobby.Get(id);
+
+                if(lobby != null) 
+                    myWork.Lobby.Get(id).AcceptLobby(myWork.User.Get(_userContext.Identity.Name));
+                myWork.Complete();
+            }
+            //TODO: More error handling?
+            return Redirect("Lobby/List");
+        }
 
         // GET: /<controller>/Show/<id>
         public ActionResult Leave(long id)
