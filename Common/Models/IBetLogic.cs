@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace Common.Models
 {
-    interface IBetJudge
+    interface IBetLogic
     {
+
         //Preconditon:
         //Et outcome er sat af Judge
         //Postcondition
@@ -19,6 +20,7 @@ namespace Common.Models
         //Postcondition
         //Vindere har fået deres del af bettets Pot
         
+
 
     }
 }

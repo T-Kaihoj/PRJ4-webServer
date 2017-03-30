@@ -6,8 +6,10 @@ using Common.Models;
 using DAL;
 using DAL.Persistence;
 using MVC.Controllers;
+using MVC.Identity;
 using MVC.ViewModels;
 using NSubstitute;
+using NSubstitute.Exceptions;
 using NUnit.Framework;
 
 namespace MVC.Tests.Controllers
@@ -17,12 +19,16 @@ namespace MVC.Tests.Controllers
     public class BetControllerTests : BaseRepositoryTest
     {
         private BetController uut;
-        
+        private IUserContext userContext;
+
         [SetUp]
         public void Setup()
         {
+            // Create mocks.
+            userContext = Substitute.For<IUserContext>();
+
             // Create the controller.
-            uut = new BetController(Factory);
+            uut = new BetController(Factory, userContext);
             uut.ControllerContext = new ControllerContext();
         }
         

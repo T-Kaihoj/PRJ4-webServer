@@ -31,6 +31,7 @@ namespace MVC.Controllers
             return View(new CreateLobbyViewModel());
         }
 
+
         [HttpPost]
         // POST: /<controller>/Create
         public ActionResult Create(CreateLobbyViewModel viewModel)
@@ -84,6 +85,63 @@ namespace MVC.Controllers
                 return View(viewModel);
             }   
         }
+        //GET: /<controller/Accept/<id>
+        public ActionResult Accept(long id)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var lobby = myWork.Lobby.Get(id);
+
+                if(lobby != null) 
+                    myWork.Lobby.Get(id).AcceptLobby(myWork.User.Get(_userContext.Identity.Name));
+                myWork.Complete();
+            }
+            //TODO: More error handling?
+            return Redirect("Lobby/List");
+        }
+
+        // GET: /<controller>/Show/<id>
+        public ActionResult Leave(long id)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                // Get the lobby from the database.
+                var lobby = myWork.Lobby.Get(id);
+
+                if (lobby == null)
+                {
+                    // Error.
+                    throw new Exception("No such lobby");
+                }
+
+                lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
+                myWork.Complete();
+                return Redirect("Lobby/List/");
+                
+            }
+        }
+
+        // GET: /<controller>/Show/<id>
+        public ActionResult Remove(long id)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                // Get the lobby from the database.
+                var lobby = myWork.Lobby.Get(id);
+
+                if (lobby == null)
+                {
+                    // Error.
+                    throw new Exception("No such lobby");
+                }
+
+                lobby.RemoveLobby();
+
+                myWork.Lobby.Remove(lobby);
+                myWork.Complete();
+                return Redirect("Lobby/List/");
+            }
+        }
 
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
@@ -98,6 +156,7 @@ namespace MVC.Controllers
                     // Error.
                     throw new Exception("No such lobby");
                 }
+                
 
                 // Create a viewmodel for the lobby.
                 var viewModel = new LobbyViewModel()
@@ -106,6 +165,7 @@ namespace MVC.Controllers
                     Name = lobby.Name,
                     Description = lobby.Description,
                     Bets = lobby.Bets
+                   
                 };
 
                 return View(viewModel);

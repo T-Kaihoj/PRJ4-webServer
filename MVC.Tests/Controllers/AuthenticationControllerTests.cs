@@ -47,6 +47,7 @@ namespace MVC.Tests.Controllers
             uut.ControllerContext = controllerContext;
         }
 
+        /*
         [Test]
         public void SignIn_WithNonExistingUser_ReturnsError()
         {
@@ -105,7 +106,7 @@ namespace MVC.Tests.Controllers
             {
                 Console.WriteLine(v.GetMethodInfo().Name);
             }
-            /*
+            
              * 
 FindByNameAsync
 FindByIdAsync
@@ -119,7 +120,7 @@ GetTwoFactorEnabledAsync
 VerifyHashedPassword
 SignOut
 SignIn
-             */
+             
 
             //Assert.That(result, Is.AssignableFrom<ViewResult>());
         }
@@ -142,7 +143,7 @@ SignIn
             
 
             Assert.That(result, Is.AssignableFrom<RedirectResult>());
-        }
+        }*/
     }
 }
 
