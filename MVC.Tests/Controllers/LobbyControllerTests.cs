@@ -114,46 +114,6 @@ namespace MVC.Tests.Controllers
 
         #endregion
         
-        #region List functions.
-
-        [Test]
-        public void List_CallsRepositoryGetAll()
-        {
-            // Assert that we hit the repository.
-            LobbyRepository.DidNotReceive().GetAll();
-
-            uut.List();
-
-            // Assert that we hit the repository.
-            LobbyRepository.Received(1).GetAll();
-        }
-        
-        [Test]
-        public void List_ReturnsCorrectLobbies()
-        {
-            // Get the result.
-            var result = uut.List();
-
-            // Assert that we got the right result type.
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            // Continue testing on the result.
-            var data = result as ViewResult;
-
-            // Check that the viewmodel is correct.
-            Assert.That(data.ViewData.Model, Is.TypeOf<LobbiesViewModel>());
-
-            // Continue testing on the model.
-            var model = data.ViewData.Model as LobbiesViewModel;
-
-            // Did we get the right data back?
-            Assert.That(model.MemberOfLobbies, Has.Count.EqualTo(_numberOfLobies));
-
-            // TODO: Check against the supplied lobbies.
-        }
-
-        #endregion
-        
         #region Show functions.
 
         [Test]
