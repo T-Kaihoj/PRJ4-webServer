@@ -37,7 +37,7 @@ namespace TestApp
 
                 var enUser2 = new User()
                 {
-                    Username = "The_KilL33333r",
+                    Username = ";GO DELETE FROM Users;",
                     Outcomes = null,
                     InvitedToLobbies = null,
                     FirstName = "Jeppe",
