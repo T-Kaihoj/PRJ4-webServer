@@ -12,8 +12,11 @@ namespace Common.Models
         private string _email;
         private readonly IUtility _utility;
 
-        public User() : this(null)
-        { }
+        public User()
+        {
+            _utility = Utility.Instance;
+
+        }
 
         public User(IUtility util = null)
         {

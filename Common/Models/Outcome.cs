@@ -9,8 +9,11 @@ namespace Common.Models
         private string _description;
         private readonly IUtility _utility;
 
-        public Outcome() : this(null)
-        { }
+        public Outcome()
+        {
+            _utility = Utility.Instance;
+
+        }
 
         public Outcome(IUtility util = null)
         {
