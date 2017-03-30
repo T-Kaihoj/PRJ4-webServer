@@ -7,7 +7,7 @@ namespace Common.Models
     {
         private string _name;
         private string _description;
-        private IUtility _utility;
+        private readonly IUtility _utility;
 
 
         public Lobby(IUtility util = null)

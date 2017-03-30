@@ -10,6 +10,19 @@ namespace Common.Models
     {
         private string _name;
         private string _description;
+        private readonly IUtility _utility;
+
+        public Bet(IUtility util = null)
+        {
+            if (util == null)
+            {
+                _utility = Utility.Instance;
+            }
+            else
+            {
+                _utility = util;
+            }
+        }
 
         [Key]
         public long BetId { get; set; }
@@ -17,7 +30,7 @@ namespace Common.Models
         public string Name
         {
             get { return _name; }
-            set { _name = Utility.DatabaseSecure(value); }
+            set { _name = _utility.DatabaseSecure(value); }
         }
 
         public DateTime StartDate { get; set; }
@@ -26,7 +39,7 @@ namespace Common.Models
         public string Description
         {
             get { return _description; }
-            set { _description = Utility.DatabaseSecure(value); }
+            set { _description = _utility.DatabaseSecure(value); }
         }
 
         public Decimal BuyIn { get; set; }
