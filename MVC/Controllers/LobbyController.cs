@@ -97,7 +97,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
             //TODO: More error handling?
-            return Redirect("Lobby/List");
+            return Redirect($"/Lobby/List");
         }
 
         // GET: /<controller>/Show/<id>
@@ -116,7 +116,7 @@ namespace MVC.Controllers
 
                 lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
                 myWork.Complete();
-                return Redirect("Lobby/List/");
+                return Redirect($"/Lobby/List");
                 
             }
         }
@@ -139,7 +139,7 @@ namespace MVC.Controllers
 
                 myWork.Lobby.Remove(lobby);
                 myWork.Complete();
-                return Redirect("Lobby/List/");
+                return Redirect("Lobby/List");
             }
         }
 
