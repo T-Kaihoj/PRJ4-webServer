@@ -91,8 +91,12 @@ namespace MVC.Controllers
             {
                 var lobby = myWork.Lobby.Get(id);
 
-                if(lobby != null) 
-                    myWork.Lobby.Get(id).AcceptLobby(myWork.User.Get(_userContext.Identity.Name));
+                if (lobby != null)
+                {
+                    var myUser = myWork.User.Get((_userContext.Identity.Name));
+                    lobby.AcceptLobby(myUser);
+                }
+                   
                 myWork.Complete();
             }
             //TODO: More error handling?
