@@ -9,6 +9,11 @@ namespace Common.Models
         private string _description;
         private readonly IUtility _utility;
 
+        public Lobby()
+        {
+            _utility = Utility.Instance;
+
+        }
 
         public Lobby(IUtility util )
         {
