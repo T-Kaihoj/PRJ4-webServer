@@ -221,6 +221,7 @@
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
+    <Compile Include="ViewModels\Money\CreateWithdrawViewModel.cs" />
     <Compile Include="ViewModels\User\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\User\EditProfileViewModel.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="test.runsettings" />
     <Content Include="Views\Home\IndexAuth.cshtml" />
+    <Content Include="Views\Money\Withdraw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

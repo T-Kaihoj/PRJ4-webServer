@@ -108,6 +108,34 @@ namespace MVC.Controllers
             return View(viewModel);
         }
 
+        [HttpGet]
+        public ActionResult Withdraw()
+        {
+            return View("~/Views/Money/Withdraw.cshtml");
+
+            // Get the user from the identity.
+            var userName = User.Identity.Name;
+
+            // Lookup the user in the repository.
+            var user = _factory.GetUOF().User.Get(userName);
+
+            // user should NEVER be null, but we check anyway.
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            // Populate the viewmodel.
+            var viewModel = new EditProfileViewModel()
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+
+            return View(viewModel);
+        }
+
         // POST: /User/Create
         [HttpPost]
         public ActionResult Create(CreateUserViewModel model)
