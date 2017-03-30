@@ -20,7 +20,7 @@ namespace MVC.Controllers
                 return View("IndexAuth");
             }
 
-            return View(new CreateUserViewModel());
+            return View("Index", new CreateUserViewModel());
         }
 
         public PartialViewResult LoginBox()
