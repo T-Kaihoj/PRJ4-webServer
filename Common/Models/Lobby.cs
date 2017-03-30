@@ -94,17 +94,8 @@ namespace Common.Models
                     }
                 }
             }
-            
-            foreach (var member in MemberList)
-            {
-                if (member.Username == user.Username)
                     MemberList.Remove(user);
-            }
-            foreach (var member in InvitedList)
-            {
-                if (member.Username == user.Username)
-                    InvitedList.Remove(user);
-            }
+                    
             user.MemberOfLobbies.Remove(this);
         }
 
