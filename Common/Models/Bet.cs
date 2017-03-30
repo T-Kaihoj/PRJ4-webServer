@@ -12,6 +12,7 @@ namespace Common.Models
         private string _name;
         private string _description;
         private readonly IUtility _utility;
+        private Outcome _result;
 
         public Bet()
         {
@@ -67,7 +68,6 @@ namespace Common.Models
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
         public virtual User Judge { get; set; }
         
-        private void Payout(ICollection<User> winners)
         public ICollection<User> Invited { get; set; }
 
         

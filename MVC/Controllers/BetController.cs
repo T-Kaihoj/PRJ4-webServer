@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
+using DAL;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -23,13 +24,7 @@ namespace MVC.Controllers
             _factory = factory ?? new Factory();
         }
 
-        // GET: /<controller>/Join/<id>
-        public ActionResult Join(long id)
-        {
-           
-            throw new Exception("Not implemented");
-        }
-
+        
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {

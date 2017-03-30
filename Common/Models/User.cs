@@ -14,6 +14,7 @@ namespace Common.Models
         private string _lastName;
         private string _email;
         private readonly IUtility _utility;
+        private decimal _balance;
 
         public User()
         {
