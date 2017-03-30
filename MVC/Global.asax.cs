@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using Common;
+using Common.Models;
 using DAL;
 using Microsoft.AspNet.Identity;
 using MVC.Identity;
@@ -35,6 +36,7 @@ namespace MVC
             container.Register<IStore, Store>(Lifestyle.Transient);
             container.Register<IUserStore<IdentityUser, string>, Store>(Lifestyle.Transient);
             container.Register<IUserContext, UserContext>();
+            container.Register<IUtility, Utility>();
 
             // Register the MVC controllers.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
