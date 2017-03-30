@@ -16,21 +16,21 @@ namespace Common.Models
         public string Username
         {
             get { return _username; }
-            set { _username = Utility.DatabaseSecure( value); }
+            set { _username = Utility.Instance.DatabaseSecure( value); }
         }
 
         [Required]
         public string FirstName
         {
             get { return _firstName; }
-            set { _firstName = Utility.DatabaseSecure(value); }
+            set { _firstName = Utility.Instance.DatabaseSecure(value); }
         }
 
         [Required]
         public string LastName
         {
             get { return _lastName; }
-            set { _lastName = Utility.DatabaseSecure(value); }
+            set { _lastName = Utility.Instance.DatabaseSecure(value); }
         }
 
         //[Required]
@@ -39,7 +39,7 @@ namespace Common.Models
         public string Email
         {
             get { return _email; }
-            set { _email = Utility.DatabaseSecure(value); }
+            set { _email = Utility.Instance.DatabaseSecure(value); }
         }
 
         [Required]

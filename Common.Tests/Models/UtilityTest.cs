@@ -17,7 +17,7 @@ namespace Common.Tests.Models
         [TestCase("ADASEFXS")]
         public void DatabaseSecure_ValidString_ReturnsSameString(string input)
         {
-            Assert.That(Utility.DatabaseSecure(input), Is.EqualTo(input)); 
+            Assert.That(Utility.Instance.DatabaseSecure(input), Is.EqualTo(input)); 
         }
 
         [TestCase("Tobias")]
@@ -25,7 +25,7 @@ namespace Common.Tests.Models
         [TestCase("ADASEFXS")]
         public void DatabaseSecure_ValidString_NoExceptionThrown(string input)
         {
-            Assert.That(() => Utility.DatabaseSecure(input), Throws.Nothing);
+            Assert.That(() => Utility.Instance.DatabaseSecure(input), Throws.Nothing);
         }
 
         [TestCase("Tobi'as")]
@@ -33,7 +33,7 @@ namespace Common.Tests.Models
         [TestCase("ADAS[EFXS")]
         public void DatabaseSecure_InvalidString_ThrowsException(string input)
         {
-            Assert.That(() => Utility.DatabaseSecure(input), Throws.Exception);
+            Assert.That(() => Utility.Instance.DatabaseSecure(input), Throws.Exception);
         }
     }
 }
