@@ -10,7 +10,31 @@ namespace Common.Tests.Models
     {
 
         // Ingen setup eller lignende da Utility er statisk.
+        private IUtility _uut;
 
+        [SetUp]
+        public void Setup()
+        {
+            _uut = new Utility();
+        }
+
+        [Test]
+        public void DatabaseSecure_ValidChars_ReturnsChars()
+        {
+            foreach (var character in UtilityCommen.ValidCharacters)
+            {
+                Assert.That(_uut.DatabaseSecure(character), Is.EqualTo(character));
+            }
+        }
+
+        [Test]
+        public void DatabaseSecure_InvalidChars_ThrowsException()
+        {
+            foreach (var character in UtilityCommen.InvalidCharacters)
+            {
+                Assert.That(() =>_uut.DatabaseSecure(character), Throws.Exception);
+            }
+        }
 
         [TestCase("Tobias")]
         [TestCase("sscdAW")]

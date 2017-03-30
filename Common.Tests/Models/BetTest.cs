@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common.Models;
 using Common.Tests;
 using NSubstitute;
+using NSubstitute.ExceptionExtensions;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 
@@ -17,13 +19,14 @@ namespace Common.Tests.Models
     class BetTest
     {
         private Bet _uut;
+        private IUtility _utility;
 
         [SetUp]
         public void Setup()
         {
-            var util = Substitute.For<IUtility>();
-            util.DatabaseSecure(Arg.Any<string>()).Returns(callinfo => callinfo.ArgAt<string>(0));
-            _uut = new Bet(util);
+            _utility = Substitute.For<IUtility>();
+            _utility.DatabaseSecure(Arg.Any<string>()).Returns(callinfo => callinfo.ArgAt<string>(0));
+            _uut = new Bet(_utility);
         }
 
         [Test]
@@ -69,11 +72,11 @@ namespace Common.Tests.Models
         {
             foreach (var chars in UtilityCommen.InvalidCharacters)
             {
-                Assert.That(() => _uut.Name = chars, Throws.Exception);
+                _utility.DidNotReceive().DatabaseSecure(Arg.Is(chars));
+                _uut.Name = chars;
+                _utility.Received(1).DatabaseSecure(Arg.Is(chars));
             }
         }
-
-
 
         [Test]
         public void Description_SetValidDescription_DescriptionSet()
@@ -99,7 +102,9 @@ namespace Common.Tests.Models
         {
             foreach (var chars in UtilityCommen.InvalidCharacters)
             {
-                Assert.That(() => _uut.Description = chars, Throws.Exception);
+                _utility.DidNotReceive().DatabaseSecure(Arg.Is(chars));
+                _uut.Description = chars;
+                _utility.Received(1).DatabaseSecure(Arg.Is(chars));
             }
         }
 
