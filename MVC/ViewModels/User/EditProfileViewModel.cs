@@ -8,7 +8,6 @@ namespace MVC.ViewModels
         private string _email = string.Empty;
         private string _firstName = string.Empty;
         private string _lastName = string.Empty;
-        private string _userName = string.Empty;
 
         #region Accessors.
 
@@ -56,21 +55,6 @@ namespace MVC.ViewModels
             set
             {
                 _email = value.Trim();
-            }
-        }
-
-        [Display(ResourceType = typeof(Resources.User), Name = "DisplayUserName")]
-        [Required(ErrorMessageResourceType = typeof(Resources.User),
-            ErrorMessageResourceName = "ErrorUserNameRequired")]
-        public string UserName
-        {
-            get
-            {
-                return _userName;
-            }
-            set
-            {
-                _userName = value.Trim();
             }
         }
 

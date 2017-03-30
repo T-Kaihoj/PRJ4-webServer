@@ -70,7 +70,6 @@ namespace MVC.Controllers
                 var user = myWork.User.Get(User.Identity.Name);
 
                 user.Email = viewModel.Email;
-                user.Username = viewModel.UserName;
                 user.FirstName = viewModel.FirstName;
                 user.LastName = viewModel.LastName;
 
@@ -104,7 +103,6 @@ namespace MVC.Controllers
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserName = user.Username
             };
 
             return View(viewModel);

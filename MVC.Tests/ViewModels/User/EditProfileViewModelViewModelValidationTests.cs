@@ -21,7 +21,6 @@ namespace MVC.Tests.ViewModels
             uut.Email = "a@a.a";
             uut.FirstName = "a";
             uut.LastName = "a";
-            uut.UserName = "a";
         }
 
         #region Validation Tests.
@@ -72,20 +71,6 @@ namespace MVC.Tests.ViewModels
         {
             // Arrange.
             uut.LastName = value;
-
-            // Perform validation.
-            var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
-
-            Assert.That(isStateValid, Is.EqualTo(expected));
-        }
-
-        [TestCase("", false)]
-        [TestCase(" ", false)]
-        [TestCase("a", true)]
-        public void Validate_WithUserName_ReturnsExpected(string value, bool expected)
-        {
-            // Arrange.
-            uut.UserName = value;
 
             // Perform validation.
             var isStateValid = Validator.TryValidateObject(uut, Context, Results, true);
@@ -146,18 +131,6 @@ namespace MVC.Tests.ViewModels
             Validator.TryValidateObject(uut, Context, Results, true);
 
             Assert.That(GetErrors, Contains.Item(Resources.User.ErrorLastNameRequired));
-        }
-
-        [Test]
-        public void Validate_WithEmptyUserName_ReturnsExpectedErrorMessage()
-        {
-            // Arrange.
-            uut.UserName = "";
-
-            // Perform validation.
-            Validator.TryValidateObject(uut, Context, Results, true);
-
-            Assert.That(GetErrors, Contains.Item(Resources.User.ErrorUserNameRequired));
         }
 
         #endregion

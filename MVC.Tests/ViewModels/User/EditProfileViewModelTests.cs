@@ -36,12 +36,6 @@ namespace MVC.Tests.ViewModels
             Assert.That(uut.LastName, Is.EqualTo(string.Empty));
         }
 
-        [Test]
-        public void Constructor_GetUserName_ReturnsEmptyString()
-        {
-            Assert.That(uut.UserName, Is.EqualTo(string.Empty));
-        }
-
         #endregion
 
         #region Setters.
@@ -74,16 +68,6 @@ namespace MVC.Tests.ViewModels
             uut.LastName = value;
 
             Assert.That(uut.LastName, Is.EqualTo(expected));
-        }
-
-        [TestCase("a", "a")]
-        [TestCase("a ", "a")]
-        [TestCase(" a", "a")]
-        public void SetUserName_GetUserName_ReturnsValue(string value, string expected)
-        {
-            uut.UserName = value;
-
-            Assert.That(uut.UserName, Is.EqualTo(expected));
         }
 
         #endregion
