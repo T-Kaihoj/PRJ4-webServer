@@ -9,8 +9,13 @@ namespace Common.Models
         private string _description;
         private readonly IUtility _utility;
 
+        public Lobby()
+        {
+            _utility = Utility.Instance;
 
-        public Lobby(IUtility util = null)
+        }
+
+        public Lobby(IUtility util )
         {
             if (util == null)
             {
@@ -53,7 +58,6 @@ namespace Common.Models
             {
                 InviteUserToLobby(i);
             }
-            
         }
 
         public void AcceptLobby(User user)

@@ -10,27 +10,46 @@ namespace Common.Models
         private string _firstName;
         private string _lastName;
         private string _email;
+        private readonly IUtility _utility;
+
+        public User()
+        {
+            _utility = Utility.Instance;
+
+        }
+
+        public User(IUtility util = null)
+        {
+            if (util == null)
+            {
+                _utility = Utility.Instance;
+            }
+            else
+            {
+                _utility = util;
+            }
+        }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Username
         {
             get { return _username; }
-            set { _username = Utility.Instance.DatabaseSecure( value); }
+            set { _username = _utility.DatabaseSecure( value); }
         }
 
         [Required]
         public string FirstName
         {
             get { return _firstName; }
-            set { _firstName = Utility.Instance.DatabaseSecure(value); }
+            set { _firstName = _utility.DatabaseSecure(value); }
         }
 
         [Required]
         public string LastName
         {
             get { return _lastName; }
-            set { _lastName = Utility.Instance.DatabaseSecure(value); }
+            set { _lastName = _utility.DatabaseSecure(value); }
         }
 
         //[Required]
@@ -39,7 +58,7 @@ namespace Common.Models
         public string Email
         {
             get { return _email; }
-            set { _email = Utility.Instance.DatabaseSecure(value); }
+            set { _email = _utility.DatabaseSecure(value); }
         }
 
         [Required]

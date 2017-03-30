@@ -144,7 +144,7 @@ namespace MVC.Controllers
 
                 var user = myWork.User.Get(User.Identity.Name);
 
-
+                //Retrieves Bet from DB using BetId, then calls joinBet on retrieved Bet and adds user+selected outcome to Bet.
                 myWork.Bet.Get(model.MyBet.BetId).joinBet(user,model.SelectedOutcome);
                 myWork.Complete();
 

@@ -11,7 +11,7 @@ namespace Common.Models
     {
         private static Utility _instance;
 
-        private Utility()
+        public Utility()
         { }
 
         public static Utility Instance
