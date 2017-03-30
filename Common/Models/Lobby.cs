@@ -8,7 +8,9 @@ namespace Common.Models
         private string _name;
         private string _description;
         private readonly IUtility _utility;
-
+        
+        public Lobby() : this(null)
+        { }
 
         public Lobby(IUtility util = null)
         {
@@ -53,7 +55,6 @@ namespace Common.Models
             {
                 InviteUserToLobby(i);
             }
-            
         }
 
         public void AcceptLobby(User user)

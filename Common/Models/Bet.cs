@@ -12,6 +12,9 @@ namespace Common.Models
         private string _description;
         private readonly IUtility _utility;
 
+        public Bet() : this(null)
+        { }
+
         public Bet(IUtility util = null)
         {
             if (util == null)
