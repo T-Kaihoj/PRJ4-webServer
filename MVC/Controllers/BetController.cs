@@ -163,5 +163,19 @@ namespace MVC.Controllers
                 return Redirect("/Lobby/List");
             }
         }
+        // GET: /<controller>/Remove/<Lobby>/<Bet>
+        [HttpGet]
+        public ActionResult Remove(long Lobby, long Bet)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var myBet = myWork.Bet.Get(Bet);
+                
+                //TODO: Check is user is owner of lobby before removing!
+                myWork.Bet.Remove(myBet);
+                string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+                return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
+            }
+        }
     }
 }

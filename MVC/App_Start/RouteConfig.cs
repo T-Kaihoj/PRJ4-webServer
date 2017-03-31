@@ -11,6 +11,11 @@ namespace MVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("RemoveBet", "Bet/Remove/{Lobby}/{Bet}",
+            new { controller = "Bet", action = "Remove", Lobby = "", Bet = "" }
+            );
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
