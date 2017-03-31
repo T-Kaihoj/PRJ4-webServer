@@ -56,18 +56,27 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult EditProfile(EditProfileViewModel viewModel)
         {
+            // Ensure the data is vaid.
+            if (!TryValidateModel(viewModel))
+            {
+                return View("EditProfile", viewModel);
+            }
+
             using (var myWork = _factory.GetUOF())
             {
                 var user = myWork.User.Get(_context.Identity.Name);
+
+                // user should NEVER be null, but we check anyway.
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
 
                 user.Email = viewModel.Email;
                 user.FirstName = viewModel.FirstName;
                 user.LastName = viewModel.LastName;
 
-                // TODO: Update the user credentials in the authentication system.
-
                 myWork.Complete();
-
             }
 
             return RedirectToAction("Index");

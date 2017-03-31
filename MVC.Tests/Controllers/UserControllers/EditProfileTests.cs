@@ -38,12 +38,16 @@ namespace MVC.Tests.Controllers.UserControllers
             };
         }
 
-        #region Edit Profile
-
         [Test]
         public void EditProfile_WithNoUser_Throws()
         {
             Assert.That(() => uut.EditProfile(), Throws.Exception);
+        }
+
+        [Test]
+        public void EditProfile_WithDataButNoUser_Throws()
+        {
+            Assert.That(() => uut.EditProfile(viewModel), Throws.Exception);
         }
 
         [Test]
@@ -233,27 +237,24 @@ namespace MVC.Tests.Controllers.UserControllers
 
             // Assert the repository state.
             UserRepository.DidNotReceive().Get(Arg.Any<string>());
-            UserRepository.DidNotReceive().AddOrUpdate(Arg.Any<User>());
             MyWork.DidNotReceive().Complete();
 
             // Attempt to edit the profile.
             var result = uut.EditProfile(viewModel);
 
-            Assert.That(uut.ModelState.IsValid, Is.False);
+            Assert.That(uut.ModelState.IsValid, Is.True);
 
             // Ensure calls were made to the repositories.
             UserRepository.Received(1).Get(Arg.Any<string>());
-            UserRepository.Received(1).AddOrUpdate(Arg.Any<User>());
             MyWork.Received(1).Complete();
 
             // Check the returned view.
-            Assert.That(result, Is.TypeOf<RedirectResult>());
+            Assert.That(result, Is.TypeOf<RedirectToRouteResult>());
 
-            var rResult = result as RedirectResult;
+            var rResult = result as RedirectToRouteResult;
 
-            Assert.That(rResult.Url, Is.EqualTo("/User/Index"));
+            Assert.That(rResult.RouteName, Is.EqualTo(""));
+            Assert.That(rResult.Permanent, Is.False);
         }
-
-        #endregion
     }
 }
