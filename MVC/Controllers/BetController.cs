@@ -173,6 +173,7 @@ namespace MVC.Controllers
                 
                 //TODO: Check is user is owner of lobby before removing!
                 myWork.Bet.Remove(myBet);
+                //TODO: Fails when there's outcomes associated with the bet!
                 myWork.Complete();
 
                 string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
