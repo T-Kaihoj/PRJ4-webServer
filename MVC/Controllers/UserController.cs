@@ -58,7 +58,7 @@ namespace MVC.Controllers
         {
             using (var myWork = _factory.GetUOF())
             {
-                var user = myWork.User.Get(User.Identity.Name);
+                var user = myWork.User.Get(_context.Identity.Name);
 
                 user.Email = viewModel.Email;
                 user.FirstName = viewModel.FirstName;
