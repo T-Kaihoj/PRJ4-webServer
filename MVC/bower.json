@@ -22,5 +22,8 @@
     "font-awesome": "4.7.0",
     "jquery": "2.1.4",
     "jquery-validation": "1.15.0"
+  },
+  "resolutions": {
+    "jquery": "^2.2"
   }
 }
