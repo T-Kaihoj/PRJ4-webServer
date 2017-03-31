@@ -173,6 +173,8 @@ namespace MVC.Controllers
                 
                 //TODO: Check is user is owner of lobby before removing!
                 myWork.Bet.Remove(myBet);
+                myWork.Complete();
+
                 string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
                 return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
             }
