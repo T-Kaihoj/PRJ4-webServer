@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
 using Common.Models;
@@ -317,6 +318,66 @@ namespace MVC.Tests.Controllers
             Assert.That(vResult.ViewName, Is.EqualTo("Profile"));
 
             Assert.That(vResult.Model, Is.TypeOf<UserProfileViewModel>());
+        }
+
+        #endregion
+
+        #region Edit Profile
+
+        [Test]
+        public void EditProfile_WithNoUser_Throws()
+        {
+            Assert.That(() => uut.EditProfile(), Throws.Exception);
+        }
+
+        [Test]
+        public void EditProfile_WithNoInput_CallsRepository()
+        {
+            UserRepository.DidNotReceive().Get(Arg.Any<string>());
+
+            try
+            {
+                uut.EditProfile();
+            }
+            catch (Exception)
+            {
+                
+            }
+
+            UserRepository.Received(1).Get(Arg.Any<string>());
+        }
+
+        [Test]
+        public void EditProfile_WithNoInput_ReturnsView()
+        {
+            // Seup the user.
+            var user = new User()
+            {
+                Email = "email",
+                FirstName = "firstname",
+                LastName = "lastname"
+            };
+
+            UserRepository.Get(Arg.Any<string>()).Returns(user);
+
+            var result = uut.EditProfile();
+
+            Assert.That(result, Is.TypeOf<ViewResult>());
+
+            var vResult = result as ViewResult;
+
+            Assert.That(vResult.ViewName, Is.EqualTo("EditProfile"));
+
+            Assert.That(vResult.Model, Is.TypeOf<EditProfileViewModel>());
+
+            var model = vResult.Model as EditProfileViewModel;
+
+            Assert.Multiple(() =>
+            {
+                Assert.That(model.Email, Is.EqualTo(user.Email));
+                Assert.That(model.FirstName, Is.EqualTo(user.FirstName));
+                Assert.That(model.LastName, Is.EqualTo(user.LastName));
+            });
         }
 
         #endregion

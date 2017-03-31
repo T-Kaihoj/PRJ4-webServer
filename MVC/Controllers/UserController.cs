@@ -96,7 +96,7 @@ namespace MVC.Controllers
                 LastName = user.LastName,
             };
 
-            return View(viewModel);
+            return View("EditProfile", viewModel);
         }
 
         [HttpGet]
