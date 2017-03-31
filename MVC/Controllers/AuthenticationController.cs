@@ -12,7 +12,7 @@ namespace MVC.Controllers
     public class AuthenticationController : Controller
     {
         private readonly UserManager<IdentityUser, string> _userManager;
-        private readonly IAuthenticationManager _authenticationManager = null;
+        private readonly IAuthenticationManager _authenticationManager;
 
         public AuthenticationController(UserManager<IdentityUser, string> userManager, IAuthenticationManager authenticationManager)
         {
@@ -64,7 +64,9 @@ namespace MVC.Controllers
         [ExcludeFromCodeCoverage]
         private SignInManager<IdentityUser, string> GetSignInManager()
         {
-            if (_authenticationManager == null)
+            var auth = _authenticationManager as EmptyAuthenticationManager;
+
+            if (auth != null)
             {
                 return new SignInManager<IdentityUser, string>(_userManager, HttpContext.GetOwinContext().Authentication);
             }
