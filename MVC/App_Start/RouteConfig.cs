@@ -11,6 +11,7 @@ namespace MVC
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //NOTE: Routings must be in the order most specific to least specific!!
             routes.MapRoute("RemoveBet", "Bet/Remove/{Lobby}/{Bet}",
             new { controller = "Bet", action = "Remove", Lobby = "", Bet = "" }
             );
