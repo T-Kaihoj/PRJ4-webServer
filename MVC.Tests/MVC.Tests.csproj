@@ -201,8 +201,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationControllerTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\CreateTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\JoinTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\ShowTests.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
-    <Compile Include="Controllers\BetControllerTests.cs" />
     <Compile Include="Controllers\LobbyControllerTests.cs" />
     <Compile Include="BaseRepositoryTest.cs" />
     <Compile Include="Controllers\UserControllers\EditProfileTests.cs" />
