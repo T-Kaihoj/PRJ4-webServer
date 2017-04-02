@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Security.Principal;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
@@ -114,46 +116,6 @@ namespace MVC.Tests.Controllers
 
         #endregion
         
-        #region List functions.
-
-        [Test]
-        public void List_CallsRepositoryGetAll()
-        {
-            // Assert that we hit the repository.
-            LobbyRepository.DidNotReceive().GetAll();
-
-            uut.List();
-
-            // Assert that we hit the repository.
-            LobbyRepository.Received(1).GetAll();
-        }
-        
-        [Test]
-        public void List_ReturnsCorrectLobbies()
-        {
-            // Get the result.
-            var result = uut.List();
-
-            // Assert that we got the right result type.
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            // Continue testing on the result.
-            var data = result as ViewResult;
-
-            // Check that the viewmodel is correct.
-            Assert.That(data.ViewData.Model, Is.TypeOf<LobbiesViewModel>());
-
-            // Continue testing on the model.
-            var model = data.ViewData.Model as LobbiesViewModel;
-
-            // Did we get the right data back?
-            Assert.That(model.MemberOfLobbies, Has.Count.EqualTo(_numberOfLobies));
-
-            // TODO: Check against the supplied lobbies.
-        }
-
-        #endregion
-        
         #region Show functions.
 
         [Test]
@@ -186,6 +148,63 @@ namespace MVC.Tests.Controllers
 
             // Assert that we passed the correct id.
             Assert.That(key, Is.EqualTo(passedKey));
+        }
+
+        #endregion
+
+        #region Accept Invitation to lobby
+        /*
+        [Test]
+        public void AcceptInvitationToLobby_LobbyInInvitedToLobbies_LobbyIsFoundInMemberOfLobbies()
+        {
+            //setup
+            var iden = Substitute.For<IIdentity>();
+            _userContext.Identity.Returns(iden);
+            iden.Name.Returns("hej");
+
+            var lobby = new Lobby();
+            var user = new User()
+            {
+                Username = "test",
+                InvitedToLobbies = new List<Lobby>(),
+                MemberOfLobbies = new List<Lobby>()
+            };
+
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+            MyWork.User.Get(Arg.Any<string>()).Returns(user);
+            UserRepository.Get(Arg.Any<string>()).Returns(user);
+
+
+            MyWork.DidNotReceive().Complete();
+
+            lobby.InvitedList.Add(user);
+            user.InvitedToLobbies.Add(lobby);
+            
+
+            uut.Accept(1);
+
+            //Assert repository was hit
+            Assert.That(user.MemberOfLobbies.Contains(lobby), Is.EqualTo(true));
+            Assert.That(user.InvitedToLobbies.Contains(lobby), Is.EqualTo(false));
+            MyWork.Received(1).Complete();
+        }
+        */
+
+        [Test]
+        public void AcceptInvitationToLobby_LobbyInInvitedToLobbies_ProperFunctionsCalled()
+        {
+            MyWork.DidNotReceive().Complete();
+            var lobby = Substitute.For<Lobby>();
+            var user = new User();
+            lobby.DidNotReceive().AcceptLobby(Arg.Any<User>());
+
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+            MyWork.User.Get(Arg.Any<string>()).Returns(user);
+
+            uut.Accept(1);
+
+            lobby.Received(1).AcceptLobby(Arg.Any<User>());
+            MyWork.Received(1).Complete();
         }
 
         #endregion

@@ -79,7 +79,8 @@ namespace MVC.Controllers
                 // Display the lobbies.
                 var viewModel = new LobbiesViewModel()
                 {
-                    MemberOfLobbies = aUser.MemberOfLobbies
+                    MemberOfLobbies = aUser.MemberOfLobbies,
+                    InvitedToLobbies = aUser.InvitedToLobbies
                 };
 
                 return View(viewModel);
@@ -92,12 +93,16 @@ namespace MVC.Controllers
             {
                 var lobby = myWork.Lobby.Get(id);
 
-                if(lobby != null) 
-                    myWork.Lobby.Get(id).AcceptLobby(myWork.User.Get(_userContext.Identity.Name));
+                if (lobby != null)
+                {
+                    var myUser = myWork.User.Get((_userContext.Identity.Name));
+                    lobby.AcceptLobby(myUser);
+                }
+                   
                 myWork.Complete();
             }
             //TODO: More error handling?
-            return Redirect("Lobby/List");
+            return Redirect($"/Lobby/List");
         }
 
         // GET: /<controller>/Show/<id>
@@ -116,7 +121,7 @@ namespace MVC.Controllers
 
                 lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
                 myWork.Complete();
-                return Redirect("Lobby/List/");
+                return Redirect($"/Lobby/List");
                 
             }
         }
@@ -139,7 +144,7 @@ namespace MVC.Controllers
 
                 myWork.Lobby.Remove(lobby);
                 myWork.Complete();
-                return Redirect("Lobby/List/");
+                return Redirect("Lobby/List");
             }
         }
 

@@ -15,13 +15,14 @@ namespace Common.Tests.Models
     class LobbyTest
     {
         private Lobby _uut;
+        private IUtility _utility;
 
         [SetUp]
         public void Setup()
         {
-            var util = Substitute.For<IUtility>();
-            util.DatabaseSecure(Arg.Any<string>()).Returns(callinfo => callinfo.ArgAt<string>(0));
-            _uut = new Lobby(util);
+            _utility = Substitute.For<IUtility>();
+            _utility.DatabaseSecure(Arg.Any<string>()).Returns(callinfo => callinfo.ArgAt<string>(0));
+            _uut = new Lobby(_utility);
         }
 
         [Test]
@@ -67,7 +68,9 @@ namespace Common.Tests.Models
         {
             foreach (var chars in UtilityCommen.InvalidCharacters)
             {
-                Assert.That(() => _uut.Name = chars, Throws.Exception);
+                _utility.DidNotReceive().DatabaseSecure(Arg.Is(chars));
+                _uut.Name = chars;
+                _utility.Received(1).DatabaseSecure(Arg.Is(chars));
             }
         }
 
@@ -95,7 +98,9 @@ namespace Common.Tests.Models
         {
             foreach (var chars in UtilityCommen.InvalidCharacters)
             {
-                Assert.That(() => _uut.Description = chars, Throws.Exception);
+                _utility.DidNotReceive().DatabaseSecure(Arg.Is(chars));
+                _uut.Description = chars;
+                _utility.Received(1).DatabaseSecure(Arg.Is(chars));
             }
         }
 
