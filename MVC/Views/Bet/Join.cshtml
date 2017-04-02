@@ -32,11 +32,11 @@
             <div class="col-md-5">
                 <h2 class="pull-left">
                     <b>
-                        @Html.DisplayFor(m => m.Outcomes[0])
+                        @Html.DisplayFor(m => m.Outcomes[0].Name)
                         #1
                     </b>
                 </h2>
-                <button type="submit" class="btn btn-primary" style="margin-left: auto;">JOIN</button>
+                <a href="/Bet/Join/@Model.Id/@Model.OutcomeId[1]" class="btn btn-primary pull-left">JOIN</a>
             </div>
         </form>
         <div class="col-md-2">
@@ -46,12 +46,11 @@
             <div class="col-md-5">
                 <h2 class="text-md-right">
                     <b>
-                        @Html.DisplayFor(m => m.Outcomes[1])
-                        @Html.HiddenFor(m => m.SelectedOutcome)
+                        @Html.DisplayFor(m => m.Outcomes[1].Name)
                         #2
                     </b>
                 </h2>
-                <button type="submit" class="btn btn-primary" style="margin-left: auto;">JOIN</button>
+                <a href="/Bet/Join/@Model.Id/@Model.OutcomeId[2]" class="btn btn-primary pull-left">JOIN</a>
             </div>
         </form>
     </div>

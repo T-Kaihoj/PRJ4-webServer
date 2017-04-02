@@ -54,7 +54,7 @@ namespace MVC.Controllers
                 };
                 foreach (var outcome in bet.Outcomes)
                 {
-                    betPage.Outcomes.Add(outcome.Name);
+                    betPage.Outcomes.Add(outcome);
                 }
 
                 return View(betPage);
@@ -135,7 +135,7 @@ namespace MVC.Controllers
                 var myBet = myWork.Bet.Get(id);
                 foreach (var outcomes in myBet.Outcomes)
                 {
-                    viewModel.Outcomes.Add(outcomes.Name);
+                    viewModel.Outcomes.Add(outcomes);
                 }
                 viewModel.Title = myBet.Name;
                 viewModel.Description = myBet.Description;
@@ -157,7 +157,17 @@ namespace MVC.Controllers
                 var user = myWork.User.Get(_userContext.Identity.Name);
 
                 //Retrieves Bet from DB using BetId, then calls joinBet on retrieved Bet and adds user+selected outcome to Bet.
-                myWork.Bet.Get(model.Id).joinBet(user, model.SelectedOutcome);
+
+                if (model.OutcomeId[0] == 1)
+                {
+                    myWork.Bet.Get(model.Id).joinBet(user, model.Outcomes[0]);
+
+                }
+                else if (model.OutcomeId[0] == 2)
+                {
+                    myWork.Bet.Get(model.Id).joinBet(user, model.Outcomes[1]);
+                }
+
                 myWork.Complete();
 
                 return Redirect("/Lobby/List");
