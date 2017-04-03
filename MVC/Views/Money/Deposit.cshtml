@@ -5,22 +5,22 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model  WithdrawViewModel
+@model  DepositViewModel
 
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <h1 class="header">
-                Withdraw Money
+                deposit Money
             </h1>
             <h2  class="label" >Your balance: @Model.CurrentBalance </h2>
             
 
-            <form method="post" action="/User/Withdraw">
+            <form method="post" action="/User/Deposit">
                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Withdraw, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Withdraw, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Withdraw, null, new { @class = "help-block" })
+                    @Html.LabelFor(m => m.Deposit, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Deposit, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Deposit, null, new { @class = "help-block" })
                 </div>
                 <div class="row">
                     <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Withdraw</button>
