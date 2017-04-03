@@ -18,7 +18,7 @@ namespace Common.Models
         public Bet()
         {
             _utility = Utility.Instance;
-
+        
         }
 
         public Bet(IUtility util = null, IFactory fact = null)
@@ -77,12 +77,8 @@ namespace Common.Models
             get { return judge; }
             set
             {
-                using (var myWork = _factory.GetUOF())
-                {
-                    if (myWork.User.Get(value.Username) == null)
-                        throw new Exception();
-                    judge = value;
-                }
+                judge = value;
+                
             }
         }
 

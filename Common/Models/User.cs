@@ -100,7 +100,7 @@ namespace Common.Models
         {
             if (_balance < amount)
             {
-                throw new ArithmeticException();
+             //   throw new ArithmeticException();
             }
             _balance = _balance + amount;
             return amount;

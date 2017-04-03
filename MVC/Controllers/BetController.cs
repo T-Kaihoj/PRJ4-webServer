@@ -102,6 +102,7 @@ namespace MVC.Controllers
                     BuyIn = Decimal.Parse(viewModel.BuyIn),
                     Description = viewModel.Description,
                     Name = viewModel.Title,
+                    Owner = myWork.User.Get(_userContext.Identity.Name),
                     Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = DateTime.Parse(viewModel.StartDate),
                     StopDate = DateTime.Parse(viewModel.StopDate)
