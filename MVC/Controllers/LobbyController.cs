@@ -33,7 +33,7 @@ namespace MVC.Controllers
 
 
         [HttpGet]
-        public ActionResult Create(long id)
+        public ActionResult Invite(long id)
         {
             var viewModel = new InviteToLobbyViewModel()
             {
@@ -51,7 +51,7 @@ namespace MVC.Controllers
                 var user = myWork.User.Get(viewModel.Username);
 
                 var lobby = myWork.Lobby.Get(viewModel.Id);
-                lobby.MemberList.Add(user);
+                lobby.InviteUserToLobby(user);
 
                 myWork.Complete();
 
@@ -197,6 +197,7 @@ namespace MVC.Controllers
                     Name = lobby.Name,
                     Description = lobby.Description,
                     Bets = lobby.Bets
+                   
                 };
 
                 return View(viewModel);
