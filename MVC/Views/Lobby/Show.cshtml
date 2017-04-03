@@ -36,6 +36,9 @@
                 <a href="/Bet/Create/@Model.ID" class="btn btn-primary pull-left">Create new bet</a>
                 <a href="/Lobby/Leave/@Model.ID" class="btn btn-primary pull-right">Leave Lobby</a>
             </p>
+            <div class="row">
+                @Html.Partial("_Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
+            </div>
         </div>
     </div>
 </div>
