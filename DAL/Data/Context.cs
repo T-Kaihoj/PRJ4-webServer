@@ -77,6 +77,16 @@ namespace DAL.Data
                 .WithMany(s => s.BetsJudged)
                 .WillCascadeOnDelete(false);
 
+
+            // en til mange opsætning mellem Bet og Outcomes
+            // formålet er at outcomes skal fjernes automatisk, når et bet fjernes
+            modelBuilder.Entity<Outcome>()
+                .HasRequired<Bet>(s => s.Bet) // dette skal muligvis ikke være required
+                .WithMany(s => s.Outcomes)
+                .WillCascadeOnDelete(true);
+
+
+
         }
     }
 }

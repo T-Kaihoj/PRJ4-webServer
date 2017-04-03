@@ -36,7 +36,6 @@ namespace DAL.Migrations
                             Username = "ThomasSwager",
                             Email = "tn@email",
                             Balance = 50,
-                            Salt = "Salt",
                             Hash = "Hash"
                         },
                         new User
@@ -46,7 +45,6 @@ namespace DAL.Migrations
                             Username = "BeutyQueen",
                             Email = "sk@email",
                             Balance = 200,
-                            Salt = "Salt",
                             Hash = "Hash"
                         },
                         new User
@@ -56,7 +54,6 @@ namespace DAL.Migrations
                             Username = "M4dsMe",
                             Email = "mh@email",
                             Balance = 456,
-                            Salt = "Salt",
                             Hash = "Hash"
                         },
                         new User
@@ -66,7 +63,6 @@ namespace DAL.Migrations
                             Username = "StenNielsen",
                             Email = "sn@email",
                             Balance = 132,
-                            Salt = "Salt",
                             Hash = "Hash"
                         }
                     };

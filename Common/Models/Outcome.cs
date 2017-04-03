@@ -43,6 +43,9 @@ namespace Common.Models
             set { _description = _utility.DatabaseSecure( value); }
         }
 
+        // navigation property
+        public virtual Bet Bet { get; set; }
+
         public virtual ICollection<User> Participants { get; set; } = new List<User>();
     }
 }
