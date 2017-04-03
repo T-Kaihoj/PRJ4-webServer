@@ -98,10 +98,6 @@ namespace Common.Models
 
         public decimal DepositMoney(decimal amount)
         {
-            if (_balance < amount)
-            {
-                throw new ArithmeticException();
-            }
             _balance = _balance + amount;
             return amount;
         }
