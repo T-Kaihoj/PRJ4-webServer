@@ -3,7 +3,7 @@ namespace DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class initia : DbMigration
     {
         public override void Up()
         {
@@ -43,7 +43,6 @@ namespace DAL.Migrations
                         Email = c.String(maxLength: 200),
                         Balance = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Hash = c.String(nullable: false),
-                        Salt = c.String(),
                     })
                 .PrimaryKey(t => t.Username)
                 .Index(t => t.Email, unique: true);
@@ -65,10 +64,10 @@ namespace DAL.Migrations
                         OutcomeId = c.Long(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
-                        Bet_BetId = c.Long(),
+                        Bet_BetId = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.OutcomeId)
-                .ForeignKey("dbo.Bets", t => t.Bet_BetId)
+                .ForeignKey("dbo.Bets", t => t.Bet_BetId, cascadeDelete: true)
                 .Index(t => t.Bet_BetId);
             
             CreateTable(
@@ -129,10 +128,10 @@ namespace DAL.Migrations
         {
             DropForeignKey("dbo.Bets", "Result_OutcomeId", "dbo.Outcomes");
             DropForeignKey("dbo.Bets", "Owner_Username", "dbo.Users");
-            DropForeignKey("dbo.Outcomes", "Bet_BetId", "dbo.Bets");
             DropForeignKey("dbo.Bets", "Judge_Username", "dbo.Users");
             DropForeignKey("dbo.UserOutcome", "OutcomeId", "dbo.Outcomes");
             DropForeignKey("dbo.UserOutcome", "Username", "dbo.Users");
+            DropForeignKey("dbo.Outcomes", "Bet_BetId", "dbo.Bets");
             DropForeignKey("dbo.UserLobbyMember", "LobbyId", "dbo.Lobbies");
             DropForeignKey("dbo.UserLobbyMember", "Username", "dbo.Users");
             DropForeignKey("dbo.UserLobbyInvited", "LobbyId", "dbo.Lobbies");

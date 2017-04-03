@@ -49,9 +49,9 @@
   <ItemGroup>
     <Compile Include="Data\Context.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="Migrations\201703311510309_InitialCreate.cs" />
-    <Compile Include="Migrations\201703311510309_InitialCreate.Designer.cs">
-      <DependentUpon>201703311510309_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201704031131041_initia.cs" />
+    <Compile Include="Migrations\201704031131041_initia.Designer.cs">
+      <DependentUpon>201704031131041_initia.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
@@ -76,8 +76,8 @@
     <Folder Include="Migrations\201703301249207_\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703311510309_InitialCreate.resx">
-      <DependentUpon>201703311510309_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201704031131041_initia.resx">
+      <DependentUpon>201704031131041_initia.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
