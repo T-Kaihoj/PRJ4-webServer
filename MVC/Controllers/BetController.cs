@@ -198,9 +198,8 @@ namespace MVC.Controllers
                 //bool betConclude = myWork.Bet.Get(id);
                 myWork.Complete();
 
-                var model = new JoinViewModel();
-                model.MyBet = Bet;
-                
+                var model = new ConcludeViewModel();
+                model.setup(Bet);
 
                 if (_userContext.Identity.Name == Bet.Judge.Username)
                     return View(model);
@@ -209,8 +208,8 @@ namespace MVC.Controllers
 
         }
 
-        
-        public ActionResult ConcludeConclude(long BetID, long SelectedOutcome)
+        [HttpPost]
+        public ActionResult Conclude(long BetID, ConcludeViewModel Model)
         {
             
             using (var myWork = _factory.GetUOF())
@@ -220,7 +219,7 @@ namespace MVC.Controllers
 
                 var user = myWork.User.Get(User.Identity.Name);
 
-                 bool betConclude = myWork.Bet.Get(BetID).ConcludeBet(user, myWork.Outcome.Get(SelectedOutcome));
+                 bool betConclude = myWork.Bet.Get(BetID).ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
                 myWork.Complete();
                 if (betConclude)
                 return View("/Show");
