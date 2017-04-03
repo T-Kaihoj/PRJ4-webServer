@@ -223,7 +223,7 @@ namespace MVC.Controllers
                  bool betConclude = bet.ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
                 myWork.Complete();
                 if (betConclude)
-                return View("/Show");
+                return Redirect("/");
             }
 
 
