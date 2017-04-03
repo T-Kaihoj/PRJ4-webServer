@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Common.Models;
 
 namespace MVC.ViewModels
 {
@@ -67,6 +69,7 @@ namespace MVC.ViewModels
             set { _outcome2 = value.Trim(); }
         }
 
+ 
         public string Judge
         {
             get { return _judge; }

@@ -42,7 +42,7 @@ namespace Common.Models
             get { return _name; }
             set { _name = _utility.DatabaseSecure(value); }
         }
-         
+
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
 
@@ -71,25 +71,28 @@ namespace Common.Models
 
         // navigation property
         private User judge;
-        public virtual User Judge {
+
+        public virtual User Judge
+        {
             get { return judge; }
             set
             {
                 using (var myWork = _factory.GetUOF())
                 {
                     if (myWork.User.Get(value.Username) == null)
-                        throw new Exception();  
+                        throw new Exception();
                     judge = value;
-                }   
+                }
             }
         }
+
 
         // navigation property
         public virtual User Owner { get; set; }
 
         // navigation property
         public virtual Lobby Lobby { get; set; }
-        
+
         private void Payout()
         {
             var numberOfWinners = Result.Participants.Count;
@@ -102,7 +105,7 @@ namespace Common.Models
 
         public bool joinBet(User user, Outcome outcome)
         {
-           
+
             if (!Outcomes.Contains(outcome)) //todo needs to check the uses in Lobby
                 return false;
 
@@ -110,7 +113,7 @@ namespace Common.Models
             outcome.Participants.Add(user);
 
 
-                return true;
+            return true;
         }
     }
 }
