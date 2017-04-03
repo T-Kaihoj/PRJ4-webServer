@@ -13,6 +13,7 @@ namespace Common.Models
         private string _description;
         private readonly IUtility _utility;
         private Outcome _result;
+        private IFactory _factory;
 
         public Bet()
         {
@@ -20,7 +21,7 @@ namespace Common.Models
 
         }
 
-        public Bet(IUtility util = null)
+        public Bet(IUtility util = null, IFactory fact = null)
         {
             if (util == null)
             {
@@ -30,6 +31,7 @@ namespace Common.Models
             {
                 _utility = util;
             }
+            _factory = fact;
         }
 
         [Key]
@@ -68,7 +70,19 @@ namespace Common.Models
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
 
         // navigation property
-        public virtual User Judge { get; set; }
+        private User judge;
+        public virtual User Judge {
+            get { return judge; }
+            set
+            {
+                using (var myWork = _factory.GetUOF())
+                {
+                    if (myWork.User.Get(value.Username) == null)
+                        throw new Exception();  
+                    judge = value;
+                }   
+            }
+        }
 
         // navigation property
         public virtual User Owner { get; set; }

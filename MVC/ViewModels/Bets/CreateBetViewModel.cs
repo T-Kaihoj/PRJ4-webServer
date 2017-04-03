@@ -15,6 +15,7 @@ namespace MVC.ViewModels
         private string _title = string.Empty;
         private string _stopDate = string.Empty;
         private string _startDate = string.Empty;
+        private string _owner = string.Empty;
 
         [DisplayName("Buy in")]
         public string BuyIn
@@ -78,5 +79,13 @@ namespace MVC.ViewModels
             get { return _lobbyId; }
             set { _lobbyId = value; }
         }
+
+        [HiddenInput]
+        public string Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
+        }
+
     }
 }

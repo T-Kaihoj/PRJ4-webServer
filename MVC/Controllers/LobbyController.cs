@@ -122,7 +122,6 @@ namespace MVC.Controllers
                 lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
                 myWork.Complete();
                 return Redirect($"/Lobby/List");
-                
             }
         }
 
