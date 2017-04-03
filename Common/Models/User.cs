@@ -77,11 +77,12 @@ namespace Common.Models
         [Required]
         public string Hash { get; set; }
 
-        public string Salt { get; set; }
 
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
         public virtual ICollection<Bet> Bets { get; set; } 
+        public virtual ICollection<Bet> BetsOwned { get; set; }
+        public virtual ICollection<Bet> BetsJudged { get; set; }
         public virtual ICollection<Outcome> Outcomes { get; set; }
         
 

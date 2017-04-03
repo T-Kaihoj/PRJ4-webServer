@@ -66,13 +66,15 @@ namespace Common.Models
         public Decimal Pot { get; set; }
         public virtual ICollection<User> Participants { get; set; } = new List<User>();
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
+
+        // navigation property
         public virtual User Judge { get; set; }
 
-        // Reference to the Lobby that the bet belongs to
+        // navigation property
+        public virtual User Owner { get; set; }
+
+        // navigation property
         public virtual Lobby Lobby { get; set; }
-
-        public ICollection<User> Invited { get; set; }
-
         
         private void Payout()
         {

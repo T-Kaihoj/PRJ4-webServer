@@ -62,7 +62,7 @@ namespace Common.Models
             }
         }
 
-        public void AcceptLobby(User user)
+        public virtual void AcceptLobby(User user)
         {
             if (!this.InvitedList.Remove(user))
                 return;
