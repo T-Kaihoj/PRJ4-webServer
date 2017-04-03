@@ -16,6 +16,9 @@ namespace Common.Models
         private readonly IUtility _utility;
         private decimal _balance;
 
+        //FJERN MIG!!!!
+        public string TEST { get; set; }
+
         public User()
         {
             _utility = Utility.Instance;
