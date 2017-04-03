@@ -33,7 +33,7 @@ namespace MVC.Controllers
 
 
         [HttpGet]
-        public ActionResult Create(long id)
+        public ActionResult Invite(long id)
         {
             var viewModel = new InviteToLobbyViewModel()
             {
