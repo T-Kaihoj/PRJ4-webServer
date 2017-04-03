@@ -113,6 +113,7 @@ namespace MVC.Controllers
                 catch (Exception e)
                 {
                     Console.WriteLine(e);
+                    return View("Create", viewModel);
                     return Redirect("../Lobby/List");
                 }
 
