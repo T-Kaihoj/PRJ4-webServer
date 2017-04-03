@@ -1,0 +1,11 @@
+﻿@model MVC.ViewModels.OutcomeViewModel
+
+<div class="col-md-5">
+    <form method="post" action="/Bet/Join">
+        <h2>
+            @Html.DisplayFor(m => m.Name)
+            @Html.HiddenFor(m => m.Id, new {Value = Model.Id})
+        </h2>
+        <button type="submit" class="btn btn-primary">Join</button>
+    </form>
+</div>

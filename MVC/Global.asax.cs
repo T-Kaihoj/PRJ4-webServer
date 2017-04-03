@@ -7,6 +7,7 @@ using Common;
 using Common.Models;
 using DAL;
 using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security;
 using MVC.Identity;
 using SimpleInjector;
 using SimpleInjector.Diagnostics;
@@ -37,6 +38,7 @@ namespace MVC
             container.Register<IUserStore<IdentityUser, string>, Store>(Lifestyle.Transient);
             container.Register<IUserContext, UserContext>();
             container.Register<IUtility, Utility>();
+            container.Register<IAuthenticationManager, EmptyAuthenticationManager>();
 
             // Register the MVC controllers.
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());

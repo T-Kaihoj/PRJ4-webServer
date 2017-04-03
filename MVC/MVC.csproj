@@ -181,12 +181,12 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BetController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\InviteToLobbyController.cs" />
     <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Identity\EmptyAuthenticationManager.cs" />
     <Compile Include="Identity\IdentityUser.cs" />
     <Compile Include="Identity\IUserContext.cs" />
     <Compile Include="Identity\Store\IStore.cs" />
@@ -215,11 +215,15 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\Bets\ShowBetOutcomeViewModel.cs" />
+    <Compile Include="ViewModels\Bets\ShowBetViewModel.cs" />
     <Compile Include="ViewModels\Bets\BetViewModel.cs" />
     <Compile Include="ViewModels\Bets\CreateBetViewModel.cs" />
-    <Compile Include="ViewModels\Bets\JoinViewModel.cs" />
+    <Compile Include="ViewModels\Bets\OutcomeViewModel.cs" />
+    <Compile Include="ViewModels\Bets\JoinBetViewModel.cs" />
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
+    <Compile Include="ViewModels\Lobbies\InviteToLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\Money\CreateWithdrawViewModel.cs" />
     <Compile Include="ViewModels\User\CreateUserViewModel.cs" />
@@ -269,10 +273,11 @@
     <Content Include="test.runsettings" />
     <Content Include="Views\Home\IndexAuth.cshtml" />
     <Content Include="Views\Money\Withdraw.cshtml" />
+    <Content Include="Views\Bet\_Outcome.cshtml" />
+    <Content Include="Views\Lobby\_Invite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\Lobbies\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

@@ -4,8 +4,10 @@
 # User-specific files
 *.suo
 *.user
+*.DotSettings
 *.userosscache
 *.sln.docstates
+.idea/
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
@@ -242,3 +244,4 @@ ModelManifest.xml
 .fake/
 *.pubxml
 /MVC/bower_components
+
