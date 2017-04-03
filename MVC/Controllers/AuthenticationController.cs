@@ -1,26 +1,22 @@
-﻿using System.Web;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web;
 using System.Web.Mvc;
-using DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using MVC.Identity;
+using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
     public class AuthenticationController : Controller
     {
-        private UserManager<IdentityUser, string> _userManager;
-        private IAuthenticationManager _authenticationManager = null;
-        private SignInManager<IdentityUser, string> _signInManager;
+        private readonly UserManager<IdentityUser, string> _userManager;
+        private readonly IAuthenticationManager _authenticationManager;
 
-        public AuthenticationController(UserManager<IdentityUser, string> userManager = null)
+        public AuthenticationController(UserManager<IdentityUser, string> userManager, IAuthenticationManager authenticationManager)
         {
-            if (userManager == null)
-            {
-                userManager = new UserManager<IdentityUser, string>(new Store(new Factory()));
-            }
-
+            _authenticationManager = authenticationManager;
             _userManager = userManager;
         }
 
@@ -30,12 +26,19 @@ namespace MVC.Controllers
         {
             var signInManager = GetSignInManager();
 
-            if (string.IsNullOrWhiteSpace(userName) || string.IsNullOrWhiteSpace(password))
+            // Convert to viewmodel.
+            AuthenticationViewModel viewModel = new AuthenticationViewModel()
+            {
+                Password = password,
+                UserName = userName
+            };
+
+            if (!TryValidateModel(viewModel))
             {
                 return View("InvalidCredentials");
             }
 
-            var result = signInManager.PasswordSignIn(userName, password, true, false);
+            var result = signInManager.PasswordSignIn(viewModel.UserName, viewModel.Password, true, false);
 
             switch (result)
             {
@@ -57,16 +60,18 @@ namespace MVC.Controllers
             return Redirect("/");
         }
 
+        // The following is made to allow for testing, and to avoid injecting runtime information. As such, it is not included in our coverage analysis.
+        [ExcludeFromCodeCoverage]
         private SignInManager<IdentityUser, string> GetSignInManager()
         {
-            if (_authenticationManager == null)
+            var auth = _authenticationManager as EmptyAuthenticationManager;
+
+            if (auth != null)
             {
                 return new SignInManager<IdentityUser, string>(_userManager, HttpContext.GetOwinContext().Authentication);
             }
-            else
-            {
-                return new SignInManager<IdentityUser, string>(_userManager, _authenticationManager);
-            }
+
+            return new SignInManager<IdentityUser, string>(_userManager, _authenticationManager);
         }
     }
 }

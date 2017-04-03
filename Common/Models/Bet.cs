@@ -67,7 +67,10 @@ namespace Common.Models
         public virtual ICollection<User> Participants { get; set; } = new List<User>();
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
         public virtual User Judge { get; set; }
-        
+
+        // Reference to the Lobby that the bet belongs to
+        public virtual Lobby Lobby { get; set; }
+
         public ICollection<User> Invited { get; set; }
 
         

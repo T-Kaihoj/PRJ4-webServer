@@ -201,10 +201,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationControllerTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\CreateTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\JoinTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\ShowTests.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
-    <Compile Include="Controllers\BetControllerTests.cs" />
     <Compile Include="Controllers\LobbyControllerTests.cs" />
     <Compile Include="BaseRepositoryTest.cs" />
+    <Compile Include="Controllers\UserControllers\EditProfileTests.cs" />
     <Compile Include="Identity\IdentityUserTests.cs" />
     <Compile Include="Identity\StoreTwoFactorTests.cs" />
     <Compile Include="Identity\StorePasswordTests.cs" />
@@ -213,6 +216,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Identity\StoreUserTests.cs" />
     <Compile Include="ViewModels\Bets\CreateBetViewModelTests.cs" />
+    <Compile Include="ViewModels\AuthenticationViewModelTests.cs" />
+    <Compile Include="ViewModels\AuthenticationViewModelValidationTests.cs" />
     <Compile Include="ViewModels\User\EditProfileViewModelTests.cs" />
     <Compile Include="ViewModels\User\CreateUserViewModelTests.cs" />
     <Compile Include="ViewModels\User\EditProfileViewModelViewModelValidationTests.cs" />

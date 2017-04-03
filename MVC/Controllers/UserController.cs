@@ -14,23 +14,14 @@ namespace MVC.Controllers
         private IFactory _factory;
         private UserManager<IdentityUser> _userManager;
         private IStore _store;
+        private IUserContext _context;
 
-        public UserController(IFactory factory = null, IStore store = null)
+        public UserController(IFactory factory, IStore store, IUserContext context)
         {
-            if (factory == null)
-            {
-                factory = new Factory();
-                throw new Exception("No factory");
-            }
-
-            if (store == null)
-            {
-                store = new Store(factory);
-            }
-
             _store = store;
             _userManager = new UserManager<IdentityUser>(_store);
             _factory = factory;
+            _context = context;
         }
 
 
@@ -39,7 +30,7 @@ namespace MVC.Controllers
         public ActionResult Index()
         {
             // Get the user from the identity.
-            var userName = User.Identity.Name;
+            var userName = _context.Identity.Name;
 
             // Lookup the user in the repository.
             var user = _factory.GetUOF().User.Get(userName);
@@ -65,18 +56,27 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult EditProfile(EditProfileViewModel viewModel)
         {
+            // Ensure the data is vaid.
+            if (!TryValidateModel(viewModel))
+            {
+                return View("EditProfile", viewModel);
+            }
+
             using (var myWork = _factory.GetUOF())
             {
-                var user = myWork.User.Get(User.Identity.Name);
+                var user = myWork.User.Get(_context.Identity.Name);
+
+                // user should NEVER be null, but we check anyway.
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
 
                 user.Email = viewModel.Email;
                 user.FirstName = viewModel.FirstName;
                 user.LastName = viewModel.LastName;
 
-                // TODO: Update the user credentials in the authentication system.
-
                 myWork.Complete();
-
             }
 
             return RedirectToAction("Index");
@@ -85,6 +85,34 @@ namespace MVC.Controllers
         [HttpGet]
         public ActionResult EditProfile()
         {
+            // Get the user from the identity.
+            var userName = _context.Identity.Name;
+
+            // Lookup the user in the repository.
+            var user = _factory.GetUOF().User.Get(userName);
+
+            // user should NEVER be null, but we check anyway.
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            // Populate the viewmodel.
+            var viewModel = new EditProfileViewModel()
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+
+            return View("EditProfile", viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Withdraw()
+        {
+            return View("~/Views/Money/Withdraw.cshtml");
+
             // Get the user from the identity.
             var userName = User.Identity.Name;
 
