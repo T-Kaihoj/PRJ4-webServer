@@ -109,31 +109,96 @@ namespace MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult Withdraw()
+        public ActionResult WithdrawMoney()
         {
-            return View("~/Views/Money/Withdraw.cshtml");
-
-            // Get the user from the identity.
-            var userName = User.Identity.Name;
+            // Get the logged in user
+            var userName = _context.Identity.Name;
 
             // Lookup the user in the repository.
             var user = _factory.GetUOF().User.Get(userName);
-
             // user should NEVER be null, but we check anyway.
             if (user == null)
             {
-                throw new Exception("User not found");
+                throw new Exception("You are not logged in");
             }
 
             // Populate the viewmodel.
-            var viewModel = new EditProfileViewModel()
+            var viewModel = new WithdrawViewModel()
             {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
+                CurrentBalance = user.Balance,
             };
 
-            return View(viewModel);
+            return View("~/Views/Money/Withdraw.cshtml",viewModel);
+        }
+
+        [HttpGet]
+        public ActionResult DepositMoney()
+        {
+            // Get the logged in user
+            var userName = _context.Identity.Name;
+
+            // Lookup the user in the repository.
+            var user = _factory.GetUOF().User.Get(userName);
+            // user should NEVER be null, but we check anyway.
+            if (user == null)
+            {
+                throw new Exception("You are not logged in");
+            }
+
+            // Populate the viewmodel.
+            var viewModel = new DepositViewModel()
+            {
+                CurrentBalance = user.Balance,
+            };
+
+            return View("~/Views/Money/Deposit.cshtml", viewModel);
+        }
+
+
+        [HttpPost]
+        public ActionResult Withdraw(WithdrawViewModel model)
+        {
+            // Get the logged in user
+            var userName = _context.Identity.Name;
+
+            using (var myWork = _factory.GetUOF())
+            {
+                // Lookup the user in the repository.
+                var user = myWork.User.Get(userName);
+                // user should NEVER be null, but we check anyway.
+                if (user == null)
+                {
+                    throw new Exception("You are not logged in");
+                }
+                //Justerer users balance
+                user.WithdrawMoney(model.Withdraw);
+                myWork.Complete();
+            }
+            return View("~/Views/Home/IndexAuth.cshtml");
+        }
+
+        [HttpPost]
+        public ActionResult Deposit(DepositViewModel model)
+        {
+            // Get the logged in user
+            var userName = _context.Identity.Name;
+
+            using (var myWork = _factory.GetUOF())
+            {
+                // Lookup the user in the repository.
+                var user = myWork.User.Get(userName);
+            // user should NEVER be null, but we check anyway.
+            if (user == null)
+            {
+                throw new Exception("You are not logged in");
+            }
+           
+                //Justerer users balance
+                user.DepositMoney(model.Deposit);
+                myWork.Complete();
+            }
+
+            return View("~/Views/Home/IndexAuth.cshtml");
         }
 
         // POST: /User/Create

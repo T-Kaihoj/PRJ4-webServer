@@ -13,6 +13,7 @@ namespace Common.Models
         private string _description;
         private readonly IUtility _utility;
         private Outcome _result;
+        private IFactory _factory;
 
         public Bet()
         {
@@ -20,7 +21,7 @@ namespace Common.Models
 
         }
 
-        public Bet(IUtility util = null)
+        public Bet(IUtility util = null, IFactory fact = null)
         {
             if (util == null)
             {
@@ -30,6 +31,7 @@ namespace Common.Models
             {
                 _utility = util;
             }
+            _factory = fact;
         }
 
         [Key]
@@ -40,7 +42,7 @@ namespace Common.Models
             get { return _name; }
             set { _name = _utility.DatabaseSecure(value); }
         }
-         
+
         public DateTime StartDate { get; set; }
         public DateTime StopDate { get; set; }
 
@@ -66,15 +68,32 @@ namespace Common.Models
         public Decimal Pot { get; set; }
         public virtual ICollection<User> Participants { get; set; } = new List<User>();
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
-        public virtual User Judge { get; set; }
 
-        // Reference to the Lobby that the bet belongs to
+        // navigation property
+        private User judge;
+
+        public virtual User Judge
+        {
+            get { return judge; }
+            set
+            {
+                using (var myWork = _factory.GetUOF())
+                {
+                    if (myWork.User.Get(value.Username) == null)
+                        throw new Exception();
+                    judge = value;
+                }
+            }
+        }
+
+
+        // navigation property
+        public virtual User Owner { get; set; }
+
+        // navigation property
         public virtual Lobby Lobby { get; set; }
 
-        public ICollection<User> Invited { get; set; }
-
-        
-        private void Payout( )
+        private void Payout()
         {
             var numberOfWinners = Result.Participants.Count;
             var payout = Decimal.ToInt32(Pot) / numberOfWinners;
@@ -101,7 +120,7 @@ namespace Common.Models
 
         public bool joinBet(User user, Outcome outcome)
         {
-           
+
             if (!Outcomes.Contains(outcome)) //todo needs to check the uses in Lobby
                 return false;
 
@@ -109,7 +128,7 @@ namespace Common.Models
             outcome.Participants.Add(user);
 
 
-                return true;
+            return true;
         }
 
        

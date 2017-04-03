@@ -32,6 +32,34 @@ namespace MVC.Controllers
         }
 
 
+        [HttpGet]
+        public ActionResult Create(long id)
+        {
+            var viewModel = new InviteToLobbyViewModel()
+            {
+                Id = id
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Invite(InviteToLobbyViewModel viewModel)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var user = myWork.User.Get(viewModel.Username);
+
+                var lobby = myWork.Lobby.Get(viewModel.Id);
+                lobby.MemberList.Add(user);
+
+                myWork.Complete();
+
+                return Redirect($"/Lobby/Invite/{lobby.LobbyId}");
+
+            }
+        }
+
         [HttpPost]
         // POST: /<controller>/Create
         public ActionResult Create(CreateLobbyViewModel viewModel)
@@ -122,7 +150,6 @@ namespace MVC.Controllers
                 lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
                 myWork.Complete();
                 return Redirect($"/Lobby/List");
-                
             }
         }
 

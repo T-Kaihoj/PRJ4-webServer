@@ -36,8 +36,7 @@ namespace DAL.Migrations
                             Username = "ThomasSwager",
                             Email = "tn@email",
                             Balance = 50,
-                            Salt = "Salt",
-                            Hash = "Hash"
+                            Hash = "AJwmelOnaNPu2IPQXi9v5LO8ZELTWysV/5r0rTIs7WY2cZ5nj6I5JeR7INRcwvahrw=="
                         },
                         new User
                         {
@@ -46,8 +45,7 @@ namespace DAL.Migrations
                             Username = "BeutyQueen",
                             Email = "sk@email",
                             Balance = 200,
-                            Salt = "Salt",
-                            Hash = "Hash"
+                            Hash = "AJwmelOnaNPu2IPQXi9v5LO8ZELTWysV/5r0rTIs7WY2cZ5nj6I5JeR7INRcwvahrw=="
                         },
                         new User
                         {
@@ -56,8 +54,7 @@ namespace DAL.Migrations
                             Username = "M4dsMe",
                             Email = "mh@email",
                             Balance = 456,
-                            Salt = "Salt",
-                            Hash = "Hash"
+                            Hash = "AJwmelOnaNPu2IPQXi9v5LO8ZELTWysV/5r0rTIs7WY2cZ5nj6I5JeR7INRcwvahrw=="
                         },
                         new User
                         {
@@ -66,8 +63,7 @@ namespace DAL.Migrations
                             Username = "StenNielsen",
                             Email = "sn@email",
                             Balance = 132,
-                            Salt = "Salt",
-                            Hash = "Hash"
+                            Hash = "AJwmelOnaNPu2IPQXi9v5LO8ZELTWysV/5r0rTIs7WY2cZ5nj6I5JeR7INRcwvahrw=="
                         }
                     };
                     foreach (var user in users)

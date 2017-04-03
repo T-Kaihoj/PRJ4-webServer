@@ -69,29 +69,40 @@ namespace Common.Models
         public decimal Balance {
             get { return _balance;  }
             set
-            {
-                _balance = _balance + value;
+            {  
+                _balance = value;
             }
         }
 
         [Required]
         public string Hash { get; set; }
 
-        public string Salt { get; set; }
 
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
         public virtual ICollection<Bet> Bets { get; set; } 
+        public virtual ICollection<Bet> BetsOwned { get; set; }
+        public virtual ICollection<Bet> BetsJudged { get; set; }
         public virtual ICollection<Outcome> Outcomes { get; set; }
         
 
         public decimal WithdrawMoney(decimal amount)
         {
-            if (Balance < amount)
+            if (_balance < amount)
             {
                 throw new ArithmeticException(); 
             }
-            Balance = Balance - amount;
+            _balance = _balance - amount;
+            return amount;
+        }
+
+        public decimal DepositMoney(decimal amount)
+        {
+            if (_balance < amount)
+            {
+                throw new ArithmeticException();
+            }
+            _balance = _balance + amount;
             return amount;
         }
     }

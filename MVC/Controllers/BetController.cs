@@ -209,17 +209,17 @@ namespace MVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Conclude(long BetID, ConcludeViewModel Model)
+        public ActionResult Conclude( ConcludeViewModel Model)
         {
             
             using (var myWork = _factory.GetUOF())
             {
                 //throw new NotImplementedException();
                 //TODO BetController JoinViewModel NullReference
-
+                var bet = myWork.Outcome.Get(Model.SelectedOutcome).bet;
                 var user = myWork.User.Get(User.Identity.Name);
 
-                 bool betConclude = myWork.Bet.Get(BetID).ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
+                 bool betConclude = bet.ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
                 myWork.Complete();
                 if (betConclude)
                 return View("/Show");
