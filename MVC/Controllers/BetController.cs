@@ -114,7 +114,6 @@ namespace MVC.Controllers
                 {
                     Console.WriteLine(e);
                     return View("Create", viewModel);
-                    return Redirect("../Lobby/List");
                 }
 
 
