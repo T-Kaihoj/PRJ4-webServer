@@ -62,7 +62,7 @@ namespace MVC
 
 
             // Update Database to latest migration
-            if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
+            //if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
             {
                 var configuration = new DAL.Migrations.Configuration();
                 var migrator = new DbMigrator(configuration);
