@@ -62,6 +62,7 @@ namespace TestApp
                     Console.WriteLine(user.Username);
                 }
 
+
                 //var enUser = unitOfWork.User.Get("ThomasSwager");
                 //Console.WriteLine(enUser.FirstName);
             }
