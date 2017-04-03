@@ -194,7 +194,7 @@ namespace MVC.Controllers
             }
            
                 //Justerer users balance
-                user.Balance = user.Balance + model.Deposit;
+                user.DepositMoney(model.Deposit);
                 myWork.Complete();
             }
 

@@ -11,7 +11,7 @@
     <div class="row">
         <div class="col-md-12">
             <h1 class="header">
-                deposit Money
+                Deposit Money
             </h1>
             <h2  class="label" >Your balance: @Model.CurrentBalance </h2>
             
@@ -23,7 +23,7 @@
                     @Html.ValidationMessageFor(m => m.Deposit, null, new { @class = "help-block" })
                 </div>
                 <div class="row">
-                    <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Withdraw</button>
+                    <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Deposit</button>
                     <button type="reset" class="btn btn-primary pull-left">Cancel</button>
                 </div>
             </form>
