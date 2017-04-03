@@ -24,7 +24,6 @@ namespace DAL.Tests
                 Bets = null,
                 Email = email,
                 Hash = "sdkjfldfkdf",
-                Salt = "dsfdfsfdsfsfd",
                 LastName = "Soerensen"
             };
         }

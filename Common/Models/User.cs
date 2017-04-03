@@ -77,7 +77,6 @@ namespace Common.Models
         [Required]
         public string Hash { get; set; }
 
-        public string Salt { get; set; }
 
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }

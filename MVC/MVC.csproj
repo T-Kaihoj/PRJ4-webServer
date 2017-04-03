@@ -223,6 +223,7 @@
     <Compile Include="ViewModels\Bets\JoinBetViewModel.cs" />
     <Compile Include="ViewModels\CreateLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
+    <Compile Include="ViewModels\Lobbies\InviteToLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
     <Compile Include="ViewModels\Money\DepositViewModel.cs" />
     <Compile Include="ViewModels\Money\WithdrawViewModel.cs" />
@@ -275,10 +276,11 @@
     <Content Include="Views\Money\Deposit.cshtml" />
     <Content Include="Views\Bet\_Outcome.cshtml" />
     <Content Include="Views\Money\Withdraw.cshtml" />
+    <Content Include="Views\Bet\_Outcome.cshtml" />
+    <Content Include="Views\Lobby\_Invite.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="ViewModels\Lobbies\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

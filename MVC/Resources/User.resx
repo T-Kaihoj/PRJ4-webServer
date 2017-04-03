@@ -144,6 +144,9 @@
   <data name="ErrorFirstNameRequired" xml:space="preserve">
     <value>You must enter your first name</value>
   </data>
+  <data name="ErrorJudgeDoesNotExist" xml:space="preserve">
+    <value>You must enter a valid judge</value>
+  </data>
   <data name="ErrorLastNameRequired" xml:space="preserve">
     <value>You must enter your last name</value>
   </data>

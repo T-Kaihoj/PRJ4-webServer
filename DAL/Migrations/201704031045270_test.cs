@@ -3,7 +3,7 @@ namespace DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Test : DbMigration
+    public partial class test : DbMigration
     {
         public override void Up()
         {
@@ -19,15 +19,18 @@ namespace DAL.Migrations
                         BuyIn = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Pot = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Lobby_LobbyId = c.Long(),
-                        Judge_Username = c.String(maxLength: 128),
+                        Judge_Username = c.String(nullable: false, maxLength: 128),
+                        Owner_Username = c.String(nullable: false, maxLength: 128),
                         Result_OutcomeId = c.Long(),
                     })
                 .PrimaryKey(t => t.BetId)
                 .ForeignKey("dbo.Lobbies", t => t.Lobby_LobbyId)
                 .ForeignKey("dbo.Users", t => t.Judge_Username)
+                .ForeignKey("dbo.Users", t => t.Owner_Username)
                 .ForeignKey("dbo.Outcomes", t => t.Result_OutcomeId)
                 .Index(t => t.Lobby_LobbyId)
                 .Index(t => t.Judge_Username)
+                .Index(t => t.Owner_Username)
                 .Index(t => t.Result_OutcomeId);
             
             CreateTable(
@@ -40,13 +43,9 @@ namespace DAL.Migrations
                         Email = c.String(maxLength: 200),
                         Balance = c.Decimal(nullable: false, precision: 18, scale: 2),
                         Hash = c.String(nullable: false),
-                        Salt = c.String(nullable: false),
-                        Bet_BetId = c.Long(),
                     })
                 .PrimaryKey(t => t.Username)
-                .ForeignKey("dbo.Bets", t => t.Bet_BetId)
-                .Index(t => t.Email, unique: true)
-                .Index(t => t.Bet_BetId);
+                .Index(t => t.Email, unique: true);
             
             CreateTable(
                 "dbo.Lobbies",
@@ -65,10 +64,10 @@ namespace DAL.Migrations
                         OutcomeId = c.Long(nullable: false, identity: true),
                         Name = c.String(),
                         Description = c.String(),
-                        Bet_BetId = c.Long(),
+                        Bet_BetId = c.Long(nullable: false),
                     })
                 .PrimaryKey(t => t.OutcomeId)
-                .ForeignKey("dbo.Bets", t => t.Bet_BetId)
+                .ForeignKey("dbo.Bets", t => t.Bet_BetId, cascadeDelete: true)
                 .Index(t => t.Bet_BetId);
             
             CreateTable(
@@ -128,11 +127,11 @@ namespace DAL.Migrations
         public override void Down()
         {
             DropForeignKey("dbo.Bets", "Result_OutcomeId", "dbo.Outcomes");
-            DropForeignKey("dbo.Outcomes", "Bet_BetId", "dbo.Bets");
+            DropForeignKey("dbo.Bets", "Owner_Username", "dbo.Users");
             DropForeignKey("dbo.Bets", "Judge_Username", "dbo.Users");
-            DropForeignKey("dbo.Users", "Bet_BetId", "dbo.Bets");
             DropForeignKey("dbo.UserOutcome", "OutcomeId", "dbo.Outcomes");
             DropForeignKey("dbo.UserOutcome", "Username", "dbo.Users");
+            DropForeignKey("dbo.Outcomes", "Bet_BetId", "dbo.Bets");
             DropForeignKey("dbo.UserLobbyMember", "LobbyId", "dbo.Lobbies");
             DropForeignKey("dbo.UserLobbyMember", "Username", "dbo.Users");
             DropForeignKey("dbo.UserLobbyInvited", "LobbyId", "dbo.Lobbies");
@@ -149,9 +148,9 @@ namespace DAL.Migrations
             DropIndex("dbo.UserBet", new[] { "BetId" });
             DropIndex("dbo.UserBet", new[] { "Username" });
             DropIndex("dbo.Outcomes", new[] { "Bet_BetId" });
-            DropIndex("dbo.Users", new[] { "Bet_BetId" });
             DropIndex("dbo.Users", new[] { "Email" });
             DropIndex("dbo.Bets", new[] { "Result_OutcomeId" });
+            DropIndex("dbo.Bets", new[] { "Owner_Username" });
             DropIndex("dbo.Bets", new[] { "Judge_Username" });
             DropIndex("dbo.Bets", new[] { "Lobby_LobbyId" });
             DropTable("dbo.UserOutcome");

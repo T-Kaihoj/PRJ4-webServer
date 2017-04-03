@@ -39,7 +39,7 @@ namespace MVC.Controllers
                 var viewmodel = new ShowBetViewModel()
                 {
                     Description = bet.Description,
-                    Judge = bet.Judge?.Username,
+                    Judge = bet.Judge.Username,
                     Title = bet.Name,
                     StartDate = bet.StartDate.ToLongDateString(),
                     StopDate = bet.StopDate.ToLongDateString(),
@@ -76,7 +76,8 @@ namespace MVC.Controllers
         {
             var viewModel = new CreateBetViewModel()
             {
-                LobbyID = id
+                LobbyID = id,
+                Owner = _userContext.Identity.Name
             };
 
             return View(viewModel);
@@ -94,18 +95,28 @@ namespace MVC.Controllers
 
             using (var myWork = _factory.GetUOF())
             {
+
                 // Create the bet.
-                var bet = new Bet()
+                var bet = new Bet(null, _factory)
                 {
                     BuyIn = Decimal.Parse(viewModel.BuyIn),
                     Description = viewModel.Description,
                     Name = viewModel.Title,
-                    Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = DateTime.Parse(viewModel.StartDate),
-                    StopDate = DateTime.Parse(viewModel.StopDate)
+                    StopDate = DateTime.Parse(viewModel.StopDate),
+                    Owner = myWork.User.Get(viewModel.Owner)
                 };
-                /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
-                
+                try
+                {
+                    bet.Judge = myWork.User.Get(viewModel.Judge);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return View("Create", viewModel);
+                }
+
+
                 var outcome1 = new Common.Models.Outcome()
                 {
                     Name = viewModel.Outcome1,
@@ -124,8 +135,11 @@ namespace MVC.Controllers
                 // Get the lobby.
                 var lobby = myWork.Lobby.Get(viewModel.LobbyID);
                 lobby.Bets.Add(bet);
-                
+
+               
                 myWork.Complete();
+                
+                
 
                 // Redirect to the bet page.
                 return Redirect($"/Bet/Show/{bet.BetId}");
