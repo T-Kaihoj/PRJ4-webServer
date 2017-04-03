@@ -17,7 +17,7 @@ namespace DAL.Data
         public DbSet<Outcome> Outcomes { get; set; }
 
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder) // 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder) 
         {
             // mange til mange opsætning mellem User og Lobby (member)
             modelBuilder.Entity<User>()
@@ -62,6 +62,21 @@ namespace DAL.Data
                     cs.MapRightKey("OutcomeId");
                     cs.ToTable("UserOutcome");
                 });
+
+
+            // en til mange opsætning mellem User og Bet (owner)
+            modelBuilder.Entity<Bet>()
+                .HasRequired<User>(s => s.Owner)
+                .WithMany(s => s.BetsOwned)
+                .WillCascadeOnDelete(false);
+
+
+            // en til mange opsætning mellem User og Bet (Judge)
+            modelBuilder.Entity<Bet>()
+                .HasRequired<User>(s => s.Judge)
+                .WithMany(s => s.BetsJudged)
+                .WillCascadeOnDelete(false);
+
         }
     }
 }
