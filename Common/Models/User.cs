@@ -82,6 +82,8 @@ namespace Common.Models
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
         public virtual ICollection<Bet> Bets { get; set; } 
+        public virtual ICollection<Bet> BetsOwned { get; set; }
+        public virtual ICollection<Bet> BetsJudged { get; set; }
         public virtual ICollection<Outcome> Outcomes { get; set; }
         
 
