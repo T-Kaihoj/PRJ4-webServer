@@ -92,6 +92,10 @@ namespace Common.Models
         private void Payout()
         {
             var numberOfWinners = Result.Participants.Count;
+            if (numberOfWinners <= 0)
+            {
+                return;
+            }
             var payout = Decimal.ToInt32(Pot) / numberOfWinners;
             foreach (var player in Result.Participants)
             {
