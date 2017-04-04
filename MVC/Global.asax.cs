@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.Entity.Migrations;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
@@ -21,6 +22,16 @@ namespace MVC
     [ExcludeFromCodeCoverage]
     public class MvcApplication : System.Web.HttpApplication
     {
+
+        /*
+        public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.MapRoute(
+            "RemoveBet",                                              // Route name
+            "{controller}/{action}/{Lobby}/{Bet}",                           // URL with parameters
+            new { controller = "Bet", action = "Remove", Lobby = "", Bet = "" }  // Parameter defaults
+        );
+        }*/
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
@@ -60,16 +71,25 @@ namespace MVC
 
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
 
-            /*
+            
             // Update Database to latest migration
-            if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
+            //if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
             {
                 var configuration = new DAL.Migrations.Configuration();
                 var migrator = new DbMigrator(configuration);
-                migrator.Update();
+                try
+                {
+                    migrator.Update();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                
             }
-            */
 
         }
+
     }
 }

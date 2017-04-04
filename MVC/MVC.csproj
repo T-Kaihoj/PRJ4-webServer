@@ -280,6 +280,7 @@
     <Content Include="Views\Money\Withdraw.cshtml" />
     <Content Include="Views\Bet\_Outcome.cshtml" />
     <Content Include="Views\Lobby\_Invite.cshtml" />
+    <Content Include="Views\Bet\Conclude.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

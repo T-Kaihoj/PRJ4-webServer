@@ -223,11 +223,28 @@ namespace MVC.Controllers
                  bool betConclude = bet.ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
                 myWork.Complete();
                 if (betConclude)
-                return View("/Show");
+                return Redirect("/");
             }
 
 
             return Redirect("/");
+        }
+        // GET: /<controller>/Remove/<Lobby>/<Bet>
+        [HttpGet]
+        public ActionResult Remove(long Lobby, long Bet)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var myBet = myWork.Bet.Get(Bet);
+                
+                //TODO: Check is user is owner of lobby before removing!
+                myWork.Bet.Remove(myBet);
+                //TODO: Fails when there's outcomes associated with the bet!
+                myWork.Complete();
+
+                string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+                return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
+            }
         }
     }
 }
