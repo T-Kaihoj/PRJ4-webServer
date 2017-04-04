@@ -61,9 +61,9 @@ namespace MVC
 
             DependencyResolver.SetResolver(new SimpleInjectorDependencyResolver(container));
 
-            /*
+            
             // Update Database to latest migration
-            if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
+            //if (bool.Parse(ConfigurationManager.AppSettings["MigrateDatabaseToLatestVersion"]))
             {
                 var configuration = new DAL.Migrations.Configuration();
                 var migrator = new DbMigrator(configuration);
@@ -78,7 +78,6 @@ namespace MVC
                 }
                 
             }
-            */
 
         }
     }
