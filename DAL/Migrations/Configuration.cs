@@ -31,17 +31,15 @@ namespace DAL.Migrations
             }
             */
 
-            //context = new Context();
-
             using (var unitOfWork = new UnitOfWork(new Context()))
             {
 
                 // Opretter User1, User2 ... User6 - password er "q1"
                 // User1 - 3 er medlem af en lobby 
                 // User1 - 2 deltager i et bet i den lobby
-                // User3 er kun medlem af lobbien
+                // User3 er judge på bettet
                 // User4 - 5 er inviteret til lobbien men ikke medlem endnu 
-                // User6 er ikke medlem af nogen lobby, men han judger bettet i førnævnte lobby
+                // User6 er ikke medlem af nogen lobby
 
                 var users = new User[]
                     {
@@ -135,8 +133,8 @@ namespace DAL.Migrations
                         }
                 };
 
-                users[0].BetsOwned = new List<Bet> { bets[0] }; // Nødvendigt? hmm
-                users[5].BetsJudged = new List<Bet> { bets[0] };
+                users[0].BetsOwned = new List<Bet> { bets[0] }; 
+                users[2].BetsJudged = new List<Bet> { bets[0] };
 
                 var lobbies = new Lobby[]
                 {
