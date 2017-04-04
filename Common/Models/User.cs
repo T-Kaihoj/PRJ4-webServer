@@ -16,6 +16,7 @@ namespace Common.Models
         private readonly IUtility _utility;
         private decimal _balance;
 
+
         public User()
         {
             _utility = Utility.Instance;
