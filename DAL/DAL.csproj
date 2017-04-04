@@ -53,10 +53,6 @@
     <Compile Include="Migrations\201704031340003_test.Designer.cs">
       <DependentUpon>201704031340003_test.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201704032049176_TEST_Attribute_on_user.cs" />
-    <Compile Include="Migrations\201704032049176_TEST_Attribute_on_user.Designer.cs">
-      <DependentUpon>201704032049176_TEST_Attribute_on_user.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -82,9 +78,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704031340003_test.resx">
       <DependentUpon>201704031340003_test.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201704032049176_TEST_Attribute_on_user.resx">
-      <DependentUpon>201704032049176_TEST_Attribute_on_user.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

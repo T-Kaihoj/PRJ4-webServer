@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Data.Entity.Migrations;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
@@ -66,7 +67,16 @@ namespace MVC
             {
                 var configuration = new DAL.Migrations.Configuration();
                 var migrator = new DbMigrator(configuration);
-                migrator.Update();
+                try
+                {
+                    migrator.Update();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                
             }
 
 
