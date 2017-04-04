@@ -1,0 +1,37 @@
+﻿@using MVC.ViewModels;
+
+@{
+    ViewData["Title"] = "Conclude " +Model.Title  ;
+}
+
+@model MVC.ViewModels.ConcludeViewModel
+
+
+@Model.Title  
+
+<br />
+
+
+<form method="post" action="/Bet/Conclude/">
+    
+    @foreach (var Outcome in Model.Outcomes)
+    {
+        
+    
+            <div>
+                <input id=""
+                       name="SelectedOutcome"
+                       type="radio"
+                       value=@Outcome.id />
+                <label for="Outcome">@Outcome.id @Outcome.OutcomeTitle</label>
+                           
+            </div>
+            
+
+
+    } 
+    <input type="submit" value="Submit" class="submit" />
+    
+    
+
+</form>

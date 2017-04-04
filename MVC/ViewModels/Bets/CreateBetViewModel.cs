@@ -73,7 +73,7 @@ namespace MVC.ViewModels
         public string Judge
         {
             get { return _judge; }
-            set { _judge = value.Trim(); }
+            set { _judge = value?.Trim(); }
         }
 
         [HiddenInput]
