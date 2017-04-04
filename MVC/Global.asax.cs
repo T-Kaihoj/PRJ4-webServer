@@ -22,16 +22,6 @@ namespace MVC
     [ExcludeFromCodeCoverage]
     public class MvcApplication : System.Web.HttpApplication
     {
-
-        /*
-        public static void RegisterRoutes(RouteCollection routes)
-        {
-            routes.MapRoute(
-            "RemoveBet",                                              // Route name
-            "{controller}/{action}/{Lobby}/{Bet}",                           // URL with parameters
-            new { controller = "Bet", action = "Remove", Lobby = "", Bet = "" }  // Parameter defaults
-        );
-        }*/
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
