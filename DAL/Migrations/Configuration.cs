@@ -14,7 +14,8 @@ namespace DAL.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(DAL.Data.Context context)
@@ -22,13 +23,20 @@ namespace DAL.Migrations
             context = new Context();
             using (var unitOfWork = new UnitOfWork(new Context()))
             {
-                // context.Database.EnsureCreated(); // noget her der også er broken efter skiftet til normal entity
-
                 // Laver flere useres og tilføjer dem til databasen hvis der ikke findes nogen
                 if (!context.Users.Any())
                 {
                     var users = new User[]
                     {
+                        new User
+                        {
+                            FirstName = "q1",
+                            LastName = "q1",
+                            Username = "q1",
+                            Email = "q1@q1.com",
+                            Balance = 9000,
+                            Hash = "ACGab8FF5QeVUeQ+O5nI8uSICG/najdGBlX7DcoHWhrlokruHBFr6AAL5UnCXyhQLA=="
+                        }, 
                         new User
                         {
                             FirstName = "Thomas",
