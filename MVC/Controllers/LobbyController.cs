@@ -196,8 +196,8 @@ namespace MVC.Controllers
                     ID = lobby.LobbyId,
                     Name = lobby.Name,
                     Description = lobby.Description,
-                    Bets = lobby.Bets,
-                    Username = _userContext.Identity.Name
+                    Bets = lobby.Bets
+                   
                 };
 
                 return View(viewModel);

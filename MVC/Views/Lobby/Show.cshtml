@@ -29,13 +29,9 @@
                       
                         
                         <a class="btn btn-primary pull-right" href="/Bet/Show/@b.BetId">Info</a>
-
                         <!-- TODO: Only show when logged in user is owner of shown bet -->
-
-                        @if (b.Owner.Username == Model.Username)
-                        {
-                            <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
-                        }
+                        <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
+                        
                         <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
                             @b.BuyIn
                         </label>

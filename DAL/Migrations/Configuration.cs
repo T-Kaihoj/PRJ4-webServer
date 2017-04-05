@@ -22,7 +22,7 @@ namespace DAL.Migrations
         protected override void Seed(DAL.Data.Context context) // Parameter not used, but has to stay for override purpose
         {
 
-            /* Hvis Seed metoden ï¿½nskes debugget
+            /* Hvis Seed metoden ønskes debugget
             if (System.Diagnostics.Debugger.IsAttached == false)
             {
 
@@ -37,7 +37,7 @@ namespace DAL.Migrations
                 // Opretter User1, User2 ... User6 - password er "q1"
                 // User1 - 3 er medlem af en lobby 
                 // User1 - 2 deltager i et bet i den lobby
-                // User3 er judge pï¿½ bettet
+                // User3 er judge på bettet
                 // User4 - 5 er inviteret til lobbien men ikke medlem endnu 
                 // User6 er ikke medlem af nogen lobby
 
@@ -73,7 +73,7 @@ namespace DAL.Migrations
                         new User
                         {
                             FirstName = "Sten",
-                            LastName = "Sï¿½rensen",
+                            LastName = "Sørensen",
                             Username = "User4",
                             Email = "aMail4@email.com",
                             Balance = 2000,

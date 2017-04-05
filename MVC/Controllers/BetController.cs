@@ -102,7 +102,7 @@ namespace MVC.Controllers
                     BuyIn = Decimal.Parse(viewModel.BuyIn),
                     Description = viewModel.Description,
                     Name = viewModel.Title,
-                    //Owner = myWork.User.Get(_userContext.Identity.Name),
+                    Owner = myWork.User.Get(_userContext.Identity.Name),
                     Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = DateTime.Parse(viewModel.StartDate),
                     StopDate = DateTime.Parse(viewModel.StopDate)
@@ -128,8 +128,6 @@ namespace MVC.Controllers
                 var lobby = myWork.Lobby.Get(viewModel.LobbyID);
                 lobby.Bets.Add(bet);
                 
-                myWork.User.Get(_userContext.Identity.Name).BetsOwned.Add(bet);
-
                 myWork.Complete();
 
                 // Redirect to the bet page.
