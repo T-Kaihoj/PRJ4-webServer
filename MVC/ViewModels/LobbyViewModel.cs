@@ -13,5 +13,7 @@ namespace MVC.ViewModels
         //Måske laves om til en liste af BetID'er?
         public ICollection<Bet> Bets { get; set; }
 
+        public string Username { get; set; }
+
     }
 }
