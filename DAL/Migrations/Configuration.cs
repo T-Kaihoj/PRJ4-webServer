@@ -31,18 +31,24 @@ namespace DAL.Migrations
             }
             */
 
-            using (var unitOfWork = new UnitOfWork(new Context()))
+            var dbContext = new Context();
+
+            if (!dbContext.Users.Any())
             {
+                using (var unitOfWork = new UnitOfWork(dbContext))
+                {
 
-                // Opretter User1, User2 ... User6 - password er "q1"
-                // User1 - 3 er medlem af en lobby 
-                // User1 - 2 deltager i et bet i den lobby
-                // User3 er judge på bettet
-                // User4 - 5 er inviteret til lobbien men ikke medlem endnu 
-                // User6 er ikke medlem af nogen lobby
+                    // Opretter User1, User2 ... User6 - password er "q1"
+                    // User1 - 3 er medlem af en lobby 
+                    // User1 - 2 deltager i et bet i den lobby
+                    // User3 er judge på bettet
+                    // User4 - 5 er inviteret til lobbien men ikke medlem endnu 
+                    // User6 er ikke medlem af nogen lobby
 
-                var users = new User[]
-                    {
+
+
+                    var users = new User[]
+                        {
                         new User
                         {
                             FirstName = "Thomas",
@@ -97,10 +103,10 @@ namespace DAL.Migrations
                             Balance = 3000,
                             Hash = "AIYT7d1P++iiw2wxGVTo9y7mrBPwKpQu1TvtLMwJPKu/+OYyCThhD81YUiZqwY5IpQ=="
                         }
-                    };
+                        };
 
-                var outcomes = new Outcome[]
-                {
+                    var outcomes = new Outcome[]
+                    {
                         new Outcome()
                         {
                             Name = "No",
@@ -114,10 +120,10 @@ namespace DAL.Migrations
                             Participants = new List<User>() {users[1]},
                             Description = "Trump will finish his term"
                         }
-                };
+                    };
 
-                var bets = new Bet[]
-                {
+                    var bets = new Bet[]
+                    {
                         new Bet()
                         {
                             Name = "Trump",
@@ -131,13 +137,13 @@ namespace DAL.Migrations
                             Participants = new List<User>() {users[0], users[1]},
                             Outcomes = new List<Outcome>() {outcomes[0], outcomes[1]}
                         }
-                };
+                    };
 
-                users[0].BetsOwned = new List<Bet> { bets[0] }; 
-                users[2].BetsJudged = new List<Bet> { bets[0] };
+                    users[0].BetsOwned = new List<Bet> { bets[0] };
+                    users[2].BetsJudged = new List<Bet> { bets[0] };
 
-                var lobbies = new Lobby[]
-                {
+                    var lobbies = new Lobby[]
+                    {
                         new Lobby()
                         {
                             Name = "Test Lobby",
@@ -146,46 +152,50 @@ namespace DAL.Migrations
                             Bets = new List<Bet>() {bets[0]},
                             InvitedList = new List<User>() {users[3], users[4]}
                         }
-                };
+                    };
 
-                foreach (var user in users)
-                {
-                    unitOfWork.User.Add(user);
+                    foreach (var user in users)
+                    {
+                        unitOfWork.User.Add(user);
+                    }
+
+                    foreach (var bet in bets)
+                    {
+                        unitOfWork.Bet.Add(bet);
+                    }
+
+                    foreach (var lobby in lobbies)
+                    {
+                        unitOfWork.Lobby.Add(lobby);
+                    }
+
+                    foreach (var outcome in outcomes)
+                    {
+                        unitOfWork.Outcome.Add(outcome);
+                    }
+
+                    unitOfWork.Complete();
+
+
+                    //  This method will be called after migrating to the latest version.
+
+                    //System.Data.Entity.Database.SetInitializer(new DbInitializer());
+
+                    //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+                    //  to avoid creating duplicate seed data. E.g.
+                    //
+                    //    context.People.AddOrUpdate(
+                    //      p => p.FullName,
+                    //      new Person { FullName = "Andrew Peters" },
+                    //      new Person { FullName = "Brice Lambson" },
+                    //      new Person { FullName = "Rowan Miller" }
+                    //    );
+                    //
                 }
 
-                foreach (var bet in bets)
-                {
-                    unitOfWork.Bet.Add(bet);
-                }
-
-                foreach (var lobby in lobbies)
-                {
-                    unitOfWork.Lobby.Add(lobby);
-                }
-
-                foreach (var outcome in outcomes)
-                {
-                    unitOfWork.Outcome.Add(outcome);
-                }
-
-                unitOfWork.Complete();
-
-
-                //  This method will be called after migrating to the latest version.
-
-                //System.Data.Entity.Database.SetInitializer(new DbInitializer());
-
-                //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
-                //  to avoid creating duplicate seed data. E.g.
-                //
-                //    context.People.AddOrUpdate(
-                //      p => p.FullName,
-                //      new Person { FullName = "Andrew Peters" },
-                //      new Person { FullName = "Brice Lambson" },
-                //      new Person { FullName = "Rowan Miller" }
-                //    );
-                //
             }
+
+
         }
     }
 }
