@@ -76,9 +76,8 @@ namespace MVC
                     Console.WriteLine(e);
                     throw;
                 }
-                
-            }
 
+            }
         }
     }
 }
