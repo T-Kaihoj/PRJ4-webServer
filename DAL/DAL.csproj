@@ -49,10 +49,6 @@
   <ItemGroup>
     <Compile Include="Data\Context.cs" />
     <Compile Include="Factory.cs" />
-    <Compile Include="Migrations\201703311510309_InitialCreate.cs" />
-    <Compile Include="Migrations\201703311510309_InitialCreate.Designer.cs">
-      <DependentUpon>201703311510309_InitialCreate.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -74,11 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Migrations\201703301249207_\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703311510309_InitialCreate.resx">
-      <DependentUpon>201703311510309_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

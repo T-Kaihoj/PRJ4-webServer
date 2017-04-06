@@ -150,7 +150,6 @@ namespace MVC.Controllers
                 lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
                 myWork.Complete();
                 return Redirect($"/Lobby/List");
-                
             }
         }
 
@@ -198,10 +197,12 @@ namespace MVC.Controllers
                     Name = lobby.Name,
                     Description = lobby.Description,
                     Bets = lobby.Bets
+                   
                 };
 
                 return View(viewModel);
             }
         }
+        
     }
 }

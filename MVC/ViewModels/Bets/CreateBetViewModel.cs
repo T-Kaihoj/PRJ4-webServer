@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Common.Models;
 
 namespace MVC.ViewModels
 {
@@ -15,6 +17,7 @@ namespace MVC.ViewModels
         private string _title = string.Empty;
         private string _stopDate = string.Empty;
         private string _startDate = string.Empty;
+        private string _owner = string.Empty;
 
         [DisplayName("Buy in")]
         public string BuyIn
@@ -66,10 +69,11 @@ namespace MVC.ViewModels
             set { _outcome2 = value.Trim(); }
         }
 
+ 
         public string Judge
         {
             get { return _judge; }
-            set { _judge = value.Trim(); }
+            set { _judge = value?.Trim(); }
         }
 
         [HiddenInput]
@@ -78,5 +82,13 @@ namespace MVC.ViewModels
             get { return _lobbyId; }
             set { _lobbyId = value; }
         }
+
+        [HiddenInput]
+        public string Owner
+        {
+            get { return _owner; }
+            set { _owner = value; }
+        }
+
     }
 }

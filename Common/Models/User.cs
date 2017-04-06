@@ -16,6 +16,7 @@ namespace Common.Models
         private readonly IUtility _utility;
         private decimal _balance;
 
+
         public User()
         {
             _utility = Utility.Instance;
@@ -69,15 +70,14 @@ namespace Common.Models
         public decimal Balance {
             get { return _balance;  }
             set
-            {
-                _balance = _balance + value;
+            {  
+                _balance = value;
             }
         }
 
         [Required]
         public string Hash { get; set; }
 
-        public string Salt { get; set; }
 
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
@@ -89,11 +89,21 @@ namespace Common.Models
 
         public decimal WithdrawMoney(decimal amount)
         {
-            if (Balance < amount)
+            if (_balance < amount)
             {
                 throw new ArithmeticException(); 
             }
-            Balance = Balance - amount;
+            _balance = _balance - amount;
+            return amount;
+        }
+
+        public decimal DepositMoney(decimal amount)
+        {
+            if (_balance < amount)
+            {
+             //   throw new ArithmeticException();
+            }
+            _balance = _balance + amount;
             return amount;
         }
     }

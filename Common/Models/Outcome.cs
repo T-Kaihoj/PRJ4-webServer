@@ -31,6 +31,8 @@ namespace Common.Models
         [Key]
         public long OutcomeId { get; set; }
 
+        public virtual Bet bet { get; set; }
+
         public string Name
         {
             get { return _name; }

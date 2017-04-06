@@ -142,6 +142,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a valid judge.
+        /// </summary>
+        public static string ErrorJudgeDoesNotExist {
+            get {
+                return ResourceManager.GetString("ErrorJudgeDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter your last name.
         /// </summary>
         public static string ErrorLastNameRequired {

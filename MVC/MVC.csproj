@@ -108,6 +108,7 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlXml" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
@@ -215,6 +216,7 @@
     </Compile>
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\Bets\ConcludeViewModel.cs" />
     <Compile Include="ViewModels\Bets\ShowBetOutcomeViewModel.cs" />
     <Compile Include="ViewModels\Bets\ShowBetViewModel.cs" />
     <Compile Include="ViewModels\Bets\BetViewModel.cs" />
@@ -225,7 +227,8 @@
     <Compile Include="ViewModels\LobbiesViewModel.cs" />
     <Compile Include="ViewModels\Lobbies\InviteToLobbyViewModel.cs" />
     <Compile Include="ViewModels\LobbyViewModel.cs" />
-    <Compile Include="ViewModels\Money\CreateWithdrawViewModel.cs" />
+    <Compile Include="ViewModels\Money\DepositViewModel.cs" />
+    <Compile Include="ViewModels\Money\WithdrawViewModel.cs" />
     <Compile Include="ViewModels\User\CreateUserViewModel.cs" />
     <Compile Include="ViewModels\User\UserProfileViewModel.cs" />
     <Compile Include="ViewModels\User\EditProfileViewModel.cs" />
@@ -272,9 +275,13 @@
     <Content Include="Views\User\EditProfile.cshtml" />
     <Content Include="test.runsettings" />
     <Content Include="Views\Home\IndexAuth.cshtml" />
+    <Content Include="Views\Money\Deposit.cshtml" />
+    <Content Include="Views\Bet\_Outcome.cshtml" />
     <Content Include="Views\Money\Withdraw.cshtml" />
     <Content Include="Views\Bet\_Outcome.cshtml" />
     <Content Include="Views\Lobby\Invite.cshtml" />
+
+    <Content Include="Views\Bet\Conclude.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
