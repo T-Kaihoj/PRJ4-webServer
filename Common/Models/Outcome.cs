@@ -31,6 +31,8 @@ namespace Common.Models
         [Key]
         public long OutcomeId { get; set; }
 
+        public virtual Bet bet { get; set; }
+
         public string Name
         {
             get { return _name; }
@@ -42,9 +44,6 @@ namespace Common.Models
             get { return _description; }
             set { _description = _utility.DatabaseSecure( value); }
         }
-
-        // navigation property
-        public virtual Bet Bet { get; set; }
 
         public virtual ICollection<User> Participants { get; set; } = new List<User>();
     }

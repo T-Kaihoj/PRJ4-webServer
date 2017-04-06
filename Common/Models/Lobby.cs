@@ -8,7 +8,6 @@ namespace Common.Models
     public class Lobby :ILobbyLogic
     {
         private string _name;
-        private string _description;
         private readonly IUtility _utility;
 
         public Lobby()
@@ -38,11 +37,6 @@ namespace Common.Models
             set { _name =_utility.DatabaseSecure( value); }
         }
 
-        public string Description
-        {
-            get { return _description; }
-            set { _description = _utility.DatabaseSecure( value); }
-        }
 
         public virtual ICollection<Bet> Bets { get; set; } = new List<Bet>();
         public virtual ICollection<User> MemberList { get; set; } = new List<User>();

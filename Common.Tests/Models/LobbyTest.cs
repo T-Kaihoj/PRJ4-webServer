@@ -74,35 +74,6 @@ namespace Common.Tests.Models
             }
         }
 
-        [Test]
-        public void Description_SetValidDescription_DescriptionSet()
-        {
-            foreach (var chars in UtilityCommen.ValidCharacters)
-            {
-                Assert.That(() => _uut.Description = chars, Throws.Nothing);
-            }
-        }
-
-        [Test]
-        public void Description_GetValidDescription_DescriptionReturned()
-        {
-            foreach (var chars in UtilityCommen.ValidCharacters)
-            {
-                _uut.Description = chars;
-                Assert.That(_uut.Description, Is.EqualTo(chars));
-            }
-        }
-
-        [Test]
-        public void Description_SetInvalidDescription_ThrowExecption()
-        {
-            foreach (var chars in UtilityCommen.InvalidCharacters)
-            {
-                _utility.DidNotReceive().DatabaseSecure(Arg.Is(chars));
-                _uut.Description = chars;
-                _utility.Received(1).DatabaseSecure(Arg.Is(chars));
-            }
-        }
 
         [Test]
         public void Bets_SetValidBets_BetsSet()

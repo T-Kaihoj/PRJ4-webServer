@@ -18,7 +18,7 @@ namespace Common.Models
         public Bet()
         {
             _utility = Utility.Instance;
-
+        
         }
 
         public Bet(IUtility util = null, IFactory fact = null)
@@ -54,7 +54,11 @@ namespace Common.Models
                 if (_result != null)
                     return;
                 _result = value;
-                Payout();
+                if (value != null) // Payout() fucker hvis value er null (eller også er den bare fucked generelt)
+                {
+                    Payout(); 
+                }
+                  
             }
         }
 
@@ -65,7 +69,7 @@ namespace Common.Models
         }
 
         public Decimal BuyIn { get; set; }
-        public Decimal Pot { get; set; }
+        public Decimal Pot { get; set; }    // denne skal muligvis fjernes, da værdien afhænger 100% af antallet af deltagere og buyin
         public virtual ICollection<User> Participants { get; set; } = new List<User>();
         public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
 
@@ -77,12 +81,8 @@ namespace Common.Models
             get { return judge; }
             set
             {
-                using (var myWork = _factory.GetUOF())
-                {
-                    if (myWork.User.Get(value.Username) == null)
-                        throw new Exception();
-                    judge = value;
-                }
+                judge = value;
+                
             }
         }
 
@@ -96,11 +96,30 @@ namespace Common.Models
         private void Payout()
         {
             var numberOfWinners = Result.Participants.Count;
+            if (numberOfWinners <= 0)
+            {
+                return;
+            }
             var payout = Decimal.ToInt32(Pot) / numberOfWinners;
             foreach (var player in Result.Participants)
             {
-                player.Balance += (decimal) payout;
+                player.Balance += (decimal)payout;
             }
+        }
+
+        public bool ConcludeBet(User user, Outcome outcome)
+        {
+            if (Judge == user && Outcomes.Contains(outcome))
+            {
+                Result = outcome;
+                Payout();
+                return true;
+            }
+            
+            
+            return false;
+
+
         }
 
         public bool joinBet(User user, Outcome outcome)
@@ -115,5 +134,7 @@ namespace Common.Models
 
             return true;
         }
+
+       
     }
 }

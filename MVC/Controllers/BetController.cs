@@ -7,6 +7,7 @@ using Common.Models;
 using MVC.Identity;
 using MVC.ViewModels;
 
+
 namespace MVC.Controllers
 {
     [Authorize]
@@ -15,7 +16,8 @@ namespace MVC.Controllers
         private readonly IFactory _factory;
         private readonly IUserContext _userContext;
 
-        public BetController(IFactory factory, IUserContext userContext)
+        public BetController(IFactory factory , IUserContext userContext)
+
         {
             _factory = factory;
             _userContext = userContext;
@@ -39,7 +41,7 @@ namespace MVC.Controllers
                 var viewmodel = new ShowBetViewModel()
                 {
                     Description = bet.Description,
-                    Judge = bet.Judge.Username,
+                    Judge = bet.Judge?.Username,
                     Title = bet.Name,
                     StartDate = bet.StartDate.ToLongDateString(),
                     StopDate = bet.StopDate.ToLongDateString(),
@@ -76,8 +78,7 @@ namespace MVC.Controllers
         {
             var viewModel = new CreateBetViewModel()
             {
-                LobbyID = id,
-                Owner = _userContext.Identity.Name
+                LobbyID = id
             };
 
             return View(viewModel);
@@ -95,28 +96,19 @@ namespace MVC.Controllers
 
             using (var myWork = _factory.GetUOF())
             {
-
                 // Create the bet.
-                var bet = new Bet(null, _factory)
+                var bet = new Bet()
                 {
                     BuyIn = Decimal.Parse(viewModel.BuyIn),
                     Description = viewModel.Description,
                     Name = viewModel.Title,
+                    Owner = myWork.User.Get(_userContext.Identity.Name),
+                    Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = DateTime.Parse(viewModel.StartDate),
-                    StopDate = DateTime.Parse(viewModel.StopDate),
-                    Owner = myWork.User.Get(viewModel.Owner)
+                    StopDate = DateTime.Parse(viewModel.StopDate)
                 };
-                try
-                {
-                    bet.Judge = myWork.User.Get(viewModel.Judge);
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine(e);
-                    return View("Create", viewModel);
-                }
-
-
+                /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
+                
                 var outcome1 = new Common.Models.Outcome()
                 {
                     Name = viewModel.Outcome1,
@@ -135,11 +127,8 @@ namespace MVC.Controllers
                 // Get the lobby.
                 var lobby = myWork.Lobby.Get(viewModel.LobbyID);
                 lobby.Bets.Add(bet);
-
-               
+                
                 myWork.Complete();
-                
-                
 
                 // Redirect to the bet page.
                 return Redirect($"/Bet/Show/{bet.BetId}");
@@ -194,6 +183,67 @@ namespace MVC.Controllers
                 myWork.Complete();
 
                 return Redirect($"/Bet/Show/{bet.BetId}");
+            }
+        }
+
+        public ActionResult Conclude(long id)
+        {
+
+            using (var myWork = _factory.GetUOF())
+            {
+                //throw new NotImplementedException();
+                //TODO BetController JoinViewModel NullReference
+
+                var user = myWork.User.Get(User.Identity.Name);
+                var Bet = myWork.Bet.Get(id);
+                //bool betConclude = myWork.Bet.Get(id);
+                myWork.Complete();
+
+                var model = new ConcludeViewModel();
+                model.setup(Bet);
+
+                if (_userContext.Identity.Name == Bet.Judge.Username)
+                    return View(model);
+            }
+            return Redirect("/");
+
+        }
+
+        [HttpPost]
+        public ActionResult Conclude( ConcludeViewModel Model)
+        {
+            
+            using (var myWork = _factory.GetUOF())
+            {
+                //throw new NotImplementedException();
+                //TODO BetController JoinViewModel NullReference
+                var bet = myWork.Outcome.Get(Model.SelectedOutcome).bet;
+                var user = myWork.User.Get(User.Identity.Name);
+
+                 bool betConclude = bet.ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
+                myWork.Complete();
+                if (betConclude)
+                return Redirect("/");
+            }
+
+
+            return Redirect("/");
+        }
+        // GET: /<controller>/Remove/<Lobby>/<Bet>
+        [HttpGet]
+        public ActionResult Remove(long Lobby, long Bet)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var myBet = myWork.Bet.Get(Bet);
+                
+                //TODO: Check is user is owner of lobby before removing!
+                myWork.Bet.Remove(myBet);
+                //TODO: Fails when there's outcomes associated with the bet!
+                myWork.Complete();
+
+                string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+                return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
             }
         }
     }
