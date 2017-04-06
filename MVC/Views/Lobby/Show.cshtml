@@ -1,4 +1,5 @@
-﻿@using MVC.ViewModels;
+﻿@using MVC.Models.Userlogic
+@using MVC.ViewModels;
 
 @{
     ViewData["Title"] = "LobbyPage";
@@ -20,8 +21,16 @@
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         </label>
                         @b.Name
+
+                       
+                        <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude/Join Bet</a>
+                         
                         <a class="btn btn-primary pull-right" href="/Bet/Join/@b.BetId">Join Bet</a>
+                      
+                        
                         <a class="btn btn-primary pull-right" href="/Bet/Show/@b.BetId">Info</a>
+                        <!-- TODO: Only show when logged in user is owner of shown bet -->
+                        <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
                         
                         <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
                             @b.BuyIn

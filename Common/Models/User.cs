@@ -16,6 +16,7 @@ namespace Common.Models
         private readonly IUtility _utility;
         private decimal _balance;
 
+
         public User()
         {
             _utility = Utility.Instance;
@@ -98,6 +99,10 @@ namespace Common.Models
 
         public decimal DepositMoney(decimal amount)
         {
+            if (_balance < amount)
+            {
+             //   throw new ArithmeticException();
+            }
             _balance = _balance + amount;
             return amount;
         }

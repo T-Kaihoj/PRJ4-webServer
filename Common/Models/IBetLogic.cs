@@ -8,6 +8,19 @@ namespace Common.Models
 {
     interface IBetLogic
     {
-       
+
+        //Preconditon:
+        //Et outcome er sat af Judge
+        //Postcondition
+        //Vindere har fået deres del af bettets Pot
+        bool ConcludeBet( User user, Outcome outcome);
+
+        //Preconditon:
+        //Et outcome er sat af Judge
+        //Postcondition
+        //Vindere har fået deres del af bettets Pot
+        
+
+
     }
 }
