@@ -46,7 +46,7 @@
                 <a href="/Lobby/Leave/@Model.ID" class="btn btn-primary pull-right">Leave Lobby</a>
             </p>
             <div class="row">
-                @Html.Partial("_Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
+                @Html.Partial("Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
             </div>
         </div>
     </div>
