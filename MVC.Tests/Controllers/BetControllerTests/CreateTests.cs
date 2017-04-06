@@ -13,6 +13,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
     [TestFixture]
     public class CreateTests : BaseRepositoryTest
     {
+
         private BetController uut;
         private IUserContext userContext;
 
