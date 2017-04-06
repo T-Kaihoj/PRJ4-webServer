@@ -147,7 +147,6 @@ namespace DAL.Migrations
                         new Lobby()
                         {
                             Name = "Test Lobby",
-                            Description = "Test desciption",
                             MemberList = new List<User>() {users[0], users[1], users[2]},
                             Bets = new List<Bet>() {bets[0]},
                             InvitedList = new List<User>() {users[3], users[4]}
@@ -192,10 +191,7 @@ namespace DAL.Migrations
                     //    );
                     //
                 }
-
             }
-
-
         }
     }
 }
