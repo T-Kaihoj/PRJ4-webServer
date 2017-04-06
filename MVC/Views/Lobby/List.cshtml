@@ -27,10 +27,10 @@
                     </div>
                 </div>
             }
+            <hr /><br />
+            <h3>Lobby invites</h3>
             @if (Model.InvitedToLobbies.Any())
             {
-                <hr /><br/>
-                <h3>Lobby invites</h3>
                 foreach (var l in Model.InvitedToLobbies)
                 {
                     <div class="row">
@@ -45,6 +45,10 @@
                         </div>
                     </div>
                 }
+            }
+            else
+            {
+                <p>You have no lobby invites</p>
             }
                 <div class="row" align="left">
                     <a class="btn btn-primary" href="/Lobby/Create">Create new lobby</a>
