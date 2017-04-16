@@ -11,9 +11,10 @@ namespace MVC.Controllers
         private IUserContext _context;
         private IFactory _factory;
 
-        public HomeController(IUserContext context)
+        public HomeController(IUserContext context, IFactory factory)
         {
             _context = context;
+            _factory = factory;
         }
 
         public ActionResult Index()
