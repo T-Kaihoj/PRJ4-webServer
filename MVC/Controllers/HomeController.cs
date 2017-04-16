@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Web.Mvc;
 using Common;
+using Microsoft.AspNet.Identity;
 using MVC.Identity;
 using MVC.ViewModels;
+using Common.Models;
+using DAL;
+
 
 namespace MVC.Controllers
 {
@@ -10,6 +14,8 @@ namespace MVC.Controllers
     {
         private IUserContext _context;
         private IFactory _factory;
+        private UserManager<IdentityUser> _userManager;
+        private IStore _store;
 
         public HomeController(IUserContext context)
         {
@@ -38,7 +44,8 @@ namespace MVC.Controllers
             var userName = _context.Identity.Name;
 
             // Lookup the user in the repository.
-            var user = _factory.GetUOF().User.Get(userName);
+
+            var user = _factory.GetUOF().User.Get(userName);     
             // user should NEVER be null, but we check anyway.
             if (user == null)
             {
