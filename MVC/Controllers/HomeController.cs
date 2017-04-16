@@ -27,10 +27,13 @@ namespace MVC.Controllers
         {
             if (_context.Identity.IsAuthenticated)
             {
-                UserHomepage();
+               return UserHomepage();
             }
 
-            return View("Index", new CreateUserViewModel());
+       
+
+        return View("Index", new CreateUserViewModel());
+          
         }
 
         public PartialViewResult LoginBox()
