@@ -14,7 +14,7 @@ namespace Common.Models
         //Modtager et UserID
         //Postcondition
         //Tilføjer User til Lobbys Invited og Lobby til Users InvitedToLobbies.
-        void InviteUserToLobby(List<User> Users);
+        void InviteUsersToLobby(List<User> Users);
 
         void AcceptLobby(User User);
 
