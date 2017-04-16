@@ -17,9 +17,10 @@ namespace MVC.Controllers
         private UserManager<IdentityUser> _userManager;
         private IStore _store;
 
-        public HomeController(IUserContext context)
+        public HomeController(IUserContext context, IFactory factory)
         {
             _context = context;
+            _factory = factory;
         }
 
         public ActionResult Index()
