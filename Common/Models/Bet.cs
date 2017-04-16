@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace Common.Models
 {
@@ -12,8 +10,6 @@ namespace Common.Models
         private string _name;
         private string _description;
         private readonly IUtility _utility;
-        private Outcome _result;
-        private IFactory _factory;
 
         public Bet()
         {
@@ -21,7 +17,7 @@ namespace Common.Models
         
         }
 
-        public Bet(IUtility util = null, IFactory fact = null)
+        public Bet(IUtility util = null)
         {
             if (util == null)
             {
@@ -31,9 +27,9 @@ namespace Common.Models
             {
                 _utility = util;
             }
-            _factory = fact;
         }
 
+        [ExcludeFromCodeCoverage]
         [Key]
         public long BetId { get; set; }
 
@@ -43,24 +39,14 @@ namespace Common.Models
             set { _name = _utility.DatabaseSecure(value); }
         }
 
+        [ExcludeFromCodeCoverage]
         public DateTime StartDate { get; set; }
+
+        [ExcludeFromCodeCoverage]
         public DateTime StopDate { get; set; }
 
-        public virtual Outcome Result
-        {
-            get { return _result; }
-            set
-            {
-                if (_result != null)
-                    return;
-                _result = value;
-                if (value != null) // Payout() fucker hvis value er null (eller også er den bare fucked generelt)
-                {
-                    Payout(); 
-                }
-                  
-            }
-        }
+        [ExcludeFromCodeCoverage]
+        public virtual Outcome Result { get; set; }
 
         public string Description
         {
@@ -68,73 +54,119 @@ namespace Common.Models
             set { _description = _utility.DatabaseSecure(value); }
         }
 
+        [ExcludeFromCodeCoverage]
         public Decimal BuyIn { get; set; }
+
+        [ExcludeFromCodeCoverage]
         public Decimal Pot { get; set; }    // denne skal muligvis fjernes, da værdien afhænger 100% af antallet af deltagere og buyin
-        public virtual ICollection<User> Participants { get; set; } = new List<User>();
-        public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
 
-        // navigation property
-        private User judge;
-
-        public virtual User Judge
+        public ICollection<User> Participants
         {
-            get { return judge; }
-            set
+            get
             {
-                judge = value;
-                
+                ICollection<User> result = new HashSet<User>();
+
+                foreach (var outcome in Outcomes)
+                {
+                    foreach (var user in outcome.Participants)
+                    {
+                        result.Add(user);
+                    }
+                }
+
+                return result;
             }
         }
 
+        [ExcludeFromCodeCoverage]
+        public virtual ICollection<Outcome> Outcomes { get; set; } = new List<Outcome>();
 
-        // navigation property
+        // Navigation property
+        [ExcludeFromCodeCoverage]
+        public virtual User Judge { get; set; }
+
+        // Navigation property
+        [ExcludeFromCodeCoverage]
         public virtual User Owner { get; set; }
 
-        // navigation property
+        // Navigation property
+        [ExcludeFromCodeCoverage]
         public virtual Lobby Lobby { get; set; }
 
         private void Payout()
         {
+            // Determine the number of winners to split the price money on.
             var numberOfWinners = Result.Participants.Count;
+
             if (numberOfWinners <= 0)
             {
                 return;
             }
-            var payout = Decimal.ToInt32(Pot) / numberOfWinners;
+
+            // Determine the payout.
+            var payout = Pot / numberOfWinners;
+
+            // Perform the payout.
             foreach (var player in Result.Participants)
             {
-                player.Balance += (decimal)payout;
+                player.Balance += payout;
             }
         }
 
         public bool ConcludeBet(User user, Outcome outcome)
         {
-            if (Judge == user && Outcomes.Contains(outcome))
+            // Bets cannot be concluded without a judge.
+            if (Judge == null)
+            {
+                return false;
+            }
+
+            // Ensure the current user is the judge, and the outcome is a part of this bet.
+            if (user == Judge && Outcomes.Contains(outcome))
             {
                 Result = outcome;
                 Payout();
+
                 return true;
             }
             
-            
             return false;
-
-
         }
 
-        public bool joinBet(User user, Outcome outcome)
+        public bool JoinBet(User user, Outcome outcome)
         {
+            // TODO: needs to check the user is in Lobby
 
-            if (!Outcomes.Contains(outcome)) //todo needs to check the uses in Lobby
+            // Handle invalid data.
+            if (user == null || outcome == null)
+            {
                 return false;
+            }
 
-            user.Balance = -BuyIn;
+            // Is the outcome part of this bet?
+            if (!Outcomes.Contains(outcome))
+            {
+                return false;
+            }
+
+            // Is the user already a part of this bet?
+            if (Participants.Contains(user))
+            {
+                return false;
+            }
+
+            // Does the user have sufficient funds?
+            if (user.Balance < BuyIn)
+            {
+                return false;
+            }
+
+            // Add the user to the outcome, and move the amount from the balance to the pot.
             outcome.Participants.Add(user);
-
+            user.Balance -= BuyIn;
+            Pot += BuyIn;
 
             return true;
         }
-
-       
     }
 }

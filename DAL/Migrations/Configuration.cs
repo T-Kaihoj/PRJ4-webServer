@@ -30,7 +30,7 @@ namespace DAL.Migrations
 
             }
             */
-
+            /*
             var dbContext = new Context();
 
             if (!dbContext.Users.Any())
@@ -191,7 +191,7 @@ namespace DAL.Migrations
                     //    );
                     //
                 }
-            }
+            }*/
         }
     }
 }

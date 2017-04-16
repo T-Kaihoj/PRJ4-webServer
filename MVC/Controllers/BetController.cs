@@ -178,7 +178,7 @@ namespace MVC.Controllers
                 var bet = myWork.Bet.Find(b => b.Outcomes.Any(o => o.OutcomeId.Equals(outcome.OutcomeId))).First();
 
                 // Join the bet.
-                bet.joinBet(user, outcome);
+                bet.JoinBet(user, outcome);
 
                 myWork.Complete();
 

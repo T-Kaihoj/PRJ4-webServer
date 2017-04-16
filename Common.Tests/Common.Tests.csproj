@@ -146,8 +146,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BetTest.cs" />
+    <Compile Include="Models\BetTests\BetFunctionTests.cs" />
+    <Compile Include="Models\BetTests\BetConstructorTests.cs" />
+    <Compile Include="Models\BetTests\BetPropertyTests.cs" />
     <Compile Include="Models\LobbyTest.cs" />
+    <Compile Include="Models\OutcomeConstructorTests.cs" />
     <Compile Include="Models\OutcomeTest.cs" />
     <Compile Include="Models\UserTest.cs" />
     <Compile Include="Models\UtilityTest.cs" />
