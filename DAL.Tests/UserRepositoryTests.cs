@@ -17,6 +17,7 @@ namespace DAL.Tests
     [TestFixture]
     class UserRepositoryTests
     {
+
         private IUserRepository _uut;
         private DAL.Data.Context _context;
 

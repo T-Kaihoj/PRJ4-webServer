@@ -13,6 +13,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
     [TestFixture]
     public class CreateTests : BaseRepositoryTest
     {
+
         private BetController uut;
         private IUserContext userContext;
 
@@ -61,6 +62,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
             MyWork.Received(1).Complete();
         }
 
+        /*
         [Test]
         public void Create_InputFromViewModel_StoredInRepository()
         {
@@ -101,5 +103,6 @@ namespace MVC.Tests.Controllers.BetControllerTests
             Assert.That(bet.StopDate, Is.EqualTo(DateTime.Parse(stopDate)));
             // TODO: Extend.
         }
+        */
     }
 }

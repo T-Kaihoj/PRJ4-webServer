@@ -2,7 +2,7 @@
 @model  MVC.ViewModels.InviteToLobbyViewModel
 
 <div class="col-md-5">
-    <form method="post" action="/Lobby/Invite">
+    <form method="post" action="/Lobby/Invite/@Model.Id">
         <h2>
             @Html.LabelFor(m => m.Username, new { @class = "control-label" })
             @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })

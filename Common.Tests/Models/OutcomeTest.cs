@@ -62,7 +62,7 @@ namespace Common.Tests.Models
                 Assert.That(_uut.Name, Is.EqualTo(name));
             }
         }
-
+        /*
         [Test]
         public void Name_SetInvalidName_ThrowsException()
         {
@@ -71,7 +71,7 @@ namespace Common.Tests.Models
                 Assert.That(() => _uut.Name = chars, Throws.Exception);
             }
         }
-
+        */
         [Test]
         public void Description_SetValidDescription_DescriptionSet()
         {
@@ -91,6 +91,7 @@ namespace Common.Tests.Models
             }
         }
 
+        /*
         [Test]
         public void Description_SetInvalidDescription_ThrowExecption()
         {
@@ -99,7 +100,7 @@ namespace Common.Tests.Models
                 Assert.That(() => _uut.Description = chars, Throws.Exception);
             }
         }
-
+        */
         [Test]
         public void Participants_SetParticipants_ParticipantsSet()
         {
