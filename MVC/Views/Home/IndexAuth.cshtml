@@ -2,18 +2,21 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model  MVC.ViewModels.HomeViewModel
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <h3>
                 LocalBet helps you make bets with your friends.
             </h3>
-            <img src="~/Content/images/handshake-icon.png" width="100" alt=""/>
+            <img src="~/Content/images/handshake-icon.png" width="100" alt="" />
         </div>
         <div class="col-md-6">
             <h3>
-                We could show lobbies and bets here.
+                Home
             </h3>
+                <h2 class="label">Welcome : @Model.Name </h2>
         </div>
     </div>
 </div>

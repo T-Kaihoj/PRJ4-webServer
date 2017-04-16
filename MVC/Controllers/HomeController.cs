@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
+using Common;
 using MVC.Identity;
 using MVC.ViewModels;
 
@@ -7,6 +9,7 @@ namespace MVC.Controllers
     public class HomeController : Controller
     {
         private IUserContext _context;
+        private IFactory _factory;
 
         public HomeController(IUserContext context)
         {
@@ -17,7 +20,7 @@ namespace MVC.Controllers
         {
             if (_context.Identity.IsAuthenticated)
             {
-                return View("IndexAuth");
+                UserHomepage();
             }
 
             return View("Index", new CreateUserViewModel());
@@ -26,6 +29,33 @@ namespace MVC.Controllers
         public PartialViewResult LoginBox()
         {
             return PartialView(new AuthenticationViewModel());
+        }
+
+        [HttpGet]
+        public ActionResult UserHomepage()
+        {
+            // Get the logged in user
+            var userName = _context.Identity.Name;
+
+            // Lookup the user in the repository.
+            var user = _factory.GetUOF().User.Get(userName);
+            // user should NEVER be null, but we check anyway.
+            if (user == null)
+            {
+                throw new Exception("You are not logged in");
+            }
+
+            // Populate the viewmodel.
+            var viewModel = new HomeViewModel()
+            {
+                Name = (user.FirstName + user.LastName),
+                CurrentBalance = user.Balance,
+                MemberOfLobbies = user.MemberOfLobbies,
+                InvitedToLobbies = user.InvitedToLobbies,
+                Bets = user.Bets
+            };
+
+            return View("~/Views/Home/IndexAuth.cshtml", viewModel);
         }
     }
 }
