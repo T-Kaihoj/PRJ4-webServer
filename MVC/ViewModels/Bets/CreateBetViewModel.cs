@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
-using Common.Models;
+using Common.Validation;
 
 namespace MVC.ViewModels
 {
@@ -15,17 +15,19 @@ namespace MVC.ViewModels
         private string _outcome2 = string.Empty;
         private string _outcome1 = string.Empty;
         private string _title = string.Empty;
-        private string _stopDate = string.Empty;
         private string _startDate = string.Empty;
-        private string _owner = string.Empty;
+        private string  _stopDate = string.Empty;
 
+        [Required]
+        [DecimalValidation]
         [DisplayName("Buy in")]
         public string BuyIn
         {
             get { return _buyIn; }
-            set { _buyIn = value.Trim(); }
+            set { _buyIn = value.Trim().Replace(',', '.'); }
         }
 
+        [Required]
         [DisplayName("Description")]
         public string Description
         {
@@ -33,6 +35,8 @@ namespace MVC.ViewModels
             set { _description = value.Trim(); }
         }
 
+        [Required]
+        [DateTimeValidation]
         [DisplayName("Start date")]
         public string StartDate
         {
@@ -40,6 +44,8 @@ namespace MVC.ViewModels
             set { _startDate = value.Trim(); }
         }
 
+        [Required]
+        [DateTimeValidation]
         [DisplayName("Stop date")]
         public string StopDate
         {
@@ -47,6 +53,7 @@ namespace MVC.ViewModels
             set { _stopDate = value.Trim(); }
         }
 
+        [Required]
         [DisplayName("Title")]
         public string Title
         {
@@ -54,7 +61,7 @@ namespace MVC.ViewModels
             set { _title = value.Trim(); }
         }
 
-        //public List<string> Outcomes { get; set; }
+        [Required]
         [DisplayName("Outcome #1")]
         public string Outcome1
         {
@@ -62,6 +69,7 @@ namespace MVC.ViewModels
             set { _outcome1 = value.Trim(); }
         }
 
+        [Required]
         [DisplayName("Outcome #2")]
         public string Outcome2
         {
@@ -69,26 +77,38 @@ namespace MVC.ViewModels
             set { _outcome2 = value.Trim(); }
         }
 
- 
+        [Required]
         public string Judge
         {
             get { return _judge; }
-            set { _judge = value?.Trim(); }
+            set { _judge = value.Trim(); }
         }
 
+        [Required]
         [HiddenInput]
-        public long LobbyID
+        public long LobbyId
         {
             get { return _lobbyId; }
             set { _lobbyId = value; }
         }
 
-        [HiddenInput]
-        public string Owner
+        #region Accessors
+
+        public decimal BuyInDecimal
         {
-            get { return _owner; }
-            set { _owner = value; }
+            get { return DecimalValidation.Parse(_buyIn); }
         }
 
+        public DateTime StartDateTime
+        {
+            get { return DateTimeValidation.Parse(_startDate); }
+        }
+
+        public DateTime StopDateTime
+        {
+            get { return DateTimeValidation.Parse(_stopDate); }
+        }
+
+        #endregion
     }
 }
