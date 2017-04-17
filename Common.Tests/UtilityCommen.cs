@@ -11,9 +11,9 @@ namespace Common.Tests
     [ExcludeFromCodeCoverage]
     public static class UtilityCommen
     {
-        public static User[] ValidUsers = {new User(), null};
+        public static User[] ValidUsers = {new User()};
 
-        public static Bet[] ValidBets = {new Bet(), null};
+        public static Bet[] ValidBets = {new Bet()};
         
         public static string[] ValidCharacters =
         {

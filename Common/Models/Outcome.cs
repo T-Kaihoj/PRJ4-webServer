@@ -12,7 +12,6 @@ namespace Common.Models
         public Outcome()
         {
             _utility = Utility.Instance;
-
         }
 
         public Outcome(IUtility util = null)
