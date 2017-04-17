@@ -30,8 +30,6 @@ namespace MVC.Controllers
                return UserHomepage();
             }
 
-       
-
         return View("Index", new CreateUserViewModel());
           
         }
