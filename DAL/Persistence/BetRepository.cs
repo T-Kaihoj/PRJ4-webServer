@@ -21,7 +21,6 @@ namespace DAL.Persistence
                 .Include(b => b.Lobby)
                 .Include(b => b.Owner)
                 .Include(b => b.Outcomes)
-                .Include(b => b.Participants)
                 .SingleOrDefault(); 
         }
 
