@@ -1,0 +1,34 @@
+branches:
+  only:
+    - release
+
+image: Visual Studio 2015
+
+environment:
+  access_token:
+    secure: qk5xX/i8yy/quJxD4TftDWgKbn+/5sApifI35hcQmFy7PF2fu8XAxpX1/GD3Qb2C
+
+build:
+  project: LocalBet.sln
+  verbosity: quiet
+
+before_build:
+  - nuget.exe restore LocalBet.sln
+
+#test_script:
+#  - .\packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"nunit3-console.exe" -targetargs:"MVC.Tests\bin\debug\MVC.Tests.dll DAL.Tests\bin\debug\DAL.Tests.dll" -output:"coverage.xml"
+#
+#after_test:
+#  - "SET PATH=C:\\Python34;C:\\Python34\\Scripts;%PATH%"
+#  - pip install codecov
+#  - codecov -f "coverage.xml"
+ 
+#on_success:
+ # # Setup git
+ # - git config --global credential.helper store
+ # - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+ ## Force checkout of master.
+ # - git checkout -fq master
+ # # Merge, using only fast forward.
+ # - cmd: git merge -q --ff-only %APPVEYOR_REPO_COMMIT%
+ # - cmd: git push

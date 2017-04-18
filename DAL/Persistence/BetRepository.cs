@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using Common.Models;
 using Common.Repositories;
 using DAL.Data;
@@ -9,6 +10,19 @@ namespace DAL.Persistence
     {
         public BetRepository(DbContext context) : base(context)
         {
+        }
+
+        public Bet GetEager(long id)
+        {
+            return OurContext.Bets
+                .Where(b => b.BetId == id)
+                .Include(b => b.Result)
+                .Include(b => b.Judge)
+                .Include(b => b.Lobby)
+                .Include(b => b.Owner)
+                .Include(b => b.Outcomes)
+                .Include(b => b.Participants)
+                .SingleOrDefault(); 
         }
 
         public Context OurContext

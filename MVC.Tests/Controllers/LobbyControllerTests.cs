@@ -38,8 +38,7 @@ namespace MVC.Tests.Controllers
 
             // Setup the mock.
             _lobby1 = new Lobby()
-            {
-                Description = "",
+            { 
                 Name = "",
                 Bets = new List<Bet>(),
                 LobbyId = 0,
@@ -48,7 +47,6 @@ namespace MVC.Tests.Controllers
             };
             _lobby2 = new Lobby()
             {
-                Description = "",
                 Name = "",
                 Bets = new List<Bet>(),
                 LobbyId = 1,
@@ -109,7 +107,6 @@ namespace MVC.Tests.Controllers
             uut.Create(viewModel);
 
             // Assert that the object passed to the repository, matches our data.
-            Assert.That(lobby.Description, Is.EqualTo(viewModel.Description));
             Assert.That(lobby.Name, Is.EqualTo(viewModel.Name));
             // TODO: Extend.
         }

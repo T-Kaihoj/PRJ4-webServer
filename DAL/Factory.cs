@@ -14,6 +14,10 @@ namespace DAL
                 if (_instance == null)
                 {
                     _instance = new Factory();
+
+
+
+
                 }
 
                 return _instance;

@@ -8,7 +8,6 @@ namespace Common.Tests.Models
     [TestFixture]
     class UtilityTest
     {
-
         // Ingen setup eller lignende da Utility er statisk.
         private IUtility _uut;
 
@@ -27,6 +26,7 @@ namespace Common.Tests.Models
             }
         }
 
+        /*
         [Test]
         public void DatabaseSecure_InvalidChars_ThrowsException()
         {
@@ -34,6 +34,12 @@ namespace Common.Tests.Models
             {
                 Assert.That(() =>_uut.DatabaseSecure(character), Throws.Exception);
             }
+        }
+        */
+        [Test]
+        public void DatabaseSecure_NullString_ReturnsNull()
+        {
+            Assert.That(_uut.DatabaseSecure(null), Is.Null);
         }
 
         [TestCase("Tobias")]

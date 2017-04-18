@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Common.Models;
 using NSubstitute;
 using NUnit.Framework;
@@ -12,7 +8,7 @@ namespace Common.Tests.Models
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    class LobbyTest
+    class LobbyPropertyTests
     {
         private Lobby _uut;
         private IUtility _utility;
@@ -74,35 +70,6 @@ namespace Common.Tests.Models
             }
         }
 
-        [Test]
-        public void Description_SetValidDescription_DescriptionSet()
-        {
-            foreach (var chars in UtilityCommen.ValidCharacters)
-            {
-                Assert.That(() => _uut.Description = chars, Throws.Nothing);
-            }
-        }
-
-        [Test]
-        public void Description_GetValidDescription_DescriptionReturned()
-        {
-            foreach (var chars in UtilityCommen.ValidCharacters)
-            {
-                _uut.Description = chars;
-                Assert.That(_uut.Description, Is.EqualTo(chars));
-            }
-        }
-
-        [Test]
-        public void Description_SetInvalidDescription_ThrowExecption()
-        {
-            foreach (var chars in UtilityCommen.InvalidCharacters)
-            {
-                _utility.DidNotReceive().DatabaseSecure(Arg.Is(chars));
-                _uut.Description = chars;
-                _utility.Received(1).DatabaseSecure(Arg.Is(chars));
-            }
-        }
 
         [Test]
         public void Bets_SetValidBets_BetsSet()
@@ -114,8 +81,8 @@ namespace Common.Tests.Models
         public void Bets_GetValidBets_BetsReturened()
         {
             _uut.Bets = UtilityCommen.ValidBets;
-            Assert.That(_uut.Bets, Contains.Item(UtilityCommen.ValidBets[0]));
-            Assert.That(_uut.Bets, Contains.Item(UtilityCommen.ValidBets[1]));
+
+            Assert.That(_uut.Bets, Is.EquivalentTo(UtilityCommen.ValidBets));
         }
 
         [Test]
@@ -128,8 +95,8 @@ namespace Common.Tests.Models
         public void MemberList_GetValidMembers_MembersReturned()
         {
             _uut.MemberList = UtilityCommen.ValidUsers;
-            Assert.That(_uut.MemberList, Contains.Item(UtilityCommen.ValidUsers[0]));
-            Assert.That(_uut.MemberList, Contains.Item(UtilityCommen.ValidUsers[1]));
+
+            Assert.That(_uut.MemberList, Is.EquivalentTo(UtilityCommen.ValidUsers));
         }
 
         [Test]
@@ -142,8 +109,8 @@ namespace Common.Tests.Models
         public void InvitedList_GetValidMembers_MembersReturned()
         {
             _uut.InvitedList = UtilityCommen.ValidUsers;
-            Assert.That(_uut.InvitedList, Contains.Item(UtilityCommen.ValidUsers[0]));
-            Assert.That(_uut.InvitedList, Contains.Item(UtilityCommen.ValidUsers[1]));
+
+            Assert.That(_uut.InvitedList, Is.EquivalentTo(UtilityCommen.ValidUsers));
         }
 
         [Test]
@@ -159,7 +126,7 @@ namespace Common.Tests.Models
         [Test]
         public void InviteUserToLobby_AddUserListToInvitedList_UsersAdded()
         {
-            _uut.InviteUserToLobby(UtilityCommen.ValidUsers.ToList());
+            _uut.InviteUsersToLobby(UtilityCommen.ValidUsers.ToList());
             foreach (var user in UtilityCommen.ValidUsers)
             {
                 Assert.That(_uut.InvitedList, Contains.Item(user));

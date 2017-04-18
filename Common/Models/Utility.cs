@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace Common.Models
 {
     public class Utility : IUtility
     {
         private static Utility _instance;
-
-        public Utility()
-        { }
 
         public static Utility Instance
         {
@@ -31,11 +23,13 @@ namespace Common.Models
         {
             if (toDB == null)
                 return null;
-            //todo db
-            if (toDB.Contains("'")||toDB.Contains("[")||toDB.Contains("]"))
+            // TODO: db
+            // TODO: What does the above note entail?
+            if (toDB.Contains("'") || toDB.Contains("[") || toDB.Contains("]"))
             {
                 throw new InvalidDataException("sqlInjection");
             }
+
             return toDB;
         }
     }
