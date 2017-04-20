@@ -207,6 +207,7 @@
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\LobbyControllerTests.cs" />
     <Compile Include="BaseRepositoryTest.cs" />
+    <Compile Include="Controllers\UserControllers\CreateUserTests.cs" />
     <Compile Include="Controllers\UserControllers\EditProfileTests.cs" />
     <Compile Include="Identity\IdentityUserTests.cs" />
     <Compile Include="Identity\StoreTwoFactorTests.cs" />

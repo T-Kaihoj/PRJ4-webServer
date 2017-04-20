@@ -117,55 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DisplayEmail" xml:space="preserve">
-    <value>Email</value>
+  <data name="Target" xml:space="preserve">
+    <value>H4sIAAAAAAAEAO0d2W7kuPE9QP5B0FMSzLrd3iCYGN27mLHHWSf22Jj2LPJm0BLdFiJRvRLbsRHky/KQT8ovhNTJUyR1dLcHiwUWbpEq1sWqYqlY87///Hfx40sSe88wy6MULf350bHvQRSkYYTWS3+LH7977//4w29/s/gUJi/ez/W87+k88ibKl/4TxpvT2SwPnmAC8qMkCrI0Tx/xUZAmMxCms5Pj4z/P5vMZJCB8AsvzFl+2CEcJLH6Qn2cpCuAGb0F8nYYwzqvnZGRVQPU+gwTmGxDApX/+4eroHGDgex/iCJD1VzB+9D2AUIoBJtidfs3hCmcpWq825AGI7143kMx7BHEOK6xP2+m2BByfUAJm7Ys1qGCb4zRxBDj/vuLITHy9F1/9hmOEZ58Ib/Erpbrg29L/CLHvieucnsUZnbP0z9IkSdFRyfojMvmdVz561wic6AX9jwxsY7zN4BLBLc5A/M673T7EUfA3+HqX/gOiJdrGMYsMQYeMcQ/Io9ss3cAMv36Bjy2Kl6HvzfhXZ+K7zZv8ayUdlwj/6Y++95mgAB5i2EicoXmF0wz+BSKYAQzDW4AxzIjALkNY8ExCQFiO/r9ejagY2SO+dw1eriBa46elT/70vYvoBYb1kwqDrygiW4q8hLMtNC2ywiDDRMOblejfdxFdWSLNBCndjALoHOZBFm1K9ZyY/I/b18tmlXMYRAmIfe82I39VNuq9760CQJE/cabkNsXjwf4MnqN1oVjCKn/dhmsy/QuMi9H8KdqUdorurvtq9CJLky9pXGpx+fB+lW6zgMorFUfuQLam29gWhav04eFVi0I1yqNQPFSiUI64onCzxcRUwVyJRTV4/0Ahtngwj5v1akzYsRpLa1z+Sfa8lh3VKM+O4qGSHeWIKzu+wJwYTy0O9TCPRPlUiUU1pEJjMWt9QKdnIK4ys3cNdPYefANdFhWW19U9tG9qjdb85L2V0erhVT6nyGiPLqIsxyO5FUdTeAX2tfKnBERxx7IksBnDkYAYoABO5kp+AvnTDnintSfEBuSFbwj7eBrRuMo+yAUPahH1aHSYVxUavOG1ReMiiyAK4yhXm1hqCu7ZOS02wpBkbMVxV8N/iZ4jYhfuUupGI40/LBaRZwpYihPUuEqzXDG+hskDzG4ejQhLEwV8hXE1uuKkUeOMYoV2hoBfPaBGrBkd5GOrWMvWyRbT9+Bli3X7nMGaF9/2KazTvvUJpFWmjQ+xHQ3IVadtc7cdIoLdFsbNdnTj6mo2lJjqbEuvTVptdfttWr2wh41ardxnqzKvvu3Nusv8hFbTi6Nrv6Ot6G5Ux15bNG5BhqMg2gCksVOWLlC5ySQHabO7PuR5GkQFGsxBjI2+eNI+odAzhGKlTGtqiFjJ5oo2ZDuR5Zf+HyRu6UE2ZDqBXMwYoixolaxxJ3r6sG4g3Xqb3wKuXNio5IsGvhNJbZA4kHitF5mMdnbn61BTmoEWo8YR2ROrzJm1EIvsPw9t7otu5gadwxhi6H0Iym8YZyAPQKjIuZB1ByhGY4Y6JSeH5QNVQTZyrhx3ILQ9eetwUiR8O+XVRZ/iSN/NrPkgwsod04WMkEYeRJgQSRs27l7Uuk1wdBEiJJMHMUXInEwp7Sop3YWNmKEeRJqQ0zbv0uOjI1sKy1jlLEUYRISBFZX0N3xRfR8l3Kxi/7yKDEXMKbwVxNw5sY2IWC5IRPOvUsGp3i0Fani5OURJr1ebxPB+GxlKABqmCyAYDvNEcBk2ZpYmCSduV3Mg2CDfMG1mD6RWKxMQToXINFvi5SO4hgXd0aFDfOjODm1EyIBq0B+HLdJpX8OVzqDRPmx054kuUJyEJdzpUOaENoQ0BpEMtu2W7iBdFTYyMEpzNo4GtPhoRK8OCy0CQ3dhS6GgBd960M18fpFp1kSIhhjRIBxDVDiB0WMSoGoaFcGiIVx0pZEPECfZsMwXLDWViujPEP+5UslHfBNJsi5AUBOpigRNsaArmUL0N2xj1smpJuBrxhazsqqwerCYacoPF9dgs4nQmilHrJ54q7IW8ey7lXu5XlLCmAW5omqvwbZZCacZWENhlMatISyKB2gt5AOgacyzMFFMK8NbTQhYr8JEsLKI6qCwnkz/rvKuVS1mEeQKL7bcuiAEJBDhghbIK4X8lkeLPkEMMnWp31kabxPUUTTYBaNMRrMgPivqSrogMMV5LBjmsQusujyPB1U/tYfE5b9ZYNyAPbyqBo/jdfnIHkZRacdCKB7I7y9mgpqICjiTNFA6uvPabKXrpeXspezFqcxd29Wv6djXli6xPNSVQnVBYkqMWFDMY3tYbc0QC6p9ag+pqgFiwVSPHNS0rvDhFLV+aA+nrORhgZRPDkZZ9SciC3VVBmEW+qp5T6sadRkApxnqooIuOPY2ek/C6DirWEijTqm4y0P7po6TzNdelp3a78fjSGVsHzW1lPkAUnYSXEpL4w24OSq7r7L9NPhVGH1F1kvmySguo0h61zDckavC9FGQO3HBTgz6+4lVTtbphCvPVIlYe9ZVsVGX0DsgSesShZYourmDqYUtpSB1spYmakUtf2zSMFKTpzwgUWvyn29N0lxmVe96y3FL76pgmSJvaskpxRGWAtEcYx0lqUgJW6LlHidMvV3bdI9un7YzVBvUXpjKrPIBbU0xW/0WRcqkwtWpo3rUIj+k4JOU6h4kvhLSaEKUsvj9TYWzmRhFcFV+XyO4arS/4Lj8/WCHc9/D7RhQe6Niqz5YaMRWjfYXG/dBYtB+KyGNut+4by1vTXD1VxiN5Orh/qLjP7IM8ycVrF5uxYTg7uXnFY0owqiogbrMaVF8UyLuQrVZD6RvU+KUJunRfKMSvkUtqu9C5n4Z0oeicgq9B5k+RyH9SLR6zTFMSiVb/RKfxeSMj9sJ1wBFjzDH5bUF/+R4fiI03zicRhizPA+5WxXqbhi8vHbWoeIhWkeo3r1ddyocr6KWubhyDfQMsuAJZL9LwMvvWUi9ek+E5G88Ru+J3oAUdzsGkcj1lwgn7C8xOmwxNOWZoahgvEQhfFn6/yreP/Uu/37Pg3jn3WRkf596x96/5UvxrtfJ+QCMV3gL1Lj3ecwcMRFDih584kGMyifZezizSgSh45a8HdwaQ/SwkuP1amjlNZDhUosFrfno1TZhGDSuFYKNil7mX1H0y5Yowh2RrqCPReMER3PId0kY3WixXRJcWOV4vbqHqo514fnAnLrzldcerBvzCuqBsW/6AIRJ+Tpb/uZdBwfpZPPHtvudk6WvfkO8hAX3JvHnDDEDUDoZgJOTgHubSycJ97athyffgRHtdFtV9RXyV1G+SVEOcMVOshzgtw9PmkNOUMajk4NEjd0OlKlM4VqK6z1OCYASiN1daaIfMKNRFojPUpTjDERyldVtFiHaZCJmkZaTs04KOmuAiiPncEOYR6vgBAqHrtgAFtTfxAPXe+6GOqlfpT+59JUlZbsSv1V9l7sSiPT0vd4urc185WUQsOmO8XY0SFcHfZgGxKr8jpGiLMGJWyQcgA7ZS7SjLmAiHepYcVcqZFN4eGg2aK5WoPm3ZYUkLh6sGbIpDT08K7RjLdqTHbLTov0aIpuOWB932bCKW7npb9KnAVcvVVFflLWsNnBSE/1FI3m1zirkXZmazircA/JTKqXhnn8jnspFgQ7BVXWWSvfb9N+cFrnItLOqbzJN6lx1B6pkbt43OGFj4e/epNGw9W3mEvsdybm7l+F+Y9ndKcluo1dbJTHW8+9IR7pbO/5qCwaK2Vz+vyM5GzpdOgQNckvKPUl8987eVuo29wZGl7tQcl+hIvdREgUndfnUNfksC+uXfviQEgmX3xGVXfREmKXRkICWj1VQ6YgZbOWuJLj1pS0FYF3XNBF0o/oS8GZEBV7bxkvFkQ6u6DnDNmKwWEPHImZMx//SNZVZevu15l2LzQ2rlck4q8X0AuJGdcsNafzatH8z9n/V3PGR/KvYREm2FqqvoaoWHIabOj2IrZvVmYlV37g6fGK1zWctm9tOJWVu7wptOKYi3SBty54Z8iFDart0AMTr+uvade+dVOpzNeVy2DUS6Qax2/XPGEvqExI/Sm9iJkJqrqZ2ESa4Kq4bx0jylNoGG9oQT6W8KlK73O1Qcg16a2gu0U9GeyB6cK9ld2laKPk+Gir3MSzTkTKoa/IhyWRga+S+u2cYQQ4NkOXL5OScvUX0vm756xzm0boFQe/JIxhwJ+xmziV6TOsjv4BRPUWo5L2GGITk+P0hw9EjCDAZDmCeF/9+288g3kJ6T+4BhpeIcG2zxYRk4nFjTq1pwqBr/aLLM4/z4qa41JOPQQJBM6JXnG/Qx20Uhw3eF4o6Yg0Imomo7j9RWWJ6D2r92kCS/zVpHaCKfU0C5Q4mm5gAy2/QCjzDPriRvXcF1yB4rXsC6IGYBcGzfXEegXUGkryC0b5PfhIdDpOXH/4PjkXPeKmEAAA=</value>
   </data>
-  <data name="DisplayFirstName" xml:space="preserve">
-    <value>First name</value>
-  </data>
-  <data name="DisplayLastName" xml:space="preserve">
-    <value>Last name</value>
-  </data>
-  <data name="DisplayPassword1" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="DisplayPassword2" xml:space="preserve">
-    <value>Repeat password</value>
-  </data>
-  <data name="DisplayUserName" xml:space="preserve">
-    <value>User name</value>
-  </data>
-  <data name="ErrorEmailInUse" xml:space="preserve">
-    <value>The email is already in use</value>
-  </data>
-  <data name="ErrorEmailInvalid" xml:space="preserve">
-    <value>You must enter a valid email</value>
-  </data>
-  <data name="ErrorEmailRequired" xml:space="preserve">
-    <value>You must enter your email</value>
-  </data>
-  <data name="ErrorFirstNameRequired" xml:space="preserve">
-    <value>You must enter your first name</value>
-  </data>
-  <data name="ErrorJudgeDoesNotExist" xml:space="preserve">
-    <value>You must enter a valid judge</value>
-  </data>
-  <data name="ErrorLastNameRequired" xml:space="preserve">
-    <value>You must enter your last name</value>
-  </data>
-  <data name="ErrorPassword1Required" xml:space="preserve">
-    <value>You must enter a password</value>
-  </data>
-  <data name="ErrorPassword2Required" xml:space="preserve">
-    <value>You must repeat the password</value>
-  </data>
-  <data name="ErrorPasswordsNotIdentical" xml:space="preserve">
-    <value>The two passwords must be identical</value>
-  </data>
-  <data name="ErrorUserNameRequired" xml:space="preserve">
-    <value>You must enter your user name</value>
-  </data>
-  <data name="ErrorUserNameTaken" xml:space="preserve">
-    <value>The user name is already in use</value>
+  <data name="DefaultSchema" xml:space="preserve">
+    <value>dbo</value>
   </data>
 </root>

@@ -30,11 +30,11 @@ namespace MVC.Controllers
                 // Find the bet.
                 var bet = myWork.Bet.Get(id);
 
-                // TODO: Remove hardcode.
-                List<Outcome> outcomes = new List<Outcome>();
-
-                outcomes.Add(new Outcome() { Description = "Han taber sig" });
-                outcomes.Add(new Outcome() { Description = "Han når det ikke" });
+                // Check for the existence of the bet.
+                if (bet == null)
+                {
+                    return Redirect("/");
+                }
 
                 // Create the viewmodel, and copy over data.
                 var viewmodel = new ShowBetViewModel()

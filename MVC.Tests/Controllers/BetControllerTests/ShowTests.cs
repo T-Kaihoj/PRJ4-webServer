@@ -27,6 +27,18 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
+        public void Show_BetIdDoesntExist_Redirects()
+        {
+            var result = uut.Show(412);
+
+            Assert.That(result, Is.TypeOf<RedirectResult>());
+
+            var rResult = result as RedirectResult;
+
+            Assert.That(rResult.Url, Is.EqualTo("/"));
+        }
+
+        [Test]
         public void Show_CallsRepositoryGet()
         {
             // Register a bet with the mock.

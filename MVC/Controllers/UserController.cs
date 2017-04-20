@@ -211,9 +211,26 @@ namespace MVC.Controllers
                 // Error, return to main page with the model.
                 return View("~/Views/Home/Index.cshtml", model);
             }
-            
 
-            // TODO: Check if username is in use.
+            using (var myWork = _factory.GetUOF())
+            {
+                // Is the username already taken?
+                if (myWork.User.Get(model.UserName) != null)
+                {
+                    ModelState.AddModelError("UserName", Resources.User.ErrorUserNameTaken);
+                }
+
+                // Is the email in use?
+                if (myWork.User.GetByEmail(model.UserName) != null)
+                {
+                    ModelState.AddModelError("Email", Resources.User.ErrorEmailInUse);
+                }
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("~/Views/Home/Index.cshtml", model);
+            }
 
             // Persist user in repository.
             var user = new User()
