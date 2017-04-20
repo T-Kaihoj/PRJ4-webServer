@@ -30,7 +30,7 @@ namespace DAL.Migrations
 
             }
             */
-            /*
+
             var dbContext = new Context();
 
             if (!dbContext.Users.Any())
@@ -38,11 +38,11 @@ namespace DAL.Migrations
                 using (var unitOfWork = new UnitOfWork(dbContext))
                 {
 
-                    // Opretter User1, User2 ... User6 - password er "q1"
-                    // User1 - 3 er medlem af en lobby 
+                    //Opretter User1, User2 ... User6 - password er "q1"
+                    // User1 - 3 er medlem af en lobby
                     // User1 - 2 deltager i et bet i den lobby
                     // User3 er judge p� bettet
-                    // User4 - 5 er inviteret til lobbien men ikke medlem endnu 
+                    // User4 - 5 er inviteret til lobbien men ikke medlem endnu
                     // User6 er ikke medlem af nogen lobby
 
 
@@ -134,7 +134,7 @@ namespace DAL.Migrations
                             Result = null,
                             StartDate = new DateTime(2018, 1, 1),
                             StopDate = new DateTime(2018, 2, 2),
-                            Participants = new List<User>() {users[0], users[1]},
+                            //Participants = new List<User>() {users[0], users[1]},
                             Outcomes = new List<Outcome>() {outcomes[0], outcomes[1]}
                         }
                     };
@@ -191,7 +191,7 @@ namespace DAL.Migrations
                     //    );
                     //
                 }
-            }*/
+            }
         }
     }
 }

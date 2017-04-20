@@ -85,6 +85,13 @@ namespace DAL.Data
                 .WithMany(s => s.Outcomes)
                 .WillCascadeOnDelete(true);
 
+            // en til mange opsætning mellem Lobby og Bets
+            // formålet er at Bets skal fjernes automatisk, når en lobby fjernes
+            modelBuilder.Entity<Bet>()
+                .HasRequired<Lobby>(s => s.Lobby) // dette skal muligvis ikke være required
+                .WithMany(s => s.Bets)
+                .WillCascadeOnDelete(true);
+
 
 
         }

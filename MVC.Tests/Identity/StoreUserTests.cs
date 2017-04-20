@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Common.Models;
 using MVC.Identity;
 using NSubstitute;
@@ -74,6 +75,39 @@ namespace MVC.Tests.Identity
             var result = uut.FindByNameAsync(userName).Result;
 
             Assert.That(result.UserName, Is.EqualTo(user.Username));
+        }
+
+        [Test]
+        public void CreateAsync_WithAnyUser_Throws()
+        {
+            TestDelegate del = () =>
+            {
+                uut.CreateAsync(null);
+            };
+
+            Assert.That(del, Throws.TypeOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void DeleteAsync_WithAnyUser_Throws()
+        {
+            TestDelegate del = () =>
+            {
+                uut.DeleteAsync(null);
+            };
+
+            Assert.That(del, Throws.TypeOf<NotImplementedException>());
+        }
+
+        [Test]
+        public void UpdateAsync_WithAnyUser_Throws()
+        {
+            TestDelegate del = () =>
+            {
+                uut.UpdateAsync(null);
+            };
+
+            Assert.That(del, Throws.TypeOf<NotImplementedException>());
         }
     }
 }

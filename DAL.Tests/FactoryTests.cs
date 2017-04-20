@@ -1,7 +1,9 @@
-﻿using NUnit.Framework;
+﻿using System.Diagnostics.CodeAnalysis;
+using NUnit.Framework;
 
 namespace DAL.Tests
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class FactoryTests
     {

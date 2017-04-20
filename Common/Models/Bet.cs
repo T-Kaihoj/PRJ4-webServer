@@ -58,7 +58,7 @@ namespace Common.Models
         public Decimal BuyIn { get; set; }
 
         [ExcludeFromCodeCoverage]
-        public Decimal Pot { get; set; }    // denne skal muligvis fjernes, da værdien afhænger 100% af antallet af deltagere og buyin
+        public Decimal Pot { get; set; }    
 
         public ICollection<User> Participants
         {
