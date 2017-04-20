@@ -18,66 +18,75 @@ namespace MVC.ViewModels
         private string _startDate = string.Empty;
         private string  _stopDate = string.Empty;
 
-        [Required]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayBuyIn")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorBuyInRequired")]
         [DecimalValidation]
-        [DisplayName("Buy in")]
         public string BuyIn
         {
             get { return _buyIn; }
             set { _buyIn = value.Trim().Replace(',', '.'); }
         }
 
-        [Required]
-        [DisplayName("Description")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorDescriptionRequired")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayDescription")]
         public string Description
         {
             get { return _description; }
             set { _description = value.Trim(); }
         }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorStartDate")]
         [DateTimeValidation]
-        [DisplayName("Start date")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayStartDate")]
         public string StartDate
         {
             get { return _startDate; }
             set { _startDate = value.Trim(); }
         }
 
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorStopDate")]
         [DateTimeValidation]
-        [DisplayName("Stop date")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayStopDate")]
         public string StopDate
         {
             get { return _stopDate; }
             set { _stopDate = value.Trim(); }
         }
 
-        [Required]
-        [DisplayName("Title")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorTitleRequired")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayTitle")]
         public string Title
         {
             get { return _title; }
             set { _title = value.Trim(); }
         }
 
-        [Required]
-        [DisplayName("Outcome #1")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorOutcomeRequired")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayOutcome2")]
         public string Outcome1
         {
             get { return _outcome1; }
             set { _outcome1 = value.Trim(); }
         }
 
-        [Required]
-        [DisplayName("Outcome #2")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorOutcomeRequired")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayOutcome2")]
         public string Outcome2
         {
             get { return _outcome2; }
             set { _outcome2 = value.Trim(); }
         }
 
-        [Required]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayJudge")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Bet),
+        ErrorMessageResourceName = "ErrorJudgeRequired")]
         public string Judge
         {
             get { return _judge; }

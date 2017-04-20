@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Web.Mvc;
 using Common.Models;
 using MVC.Controllers;
@@ -133,6 +134,9 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             Assert.That(vResult.Model, Is.EqualTo(model));
             Assert.That(vResult.ViewName, Is.EqualTo("Create"));
+
+            // Check that the right error message has been selected.
+            Assert.That(uut.ModelState.SelectMany(x => x.Value.Errors).Select(z => z.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorJudgeDoesntExist));
         }
 
         [Test]
@@ -153,17 +157,12 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             SetupJudge(model.Judge);
 
-            var result = uut.Create(model);
+            TestDelegate del = () =>
+            {
+                uut.Create(model);
+            };
 
-            Assert.That(uut.ModelState.IsValid);
-
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-            Assert.That(vResult.Model, Is.TypeOf<CreateBetViewModel>());
-
-            Assert.That(vResult.Model, Is.EqualTo(model));
-            Assert.That(vResult.ViewName, Is.EqualTo("Create"));
+            Assert.That(del ,Throws.Exception);
         }
 
         [Test]
