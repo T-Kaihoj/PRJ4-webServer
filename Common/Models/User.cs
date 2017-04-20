@@ -72,6 +72,8 @@ namespace Common.Models
             }
         }
 
+
+
         [Required]
         [ExcludeFromCodeCoverage]
         public string Hash { get; set; }
@@ -79,8 +81,14 @@ namespace Common.Models
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
 
-        public virtual ICollection<User> Friendlist { get; set; }
+        public void addFriend(User u)
+        {
+            Friendlist.Add(u);
+            u.Friendlist.Add(this);
+            
+        }
 
+        public virtual ICollection<User> Friendlist { get; set; }
 
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
