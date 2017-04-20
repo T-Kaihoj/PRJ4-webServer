@@ -245,3 +245,5 @@ ModelManifest.xml
 *.pubxml
 /MVC/bower_components
 
+
+DAL/Migrations/

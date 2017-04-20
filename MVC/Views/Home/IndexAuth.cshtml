@@ -96,6 +96,52 @@
             {
                 <p>You have no aktive bets</p>
             }
+             <h3>Invites</h3>
+            @if (Model.InvitedToLobbies.Any())
+            {
+                foreach (var l in Model.InvitedToLobbies)
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                @l.Name
+                            </h4>
+                        </div>
+                        <div class="col-md-6 text-md-right text-sm-left">
+                            <a class="btn btn-primary" href="#">Info</a>
+                            <a class="btn btn-primary" href="/Lobby/Accept/@l.LobbyId">Accept</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>You have no lobby invites</p>
+            }
+
+            <h3>Friendlist</h3>
+            @if (Model.Friendlist.Any())
+            {
+               foreach (var f in Model.Friendlist)
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                @f.FirstName @f.LastName
+                            </h4> 
+                        </div>
+                        <div class="col-md-6 text-md-right text-sm-left">
+                            <a class="btn btn-primary" href="#">Info</a>
+                            <a class="btn btn-primary" href="#">messags</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>You have no Friendss</p>
+            }
+
 
         </div>
     </div>
