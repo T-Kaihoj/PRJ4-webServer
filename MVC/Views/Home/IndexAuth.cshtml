@@ -10,7 +10,7 @@
             <h3>
                 LocalBet helps you make bets with your friends.
             </h3>
-            <img src="~/Content/images/handshake-icon.png" width="100" alt="" />
+            <img src="~/Content/images/handshake-icon.png" width="400" alt="" />
         </div>
         <div class="col-md-6">
             <h1>
@@ -30,7 +30,6 @@
                         </h4>
                     </div>
                     <div class="col-md-6 text-md-right text-sm-left">
-                        <a class="btn btn-primary" href="#">Info</a>
                         <a class="btn btn-primary" href="/Lobby/Show/@l.LobbyId">View</a>
                     </div>
                 </div>
@@ -78,7 +77,6 @@
                             <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
                             }
 
-                            <a class="btn btn-primary pull-right" href="/Bet/Show/@b.BetId">Info</a>
                             <!-- TODO: Only show when logged in user is owner of shown bet -->
                             @if (b.Owner.Username == Model.Username)
                             {
