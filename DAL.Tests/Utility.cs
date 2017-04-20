@@ -21,7 +21,7 @@ namespace DAL.Tests
                 FirstName = "Jeppe",
                 MemberOfLobbies = null,
                 Balance = 50,
-                Bets = null,
+                //Bets = null,
                 Email = email,
                 Hash = "sdkjfldfkdf",
                 LastName = "Soerensen"

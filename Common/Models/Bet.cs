@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Common.Models
@@ -60,6 +61,7 @@ namespace Common.Models
         [ExcludeFromCodeCoverage]
         public Decimal Pot { get; set; }    
 
+        [NotMapped]
         public ICollection<User> Participants
         {
             get
@@ -163,6 +165,7 @@ namespace Common.Models
 
             // Add the user to the outcome, and move the amount from the balance to the pot.
             outcome.Participants.Add(user);
+            user.Outcomes.Add(outcome);
             user.Balance -= BuyIn;
             Pot += BuyIn;
 
