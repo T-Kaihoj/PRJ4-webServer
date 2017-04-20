@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Linq;
 using Common.Models;
 using Common.Repositories;
 using DAL.Data;
@@ -9,6 +10,16 @@ namespace DAL.Persistence
     {
         public LobbyRepository(DbContext context) : base(context)
         {
+        }
+
+        public Lobby GetEager(long id)
+        {
+            return OurContext.Lobbies
+                .Where(b => b.LobbyId == id)
+                .Include(b => b.Bets)
+                .Include(b => b.MemberList)
+                .Include(b => b.InvitedList)
+                .SingleOrDefault();
         }
 
         public Context OurContext
