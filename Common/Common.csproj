@@ -63,6 +63,8 @@
     <Compile Include="Repositories\IOutcomeRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Validation\DecimalValidation.cs" />
+    <Compile Include="Validation\DateTimeValidation.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

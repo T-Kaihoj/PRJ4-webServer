@@ -13,6 +13,7 @@
             <h1 class="header">
                 @Html.DisplayFor(m => m.Name)
             </h1>
+
             @foreach (var b in Model.Bets)
             {
                 <div class="row" align="left">
@@ -47,6 +48,25 @@
             </p>
             <div class="row">
                 @Html.Partial("Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
+            </div>
+            <div class="row">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Members of this lobby</th>
+                            <th>Username</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var u in Model.Participants)
+                        {
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>@u.Username</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

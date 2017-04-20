@@ -12,20 +12,20 @@ namespace MVC.Models.Userlogic
     {
         // INFO ___________________________________________
         //Preconditon:
-        //Modtager et LobbyID
+        //Modtager et LobbyId
         //Postcondition
         //Returner et lobby navn.
         string getLobbyName(long lobbyID);
 
         //Preconditon:
-        //Modtager et LobbyID
+        //Modtager et LobbyId
         //Postcondition
         //Returner lobby describtion.
         string getDescribtion(long lobbyID);
 
        
         //Precondition:
-        //Modtager et LobbyID
+        //Modtager et LobbyId
         //Postcondition
         //Returner en liste af Users som er medlem af lobbyen.
         List<User> getParticipants(long lobbyID);

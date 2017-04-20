@@ -1,8 +1,10 @@
-﻿using MVC.Identity;
+﻿using System.Diagnostics.CodeAnalysis;
+using MVC.Identity;
 using NUnit.Framework;
 
 namespace MVC.Tests.Identity
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class IdentityUserTests
     {

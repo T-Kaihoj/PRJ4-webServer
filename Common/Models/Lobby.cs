@@ -1,11 +1,12 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+
+// TODO: I am confused regarding the population of a users invitedto and memberof, compared to the equivalent lists here (Magnus).
 
 namespace Common.Models
 {
-    public class Lobby :ILobbyLogic
+    public class Lobby : ILobbyLogic
     {
         private string _name;
         private readonly IUtility _utility;
@@ -13,10 +14,9 @@ namespace Common.Models
         public Lobby()
         {
             _utility = Utility.Instance;
-
         }
 
-        public Lobby(IUtility util )
+        public Lobby(IUtility util)
         {
             if (util == null)
             {
@@ -37,28 +37,42 @@ namespace Common.Models
             set { _name =_utility.DatabaseSecure( value); }
         }
 
-
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<Bet> Bets { get; set; } = new List<Bet>();
+
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<User> MemberList { get; set; } = new List<User>();
+
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<User> InvitedList { get; set; } = new List<User>();
+
         public void InviteUserToLobby(User user)
         {
             //TODO sede meg to user
             //user.meg("InvitetoLobby",this)
-            InvitedList.Add(user);
+
+            if (user != null)
+            {
+                InvitedList.Add(user);
+            }
         }
 
-        public void InviteUserToLobby(List<User> users)
+        public void InviteUsersToLobby(List<User> users)
         {
+            if (users == null)
+            {
+                return;
+            }
+
             foreach (var i in users)
             {
                 InviteUserToLobby(i);
             }
         }
 
-        public virtual void AcceptLobby(User user)
+        public void AcceptLobby(User user)
         {
-            if (!this.InvitedList.Remove(user))
+            if (!InvitedList.Remove(user))
                 return;
 
             MemberList.Add(user);
@@ -68,43 +82,58 @@ namespace Common.Models
         {
             foreach (var member in MemberList)
             {
-                RemoveMemberFromLobby(member);
+                RemoveMemberFromBets(member);
             }
+            MemberList.Clear();
+
             foreach (var member in InvitedList)
             {
-                RemoveMemberFromLobby(member);
+                member.InvitedToLobbies.Remove(this);
             }
+            InvitedList.Clear();
         }
+
         public void RemoveMemberFromLobby(User user)
         {
-            foreach (var bet in this.Bets)
+            if (user == null)
             {
-                foreach (var outcome in bet.Outcomes)
-                {
-                    foreach (var participant in outcome.Participants)
-                    {
-                        if(user.Username == participant.Username)
-                            outcome.Participants.Remove(participant);
-                    }
-                }
+                return;
             }
-                    MemberList.Remove(user);
-                    
+
+            RemoveMemberFromBets(user);
+
+            // TODO: We seem to do two removals here. Surely we can get EF to handle this for us?
+            // Remove the user from the memberlist.
+            MemberList.Remove(user);
+
+            // Remove the reverse association.
             user.MemberOfLobbies.Remove(this);
         }
 
-        public void RemoveLobbyFromLists()
+        private void RemoveMemberFromBets(User user)
+        {
+            // Loop over all bets in the lobby, removing the user if present.
+            foreach (var bet in Bets)
+            {
+                foreach (var outcome in bet.Outcomes)
+                {
+                    outcome.Participants.Remove(user);
+                }
+            }
+        }
+
+        // TODO: Currently unused.
+        /*public void RemoveLobbyFromLists()
         {
             foreach (var member in MemberList)
             {
                 member.MemberOfLobbies.Remove(this);
             }
+
             foreach (var member in InvitedList)
             {
                 member.InvitedToLobbies.Remove(this);
             }
-        }
-
-
+        }*/
     }
 }
