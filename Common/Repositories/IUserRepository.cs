@@ -5,5 +5,7 @@ namespace Common.Repositories
     public interface IUserRepository : IRepository<User>
     {
         User Get(string username);
+
+        User GetByEmail(string email);
     }
 }
