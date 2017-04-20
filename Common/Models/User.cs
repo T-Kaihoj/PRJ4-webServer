@@ -79,6 +79,9 @@ namespace Common.Models
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
 
+        public virtual ICollection<User> Friendlist { get; set; }
+
+
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
 

@@ -61,7 +61,9 @@ namespace MVC.Controllers
                 CurrentBalance = user.Balance,
                 MemberOfLobbies = user.MemberOfLobbies,
                 InvitedToLobbies = user.InvitedToLobbies,
-                Bets = user.Bets
+                Bets = user.Bets,
+                Friendlist = user.Friendlist
+
             };
 
             return View("IndexAuth", viewModel);
