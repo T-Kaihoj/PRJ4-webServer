@@ -2,18 +2,100 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model  MVC.ViewModels.HomeViewModel
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
             <h3>
                 LocalBet helps you make bets with your friends.
             </h3>
-            <img src="~/Content/images/handshake-icon.png" width="100" alt=""/>
+            <img src="~/Content/images/handshake-icon.png" width="100" alt="" />
         </div>
         <div class="col-md-6">
-            <h3>
-                We could show lobbies and bets here.
-            </h3>
+            <h1>
+                Home
+            </h1>
+            <h2 class="label">Welcome : @Model.Name </h2><br>
+            <h2 class="label">Your Balance is : @Model.CurrentBalance </h2>
+            @* List Joined lobbies *@
+            <h3>Lobbies</h3>
+            @foreach (var l in Model.MemberOfLobbies)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>
+                            @l.Name
+                        </h4>
+                    </div>
+                    <div class="col-md-6 text-md-right text-sm-left">
+                        <a class="btn btn-primary" href="#">Info</a>
+                        <a class="btn btn-primary" href="/Lobby/Show/@l.LobbyId">View</a>
+                    </div>
+                </div>
+            }
+            <hr /><br />
+            @* List Lobby Invites *@
+            <h3>Invites</h3>
+            @if (Model.InvitedToLobbies.Any())
+            {
+                foreach (var l in Model.InvitedToLobbies)
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                @l.Name
+                            </h4>
+                        </div>
+                        <div class="col-md-6 text-md-right text-sm-left">
+                            <a class="btn btn-primary" href="#">Info</a>
+                            <a class="btn btn-primary" href="/Lobby/Accept/@l.LobbyId">Accept</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>You have no lobby invites</p>
+            }
+            @* List Bets *@
+            <h3>Bets</h3>
+            @if (Model.Bets.Any())
+            {
+                foreach (var b in Model.Bets)
+                {
+                    <div class="row" align="left">
+                        <p class="lead">
+                            <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </label>
+                            @b.Name
+
+
+                            <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude/Join Bet</a>
+
+                            <a class="btn btn-primary pull-right" href="/Bet/Join/@b.BetId">Join Bet</a>
+
+
+                            <a class="btn btn-primary pull-right" href="/Bet/Show/@b.BetId">Info</a>
+                            <!-- TODO: Only show when logged in user is owner of shown bet -->
+                            <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
+
+                            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
+                                @b.BuyIn
+                            </label>
+                            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="5 minutes left">
+                                <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+                            </label>
+                        </p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>You have no aktive bets</p>
+            }
+
         </div>
     </div>
 </div>

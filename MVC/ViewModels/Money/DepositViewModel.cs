@@ -6,7 +6,7 @@ namespace MVC.ViewModels
 {
     public class DepositViewModel
     {
-        [Required(ErrorMessage = "Please provide amount you want to withdraw")]
+        [Required(ErrorMessage = "Please provide amount you want to deposit")]
         [DisplayName("Amount to deposit")]
         public decimal Deposit { get; set; }
         public decimal CurrentBalance { get; set; }

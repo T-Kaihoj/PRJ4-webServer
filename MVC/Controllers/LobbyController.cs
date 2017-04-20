@@ -194,7 +194,8 @@ namespace MVC.Controllers
                 {
                     ID = lobby.LobbyId,
                     Name = lobby.Name,
-                    Bets = lobby.Bets
+                    Bets = lobby.Bets,
+                    Participants = lobby.MemberList
                 };
 
                 return View(viewModel);
