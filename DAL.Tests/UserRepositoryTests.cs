@@ -40,6 +40,9 @@ namespace DAL.Tests
         public void Dispose()
         {
             // Reset the database.
+            _context.Database.ExecuteSqlCommand("DELETE FROM Lobbies");
+            _context.Database.ExecuteSqlCommand("DELETE FROM Bets");
+            _context.Database.ExecuteSqlCommand("DELETE FROM Outcomes");
             _context.Database.ExecuteSqlCommand("DELETE FROM Users");
         }
 
