@@ -64,7 +64,7 @@ namespace MVC.Controllers
                 Bets = user.Bets
             };
 
-            return View("~/Views/Home/IndexAuth.cshtml", viewModel);
+            return View("IndexAuth", viewModel);
         }
     }
 }
