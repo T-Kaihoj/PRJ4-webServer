@@ -30,6 +30,18 @@ namespace DAL.Data
                     cs.ToTable("UserLobbyMember");
                 });
 
+
+            modelBuilder.Entity<User>()
+                .HasMany<User>(s => s.Friendlist)
+                .WithMany()
+                .Map(cs =>
+                {
+                    cs.MapLeftKey("Username");
+                    cs.MapRightKey("Username2");
+                    cs.ToTable("Friendlist");
+                });
+
+
             // mange til mange opsætning mellem User og Lobby (invited)
             modelBuilder.Entity<User>()
                 .HasMany<Lobby>(s => s.InvitedToLobbies)
@@ -42,15 +54,15 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Bet
-            modelBuilder.Entity<User>()
-                .HasMany(s => s.Bets)
-                .WithMany(c => c.Participants)
-                .Map(cs =>
-                {
-                    cs.MapLeftKey("Username");
-                    cs.MapRightKey("BetId");
-                    cs.ToTable("UserBet");
-                });
+            //modelBuilder.Entity<User>()
+            //    .HasMany(s => s.Bets)
+            //    .WithMany(c => c.Participants)
+            //    .Map(cs =>
+            //    {
+            //        cs.MapLeftKey("Username");
+            //        cs.MapRightKey("BetId");
+            //        cs.ToTable("UserBet");
+            //    });
 
             // mange til mange opsætning mellem User og Outcome
             modelBuilder.Entity<User>()

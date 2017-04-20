@@ -73,7 +73,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\201703301249207_\" />
+    <EmbeddedResource Include="Migrations\201704201342351_this.resx">
+      <DependentUpon>201704201342351_this.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201704201151525_new.resx">

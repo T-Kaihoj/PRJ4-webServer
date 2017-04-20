@@ -8,9 +8,12 @@ namespace MVC.ViewModels
     {
         public int ID { get; set; }
         public string Name { get; set; }
+        public string Username { get; set; }
         public decimal CurrentBalance { get; set; }
         public IEnumerable<Lobby> MemberOfLobbies { get; set; }
         public IEnumerable<Lobby> InvitedToLobbies { get; set; }
         public ICollection<Bet> Bets { get; set; }
+        public ICollection<User> Friendlist { get; set; }
+
     }
 }
