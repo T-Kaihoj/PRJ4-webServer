@@ -7,7 +7,6 @@ using Common.Models;
 using MVC.Identity;
 using MVC.ViewModels;
 
-
 namespace MVC.Controllers
 {
     [Authorize]
@@ -106,13 +105,19 @@ namespace MVC.Controllers
                     StartDate = viewModel.StartDateTime,
                     StopDate = viewModel.StopDateTime
                 };
-                /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
 
                 // Ensure both owner and judge was found.
-                if (bet.Judge == null || bet.Owner == null)
+                if (bet.Judge == null)
                 {
-                    // TODO: Inject errors.
+                    ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeDoesntExist);
+
                     return View("Create", viewModel);
+                }
+
+                if (bet.Owner == null)
+                {
+                    // We should never be able to get to this line.
+                    throw new Exception("Owner is not logged in");
                 }
 
                 var outcome1 = new Outcome()
@@ -137,7 +142,7 @@ namespace MVC.Controllers
                 myWork.Complete();
 
                 // Redirect to the bet page.
-                return Redirect($"/Bet/Show/{bet.BetId}");
+                return Redirect($"/Bet/Join/{bet.BetId}");
             }
         }
 
@@ -192,9 +197,9 @@ namespace MVC.Controllers
             }
         }
 
+        // GET: /<controller>/Conclude/<id>
         public ActionResult Conclude(long id)
         {
-
             using (var myWork = _factory.GetUOF())
             {
                 //throw new NotImplementedException();
@@ -211,10 +216,11 @@ namespace MVC.Controllers
                 if (_userContext.Identity.Name == Bet.Judge.Username)
                     return View(model);
             }
-            return Redirect("/");
 
+            return Redirect("/");
         }
 
+        // POST: /<controller>/Conclude/
         [HttpPost]
         public ActionResult Conclude( ConcludeViewModel Model)
         {
@@ -232,9 +238,9 @@ namespace MVC.Controllers
                 return Redirect("/");
             }
 
-
             return Redirect("/");
         }
+
         // GET: /<controller>/Remove/<Lobby>/<Bet>
         [HttpGet]
         public ActionResult Remove(long Lobby, long Bet)
@@ -242,12 +248,12 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 var myBet = myWork.Bet.Get(Bet);
-                
-                //TODO: Check is user is owner of lobby before removing!
-                myWork.Bet.Remove(myBet);
-                //TODO: Fails when there's outcomes associated with the bet!
-                myWork.Complete();
-
+            
+                if (_userContext.Identity.Name == myBet.Owner.Username && myBet.StartDate > DateTime.Now)
+                {
+                    myWork.Bet.Remove(myBet);
+                    myWork.Complete();
+                }
                 string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
                 return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
             }

@@ -57,14 +57,15 @@ namespace MVC.Controllers
             // Populate the viewmodel.
             var viewModel = new HomeViewModel()
             {
-                Name = (user.FirstName + user.LastName),
+                Name = (user.FirstName + "   " + user.LastName),
                 CurrentBalance = user.Balance,
                 MemberOfLobbies = user.MemberOfLobbies,
                 InvitedToLobbies = user.InvitedToLobbies,
-                Bets = user.Bets
+                Bets = user.Bets,
+                Username = user.Username
             };
 
-            return View("~/Views/Home/IndexAuth.cshtml", viewModel);
+            return View("IndexAuth", viewModel);
         }
     }
 }

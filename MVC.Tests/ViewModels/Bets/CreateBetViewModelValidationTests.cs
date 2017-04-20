@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using MVC.ViewModels;
 using NUnit.Framework;
 
@@ -28,6 +29,114 @@ namespace MVC.Tests.ViewModels
             uut.StopDate = "24-11-2018 04:45:22";
             uut.Title = "title";
         }
+
+        #region Validation Messages
+
+        [Test]
+        public void ErrorMessage_ForBuyIn_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.BuyIn = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorBuyInRequired));
+        }
+
+        [Test]
+        public void ErrorMessage_ForDescription_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.Description = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorDescriptionRequired));
+        }
+
+        [Test]
+        public void ErrorMessage_ForJudge_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.Judge = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorJudgeRequired));
+        }
+
+        [Test]
+        public void ErrorMessage_ForOutcome1_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.Outcome1 = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorOutcomeRequired));
+        }
+
+        [Test]
+        public void ErrorMessage_ForOutcome2_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.Outcome2 = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorOutcomeRequired));
+        }
+
+        [Test]
+        public void ErrorMessage_ForStartDate_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.StartDate = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorStartDate));
+        }
+
+        [Test]
+        public void ErrorMessage_ForStopDate_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.StopDate = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorStopDate));
+        }
+
+        [Test]
+        public void ErrorMessage_ForTitle_ReturnsExpected()
+        {
+            // Setup modelstate.
+            uut.Title = string.Empty;
+
+            // Perform validation.
+            Validator.TryValidateObject(uut, Context, Results, true);
+
+            // Assert.
+            Assert.That(Results.Select(e => e.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorTitleRequired));
+        }
+
+        #endregion
 
         #region Validation Tests
 

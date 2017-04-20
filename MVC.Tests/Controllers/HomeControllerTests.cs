@@ -1,6 +1,8 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
+using Common;
+using Common.Models;
 using MVC.Controllers;
 using MVC.Identity;
 using MVC.ViewModels;
@@ -15,13 +17,13 @@ namespace MVC.Tests.Controllers
     {
         private HomeController uut;
         private IUserContext context;
-
+        
         [SetUp]
         public void Setup()
         {
             context = Substitute.For<IUserContext>();
-
-            uut = new HomeController(context);
+          
+            uut = new HomeController(context, Factory);
         }
 
         [Test]
@@ -30,7 +32,8 @@ namespace MVC.Tests.Controllers
             var identityMock = Substitute.For<IIdentity>();
             identityMock.IsAuthenticated.Returns(true);
             context.Identity.Returns(identityMock);
-
+            var user = new User();
+            Factory.GetUOF().User.Get(Arg.Any<string>()).Returns(user);
             // Act.
             var result = uut.Index();
 

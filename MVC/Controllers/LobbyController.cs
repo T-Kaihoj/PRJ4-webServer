@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
@@ -187,14 +188,20 @@ namespace MVC.Controllers
                     // Error.
                     throw new Exception("No such lobby");
                 }
-                
+                List<Bet> myBets = new List<Bet>();
+                foreach (var bet in lobby.Bets)
+                {
+                    var tempBet = myWork.Bet.GetEager(bet.BetId);
+                    myBets.Add(tempBet);
+                }
 
                 // Create a viewmodel for the lobby.
                 var viewModel = new LobbyViewModel()
                 {
                     ID = lobby.LobbyId,
                     Name = lobby.Name,
-                    Bets = lobby.Bets
+                    Bets = myBets,
+                    Participants = lobby.MemberList
                 };
 
                 return View(viewModel);

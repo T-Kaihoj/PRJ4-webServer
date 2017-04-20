@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data.Entity.Infrastructure;
+using System.Linq;
 using Common;
 using Common.Repositories;
 using DAL.Data;
@@ -41,15 +43,30 @@ namespace DAL
 
         public int Complete()
         {
-            try
+            bool saveFailed;
+            do
             {
-                return _context.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+                saveFailed = false;
+                try
+                {
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException e)
+                {
+                    saveFailed = true;
+
+                    // Update the values of the entity that failed to save from the store 
+                    e.Entries.Single().Reload();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+
+            } while (saveFailed);
+
+            return 0;
         }
     }
 }
