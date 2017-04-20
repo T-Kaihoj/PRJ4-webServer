@@ -23,9 +23,10 @@
                         </label>
                         @b.Name
 
-                       
-                        <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
-                         
+                       @if (b.Owner.Username == User.Identity.Name)
+                       {
+                           <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
+                       }
                         <a class="btn btn-primary pull-right" href="/Bet/Join/@b.BetId">Join Bet</a>
                       
                         
