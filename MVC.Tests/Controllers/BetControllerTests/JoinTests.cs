@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Mvc;
 using MVC.Controllers;
 using MVC.Identity;
 using NSubstitute;
@@ -6,6 +7,7 @@ using NUnit.Framework;
 
 namespace MVC.Tests.Controllers.BetControllerTests
 {
+    [ExcludeFromCodeCoverage]
     [TestFixture]
     public class JoinTests : BaseRepositoryTest
     {

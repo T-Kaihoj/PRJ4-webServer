@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using MVC.ViewModels;
 using NUnit.Framework;
 
@@ -39,7 +40,7 @@ namespace MVC.Tests.ViewModels
         [Test]
         public void Constructor_GetLobbyId_ReturnsZerog()
         {
-            Assert.That(uut.LobbyID, Is.EqualTo(0));
+            Assert.That(uut.LobbyId, Is.EqualTo(0));
         }
 
         [Test]
@@ -79,7 +80,9 @@ namespace MVC.Tests.ViewModels
         [TestCase("a", "a")]
         [TestCase("a ", "a")]
         [TestCase(" a", "a")]
-        public void SetBuyIn_GetBuyIn_ReturnsValue(string value, string expected)
+        [TestCase("a,a", "a.a")]
+        [TestCase("a.a", "a.a")]
+        public void BuyIn_SetGetBuyIn_ReturnsValue(string value, string expected)
         {
             uut.BuyIn = value;
 
@@ -89,7 +92,7 @@ namespace MVC.Tests.ViewModels
         [TestCase("a", "a")]
         [TestCase("a ", "a")]
         [TestCase(" a", "a")]
-        public void SetDescription_GetDescription_ReturnsValue(string value, string expected)
+        public void Description_SetGetDescription_ReturnsValue(string value, string expected)
         {
             uut.Description = value;
 
@@ -99,7 +102,7 @@ namespace MVC.Tests.ViewModels
         [TestCase("a", "a")]
         [TestCase("a ", "a")]
         [TestCase(" a", "a")]
-        public void SetJudge_GetJudge_ReturnsValue(string value, string expected)
+        public void Judge_SetGetJudge_ReturnsValue(string value, string expected)
         {
             uut.Judge = value;
 
@@ -109,17 +112,17 @@ namespace MVC.Tests.ViewModels
         [TestCase(0, 0)]
         [TestCase(10, 10)]
         [TestCase(-10, -10)]
-        public void SetLobbyID_GetLobbyID_ReturnsValue(long value, long expected)
+        public void LobbyID_SetGetLobbyID_ReturnsValue(long value, long expected)
         {
-            uut.LobbyID = value;
+            uut.LobbyId = value;
 
-            Assert.That(uut.LobbyID, Is.EqualTo(expected));
+            Assert.That(uut.LobbyId, Is.EqualTo(expected));
         }
 
         [TestCase("a", "a")]
         [TestCase("a ", "a")]
         [TestCase(" a", "a")]
-        public void SetOutcome1_GetOutcome1_ReturnsValue(string value, string expected)
+        public void Outcome1_SetGetOutcome1_ReturnsValue(string value, string expected)
         {
             uut.Outcome1 = value;
 
@@ -129,27 +132,27 @@ namespace MVC.Tests.ViewModels
         [TestCase("a", "a")]
         [TestCase("a ", "a")]
         [TestCase(" a", "a")]
-        public void SetOutcome2_GetOutcome2_ReturnsValue(string value, string expected)
+        public void Outcome2_SetGetOutcome2_ReturnsValue(string value, string expected)
         {
             uut.Outcome2 = value;
 
             Assert.That(uut.Outcome2, Is.EqualTo(expected));
         }
 
-        [TestCase("a", "a")]
-        [TestCase("a ", "a")]
-        [TestCase(" a", "a")]
-        public void SetStartDate_GetStartDate_ReturnsValue(string value, string expected)
+        [TestCase("13/01/2013 00:11:22", "13/01/2013 00:11:22")]
+        [TestCase("13/01/2013 00:11:22 ", "13/01/2013 00:11:22")]
+        [TestCase(" 13/01/2013 00:11:22", "13/01/2013 00:11:22")]
+        public void StartDate_SetGetStartDate_ReturnsValue(string value, string expected)
         {
             uut.StartDate = value;
 
             Assert.That(uut.StartDate, Is.EqualTo(expected));
         }
 
-        [TestCase("a", "a")]
-        [TestCase("a ", "a")]
-        [TestCase(" a", "a")]
-        public void SetStopDate_GetStopDate_ReturnsValue(string value, string expected)
+        [TestCase("13/01/2013 00:11:22", "13/01/2013 00:11:22")]
+        [TestCase("13/01/2013 00:11:22 ", "13/01/2013 00:11:22")]
+        [TestCase(" 13/01/2013 00:11:22", "13/01/2013 00:11:22")]
+        public void StopDate_SetGetStopDate_ReturnsValue(string value, string expected)
         {
             uut.StopDate = value;
 
@@ -159,11 +162,68 @@ namespace MVC.Tests.ViewModels
         [TestCase("a", "a")]
         [TestCase("a ", "a")]
         [TestCase(" a", "a")]
-        public void SetTitle_GetTitle_ReturnsValue(string value, string expected)
+        public void Title_SetGetTitle_ReturnsValue(string value, string expected)
         {
             uut.Title = value;
 
             Assert.That(uut.Title, Is.EqualTo(expected));
+        }
+
+        #endregion
+
+        #region Accessors
+
+        [TestCase("0", 0)]
+        [TestCase("10 ", 10)]
+        [TestCase("11.1", 11.1)]
+        [TestCase("11,1", 11.1)]
+        public void BuyInDecimal_ReturnsExpected(string value, decimal expected)
+        {
+            uut.BuyIn = value;
+
+            Assert.That(uut.BuyInDecimal, Is.EqualTo(expected));
+        }
+
+        [TestCase("2013/2/24 14:46:59")]
+        [TestCase("2013 2 24 14:46:59")]
+        [TestCase("2013-2-24 14:46:59")]
+        [TestCase("24/2/2013 14:46:59")]
+        [TestCase("24 2 2013 14:46:59")]
+        [TestCase("24-2-2013 14:46:59")]
+        public void StartDateTime_ReturnsExpected(string value)
+        {
+            DateTime expected = new DateTime(
+                2013,
+                2,
+                24,
+                14,
+                46,
+                59);
+
+            uut.StartDate = value;
+
+            Assert.That(uut.StartDateTime, Is.EqualTo(expected));
+        }
+
+        [TestCase("2013/2/24 14:46:59")]
+        [TestCase("2013 2 24 14:46:59")]
+        [TestCase("2013-2-24 14:46:59")]
+        [TestCase("24/2/2013 14:46:59")]
+        [TestCase("24 2 2013 14:46:59")]
+        [TestCase("24-2-2013 14:46:59")]
+        public void StopDateTime_ReturnsExpected(string value)
+        {
+            DateTime expected = new DateTime(
+                2013,
+                2,
+                24,
+                14,
+                46,
+                59);
+            
+            uut.StopDate = value;
+
+            Assert.That(uut.StopDateTime, Is.EqualTo(expected));
         }
 
         #endregion

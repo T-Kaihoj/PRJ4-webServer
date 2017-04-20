@@ -1,9 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using System.Diagnostics.CodeAnalysis;
 
 namespace Common.Models
 {
@@ -19,7 +18,6 @@ namespace Common.Models
         public User()
         {
             _utility = Utility.Instance;
-
         }
 
         public User(IUtility util = null)
@@ -75,34 +73,55 @@ namespace Common.Models
         }
 
         [Required]
+        [ExcludeFromCodeCoverage]
         public string Hash { get; set; }
 
-
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
+
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
-        public virtual ICollection<Bet> Bets { get; set; } 
+
+        [ExcludeFromCodeCoverage]
+        public virtual ICollection<Bet> Bets { get; set; }
+
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<Bet> BetsOwned { get; set; }
+
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<Bet> BetsJudged { get; set; }
+
+        [ExcludeFromCodeCoverage]
         public virtual ICollection<Outcome> Outcomes { get; set; }
-        
 
         public decimal WithdrawMoney(decimal amount)
         {
+            if (amount <= 0)
+            {
+                throw new ArithmeticException();
+            }
+
             if (_balance < amount)
             {
                 throw new ArithmeticException(); 
             }
-            _balance = _balance - amount;
+
+            _balance -= amount;
+
+            // TODO: Return balance or amount?
             return amount;
         }
 
         public decimal DepositMoney(decimal amount)
         {
-            if (_balance < amount)
+            if (amount <= 0)
             {
-             //   throw new ArithmeticException();
+                throw new ArithmeticException();
             }
-            _balance = _balance + amount;
+
+            _balance += amount;
+
+            // TODO: Return balance or amount?
             return amount;
         }
     }

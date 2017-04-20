@@ -174,7 +174,7 @@ namespace MVC.Controllers
                 user.WithdrawMoney(model.Withdraw);
                 myWork.Complete();
             }
-            return View("~/Views/Home/IndexAuth.cshtml");
+            return Redirect($"/Home/Index/");
         }
 
         [HttpPost]
@@ -198,7 +198,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
-            return View("~/Views/Home/IndexAuth.cshtml");
+            return Redirect($"/Home/Index/");
         }
 
         // POST: /User/Create

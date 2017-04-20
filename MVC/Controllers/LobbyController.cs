@@ -77,7 +77,6 @@ namespace MVC.Controllers
                 var lobby = new Lobby()
                 {
                     Name = viewModel.Name,
-                    Description = viewModel.Description,
                 };
 
                 // Save to the database.
@@ -195,13 +194,12 @@ namespace MVC.Controllers
                 {
                     ID = lobby.LobbyId,
                     Name = lobby.Name,
-                    Description = lobby.Description,
                     Bets = lobby.Bets
-                   
                 };
 
                 return View(viewModel);
             }
         }
+        
     }
 }

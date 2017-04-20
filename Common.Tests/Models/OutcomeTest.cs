@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics.CodeAnalysis;
 using Common.Models;
 using NSubstitute;
 using NUnit.Framework;
@@ -62,7 +57,7 @@ namespace Common.Tests.Models
                 Assert.That(_uut.Name, Is.EqualTo(name));
             }
         }
-
+        /*
         [Test]
         public void Name_SetInvalidName_ThrowsException()
         {
@@ -71,7 +66,7 @@ namespace Common.Tests.Models
                 Assert.That(() => _uut.Name = chars, Throws.Exception);
             }
         }
-
+        */
         [Test]
         public void Description_SetValidDescription_DescriptionSet()
         {
@@ -91,6 +86,7 @@ namespace Common.Tests.Models
             }
         }
 
+        /*
         [Test]
         public void Description_SetInvalidDescription_ThrowExecption()
         {
@@ -99,7 +95,7 @@ namespace Common.Tests.Models
                 Assert.That(() => _uut.Description = chars, Throws.Exception);
             }
         }
-
+        */
         [Test]
         public void Participants_SetParticipants_ParticipantsSet()
         {
@@ -121,5 +117,20 @@ namespace Common.Tests.Models
 
         }
 
+        [Test]
+        public void Bet_Get_ReturnsNothingWithNoValue()
+        {
+            Assert.That(_uut.bet, Is.Null);
+        }
+
+        [Test]
+        public void Bet_GetSet_ReturnsExpectedValue()
+        {
+            var b = Substitute.For<Bet>();
+
+            _uut.bet = b;
+
+            Assert.That(_uut.bet, Is.EqualTo(b));
+        }
     }
 }

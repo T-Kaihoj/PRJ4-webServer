@@ -78,20 +78,19 @@ namespace MVC.Controllers
         {
             var viewModel = new CreateBetViewModel()
             {
-                LobbyID = id
+                LobbyId = id
             };
 
-            return View(viewModel);
+            return View("Create", viewModel);
         }
 
         // POST: /<controller>/Create
         [HttpPost]
         public ActionResult Create(CreateBetViewModel viewModel)
         {
-            // TODO: Fix validation.
             if (!TryValidateModel(viewModel))
             {
-                return View(viewModel);
+                return View("Create", viewModel);
             }
 
             using (var myWork = _factory.GetUOF())
@@ -99,22 +98,29 @@ namespace MVC.Controllers
                 // Create the bet.
                 var bet = new Bet()
                 {
-                    BuyIn = Decimal.Parse(viewModel.BuyIn),
+                    BuyIn = viewModel.BuyInDecimal,
                     Description = viewModel.Description,
                     Name = viewModel.Title,
                     Owner = myWork.User.Get(_userContext.Identity.Name),
                     Judge = myWork.User.Get(viewModel.Judge),
-                    StartDate = DateTime.Parse(viewModel.StartDate),
-                    StopDate = DateTime.Parse(viewModel.StopDate)
+                    StartDate = viewModel.StartDateTime,
+                    StopDate = viewModel.StopDateTime
                 };
                 /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
-                
-                var outcome1 = new Common.Models.Outcome()
+
+                // Ensure both owner and judge was found.
+                if (bet.Judge == null || bet.Owner == null)
+                {
+                    // TODO: Inject errors.
+                    return View("Create", viewModel);
+                }
+
+                var outcome1 = new Outcome()
                 {
                     Name = viewModel.Outcome1,
                     Description = viewModel.Outcome1
                 };
-                var outcome2 = new Common.Models.Outcome()
+                var outcome2 = new Outcome()
                 {
                     Name = viewModel.Outcome2,
                     Description = viewModel.Outcome2
@@ -125,7 +131,7 @@ namespace MVC.Controllers
                 myWork.Bet.Add(bet);
 
                 // Get the lobby.
-                var lobby = myWork.Lobby.Get(viewModel.LobbyID);
+                var lobby = myWork.Lobby.Get(viewModel.LobbyId);
                 lobby.Bets.Add(bet);
                 
                 myWork.Complete();
@@ -178,7 +184,7 @@ namespace MVC.Controllers
                 var bet = myWork.Bet.Find(b => b.Outcomes.Any(o => o.OutcomeId.Equals(outcome.OutcomeId))).First();
 
                 // Join the bet.
-                bet.joinBet(user, outcome);
+                bet.JoinBet(user, outcome);
 
                 myWork.Complete();
 
@@ -223,11 +229,28 @@ namespace MVC.Controllers
                  bool betConclude = bet.ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
                 myWork.Complete();
                 if (betConclude)
-                return View("/Show");
+                return Redirect("/");
             }
 
 
             return Redirect("/");
+        }
+        // GET: /<controller>/Remove/<Lobby>/<Bet>
+        [HttpGet]
+        public ActionResult Remove(long Lobby, long Bet)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var myBet = myWork.Bet.Get(Bet);
+                
+                //TODO: Check is user is owner of lobby before removing!
+                myWork.Bet.Remove(myBet);
+                //TODO: Fails when there's outcomes associated with the bet!
+                myWork.Complete();
+
+                string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+                return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
+            }
         }
     }
 }
