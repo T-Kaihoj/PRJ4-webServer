@@ -16,8 +16,9 @@
             <h1>
                 Home
             </h1>
-            <h2 class="label">Welcome : @Model.Name </h2><br>
-            <h2 class="label">Your Balance is : @Model.CurrentBalance </h2>
+            <br />
+            <h2 class="label" style="font-size: 20px; background-color: black" >Welcome : @Model.Name </h2>  <br><br />
+            <h2 class="label" style="font-size: 18px; background-color: black">Your Balance is : @Model.CurrentBalance </h2>
             @* List Joined lobbies *@
             <h3>Lobbies</h3>
             @foreach (var l in Model.MemberOfLobbies)
@@ -48,7 +49,6 @@
                             </h4>
                         </div>
                         <div class="col-md-6 text-md-right text-sm-left">
-                            <a class="btn btn-primary" href="#">Info</a>
                             <a class="btn btn-primary" href="/Lobby/Accept/@l.LobbyId">Accept</a>
                         </div>
                     </div>
@@ -69,9 +69,9 @@
                             <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
                                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                             </label>
-                            <div>
+                            <h4>
                                 @b.Name
-                            </div>
+                            </h4>
                            
                             @if(b.Judge.Username == Model.Username )
                             {
@@ -87,8 +87,8 @@
                             <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
                                 @b.BuyIn
                             </label>
-                            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="5 minutes left">
-                                <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+                            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @b.StopDate">
+                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                             </label>
                         </p>
                     </div>

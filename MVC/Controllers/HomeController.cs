@@ -57,7 +57,7 @@ namespace MVC.Controllers
             // Populate the viewmodel.
             var viewModel = new HomeViewModel()
             {
-                Name = (user.FirstName + user.LastName),
+                Name = (user.FirstName + "   " + user.LastName),
                 CurrentBalance = user.Balance,
                 MemberOfLobbies = user.MemberOfLobbies,
                 InvitedToLobbies = user.InvitedToLobbies,
