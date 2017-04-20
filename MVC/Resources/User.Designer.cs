@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The email is already in use.
+        /// </summary>
+        public static string ErrorEmailInUse {
+            get {
+                return ResourceManager.GetString("ErrorEmailInUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter a valid email.
         /// </summary>
         public static string ErrorEmailInvalid {
@@ -192,6 +201,15 @@ namespace Resources {
         public static string ErrorUserNameRequired {
             get {
                 return ResourceManager.GetString("ErrorUserNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user name is already in use.
+        /// </summary>
+        public static string ErrorUserNameTaken {
+            get {
+                return ResourceManager.GetString("ErrorUserNameTaken", resourceCulture);
             }
         }
     }
