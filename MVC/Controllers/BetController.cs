@@ -7,7 +7,6 @@ using Common.Models;
 using MVC.Identity;
 using MVC.ViewModels;
 
-
 namespace MVC.Controllers
 {
     [Authorize]
@@ -106,7 +105,6 @@ namespace MVC.Controllers
                     StartDate = viewModel.StartDateTime,
                     StopDate = viewModel.StopDateTime
                 };
-                /* TODO: Hardcoded indtil vi nemt kan hente et User-objekt fra databasen givet et Username! */
 
                 // Ensure both owner and judge was found.
                 if (bet.Judge == null || bet.Owner == null)
@@ -137,7 +135,7 @@ namespace MVC.Controllers
                 myWork.Complete();
 
                 // Redirect to the bet page.
-                return Redirect($"/Bet/Show/{bet.BetId}");
+                return Redirect($"/Bet/Join/{bet.BetId}");
             }
         }
 
@@ -192,9 +190,9 @@ namespace MVC.Controllers
             }
         }
 
+        // GET: /<controller>/Conclude/<id>
         public ActionResult Conclude(long id)
         {
-
             using (var myWork = _factory.GetUOF())
             {
                 //throw new NotImplementedException();
@@ -211,10 +209,11 @@ namespace MVC.Controllers
                 if (_userContext.Identity.Name == Bet.Judge.Username)
                     return View(model);
             }
-            return Redirect("/");
 
+            return Redirect("/");
         }
 
+        // POST: /<controller>/Conclude/
         [HttpPost]
         public ActionResult Conclude( ConcludeViewModel Model)
         {
@@ -232,9 +231,9 @@ namespace MVC.Controllers
                 return Redirect("/");
             }
 
-
             return Redirect("/");
         }
+
         // GET: /<controller>/Remove/<Lobby>/<Bet>
         [HttpGet]
         public ActionResult Remove(long Lobby, long Bet)
