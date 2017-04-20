@@ -23,7 +23,7 @@
                         </label>
                         @b.Name
 
-                       @if (b.Owner.Username == User.Identity.Name)
+                       @if (b.Judge.Username == User.Identity.Name)
                        {
                            <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
                        }
