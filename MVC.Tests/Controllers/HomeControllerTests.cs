@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
 using Common;
@@ -33,6 +34,7 @@ namespace MVC.Tests.Controllers
             identityMock.IsAuthenticated.Returns(true);
             context.Identity.Returns(identityMock);
             var user = new User();
+            user.Outcomes = new List<Outcome>();
             Factory.GetUOF().User.Get(Arg.Any<string>()).Returns(user);
             // Act.
             var result = uut.Index();

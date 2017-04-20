@@ -93,8 +93,23 @@ namespace Common.Models
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
 
+        [NotMapped]
         [ExcludeFromCodeCoverage]
-        public virtual ICollection<Bet> Bets { get; set; }
+        public virtual ICollection<Bet> Bets
+        {
+            get
+            {
+                ICollection<Bet> result = new HashSet<Bet>();
+
+                foreach (var outcome in Outcomes)
+                {
+                    result.Add(outcome.bet);
+                }
+
+                return result;
+            }
+            
+        }
 
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Bet> BetsOwned { get; set; }

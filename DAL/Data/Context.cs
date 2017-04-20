@@ -54,15 +54,15 @@ namespace DAL.Data
                 });
 
             // mange til mange opsætning mellem User og Bet
-            modelBuilder.Entity<User>()
-                .HasMany(s => s.Bets)
-                .WithMany(c => c.Participants)
-                .Map(cs =>
-                {
-                    cs.MapLeftKey("Username");
-                    cs.MapRightKey("BetId");
-                    cs.ToTable("UserBet");
-                });
+            //modelBuilder.Entity<User>()
+            //    .HasMany(s => s.Bets)
+            //    .WithMany(c => c.Participants)
+            //    .Map(cs =>
+            //    {
+            //        cs.MapLeftKey("Username");
+            //        cs.MapRightKey("BetId");
+            //        cs.ToTable("UserBet");
+            //    });
 
             // mange til mange opsætning mellem User og Outcome
             modelBuilder.Entity<User>()
