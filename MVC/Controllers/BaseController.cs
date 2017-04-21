@@ -26,6 +26,11 @@ namespace MVC.Controllers
             get { return Factory.GetUOF(); }
         }
 
+        protected HttpUnauthorizedResult HttpUnauthorized()
+        {
+            return new HttpUnauthorizedResult();
+        }
+
         protected HttpForbiddenResult HttpForbidden()
         {
             return new HttpForbiddenResult();

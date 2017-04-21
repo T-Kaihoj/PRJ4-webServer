@@ -3,7 +3,6 @@ using System.Web.Mvc;
 using Common;
 using Common.Exceptions;
 using Common.Models;
-using DAL;
 using Microsoft.AspNet.Identity;
 using MVC.Identity;
 using MVC.ViewModels;
@@ -12,102 +11,17 @@ namespace MVC.Controllers
 {
     public class UserController : BaseController
     {
-        private UserManager<IdentityUser> _userManager;
-        private IStore _store;
+        private readonly UserManager<IdentityUser> _userManager;
 
         public UserController(IFactory factory, IUserContext userContext, IStore store)
             : base(factory, userContext)
         {
-            _store = store;
-            _userManager = new UserManager<IdentityUser>(_store);
+            _userManager = new UserManager<IdentityUser>(store);
         }
-
-        // GET: /User/
-        [HttpGet]
-        public ActionResult Index()
-        {
-            // Get the user from the identity.
-            var userName = GetUserName;
-
-            // Lookup the user in the repository.
-            var user = GetUOF.User.Get(userName);
-
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
-            // Populate the viewmodel.
-            var viewModel = new UserProfileViewModel()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                UserName = user.Username
-            };
-
-            return View("Profile", viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult EditProfile(EditProfileViewModel viewModel)
-        {
-            // Ensure the data is vaid.
-            if (!TryValidateModel(viewModel))
-            {
-                return View("EditProfile", viewModel);
-            }
-
-            using (var myWork = GetUOF)
-            {
-                var user = myWork.User.Get(GetUserName);
-
-                // user should NEVER be null, but we check anyway.
-                if (user == null)
-                {
-                    throw new Exception("User not found");
-                }
-
-                user.Email = viewModel.Email;
-                user.FirstName = viewModel.FirstName;
-                user.LastName = viewModel.LastName;
-
-                myWork.Complete();
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public ActionResult EditProfile()
-        {
-            // Get the user from the identity.
-            var userName = GetUserName;
-
-            // Lookup the user in the repository.
-            var user = GetUOF.User.Get(userName);
-
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
-            // Populate the viewmodel.
-            var viewModel = new EditProfileViewModel()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-            };
-
-            return View("EditProfile", viewModel);
-        }
-
+        
         #region Create
 
-        // POST: /User/Create
+        // POST: /User/Create/
         [HttpPost]
         public ActionResult Create(CreateUserViewModel model)
         {
@@ -159,6 +73,7 @@ namespace MVC.Controllers
 
         #region Deposit
 
+        // GET: /User/Deposit/
         [HttpGet]
         public ActionResult Deposit()
         {
@@ -177,6 +92,7 @@ namespace MVC.Controllers
             return View("~/Views/Money/Deposit.cshtml", model);
         }
 
+        // POST: /User/Deposit/
         [HttpPost]
         public ActionResult Deposit(DepositViewModel model)
         {
@@ -209,8 +125,102 @@ namespace MVC.Controllers
 
         #endregion
 
+        #region EditProfile
+
+        // GET: /User/EditProfile/
+        [HttpGet]
+        public ActionResult EditProfile()
+        {
+            // Get the user from the identity.
+            var userName = GetUserName;
+
+            // Lookup the user in the repository.
+            var user = GetUOF.User.Get(userName);
+
+            // user should NEVER be null, but we check anyway.
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+
+            // Populate the viewmodel.
+            var viewModel = new EditProfileViewModel()
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+
+            return View("EditProfile", viewModel);
+        }
+
+        // POST: /User/EditProfile/
+        [HttpPost]
+        public ActionResult EditProfile(EditProfileViewModel viewModel)
+        {
+            // Ensure the data is vaid.
+            if (!TryValidateModel(viewModel))
+            {
+                return View("EditProfile", viewModel);
+            }
+
+            using (var myWork = GetUOF)
+            {
+                var user = myWork.User.Get(GetUserName);
+
+                // user should NEVER be null, but we check anyway.
+                if (user == null)
+                {
+                    throw new Exception("User not found");
+                }
+
+                user.Email = viewModel.Email;
+                user.FirstName = viewModel.FirstName;
+                user.LastName = viewModel.LastName;
+
+                myWork.Complete();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Index
+
+        // GET: /User/
+        [HttpGet]
+        public ActionResult Index()
+        {
+            // Is the user logged in?
+            if (!IsAuthenticated)
+            {
+                return HttpUnauthorized();
+            }
+
+            // Get the user from the identity.
+            var userName = GetUserName;
+
+            // Lookup the user in the repository.
+            var user = GetUOF.User.Get(userName);
+
+            // Populate the viewmodel.
+            var viewModel = new UserProfileViewModel()
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserName = user.Username
+            };
+
+            return View("Profile", viewModel);
+        }
+
+        #endregion
+
         #region Withdraw
 
+        // GET: /User/Withdraw/
         [HttpGet]
         public ActionResult Withdraw()
         {
@@ -229,6 +239,7 @@ namespace MVC.Controllers
             return View("~/Views/Money/Withdraw.cshtml", model);
         }
 
+        // POST: /User/Withdraw/
         [HttpPost]
         public ActionResult Withdraw(WithdrawViewModel model)
         {
