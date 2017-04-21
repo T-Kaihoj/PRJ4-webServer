@@ -195,10 +195,20 @@ namespace MVC.Controllers
         public ActionResult Join(long id)
         {
             var viewModel = new JoinBetViewModel();
+
             using (var myWork = GetUOF)
             {
-                var myBet = myWork.Bet.Get(id);
-                foreach (var outcomes in myBet.Outcomes)
+                // Get the bet.
+                var bet = myWork.Bet.Get(id);
+
+                // Does the bet exist?
+                if (bet == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Extract data.
+                foreach (var outcomes in bet.Outcomes)
                 {
                     var ovm = new OutcomeViewModel()
                     {
@@ -208,9 +218,10 @@ namespace MVC.Controllers
 
                     viewModel.Outcomes.Add(ovm);
                 }
-                viewModel.Title = myBet.Name;
-                viewModel.Description = myBet.Description;
-                viewModel.MoneyPool = myBet.BuyIn;
+
+                viewModel.Title = bet.Name;
+                viewModel.Description = bet.Description;
+                viewModel.MoneyPool = bet.BuyIn;
                 viewModel.Id = id;
 
                 return View("Join", viewModel);
@@ -278,7 +289,7 @@ namespace MVC.Controllers
                 // Check for the existence of the bet.
                 if (bet == null)
                 {
-                    return Redirect("/");
+                    return HttpNotFound();
                 }
 
                 // Create the viewmodel, and copy over data.

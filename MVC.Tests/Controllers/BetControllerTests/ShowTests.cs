@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common.Models;
 using MVC.Controllers;
@@ -27,22 +28,41 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
-        public void Show_BetIdDoesntExist_Redirects()
+        public void Show_BetIdDoesntExist_Returns404()
         {
             var result = uut.Show(412);
 
-            Assert.That(result, Is.TypeOf<RedirectResult>());
-
-            var rResult = result as RedirectResult;
-
-            Assert.That(rResult.Url, Is.EqualTo("/"));
+            CheckStatusCode(result, 404);
         }
 
         [Test]
         public void Show_CallsRepositoryGet()
         {
             // Register a bet with the mock.
-            var bet = new Bet();
+            var bet = new Bet()
+            {
+                Outcomes = new List<Outcome>()
+                {
+                    new Outcome()
+                    {
+                        Name = "test1",
+                        Participants = new List<User>()
+                        {
+                            new User(),
+                            new User()
+                        }
+                    },
+                    new Outcome()
+                    {
+                        Name = "test2",
+                        Participants = new List<User>()
+                        {
+                            new User(),
+                            new User()
+                        }
+                    }
+                }
+            };
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
 
             // Assert that we hit the repository.
