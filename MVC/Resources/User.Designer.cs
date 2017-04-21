@@ -178,6 +178,24 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must enter a positive amount to withdraw.
+        /// </summary>
+        public static string ErrorNegativeWithdraw {
+            get {
+                return ResourceManager.GetString("ErrorNegativeWithdraw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not enough funds to cover requested withdraw.
+        /// </summary>
+        public static string ErrorNotEnoughFunds {
+            get {
+                return ResourceManager.GetString("ErrorNotEnoughFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter a password.
         /// </summary>
         public static string ErrorPassword1Required {

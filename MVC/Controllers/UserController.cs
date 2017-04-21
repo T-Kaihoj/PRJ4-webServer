@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using Common;
+using Common.Exceptions;
 using Common.Models;
 using DAL;
 using Microsoft.AspNet.Identity;
@@ -104,56 +105,6 @@ namespace MVC.Controllers
             return View("EditProfile", viewModel);
         }
 
-        [HttpGet]
-        public ActionResult WithdrawMoney()
-        {
-            // Get the logged in user
-            var userName = GetUserName;
-
-            // Lookup the user in the repository.
-            var user = GetUOF.User.Get(userName);
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("You are not logged in");
-            }
-
-            // Populate the viewmodel.
-            var viewModel = new WithdrawViewModel()
-            {
-                CurrentBalance = user.Balance,
-            };
-
-            return View("~/Views/Money/Withdraw.cshtml",viewModel);
-        }
-
-        
-
-
-        [HttpPost]
-        public ActionResult Withdraw(WithdrawViewModel model)
-        {
-            // Get the logged in user
-            var userName = GetUserName;
-
-            using (var myWork = GetUOF)
-            {
-                // Lookup the user in the repository.
-                var user = myWork.User.Get(userName);
-                // user should NEVER be null, but we check anyway.
-                if (user == null)
-                {
-                    throw new Exception("You are not logged in");
-                }
-                //Justerer users balance
-                user.WithdrawMoney(model.Withdraw);
-                myWork.Complete();
-            }
-            return Redirect($"/Home/Index/");
-        }
-
-        
-
         #region Create
 
         // POST: /User/Create
@@ -253,6 +204,59 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Withdraw
+
+        [HttpGet]
+        public ActionResult Withdraw()
+        {
+            // Get the logged in user
+            var userName = GetUserName;
+
+            // Lookup the user in the repository.
+            var user = GetUOF.User.Get(userName);
+
+            // Populate the viewmodel.
+            var model = new WithdrawViewModel()
+            {
+                CurrentBalance = user.Balance,
+            };
+
+            return View("~/Views/Money/Withdraw.cshtml", model);
+        }
+
+        [HttpPost]
+        public ActionResult Withdraw(WithdrawViewModel model)
+        {
+            // Get the logged in user
+            var userName = GetUserName;
+
+            using (var myWork = GetUOF)
+            {
+                // Lookup the user in the repository.
+                var user = myWork.User.Get(userName);
+                
+                // Alter user balance.
+                try
+                {
+                    user.WithdrawMoney(model.Withdraw);
+                    myWork.Complete();
+                }
+                catch (NotEnoughFundsException)
+                {
+                    ModelState.AddModelError("Withdraw", Resources.User.ErrorNotEnoughFunds);
+                    return View("~/Views/Money/Withdraw.cshtml", model);
+                }
+                catch (NegativeWithdrawException)
+                {
+                    ModelState.AddModelError("Withdraw", Resources.User.ErrorNegativeWithdraw);
+                    return View("~/Views/Money/Withdraw.cshtml", model);
+                }
+            }
             return RedirectToAction("Index");
         }
 

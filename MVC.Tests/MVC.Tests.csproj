@@ -212,7 +212,9 @@
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\LobbyControllerTests.cs" />
     <Compile Include="BaseRepositoryTest.cs" />
+    <Compile Include="Controllers\UserControllerTests\WithdrawTestsGet.cs" />
     <Compile Include="Controllers\UserControllerTests\DepositTestsGet.cs" />
+    <Compile Include="Controllers\UserControllerTests\WithdrawTestsPost.cs" />
     <Compile Include="Controllers\UserControllerTests\DepositTestsPost.cs" />
     <Compile Include="Controllers\UserControllerTests\CreateUserTests.cs" />
     <Compile Include="Controllers\UserControllerTests\EditProfileTests.cs" />
