@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common;
@@ -73,7 +72,25 @@ namespace MVC.Tests
 
             Assert.That(view.ViewName, Is.EqualTo(viewName));
         }
-        
+
+        protected void CheckRedirectsToRouteWithId(object result, string controller, string action, long id)
+        {
+            Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());
+
+            var route = result as RedirectToRouteResult;
+
+            var dict = new Dictionary<string, string>();
+            dict.Add("id", id.ToString());
+            dict.Add("action", action);
+            dict.Add("controller", controller);
+
+            foreach (var i in dict)
+            {
+                Assert.That(route.RouteValues.Keys, Contains.Item(i.Key));
+                Assert.That(route.RouteValues[i.Key].ToString(), Is.EqualTo(i.Value));
+            }
+        }
+
         protected void CheckRedirectsToRouteWithId(object result, string action, long id)
         {
             Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());

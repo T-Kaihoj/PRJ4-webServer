@@ -264,19 +264,43 @@ namespace MVC.Controllers
 
         // GET: /<controller>/Remove/<Lobby>/<Bet>
         [HttpGet]
-        public ActionResult Remove(long Lobby, long Bet)
+        public ActionResult Remove(long id)
         {
             using (var myWork = GetUOF)
             {
-                var myBet = myWork.Bet.Get(Bet);
-            
-                if (GetUserName == myBet.Owner.Username && myBet.StartDate > DateTime.Now)
+                // Locate the bet.
+                var bet = myWork.Bet.Get(id);
+
+                if (bet == null)
                 {
-                    myWork.Bet.Remove(myBet);
-                    myWork.Complete();
+                    return HttpNotFound();
                 }
-                string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
-                return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
+
+                // Is the current user the owner?
+                if (GetUserName != bet.Owner.Username)
+                {
+                    return HttpForbidden();
+                }
+
+                // Are we past the start date?
+                if (bet.StartDate < DateTime.Now)
+                {
+                    return HttpForbidden();
+                }
+
+                var lobbyId = bet.Lobby.LobbyId;
+
+                // Remove the bet and redirect to the lobby.
+                myWork.Bet.Remove(bet);
+                myWork.Complete();
+
+                return RedirectToRoute(new
+                    {
+                        controller = "Lobby",
+                        action = "Show",
+                        id = lobbyId
+                    }
+                );
             }
         }
 
