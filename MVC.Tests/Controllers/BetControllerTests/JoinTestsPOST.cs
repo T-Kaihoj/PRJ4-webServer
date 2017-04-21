@@ -11,7 +11,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class JoinTestsPOST : BaseRepositoryTest
+    public class JoinTestsPost : BaseRepositoryTest
     {
         private BetController uut;
         private IUserContext userContext;
@@ -26,6 +26,8 @@ namespace MVC.Tests.Controllers.BetControllerTests
             uut = new BetController(Factory, userContext);
             uut.ControllerContext = new ControllerContext();
         }
+
+        #region POST
 
         [Test]
         public void Join_NonExistingBet_Returns404()
@@ -114,5 +116,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
             // Assert.
             CheckRedirectsToRouteWithId(result, "Show", betId);
         }
+
+        #endregion
     }
 }

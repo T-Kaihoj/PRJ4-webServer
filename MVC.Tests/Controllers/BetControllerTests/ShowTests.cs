@@ -27,6 +27,8 @@ namespace MVC.Tests.Controllers.BetControllerTests
             uut.ControllerContext = new ControllerContext();
         }
 
+        #region GET
+
         [Test]
         public void Show_BetIdDoesntExist_Returns404()
         {
@@ -93,5 +95,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
             // Assert that we passed the correct id.
             Assert.That(key, Is.EqualTo(passedKey));
         }
+
+        #endregion
     }
 }
