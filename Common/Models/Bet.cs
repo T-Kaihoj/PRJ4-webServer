@@ -115,7 +115,7 @@ namespace Common.Models
             }
         }
 
-        public bool ConcludeBet(User user, Outcome outcome)
+        public virtual bool ConcludeBet(User user, Outcome outcome)
         {
             // Bets cannot be concluded without a judge.
             if (Judge == null)

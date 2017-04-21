@@ -202,43 +202,91 @@ namespace MVC.Controllers
         {
             using (var myWork = _factory.GetUOF())
             {
-                //throw new NotImplementedException();
-                //TODO BetController JoinViewModel NullReference
+                // Find the bet.
+                var bet = myWork.Bet.Get(id);
 
-                var user = myWork.User.Get(User.Identity.Name);
-                var Bet = myWork.Bet.Get(id);
-                //bool betConclude = myWork.Bet.Get(id);
-                myWork.Complete();
+                // Does the bet exist?
+                if (bet == null)
+                {
+                    return Redirect("/");
+                }
 
-                var model = new ConcludeViewModel();
-                model.setup(Bet);
+                // Populate the viewmodel.
+                var model = new ConcludeViewModel(bet);
 
-                if (_userContext.Identity.Name == Bet.Judge.Username)
-                    return View(model);
+                // Check access restrictions.
+                if (_userContext.Identity.Name == bet.Judge.Username)
+                {
+                    return View("Conclude", model);
+                }
             }
 
+            // Error, redirect to homepage.
             return Redirect("/");
         }
 
         // POST: /<controller>/Conclude/
         [HttpPost]
-        public ActionResult Conclude( ConcludeViewModel Model)
+        public ActionResult Conclude(ConcludeViewModel model)
         {
-            
-            using (var myWork = _factory.GetUOF())
-            {
-                //throw new NotImplementedException();
-                //TODO BetController JoinViewModel NullReference
-                var bet = myWork.Outcome.Get(Model.SelectedOutcome).bet;
-                var user = myWork.User.Get(User.Identity.Name);
+            // Validate the model.
+            TryValidateModel(model);
 
-                 bool betConclude = bet.ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
-                myWork.Complete();
-                if (betConclude)
-                return Redirect("/");
+            // Ensure the id is valid.
+            if (model.SelectedOutcome < 0)
+            {
+                // TODO: Could be extracted to a validationhelper.
+                ModelState.AddModelError("SelectedOutcome", Resources.Bet.ErrorSelectOutcomeRequired);
+            }
+            
+            if (!ModelState.IsValid)
+            {
+                return View("Conclude", model);
             }
 
-            return Redirect("/");
+            using (var myWork = _factory.GetUOF())
+            {
+                // Locate the outcome.
+                var outcome = myWork.Outcome.Get(model.SelectedOutcome);
+
+                // Does the outcome exist?
+                if (outcome == null)
+                {
+                    throw new Exception(Resources.Bet.ExceptionOutcomeDoesntExist);
+                }
+
+                // Extract the bet.
+                var bet = outcome.bet;
+
+                // Is the current user a judge?
+                if (bet.Judge.Username != _userContext.Identity.Name)
+                {
+                    throw new Exception(Resources.Bet.ExceptionUserIsNotJudge);
+                }
+
+                // Get the current user.
+                var user = myWork.User.Get(_userContext.Identity.Name);
+
+                // Is the bet already concluded?
+                if (bet.Result != null)
+                {
+                    throw new Exception(Resources.Bet.ExceptionBetAlreadyConcluded);
+                }
+
+                // Conclude the bet.
+                bool betConclude = bet.ConcludeBet(
+                    user,
+                    outcome
+                );
+                myWork.Complete();
+
+                // TODO: Should the logic be here or in the bet?
+
+                if (betConclude)
+                    return Redirect($"/Bet/Show/{bet.BetId}");
+            }
+
+            throw new Exception("Unspecified error");
         }
 
         // GET: /<controller>/Remove/<Lobby>/<Bet>

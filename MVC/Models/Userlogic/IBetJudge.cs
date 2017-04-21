@@ -11,7 +11,7 @@ namespace MVC.Models.Userlogic
     {
 
         //Preconditon:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition
         //Sætter det Bet som skal konkluderes.
         void setCurrentBet(long betID);

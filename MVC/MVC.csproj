@@ -222,6 +222,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Bets\ConcludeViewModel.cs" />
+    <Compile Include="ViewModels\Bets\OutcomeView.cs" />
     <Compile Include="ViewModels\Bets\ShowBetOutcomeViewModel.cs" />
     <Compile Include="ViewModels\Bets\ShowBetViewModel.cs" />
     <Compile Include="ViewModels\Bets\BetViewModel.cs" />

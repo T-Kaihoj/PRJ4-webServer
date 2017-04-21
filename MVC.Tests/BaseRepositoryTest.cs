@@ -32,6 +32,7 @@ namespace MVC.Tests
             // Register the repositories with the unit of work.
             MyWork.Bet.Returns(BetRepository);
             MyWork.Lobby.Returns(LobbyRepository);
+            MyWork.Outcome.Returns(OutcomeRepository);
             MyWork.User.Returns(UserRepository);
 
             // Create a substitue for the factory.

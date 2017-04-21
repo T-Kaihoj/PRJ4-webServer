@@ -201,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationControllerTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\ConcludeTests.cs" />
     <Compile Include="Controllers\BetControllerTests\CreateTests.cs" />
     <Compile Include="Controllers\BetControllerTests\JoinTests.cs" />
     <Compile Include="Controllers\BetControllerTests\ShowTests.cs" />

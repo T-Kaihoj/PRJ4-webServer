@@ -178,6 +178,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select an outcome.
+        /// </summary>
+        public static string ErrorSelectOutcomeRequired {
+            get {
+                return ResourceManager.GetString("ErrorSelectOutcomeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start date is required.
         /// </summary>
         public static string ErrorStartDate {
@@ -201,6 +210,33 @@ namespace Resources {
         public static string ErrorTitleRequired {
             get {
                 return ResourceManager.GetString("ErrorTitleRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bet is already concluded.
+        /// </summary>
+        public static string ExceptionBetAlreadyConcluded {
+            get {
+                return ResourceManager.GetString("ExceptionBetAlreadyConcluded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Outcome doesn&apos;t exist.
+        /// </summary>
+        public static string ExceptionOutcomeDoesntExist {
+            get {
+                return ResourceManager.GetString("ExceptionOutcomeDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current user is not judge.
+        /// </summary>
+        public static string ExceptionUserIsNotJudge {
+            get {
+                return ResourceManager.GetString("ExceptionUserIsNotJudge", resourceCulture);
             }
         }
     }
