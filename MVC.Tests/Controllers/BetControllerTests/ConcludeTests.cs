@@ -82,7 +82,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
-        public void Create_WithNonExistingBetId_Redirects()
+        public void Create_WithNonExistingBetId_Returns404()
         {
             // Setup the repository.
             long id = 123;
@@ -90,15 +90,12 @@ namespace MVC.Tests.Controllers.BetControllerTests
             // Act.
             var result = uut.Conclude(id);
 
-            Assert.That(result, Is.TypeOf<RedirectResult>());
-
-            var vResult = result as RedirectResult;
-
-            Assert.That(vResult.Url, Is.EqualTo("/"));
+            // Assert.
+            CheckStatusCode(result, 404);
         }
 
         [Test]
-        public void Create_WithBetIdButNotAsJudge_ReturnsCorrectModel()
+        public void Create_WithBetIdButNotAsJudge_Returns403()
         {
             // Setup the repository.
             long id = 123;
@@ -114,11 +111,8 @@ namespace MVC.Tests.Controllers.BetControllerTests
             // Act.
             var result = uut.Conclude(id);
 
-            Assert.That(result, Is.TypeOf<RedirectResult>());
-
-            var vResult = result as RedirectResult;
-
-            Assert.That(vResult.Url, Is.EqualTo("/"));
+            // Assert.
+            CheckStatusCode(result, 403);
         }
 
         #endregion
@@ -126,42 +120,47 @@ namespace MVC.Tests.Controllers.BetControllerTests
         #region POST
 
         [Test]
-        public void ConcludeBet_OutcomeDoesntExist_Redirects()
+        public void ConcludeBet_OutcomeDoesntExist_Returns404()
         {
-            long id = 123;
-
             // Create the model.
             var model = new ConcludeViewModel()
             {
-                BetId = id,
+                BetId = 123,
                 SelectedOutcome = 1
             };
 
-            // Assert that the controller throws an error.
-            TestDelegate del = () =>
-            {
-                uut.Conclude(model);
-            };
+            // Act.
+            var result = uut.Conclude(model);
 
-            Assert.That(del, Throws.Exception.With.Message.EqualTo(Resources.Bet.ExceptionOutcomeDoesntExist));
+            // Assert.
+            CheckStatusCode(result, 404);
         }
 
         [Test]
-        public void ConcludeBetUserIsNotJudge_Redirects()
+        public void ConcludeBetUserIsNotJudge_Returns403()
         {
+            // Arrange.
             long betId = 123;
             long outcomeId = 34;
+            string judgeUserName = "judge";
+            string localUserName = "notJudge";
 
-            var user = new User()
+            var judgeUser = new User()
             {
-                Username = "judge"
+                Username = judgeUserName
             };
 
-            UserRepository.Get(Arg.Any<string>()).Returns(user);
+            var localUser = new User()
+            {
+                Username = localUserName
+            };
+
+            UserRepository.Get(Arg.Is(judgeUserName)).Returns(judgeUser);
+            UserRepository.Get(Arg.Is(localUserName)).Returns(localUser);
 
             var bet = new Bet()
             {
-                Judge = user
+                Judge = judgeUser
             };
 
             BetRepository.Get(Arg.Is(betId)).Returns(bet);
@@ -174,7 +173,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             OutcomeRepository.Get(Arg.Is(outcomeId)).Returns(outcome);
 
-            userContext.Identity.Name.Returns("notJudge");
+            userContext.Identity.Name.Returns(localUserName);
 
             // Create the model.
             var model = new ConcludeViewModel()
@@ -183,13 +182,11 @@ namespace MVC.Tests.Controllers.BetControllerTests
                 SelectedOutcome = outcomeId
             };
 
-            // Assert that the controller throws an error.
-            TestDelegate del = () =>
-            {
-                uut.Conclude(model);
-            };
-
-            Assert.That(del, Throws.Exception.With.Message.EqualTo(Resources.Bet.ExceptionUserIsNotJudge));
+            // Act.
+            var result = uut.Conclude(model);
+            
+            // Assert.
+            CheckStatusCode(result, 403);
         }
 
         [Test]

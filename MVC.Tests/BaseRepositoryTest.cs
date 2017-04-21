@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Web.Mvc;
 using Common;
 using Common.Repositories;
 using NSubstitute;
@@ -40,6 +41,15 @@ namespace MVC.Tests
 
             // Register the unit of work with the factory.
             Factory.GetUOF().Returns(MyWork);
+        }
+
+        protected void CheckStatusCode(object result, int code)
+        {
+            Assert.That(result, Is.InstanceOf<HttpStatusCodeResult>());
+
+            var codeResult = result as HttpStatusCodeResult;
+
+            Assert.That(codeResult.StatusCode, Is.EqualTo(code));
         }
     }
 }

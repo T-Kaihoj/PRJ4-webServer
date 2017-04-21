@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Common;
+using Common.Exceptions;
 using Common.Models;
 using MVC.Identity;
+using MVC.Others;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
     [Authorize]
-    public class BetController : Controller
+    public class BetController : BaseController
     {
         private readonly IFactory _factory;
         private readonly IUserContext _userContext;
@@ -197,6 +199,8 @@ namespace MVC.Controllers
             }
         }
 
+        #region Conclude
+
         // GET: /<controller>/Conclude/<id>
         public ActionResult Conclude(long id)
         {
@@ -208,7 +212,7 @@ namespace MVC.Controllers
                 // Does the bet exist?
                 if (bet == null)
                 {
-                    return Redirect("/");
+                    return HttpNotFound();
                 }
 
                 // Populate the viewmodel.
@@ -222,7 +226,7 @@ namespace MVC.Controllers
             }
 
             // Error, redirect to homepage.
-            return Redirect("/");
+            return HttpForbidden();
         }
 
         // POST: /<controller>/Conclude/
@@ -252,42 +256,38 @@ namespace MVC.Controllers
                 // Does the outcome exist?
                 if (outcome == null)
                 {
-                    throw new Exception(Resources.Bet.ExceptionOutcomeDoesntExist);
+                    return HttpNotFound();
                 }
 
                 // Extract the bet.
                 var bet = outcome.bet;
 
-                // Is the current user a judge?
-                if (bet.Judge.Username != _userContext.Identity.Name)
-                {
-                    throw new Exception(Resources.Bet.ExceptionUserIsNotJudge);
-                }
-
                 // Get the current user.
                 var user = myWork.User.Get(_userContext.Identity.Name);
 
+                // Try to conclude the bet.
+                bool result;
+
+                try
+                {
+                    result = bet.ConcludeBet(user, outcome);
+                }
+                catch (UserNotJudgeException)
+                {
+                    return HttpForbidden();
+                }
+
                 // Is the bet already concluded?
-                if (bet.Result != null)
+                if (!result)
                 {
                     throw new Exception(Resources.Bet.ExceptionBetAlreadyConcluded);
                 }
 
-                // Conclude the bet.
-                bool betConclude = bet.ConcludeBet(
-                    user,
-                    outcome
-                );
-                myWork.Complete();
-
-                // TODO: Should the logic be here or in the bet?
-
-                if (betConclude)
-                    return Redirect($"/Bet/Show/{bet.BetId}");
+                return Redirect($"/Bet/Show/{bet.BetId}");
             }
-
-            throw new Exception("Unspecified error");
         }
+
+        #endregion
 
         // GET: /<controller>/Remove/<Lobby>/<Bet>
         [HttpGet]

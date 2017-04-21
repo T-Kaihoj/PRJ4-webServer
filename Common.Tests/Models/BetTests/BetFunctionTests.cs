@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Common.Exceptions;
 using Common.Models;
 using NSubstitute;
 using NUnit.Framework;
@@ -50,6 +51,25 @@ namespace Common.Tests.Models
 
             // Act.
             var result = _uut.ConcludeBet(null, o);
+
+            // Assert.
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void ConcludeBet_AlreadyConcluded_ReturnsFalse()
+        {
+            // Setup.
+            var o = Substitute.For<Outcome>();
+            _uut.Outcomes.Add(o);
+
+            var j = Substitute.For<User>();
+            _uut.Judge = j;
+
+            _uut.ConcludeBet(j, o);
+
+            // Act.
+            var result = _uut.ConcludeBet(j, o);
 
             // Assert.
             Assert.That(result, Is.False);
@@ -114,6 +134,25 @@ namespace Common.Tests.Models
             // Assert.
             Assert.That(_uut.Judge, Is.Null);
             Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void ConcludeBet_UserIsNotJudge_ThrowsException()
+        {
+            // Setup.
+            var o = Substitute.For<Outcome>();
+            var j = Substitute.For<User>();
+            _uut.Judge = j;
+            var u = Substitute.For<User>();
+
+            // Act.
+            TestDelegate del = () =>
+            {
+                _uut.ConcludeBet(u, o);
+            };
+            
+            // Assert.
+            Assert.That(del, Throws.Exception.TypeOf<UserNotJudgeException>());
         }
 
         [Test]

@@ -68,7 +68,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
         #region POST
 
         [Test]
-        public void Create_WithInvalidModel_ReturnsView()
+        public void Create_WithInvalidModel_ReturnsCorrectView()
         {
             var model = new CreateBetViewModel()
             {
@@ -87,7 +87,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
-        public void Create_WithInvalidModel_ReturnsViewModel()
+        public void Create_WithInvalidModel_ReturnsCorrectViewModel()
         {
             var model = new CreateBetViewModel()
             {
