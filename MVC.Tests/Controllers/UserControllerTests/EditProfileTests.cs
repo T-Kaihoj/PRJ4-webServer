@@ -9,7 +9,7 @@ using MVC.ViewModels;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace MVC.Tests.Controllers.UserControllers
+namespace MVC.Tests.Controllers.UserControllerTests
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
@@ -27,7 +27,7 @@ namespace MVC.Tests.Controllers.UserControllers
             context = Substitute.For<IUserContext>();
             store = Substitute.For<IStore>();
 
-            uut = new UserController(Factory, store, context);
+            uut = new UserController(Factory, context, store);
             uut.ControllerContext = new ControllerContext();
             
             viewModel = new EditProfileViewModel()

@@ -30,5 +30,10 @@ namespace MVC.Controllers
         {
             return new HttpForbiddenResult();
         }
+
+        protected bool IsAuthenticated
+        {
+            get { return UserContext.Identity.IsAuthenticated; }
+        }
     }
 }

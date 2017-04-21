@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Web.Mvc;
 using Common;
 using Common.Repositories;
@@ -73,6 +74,22 @@ namespace MVC.Tests
             Assert.That(view.ViewName, Is.EqualTo(viewName));
         }
 
+        protected void CheckRedirectsToRouteWithId(object result, string action)
+        {
+            Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());
+
+            var route = result as RedirectToRouteResult;
+
+            var dict = new Dictionary<string, string>();
+            dict.Add("action", action);
+
+            foreach (var i in dict)
+            {
+                Assert.That(route.RouteValues.Keys, Contains.Item(i.Key));
+                Assert.That(route.RouteValues[i.Key].ToString(), Is.EqualTo(i.Value));
+            }
+        }
+
         protected void CheckRedirectsToRouteWithId(object result, string controller, string action, long id)
         {
             Assert.That(result, Is.InstanceOf<RedirectToRouteResult>());
@@ -106,6 +123,13 @@ namespace MVC.Tests
                 Assert.That(route.RouteValues.Keys, Contains.Item(i.Key));
                 Assert.That(route.RouteValues[i.Key].ToString(), Is.EqualTo(i.Value));
             }
+        }
+
+        protected void CheckErrorOnModel(ModelStateDictionary modelState, string error)
+        {
+            Assert.That(modelState.IsValid, Is.False);
+
+            Assert.That(modelState.SelectMany(x => x.Value.Errors).Select(e => e.ErrorMessage).ToList(), Contains.Item(error));
         }
     }
 }

@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The deposit must be positive.
+        /// </summary>
+        public static string ErrorNegativeDeposit {
+            get {
+                return ResourceManager.GetString("ErrorNegativeDeposit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter a password.
         /// </summary>
         public static string ErrorPassword1Required {
