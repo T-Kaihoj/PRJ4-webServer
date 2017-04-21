@@ -234,21 +234,27 @@ namespace MVC.Controllers
         {
             using (var myWork = GetUOF)
             {
-                // Get the current user.
-                var user = myWork.User.Get(GetUserName);
-
                 // Find the outcome in the database.
                 var outcome = myWork.Outcome.Get(model.Id);
 
-                // Get the bet from the database, and join the selected outcome.
-                var bet = myWork.Bet.Find(b => b.Outcomes.Any(o => o.OutcomeId.Equals(outcome.OutcomeId))).First();
+                // Does the outcome exist?
+                if (outcome == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Get the current user.
+                var user = myWork.User.Get(GetUserName);
+
+                // Get the bet from the database.
+                var bet = outcome.bet;
 
                 // Join the bet.
                 bet.JoinBet(user, outcome);
 
                 myWork.Complete();
 
-                return Redirect($"/Bet/Show/{bet.BetId}");
+                return RedirectToAction("Show", new {id = bet.BetId});
             }
         }
 

@@ -12,7 +12,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class JoinTests : BaseRepositoryTest
+    public class JoinTestsGET : BaseRepositoryTest
     {
         private BetController uut;
         private IUserContext userContext;
@@ -27,8 +27,6 @@ namespace MVC.Tests.Controllers.BetControllerTests
             uut = new BetController(Factory, userContext);
             uut.ControllerContext = new ControllerContext();
         }
-
-        #region Get
 
         [Test]
         public void Join_NonExistingBet_Returns404()
@@ -124,7 +122,5 @@ namespace MVC.Tests.Controllers.BetControllerTests
                 Assert.That(model.Outcomes.Select(x => x.Id), Contains.Item(outcome2.OutcomeId));
             });
         }
-
-        #endregion
     }
 }

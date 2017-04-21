@@ -154,7 +154,7 @@ namespace Common.Models
             return false;
         }
 
-        public bool JoinBet(User user, Outcome outcome)
+        public virtual bool JoinBet(User user, Outcome outcome)
         {
             // TODO: needs to check the user is in Lobby
 
