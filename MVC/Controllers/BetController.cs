@@ -103,6 +103,9 @@ namespace MVC.Controllers
                     throw new Exception(Resources.Bet.ExceptionBetAlreadyConcluded);
                 }
 
+                // Save the changes.
+                myWork.Complete();
+
                 return Redirect($"/Bet/Show/{bet.BetId}");
             }
         }
@@ -349,6 +352,19 @@ namespace MVC.Controllers
                         Name = outcome.Name,
                         Participants = users
                     };
+
+                    // Is this outcome the winner?
+                    if (bet.IsConcluded)
+                    {
+                        if (bet.Result == outcome)
+                        {
+                            vm.winner = true;
+                        }
+                        else
+                        {
+                            vm.loser = true;
+                        }
+                    }
 
                     viewmodel.Outcomes.Add(vm);
                 }

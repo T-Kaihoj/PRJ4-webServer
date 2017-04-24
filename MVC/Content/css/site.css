@@ -14,6 +14,15 @@ body { padding-top: 70px; }
     body { padding-top: 0px; }
 }
 
+/* Background for bets (Currently not used, but kept for easy access to the colors. */
+.betloser {
+    background-color: lightcoral;
+}
+
+.betwinner {
+    background-color: lightgreen;
+}
+
 /* Style links in the navbar to have a color change on hover. */
 div.navbar a:hover {
     background-color: #19a094 !important;

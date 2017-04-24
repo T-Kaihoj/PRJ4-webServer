@@ -191,6 +191,49 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
+        public void ConcludeBet_AllDataValid_CallsUnitOfWorkComplete()
+        {
+            long betId = 123;
+            long outcomeId = 34;
+
+            var user = new User()
+            {
+                Username = "judge"
+            };
+
+            UserRepository.Get(Arg.Any<string>()).Returns(user);
+
+            var bet = Substitute.For<Bet>();
+            bet.Judge.Returns(user);
+            bet.ConcludeBet(Arg.Any<User>(), Arg.Any<Outcome>()).Returns(true);
+
+            BetRepository.Get(Arg.Is(betId)).Returns(bet);
+
+            var outcome = new Outcome()
+            {
+                bet = bet,
+                OutcomeId = outcomeId
+            };
+
+            OutcomeRepository.Get(Arg.Is(outcomeId)).Returns(outcome);
+
+            userContext.Identity.Name.Returns("judge");
+
+            // Create the model.
+            var model = new ConcludeViewModel()
+            {
+                BetId = betId,
+                SelectedOutcome = outcomeId
+            };
+
+            MyWork.DidNotReceive().Complete();
+
+            uut.Conclude(model);
+
+            MyWork.Received(1).Complete();
+        }
+
+        [Test]
         public void ConcludeBet_AllDataValid_RedirectsToBet()
         {
             long betId = 123;

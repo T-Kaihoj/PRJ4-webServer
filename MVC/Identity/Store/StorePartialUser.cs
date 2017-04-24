@@ -42,7 +42,7 @@ namespace MVC.Identity
                 // Convert the two.
                 user = new IdentityUser()
                 {
-                    UserName = userName
+                    UserName = dbUser.Username
                 };
             }
 

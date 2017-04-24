@@ -119,7 +119,7 @@ namespace Common.Models
         public virtual bool ConcludeBet(User user, Outcome outcome)
         {
             // Is the bet already concluded?
-            if (Result != null)
+            if (IsConcluded)
             {
                 return false;
             }
@@ -189,6 +189,11 @@ namespace Common.Models
             Pot += BuyIn;
 
             return true;
+        }
+
+        public bool IsConcluded
+        {
+            get { return Result != null; }
         }
     }
 }
