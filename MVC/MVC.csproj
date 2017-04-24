@@ -248,7 +248,84 @@
     <Content Include="Content\css\**" />
     <Content Include="Content\js\**" />
     <Content Include="Content\images\**" />
-    <Content Include="Content\assets\**" />
+    <Content Include="Content\assets\css\bootstrap-datetimepicker-standalone.css" />
+    <Content Include="Content\assets\css\bootstrap-datetimepicker.css" />
+    <Content Include="Content\assets\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="Content\assets\css\bootstrap-material-design.css" />
+    <Content Include="Content\assets\css\bootstrap-material-design.css.map" />
+    <Content Include="Content\assets\css\bootstrap-material-design.min.css" />
+    <Content Include="Content\assets\css\bootstrap-material-design.min.css.map" />
+    <Content Include="Content\assets\css\bootstrap-theme.css" />
+    <Content Include="Content\assets\css\bootstrap-theme.css.map" />
+    <Content Include="Content\assets\css\bootstrap-theme.min.css" />
+    <Content Include="Content\assets\css\bootstrap-theme.min.css.map" />
+    <Content Include="Content\assets\css\bootstrap.css" />
+    <Content Include="Content\assets\css\bootstrap.css.map" />
+    <Content Include="Content\assets\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\bootstrap.min.css.map" />
+    <Content Include="Content\assets\css\font-awesome.css" />
+    <Content Include="Content\assets\css\font-awesome.css.map" />
+    <Content Include="Content\assets\css\font-awesome.min.css" />
+    <Content Include="Content\assets\css\ripples.css" />
+    <Content Include="Content\assets\css\ripples.css.map" />
+    <Content Include="Content\assets\css\ripples.min.css" />
+    <Content Include="Content\assets\css\ripples.min.css.map" />
+    <Content Include="Content\assets\fonts\fontawesome-webfont.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\fontawesome-webfont.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\fontawesome-webfont.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\FontAwesome.otf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\fonts\glyphicons-halflings-regular.woff2">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\assets\js\additional-methods.js" />
+    <Content Include="Content\assets\js\additional-methods.min.js" />
+    <Content Include="Content\assets\js\bootstrap-datetimepicker.js" />
+    <Content Include="Content\assets\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="Content\assets\js\bootstrap.js" />
+    <Content Include="Content\assets\js\bootstrap.min.js" />
+    <Content Include="Content\assets\js\jquery.js" />
+    <Content Include="Content\assets\js\jquery.min.js" />
+    <Content Include="Content\assets\js\jquery.min.map" />
+    <Content Include="Content\assets\js\jquery.validate.js" />
+    <Content Include="Content\assets\js\jquery.validate.min.js" />
+    <Content Include="Content\assets\js\locales.js" />
+    <Content Include="Content\assets\js\locales.min.js" />
+    <Content Include="Content\assets\js\material.js" />
+    <Content Include="Content\assets\js\material.min.js" />
+    <Content Include="Content\assets\js\material.min.js.map" />
+    <Content Include="Content\assets\js\moment-with-locales.js" />
+    <Content Include="Content\assets\js\moment-with-locales.min.js" />
+    <Content Include="Content\assets\js\moment.js" />
+    <Content Include="Content\assets\js\moment.min.js" />
+    <Content Include="Content\assets\js\ripples.js" />
+    <Content Include="Content\assets\js\ripples.min.js" />
+    <Content Include="Content\assets\js\ripples.min.js.map" />
     <Content Include="bower.json" />
     <None Include="Properties\PublishProfiles\ASEProject4 - Web Deploy.pubxml" />
     <Content Include="Web.config">
