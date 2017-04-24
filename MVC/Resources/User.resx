@@ -153,6 +153,15 @@
   <data name="ErrorLastNameRequired" xml:space="preserve">
     <value>You must enter your last name</value>
   </data>
+  <data name="ErrorNegativeDeposit" xml:space="preserve">
+    <value>The deposit must be positive</value>
+  </data>
+  <data name="ErrorNegativeWithdraw" xml:space="preserve">
+    <value>You must enter a positive amount to withdraw</value>
+  </data>
+  <data name="ErrorNotEnoughFunds" xml:space="preserve">
+    <value>Not enough funds to cover requested withdraw</value>
+  </data>
   <data name="ErrorPassword1Required" xml:space="preserve">
     <value>You must enter a password</value>
   </data>

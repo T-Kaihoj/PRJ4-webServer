@@ -1,218 +1,34 @@
 ﻿using System;
 using System.Web.Mvc;
 using Common;
+using Common.Exceptions;
 using Common.Models;
-using DAL;
 using Microsoft.AspNet.Identity;
 using MVC.Identity;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
-        private IFactory _factory;
-        private UserManager<IdentityUser> _userManager;
-        private IStore _store;
-        private IUserContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public UserController(IFactory factory, IStore store, IUserContext context)
+        public UserController(IFactory factory, IUserContext userContext, IStore store)
+            : base(factory, userContext)
         {
-            _store = store;
-            _userManager = new UserManager<IdentityUser>(_store);
-            _factory = factory;
-            _context = context;
+            _userManager = new UserManager<IdentityUser>(store);
         }
+        
+        #region Create
 
-
-        // GET: /User/
-        [HttpGet]
-        public ActionResult Index()
-        {
-            // Get the user from the identity.
-            var userName = _context.Identity.Name;
-
-            // Lookup the user in the repository.
-            var user = _factory.GetUOF().User.Get(userName);
-
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
-            // Populate the viewmodel.
-            var viewModel = new UserProfileViewModel()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                UserName = user.Username
-            };
-
-            return View("Profile", viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult EditProfile(EditProfileViewModel viewModel)
-        {
-            // Ensure the data is vaid.
-            if (!TryValidateModel(viewModel))
-            {
-                return View("EditProfile", viewModel);
-            }
-
-            using (var myWork = _factory.GetUOF())
-            {
-                var user = myWork.User.Get(_context.Identity.Name);
-
-                // user should NEVER be null, but we check anyway.
-                if (user == null)
-                {
-                    throw new Exception("User not found");
-                }
-
-                user.Email = viewModel.Email;
-                user.FirstName = viewModel.FirstName;
-                user.LastName = viewModel.LastName;
-
-                myWork.Complete();
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        [HttpGet]
-        public ActionResult EditProfile()
-        {
-            // Get the user from the identity.
-            var userName = _context.Identity.Name;
-
-            // Lookup the user in the repository.
-            var user = _factory.GetUOF().User.Get(userName);
-
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
-            // Populate the viewmodel.
-            var viewModel = new EditProfileViewModel()
-            {
-                Email = user.Email,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-            };
-
-            return View("EditProfile", viewModel);
-        }
-
-        [HttpGet]
-        public ActionResult WithdrawMoney()
-        {
-            // Get the logged in user
-            var userName = _context.Identity.Name;
-
-            // Lookup the user in the repository.
-            var user = _factory.GetUOF().User.Get(userName);
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("You are not logged in");
-            }
-
-            // Populate the viewmodel.
-            var viewModel = new WithdrawViewModel()
-            {
-                CurrentBalance = user.Balance,
-            };
-
-            return View("~/Views/Money/Withdraw.cshtml",viewModel);
-        }
-
-        [HttpGet]
-        public ActionResult DepositMoney()
-        {
-            // Get the logged in user
-            var userName = _context.Identity.Name;
-
-            // Lookup the user in the repository.
-            var user = _factory.GetUOF().User.Get(userName);
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("You are not logged in");
-            }
-
-            // Populate the viewmodel.
-            var viewModel = new DepositViewModel()
-            {
-                CurrentBalance = user.Balance,
-            };
-
-            return View("~/Views/Money/Deposit.cshtml", viewModel);
-        }
-
-
-        [HttpPost]
-        public ActionResult Withdraw(WithdrawViewModel model)
-        {
-            // Get the logged in user
-            var userName = _context.Identity.Name;
-
-            using (var myWork = _factory.GetUOF())
-            {
-                // Lookup the user in the repository.
-                var user = myWork.User.Get(userName);
-                // user should NEVER be null, but we check anyway.
-                if (user == null)
-                {
-                    throw new Exception("You are not logged in");
-                }
-                //Justerer users balance
-                user.WithdrawMoney(model.Withdraw);
-                myWork.Complete();
-            }
-            return Redirect($"/Home/Index/");
-        }
-
-        [HttpPost]
-        public ActionResult Deposit(DepositViewModel model)
-        {
-            // Get the logged in user
-            var userName = _context.Identity.Name;
-
-            using (var myWork = _factory.GetUOF())
-            {
-                // Lookup the user in the repository.
-                var user = myWork.User.Get(userName);
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("You are not logged in");
-            }
-           
-                //Justerer users balance
-                user.DepositMoney(model.Deposit);
-                myWork.Complete();
-            }
-
-            return Redirect($"/Home/Index/");
-        }
-
-        // POST: /User/Create
+        // POST: /User/Create/
         [HttpPost]
         public ActionResult Create(CreateUserViewModel model)
         {
             // Validate the model.
-            if (!TryValidateModel(model))
-            {
-                // Error, return to main page with the model.
-                return View("~/Views/Home/Index.cshtml", model);
-            }
+            TryValidateModel(model);
 
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 // Is the username already taken?
                 if (myWork.User.Get(model.UserName) != null)
@@ -221,7 +37,7 @@ namespace MVC.Controllers
                 }
 
                 // Is the email in use?
-                if (myWork.User.GetByEmail(model.UserName) != null)
+                if (myWork.User.GetByEmail(model.Email) != null)
                 {
                     ModelState.AddModelError("Email", Resources.User.ErrorEmailInUse);
                 }
@@ -244,13 +60,212 @@ namespace MVC.Controllers
             // Set the password.
             user.Hash = _userManager.PasswordHasher.HashPassword(model.Password1);
 
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 myWork.User.Add(user);
                 myWork.Complete();
             }
 
-            return View("~/Views/Home/Index.cshtml", model);
+            return RedirectToAction("Index");
         }
+
+        #endregion
+
+        #region Deposit
+
+        // GET: /User/Deposit/
+        [HttpGet]
+        public ActionResult Deposit()
+        {
+            // Get the logged in user
+            var userName = GetUserName;
+
+            // Lookup the user in the repository.
+            var user = GetUOF.User.Get(userName);
+
+            // Populate the viewmodel.
+            var model = new DepositViewModel()
+            {
+                CurrentBalance = user.Balance,
+            };
+
+            return View("~/Views/Money/Deposit.cshtml", model);
+        }
+
+        // POST: /User/Deposit/
+        [HttpPost]
+        public ActionResult Deposit(DepositViewModel model)
+        {
+            // Is the model valid?
+            if (model.Deposit < 0m)
+            {
+                ModelState.AddModelError("Deposit", Resources.User.ErrorNegativeDeposit);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View("~/Views/Money/Deposit.cshtml", model);
+            }
+
+            // Get the logged in user
+            var userName = GetUserName;
+
+            using (var myWork = GetUOF)
+            {
+                // Lookup the user in the repository.
+                var user = myWork.User.Get(userName);
+
+                //Justerer users balance
+                user.DepositMoney(model.Deposit);
+                myWork.Complete();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region EditProfile
+
+        // GET: /User/EditProfile/
+        [HttpGet]
+        public ActionResult EditProfile()
+        {
+            // Get the user from the identity.
+            var userName = GetUserName;
+
+            // Lookup the user in the repository.
+            var user = GetUOF.User.Get(userName);
+
+            // Populate the viewmodel.
+            var viewModel = new EditProfileViewModel()
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+            };
+
+            return View("EditProfile", viewModel);
+        }
+
+        // POST: /User/EditProfile/
+        [HttpPost]
+        public ActionResult EditProfile(EditProfileViewModel viewModel)
+        {
+            // Ensure the data is vaid.
+            if (!TryValidateModel(viewModel))
+            {
+                return View("EditProfile", viewModel);
+            }
+
+            using (var myWork = GetUOF)
+            {
+                var user = myWork.User.Get(GetUserName);
+
+                // Is the email in use?
+                if (myWork.User.GetByEmail(viewModel.Email) != null)
+                {
+                    ModelState.AddModelError("Email", Resources.User.ErrorEmailInUse);
+                    return View("EditProfile", viewModel);
+                }
+
+                user.Email = viewModel.Email;
+                user.FirstName = viewModel.FirstName;
+                user.LastName = viewModel.LastName;
+
+                myWork.Complete();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        #endregion
+
+        #region Index
+
+        // GET: /User/
+        [HttpGet]
+        public ActionResult Index()
+        {
+            // Is the user logged in?
+            if (!IsAuthenticated)
+            {
+                return HttpUnauthorized();
+            }
+
+            // Get the user from the identity.
+            var userName = GetUserName;
+
+            // Lookup the user in the repository.
+            var user = GetUOF.User.Get(userName);
+
+            // Populate the viewmodel.
+            var viewModel = new UserProfileViewModel()
+            {
+                Email = user.Email,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                UserName = user.Username
+            };
+
+            return View("Profile", viewModel);
+        }
+
+        #endregion
+
+        #region Withdraw
+
+        // GET: /User/Withdraw/
+        [HttpGet]
+        public ActionResult Withdraw()
+        {
+            // Get the logged in user
+            var userName = GetUserName;
+
+            // Lookup the user in the repository.
+            var user = GetUOF.User.Get(userName);
+
+            // Populate the viewmodel.
+            var model = new WithdrawViewModel()
+            {
+                CurrentBalance = user.Balance,
+            };
+
+            return View("~/Views/Money/Withdraw.cshtml", model);
+        }
+
+        // POST: /User/Withdraw/
+        [HttpPost]
+        public ActionResult Withdraw(WithdrawViewModel model)
+        {
+            // Get the logged in user
+            var userName = GetUserName;
+
+            using (var myWork = GetUOF)
+            {
+                // Lookup the user in the repository.
+                var user = myWork.User.Get(userName);
+                
+                // Alter user balance.
+                try
+                {
+                    user.WithdrawMoney(model.Withdraw);
+                    myWork.Complete();
+                }
+                catch (NotEnoughFundsException)
+                {
+                    ModelState.AddModelError("Withdraw", Resources.User.ErrorNotEnoughFunds);
+                    return View("~/Views/Money/Withdraw.cshtml", model);
+                }
+                catch (NegativeWithdrawException)
+                {
+                    ModelState.AddModelError("Withdraw", Resources.User.ErrorNegativeWithdraw);
+                    return View("~/Views/Money/Withdraw.cshtml", model);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+
+        #endregion
     }
 }

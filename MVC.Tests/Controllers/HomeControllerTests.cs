@@ -2,7 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
-using Common;
 using Common.Models;
 using MVC.Controllers;
 using MVC.Identity;
@@ -24,7 +23,7 @@ namespace MVC.Tests.Controllers
         {
             context = Substitute.For<IUserContext>();
           
-            uut = new HomeController(context, Factory);
+            uut = new HomeController(Factory, context);
         }
 
         [Test]

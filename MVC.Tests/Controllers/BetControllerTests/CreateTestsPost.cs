@@ -14,7 +14,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
 {
     [ExcludeFromCodeCoverage]
     [TestFixture]
-    public class CreateTests : BaseRepositoryTest
+    public class CreateTestsPost : BaseRepositoryTest
     {
 
         private BetController uut;
@@ -31,44 +31,10 @@ namespace MVC.Tests.Controllers.BetControllerTests
             uut.ControllerContext = new ControllerContext();
         }
 
-        #region GET
-
-        [Test]
-        public void Create_WithLobbyId_ReturnsCorrectView()
-        {
-            long id = 123;
-
-            var result = uut.Create(id);
-
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-
-            Assert.That(vResult.ViewName, Is.EqualTo("Create"));
-        }
-
-        [Test]
-        public void Create_WithLobbyId_ReturnsCorrectViewModel()
-        {
-            long id = 123;
-
-            var result = uut.Create(id);
-
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-            Assert.That(vResult.Model, Is.TypeOf<CreateBetViewModel>());
-
-            var model = vResult.Model as CreateBetViewModel;
-            Assert.That(model.LobbyId, Is.EqualTo(id));
-        }
-
-        #endregion
-
         #region POST
 
         [Test]
-        public void Create_WithInvalidModel_ReturnsView()
+        public void Create_WithInvalidModel_ReturnsCorrectView()
         {
             var model = new CreateBetViewModel()
             {
@@ -87,7 +53,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
-        public void Create_WithInvalidModel_ReturnsViewModel()
+        public void Create_WithInvalidModel_ReturnsCorrectViewModel()
         {
             var model = new CreateBetViewModel()
             {

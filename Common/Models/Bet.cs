@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Common.Exceptions;
 
 namespace Common.Models
 {
@@ -115,16 +116,34 @@ namespace Common.Models
             }
         }
 
-        public bool ConcludeBet(User user, Outcome outcome)
+        public virtual bool ConcludeBet(User user, Outcome outcome)
         {
+            // Is the bet already concluded?
+            if (IsConcluded)
+            {
+                return false;
+            }
+
             // Bets cannot be concluded without a judge.
             if (Judge == null)
             {
                 return false;
             }
 
-            // Ensure the current user is the judge, and the outcome is a part of this bet.
-            if (user == Judge && Outcomes.Contains(outcome))
+            // Is the user valid?
+            if (user == null)
+            {
+                return false;
+            }
+
+            // Ensure the current user is the judge
+            if (user != Judge)
+            {
+                throw new UserNotJudgeException();
+            }
+
+            // Ensure the outcome is a part of this bet.
+            if (Outcomes.Contains(outcome))
             {
                 Result = outcome;
                 Payout();
@@ -135,7 +154,7 @@ namespace Common.Models
             return false;
         }
 
-        public bool JoinBet(User user, Outcome outcome)
+        public virtual bool JoinBet(User user, Outcome outcome)
         {
             // TODO: needs to check the user is in Lobby
 
@@ -170,6 +189,11 @@ namespace Common.Models
             Pot += BuyIn;
 
             return true;
+        }
+
+        public bool IsConcluded
+        {
+            get { return Result != null; }
         }
     }
 }
