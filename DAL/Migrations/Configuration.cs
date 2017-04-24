@@ -79,7 +79,7 @@ namespace DAL.Migrations
                         new User
                         {
                             FirstName = "Sten",
-                            LastName = "Sørensen",
+                            LastName = "Hansen",
                             Username = "User4",
                             Email = "aMail4@email.com",
                             Balance = 2000,
