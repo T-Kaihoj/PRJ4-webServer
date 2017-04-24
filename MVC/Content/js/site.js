@@ -23,6 +23,19 @@ jQuery.validator.setDefaults({
     }
 });
 
+function enterClicksButton(buttonId, event) {
+    // Check the keycode.
+    if (event.keyCode !== 13) {
+        return;
+    }
+
+    // Find the element.
+    var button = document.getElementById(buttonId);
+
+    // Send the click event.
+    button.click();
+}
+
 function registerDateTimePicker(datetimepicker) {
     $(document).ready(function () {
         // Find the element.
