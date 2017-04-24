@@ -218,6 +218,71 @@ namespace MVC.Tests.Controllers.UserControllerTests
             });
         }
 
+        [TestCase]
+        public void EditProfile_CallsRepositoryGetEmail()
+        {
+            string userName = "test";
+
+            var identity = Substitute.For<IIdentity>();
+            identity.Name.Returns(userName);
+            context.Identity.Returns(identity);
+
+            var user = new User()
+            {
+                Email = viewModel.Email
+            };
+
+            UserRepository.Get(Arg.Is(userName)).Returns(user);
+
+            // Assert the repository state.
+            UserRepository.DidNotReceive().GetByEmail(Arg.Any<string>());
+            MyWork.DidNotReceive().Complete();
+
+            // Attempt to edit the profile.
+            uut.EditProfile(viewModel);
+
+            // Ensure calls were made to the repositories.
+            UserRepository.Received(1).GetByEmail(Arg.Is(viewModel.Email));
+            MyWork.Received(1).Complete();
+        }
+
+        [TestCase]
+        public void EditProfile_WithEmailInUse()
+        {
+            // Setup user and identity.
+            string userName = "test";
+
+            var user = new User()
+            {
+                Email = viewModel.Email
+            };
+
+            UserRepository.GetByEmail(Arg.Is(viewModel.Email)).Returns(user);
+
+            // Attempt to edit the profile.
+            var result = uut.EditProfile(viewModel);
+
+            Assert.That(uut.ModelState.IsValid, Is.False);
+
+            // Check the returned view.
+            Assert.That(result, Is.TypeOf<ViewResult>());
+
+            var vResult = result as ViewResult;
+
+            // Check the viewmodel.
+            Assert.That(vResult.Model, Is.TypeOf<EditProfileViewModel>());
+
+            var model = vResult.Model as EditProfileViewModel;
+
+            // Check the data.
+            Assert.Multiple(() =>
+            {
+                Assert.That(model.Email, Is.EqualTo(viewModel.Email));
+                Assert.That(model.FirstName, Is.EqualTo(viewModel.FirstName));
+                Assert.That(model.LastName, Is.EqualTo(viewModel.LastName));
+            });
+        }
+
         [Test]
         public void EditProfile_WithValidInput_Redirects()
         {

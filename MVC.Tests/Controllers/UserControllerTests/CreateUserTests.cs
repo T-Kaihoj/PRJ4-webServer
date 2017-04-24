@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common.Models;
 using MVC.Controllers;
@@ -197,7 +196,7 @@ namespace MVC.Tests.Controllers.UserControllerTests
                 Email = viewModel.Email
             };
             
-            UserRepository.GetByEmail(Arg.Is(viewModel.UserName)).Returns(user);
+            UserRepository.GetByEmail(Arg.Is(viewModel.Email)).Returns(user);
 
             // Attempt to create the user.
             uut.Create(viewModel);

@@ -37,7 +37,7 @@ namespace MVC.Controllers
                 }
 
                 // Is the email in use?
-                if (myWork.User.GetByEmail(model.UserName) != null)
+                if (myWork.User.GetByEmail(model.Email) != null)
                 {
                     ModelState.AddModelError("Email", Resources.User.ErrorEmailInUse);
                 }
@@ -137,12 +137,6 @@ namespace MVC.Controllers
             // Lookup the user in the repository.
             var user = GetUOF.User.Get(userName);
 
-            // user should NEVER be null, but we check anyway.
-            if (user == null)
-            {
-                throw new Exception("User not found");
-            }
-
             // Populate the viewmodel.
             var viewModel = new EditProfileViewModel()
             {
@@ -168,10 +162,11 @@ namespace MVC.Controllers
             {
                 var user = myWork.User.Get(GetUserName);
 
-                // user should NEVER be null, but we check anyway.
-                if (user == null)
+                // Is the email in use?
+                if (myWork.User.GetByEmail(viewModel.Email) != null)
                 {
-                    throw new Exception("User not found");
+                    ModelState.AddModelError("Email", Resources.User.ErrorEmailInUse);
+                    return View("EditProfile", viewModel);
                 }
 
                 user.Email = viewModel.Email;
