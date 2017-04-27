@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
@@ -18,7 +19,9 @@ namespace MVC
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 CookieSecure = CookieSecureOption.Never,
-                LoginPath = new PathString("/")
+                ExpireTimeSpan = TimeSpan.FromMinutes(20),
+                LoginPath = new PathString("/"),
+                SlidingExpiration = true
             };
 
             app.UseCookieAuthentication(cookieOptions);

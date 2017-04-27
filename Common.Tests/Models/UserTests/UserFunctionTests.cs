@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Common.Exceptions;
 using Common.Models;
 using NSubstitute;
 using NUnit.Framework;
@@ -72,7 +73,7 @@ namespace Common.Tests.Models
             _uut.Balance = 5000m;
             var amount = -1000m;
 
-            Assert.That(() => _uut.WithdrawMoney(amount), Throws.Exception.TypeOf<ArithmeticException>());
+            Assert.That(() => _uut.WithdrawMoney(amount), Throws.Exception.TypeOf<NegativeWithdrawException>());
         }
 
         [Test]
@@ -93,7 +94,7 @@ namespace Common.Tests.Models
             _uut.Balance = 5000;
             var amount = 6000m;
 
-            Assert.That(() => _uut.WithdrawMoney(amount), Throws.Exception.TypeOf<ArithmeticException>());
+            Assert.That(() => _uut.WithdrawMoney(amount), Throws.Exception.TypeOf<NotEnoughFundsException>());
         }
 
         #endregion

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using Common;
+using Common.Exceptions;
 using Common.Models;
 using MVC.Identity;
 using MVC.ViewModels;
@@ -10,66 +11,108 @@ using MVC.ViewModels;
 namespace MVC.Controllers
 {
     [Authorize]
-    public class BetController : Controller
+    public class BetController : BaseController
     {
-        private readonly IFactory _factory;
-        private readonly IUserContext _userContext;
-
         public BetController(IFactory factory , IUserContext userContext)
-
+            : base(factory, userContext)
         {
-            _factory = factory;
-            _userContext = userContext;
+            
         }
         
-        // GET: /<controller>/Show/<id>
-        public ActionResult Show(long id)
+        #region Conclude
+
+        // GET: /<controller>/Conclude/<id>
+        public ActionResult Conclude(long id)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 // Find the bet.
                 var bet = myWork.Bet.Get(id);
 
-                // TODO: Remove hardcode.
-                List<Outcome> outcomes = new List<Outcome>();
-
-                outcomes.Add(new Outcome() { Description = "Han taber sig" });
-                outcomes.Add(new Outcome() { Description = "Han når det ikke" });
-
-                // Create the viewmodel, and copy over data.
-                var viewmodel = new ShowBetViewModel()
+                // Does the bet exist?
+                if (bet == null)
                 {
-                    Description = bet.Description,
-                    Judge = bet.Judge?.Username,
-                    Title = bet.Name,
-                    StartDate = bet.StartDate.ToLongDateString(),
-                    StopDate = bet.StopDate.ToLongDateString(),
-                    MoneyPool = bet.Pot
-                };
-
-                // Extract users for each outcome.
-                foreach (var outcome in bet.Outcomes)
-                {
-                    var users = new List<string>();
-
-                    foreach (var user in outcome.Participants)
-                    {
-                        users.Add(user.Username);
-                    }
-
-                    // Create the nested viewmodel.
-                    var vm = new ShowBetOutcomeViewModel()
-                    {
-                        Name = outcome.Name,
-                        Participants = users
-                    };
-
-                    viewmodel.Outcomes.Add(vm);
+                    return HttpNotFound();
                 }
 
-                return View("Show", viewmodel);
+                // Populate the viewmodel.
+                var model = new ConcludeViewModel(bet);
+
+                // Check access restrictions.
+                if (GetUserName == bet.Judge.Username)
+                {
+                    return View("Conclude", model);
+                }
+            }
+
+            // Error, redirect to homepage.
+            return HttpForbidden();
+        }
+
+        // POST: /<controller>/Conclude/
+        [HttpPost]
+        public ActionResult Conclude(ConcludeViewModel model)
+        {
+            // Validate the model.
+            TryValidateModel(model);
+
+            // Ensure the id is valid.
+            if (model.SelectedOutcome < 0)
+            {
+                // TODO: Could be extracted to a validationhelper.
+                ModelState.AddModelError("SelectedOutcome", Resources.Bet.ErrorSelectOutcomeRequired);
+            }
+            
+            if (!ModelState.IsValid)
+            {
+                return View("Conclude", model);
+            }
+
+            using (var myWork = GetUOF)
+            {
+                // Locate the outcome.
+                var outcome = myWork.Outcome.Get(model.SelectedOutcome);
+
+                // Does the outcome exist?
+                if (outcome == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Extract the bet.
+                var bet = outcome.bet;
+
+                // Get the current user.
+                var user = myWork.User.Get(GetUserName);
+
+                // Try to conclude the bet.
+                bool result;
+
+                try
+                {
+                    result = bet.ConcludeBet(user, outcome);
+                }
+                catch (UserNotJudgeException)
+                {
+                    return HttpForbidden();
+                }
+
+                // Is the bet already concluded?
+                if (!result)
+                {
+                    throw new Exception(Resources.Bet.ExceptionBetAlreadyConcluded);
+                }
+
+                // Save the changes.
+                myWork.Complete();
+
+                return Redirect($"/Bet/Show/{bet.BetId}");
             }
         }
+
+        #endregion
+
+        #region Create
 
         // GET: /<controller>/Create/<id>
         [HttpGet]
@@ -92,7 +135,7 @@ namespace MVC.Controllers
                 return View("Create", viewModel);
             }
 
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 // Create the bet.
                 var bet = new Bet()
@@ -100,7 +143,7 @@ namespace MVC.Controllers
                     BuyIn = viewModel.BuyInDecimal,
                     Description = viewModel.Description,
                     Name = viewModel.Title,
-                    Owner = myWork.User.Get(_userContext.Identity.Name),
+                    Owner = myWork.User.Get(GetUserName),
                     Judge = myWork.User.Get(viewModel.Judge),
                     StartDate = viewModel.StartDateTime,
                     StopDate = viewModel.StopDateTime
@@ -138,7 +181,7 @@ namespace MVC.Controllers
                 // Get the lobby.
                 var lobby = myWork.Lobby.Get(viewModel.LobbyId);
                 lobby.Bets.Add(bet);
-                
+
                 myWork.Complete();
 
                 // Redirect to the bet page.
@@ -146,15 +189,29 @@ namespace MVC.Controllers
             }
         }
 
+        #endregion
+
+        #region Join
+
         // GET: /<controller>/Join/<id>
         [HttpGet]
         public ActionResult Join(long id)
         {
             var viewModel = new JoinBetViewModel();
-            using (var myWork = _factory.GetUOF())
+
+            using (var myWork = GetUOF)
             {
-                var myBet = myWork.Bet.Get(id);
-                foreach (var outcomes in myBet.Outcomes)
+                // Get the bet.
+                var bet = myWork.Bet.Get(id);
+
+                // Does the bet exist?
+                if (bet == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Extract data.
+                foreach (var outcomes in bet.Outcomes)
                 {
                     var ovm = new OutcomeViewModel()
                     {
@@ -164,9 +221,10 @@ namespace MVC.Controllers
 
                     viewModel.Outcomes.Add(ovm);
                 }
-                viewModel.Title = myBet.Name;
-                viewModel.Description = myBet.Description;
-                viewModel.MoneyPool = myBet.BuyIn;
+
+                viewModel.Title = bet.Name;
+                viewModel.Description = bet.Description;
+                viewModel.MoneyPool = bet.BuyIn;
                 viewModel.Id = id;
 
                 return View("Join", viewModel);
@@ -177,86 +235,144 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Join(OutcomeViewModel model)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
-                // Get the current user.
-                var user = myWork.User.Get(_userContext.Identity.Name);
-
                 // Find the outcome in the database.
                 var outcome = myWork.Outcome.Get(model.Id);
 
-                // Get the bet from the database, and join the selected outcome.
-                var bet = myWork.Bet.Find(b => b.Outcomes.Any(o => o.OutcomeId.Equals(outcome.OutcomeId))).First();
+                // Does the outcome exist?
+                if (outcome == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Get the current user.
+                var user = myWork.User.Get(GetUserName);
+
+                // Get the bet from the database.
+                var bet = outcome.bet;
 
                 // Join the bet.
                 bet.JoinBet(user, outcome);
 
                 myWork.Complete();
 
-                return Redirect($"/Bet/Show/{bet.BetId}");
+                return RedirectToAction("Show", new {id = bet.BetId});
             }
         }
 
-        // GET: /<controller>/Conclude/<id>
-        public ActionResult Conclude(long id)
-        {
-            using (var myWork = _factory.GetUOF())
-            {
-                //throw new NotImplementedException();
-                //TODO BetController JoinViewModel NullReference
+        #endregion
 
-                var user = myWork.User.Get(User.Identity.Name);
-                var Bet = myWork.Bet.Get(id);
-                //bool betConclude = myWork.Bet.Get(id);
-                myWork.Complete();
-
-                var model = new ConcludeViewModel();
-                model.setup(Bet);
-
-                if (_userContext.Identity.Name == Bet.Judge.Username)
-                    return View(model);
-            }
-
-            return Redirect("/");
-        }
-
-        // POST: /<controller>/Conclude/
-        [HttpPost]
-        public ActionResult Conclude( ConcludeViewModel Model)
-        {
-            
-            using (var myWork = _factory.GetUOF())
-            {
-                //throw new NotImplementedException();
-                //TODO BetController JoinViewModel NullReference
-                var bet = myWork.Outcome.Get(Model.SelectedOutcome).bet;
-                var user = myWork.User.Get(User.Identity.Name);
-
-                 bool betConclude = bet.ConcludeBet(user, myWork.Outcome.Get(Model.SelectedOutcome));
-                myWork.Complete();
-                if (betConclude)
-                return Redirect("/");
-            }
-
-            return Redirect("/");
-        }
+        #region Remove
 
         // GET: /<controller>/Remove/<Lobby>/<Bet>
         [HttpGet]
-        public ActionResult Remove(long Lobby, long Bet)
+        public ActionResult Remove(long id)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
-                var myBet = myWork.Bet.Get(Bet);
-            
-                if (_userContext.Identity.Name == myBet.Owner.Username && myBet.StartDate > DateTime.Now)
+                // Locate the bet.
+                var bet = myWork.Bet.Get(id);
+
+                if (bet == null)
                 {
-                    myWork.Bet.Remove(myBet);
-                    myWork.Complete();
+                    return HttpNotFound();
                 }
-                string baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
-                return Redirect($"{baseUrl}/Lobby/Show/{Lobby}");
+
+                // Is the current user the owner?
+                if (GetUserName != bet.Owner.Username)
+                {
+                    return HttpForbidden();
+                }
+
+                // Are we past the start date?
+                if (bet.StartDate < DateTime.Now)
+                {
+                    return HttpForbidden();
+                }
+
+                var lobbyId = bet.Lobby.LobbyId;
+
+                // Remove the bet and redirect to the lobby.
+                myWork.Bet.Remove(bet);
+                myWork.Complete();
+
+                return RedirectToRoute(new
+                    {
+                        controller = "Lobby",
+                        action = "Show",
+                        id = lobbyId
+                    }
+                );
             }
         }
+
+        #endregion
+
+        #region Show
+
+        // GET: /<controller>/Show/<id>
+        public ActionResult Show(long id)
+        {
+            using (var myWork = GetUOF)
+            {
+                // Find the bet.
+                var bet = myWork.Bet.Get(id);
+
+                // Check for the existence of the bet.
+                if (bet == null)
+                {
+                    return HttpNotFound();
+                }
+
+                // Create the viewmodel, and copy over data.
+                var viewmodel = new ShowBetViewModel()
+                {
+                    Description = bet.Description,
+                    Judge = bet.Judge?.Username,
+                    Title = bet.Name,
+                    StartDate = bet.StartDate.ToLongDateString(),
+                    StopDate = bet.StopDate.ToLongDateString(),
+                    MoneyPool = bet.Pot
+                };
+
+                // Extract users for each outcome.
+                foreach (var outcome in bet.Outcomes)
+                {
+                    var users = new List<string>();
+
+                    foreach (var user in outcome.Participants)
+                    {
+                        users.Add(user.Username);
+                    }
+
+                    // Create the nested viewmodel.
+                    var vm = new ShowBetOutcomeViewModel()
+                    {
+                        Name = outcome.Name,
+                        Participants = users
+                    };
+
+                    // Is this outcome the winner?
+                    if (bet.IsConcluded)
+                    {
+                        if (bet.Result == outcome)
+                        {
+                            vm.winner = true;
+                        }
+                        else
+                        {
+                            vm.loser = true;
+                        }
+                    }
+
+                    viewmodel.Outcomes.Add(vm);
+                }
+
+                return View("Show", viewmodel);
+            }
+        }
+
+        #endregion
     }
 }
