@@ -106,6 +106,13 @@ namespace MVC.Controllers
 
             if (!ModelState.IsValid)
             {
+                // Ensure we repopulate the balance field.
+                using (var myWork = GetUOF)
+                {
+                    var user = myWork.User.Get(GetUserName);
+                    model.CurrentBalance = user.Balance;
+                }
+
                 return View("~/Views/Money/Deposit.cshtml", model);
             }
 
@@ -262,11 +269,17 @@ namespace MVC.Controllers
                 catch (NotEnoughFundsException)
                 {
                     ModelState.AddModelError("Withdraw", Resources.User.ErrorNotEnoughFunds);
-                    return View("~/Views/Money/Withdraw.cshtml", model);
                 }
                 catch (NegativeWithdrawException)
                 {
                     ModelState.AddModelError("Withdraw", Resources.User.ErrorNegativeWithdraw);
+                }
+
+                if (!ModelState.IsValid)
+                {
+                    // Ensure we repopulate the balance field.
+                    model.CurrentBalance = user.Balance;
+
                     return View("~/Views/Money/Withdraw.cshtml", model);
                 }
             }

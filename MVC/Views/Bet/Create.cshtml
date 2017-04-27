@@ -18,22 +18,22 @@
                 <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.Title, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Title)
                 </div>
                 <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.Description, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Description)
                 </div>
                 <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.BuyIn, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.BuyIn, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.BuyIn, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.BuyIn)
                 </div>
                 <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.Outcome1, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Outcome1, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Outcome1, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Outcome1)
                 </div>
 
             </div>
@@ -41,11 +41,11 @@
                 <div class="form-group label-floating">
                     @Html.LabelFor(m => m.Judge, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Judge, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Judge, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Judge)
                 </div>
                 <div class="form-group label-floating">
                     @Html.LabelFor(m => m.StartDate, new { @class = "control-label" })
-                    @Html.ValidationMessageFor(m => m.StartDate, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.StartDate)
                     <div class="input-group date" id="datetimepickerstart">
                         @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
                         <span class="input-group-addon">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="form-group label-floating">
                     @Html.LabelFor(m => m.StopDate, new { @class = "control-label" })
-                    @Html.ValidationMessageFor(m => m.StopDate, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.StopDate)
                     <div class="input-group date" id="datetimepickerend">
                         @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control" })
                         <span class="input-group-addon">
@@ -66,7 +66,7 @@
                 <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.Outcome2, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Outcome2, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Outcome2, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Outcome2)
                 </div>
             </div>
         </div>
@@ -92,9 +92,13 @@
     </form>
 </div>
 
-<script>
-    $(document).ready(function () {
-        registerDateTimePicker("#datetimepickerstart");
-        registerDateTimePicker("#datetimepickerend");
-    });
-</script>
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            findErrorTags();
+            registerDateTimePicker("#datetimepickerstart");
+            registerDateTimePicker("#datetimepickerend");
+        });
+    </script>
+}

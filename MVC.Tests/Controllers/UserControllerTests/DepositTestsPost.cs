@@ -43,6 +43,17 @@ namespace MVC.Tests.Controllers.UserControllerTests
             // Setup.
             viewModel.Deposit = -100m;
 
+            // Setup.
+            var user = new User()
+            {
+                Balance = 100m,
+                Username = "test"
+            };
+
+            context.Identity.Name.Returns(user.Username);
+
+            UserRepository.Get(Arg.Is(user.Username)).Returns(user);
+
             // Act.
             var result = uut.Deposit(viewModel);
 
@@ -57,6 +68,36 @@ namespace MVC.Tests.Controllers.UserControllerTests
 
             // Check that the correct error is attached.
             CheckErrorOnModel(uut.ModelState, Resources.User.ErrorNegativeDeposit);
+        }
+
+        [Test]
+        public void Withdraw_InvalidData_ReturnsErrorWithCorrectModelData()
+        {
+            // Setup.
+            var user = new User()
+            {
+                Balance = 100m,
+                Username = "test"
+            };
+
+            context.Identity.Name.Returns(user.Username);
+
+            UserRepository.Get(Arg.Is(user.Username)).Returns(user);
+
+            viewModel.CurrentBalance = 0;
+            viewModel.Deposit = -10m;
+
+            // Act.
+            var result = uut.Deposit(viewModel);
+
+            // Assert the the view is correct.
+            CheckViewName(result, "~/Views/Money/Deposit.cshtml");
+
+            // Check that the viewmodel is correct.
+            var model = CheckViewModel<DepositViewModel>(result);
+
+            // Check that the correct balance is returned.
+            Assert.That(model.CurrentBalance, Is.EqualTo(user.Balance));
         }
 
         [Test]
