@@ -13,6 +13,8 @@ namespace Common.Models
         private string _description;
         private readonly IUtility _utility;
 
+        #region Constructors
+
         public Bet()
         {
             _utility = Utility.Instance;
@@ -30,6 +32,10 @@ namespace Common.Models
                 _utility = util;
             }
         }
+
+        #endregion
+
+        #region Properties
 
         [ExcludeFromCodeCoverage]
         [Key]
@@ -60,7 +66,7 @@ namespace Common.Models
         public Decimal BuyIn { get; set; }
 
         [ExcludeFromCodeCoverage]
-        public Decimal Pot { get; set; }    
+        public Decimal Pot { get; set; }
 
         [NotMapped]
         public ICollection<User> Participants
@@ -95,6 +101,15 @@ namespace Common.Models
         // Navigation property
         [ExcludeFromCodeCoverage]
         public virtual Lobby Lobby { get; set; }
+
+        public bool IsConcluded
+        {
+            get { return Result != null; }
+        }
+
+        #endregion
+
+        #region Functions
 
         private void Payout()
         {
@@ -171,6 +186,12 @@ namespace Common.Models
         {
             // TODO: needs to check the user is in Lobby
 
+            // Is the bet concluded?
+            if (IsConcluded)
+            {
+                throw new BetConcludedException();
+            }
+
             // Handle invalid data.
             if (user == null || outcome == null)
             {
@@ -204,9 +225,6 @@ namespace Common.Models
             return true;
         }
 
-        public bool IsConcluded
-        {
-            get { return Result != null; }
-        }
+        #endregion
     }
 }

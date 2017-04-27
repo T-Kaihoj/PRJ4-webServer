@@ -117,6 +117,45 @@ namespace MVC.Tests.Controllers.BetControllerTests
             CheckRedirectsToRouteWithId(result, "Show", betId);
         }
 
+        [Test]
+        public void Join_ConcludedBet_ReturnsErrorView()
+        {
+            // Setup.
+            long id = 412;
+            long betId = 32;
+
+            var model = new OutcomeViewModel()
+            {
+                Id = id
+            };
+
+            var bet = new Bet()
+            {
+                BetId = betId,
+            };
+
+            var outcome = new Outcome()
+            {
+                bet = bet,
+                OutcomeId = id
+            };
+
+            bet.Result = outcome;
+
+            string userName = "username";
+            var user = new User();
+            UserRepository.Get(Arg.Is(userName)).Returns(user);
+            userContext.Identity.Name.Returns(userName);
+
+            OutcomeRepository.Get(Arg.Is(id)).Returns(outcome);
+
+            // Act.
+            var result = uut.Join(model);
+
+            // Assert.
+            CheckViewName(result, "Concluded");
+        }
+
         #endregion
     }
 }

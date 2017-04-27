@@ -402,6 +402,7 @@
     <Content Include="Views\Bet\Conclude.cshtml" />
     <Content Include="Views\Lobby\Invite.cshtml" />
     <Content Include="Views\Bet\_PrintOutcome.cshtml" />
+    <Content Include="Views\Bet\Concluded.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

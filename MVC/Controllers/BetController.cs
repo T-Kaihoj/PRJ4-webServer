@@ -253,7 +253,14 @@ namespace MVC.Controllers
                 var bet = outcome.bet;
 
                 // Join the bet.
-                bet.JoinBet(user, outcome);
+                try
+                {
+                    bet.JoinBet(user, outcome);
+                }
+                catch (BetConcludedException)
+                {
+                    return View("Concluded");
+                }
 
                 myWork.Complete();
 

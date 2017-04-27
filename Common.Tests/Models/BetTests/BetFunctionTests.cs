@@ -588,6 +588,34 @@ namespace Common.Tests.Models
             Assert.That(outcome.Participants, Contains.Item(u2));
         }
 
+        [Test]
+        public void JoinBet_AlreadyConcluded_Throws()
+        {
+            // Setup.
+            var initialBalance = 60m;
+            var buyIn = 50m;
+
+            var outcome = new Outcome();
+            var u1 = Substitute.For<User>();
+            var u2 = Substitute.For<User>();
+            u2.Balance = initialBalance;
+
+            _uut.Outcomes.Add(outcome);
+            _uut.BuyIn = buyIn;
+            _uut.Judge = u1;
+
+            _uut.ConcludeBet(u1, outcome);
+
+            TestDelegate del = () =>
+            {
+                _uut.JoinBet(u2, outcome);
+            };
+
+            // Act and assert.
+            Assert.That(del, Throws.TypeOf<BetConcludedException>());
+            Assert.That(u2.Balance, Is.EqualTo(initialBalance));
+        }
+
         #endregion
     }
 }
