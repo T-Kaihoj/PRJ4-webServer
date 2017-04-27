@@ -49,6 +49,14 @@
   <ItemGroup>
     <Compile Include="Data\Context.cs" />
     <Compile Include="Factory.cs" />
+    <Compile Include="Migrations\201704201151525_new.cs" />
+    <Compile Include="Migrations\201704201151525_new.Designer.cs">
+      <DependentUpon>201704201151525_new.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201704201358332_merge.cs" />
+    <Compile Include="Migrations\201704201358332_merge.Designer.cs">
+      <DependentUpon>201704201358332_merge.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Persistence\BetRepository.cs" />
     <Compile Include="Persistence\LobbyRepository.cs" />
@@ -69,7 +77,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Migrations\201703301249207_\" />
+    <EmbeddedResource Include="Migrations\201704201342351_this.resx">
+      <DependentUpon>201704201342351_this.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201704201358332_merge.resx">
+      <DependentUpon>201704201358332_merge.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201704201151525_new.resx">
+      <DependentUpon>201704201151525_new.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

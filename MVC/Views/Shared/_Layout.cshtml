@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Test</title>
+    <title>@ViewData["Title"] - LocalBet</title>
     @Scripts.Render("~/bundles/js-essential")
     @Styles.Render("~/bundles/css-libs")
     @Styles.Render("~/bundles/css-site")
@@ -22,9 +22,9 @@
                 </div>
                 <div class="navbar-collapse collapse navbar-responsive-collapse">
                     <h4 class="navbar-text">You Bet It's Fun!</h4>
-                    @Html.Partial("MenuBox")
                     @if (User.Identity.IsAuthenticated)
                     {
+                        Html.RenderPartial("MenuBox");
                         Html.RenderPartial("UserBox");
                     }
                     else

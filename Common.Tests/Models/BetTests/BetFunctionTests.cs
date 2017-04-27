@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Common.Exceptions;
 using Common.Models;
 using NSubstitute;
 using NUnit.Framework;
@@ -50,6 +51,25 @@ namespace Common.Tests.Models
 
             // Act.
             var result = _uut.ConcludeBet(null, o);
+
+            // Assert.
+            Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void ConcludeBet_AlreadyConcluded_ReturnsFalse()
+        {
+            // Setup.
+            var o = Substitute.For<Outcome>();
+            _uut.Outcomes.Add(o);
+
+            var j = Substitute.For<User>();
+            _uut.Judge = j;
+
+            _uut.ConcludeBet(j, o);
+
+            // Act.
+            var result = _uut.ConcludeBet(j, o);
 
             // Assert.
             Assert.That(result, Is.False);
@@ -114,6 +134,25 @@ namespace Common.Tests.Models
             // Assert.
             Assert.That(_uut.Judge, Is.Null);
             Assert.That(result, Is.False);
+        }
+
+        [Test]
+        public void ConcludeBet_UserIsNotJudge_ThrowsException()
+        {
+            // Setup.
+            var o = Substitute.For<Outcome>();
+            var j = Substitute.For<User>();
+            _uut.Judge = j;
+            var u = Substitute.For<User>();
+
+            // Act.
+            TestDelegate del = () =>
+            {
+                _uut.ConcludeBet(u, o);
+            };
+            
+            // Assert.
+            Assert.That(del, Throws.Exception.TypeOf<UserNotJudgeException>());
         }
 
         [Test]
@@ -272,9 +311,11 @@ namespace Common.Tests.Models
         }
 
         [Test]
-        public void ConcludeBet_WithValidDataButNoWinners_PaysNothing()
+        public void ConcludeBet_WithValidDataButNoWinners_PaysBuyIn()
         {
             // Setup.
+            var pot = 100m;
+
             var outcomeWinner = new Outcome();
             var outcomeOther1 = new Outcome();
             var outcomeOther2 = new Outcome();
@@ -294,7 +335,7 @@ namespace Common.Tests.Models
 
             outcomeOther2.Participants.Add(user4);
 
-            _uut.Pot = 100m;
+            _uut.Pot = pot;
             _uut.Outcomes.Add(outcomeOther1);
             _uut.Outcomes.Add(outcomeWinner);
             _uut.Outcomes.Add(outcomeOther2);
@@ -303,12 +344,14 @@ namespace Common.Tests.Models
             var result = _uut.ConcludeBet(j, outcomeWinner);
 
             // Assert.
+            var expected = pot / 4;
+
             Assert.That(result, Is.True);
 
-            Assert.That(user1.Balance, Is.Zero);
-            Assert.That(user2.Balance, Is.Zero);
-            Assert.That(user3.Balance, Is.Zero);
-            Assert.That(user4.Balance, Is.Zero);
+            Assert.That(user1.Balance, Is.EqualTo(expected));
+            Assert.That(user2.Balance, Is.EqualTo(expected));
+            Assert.That(user3.Balance, Is.EqualTo(expected));
+            Assert.That(user4.Balance, Is.EqualTo(expected));
         }
 
         #endregion

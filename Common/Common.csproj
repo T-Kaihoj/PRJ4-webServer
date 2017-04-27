@@ -47,6 +47,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\LocalBetException.cs" />
+    <Compile Include="Exceptions\NegativeWithdrawException.cs" />
+    <Compile Include="Exceptions\NotEnoughFundsException.cs" />
+    <Compile Include="Exceptions\UserNotJudgeException.cs" />
     <Compile Include="IFactory.cs" />
     <Compile Include="IUnitOfWork.cs" />
     <Compile Include="Models\Bet.cs" />
