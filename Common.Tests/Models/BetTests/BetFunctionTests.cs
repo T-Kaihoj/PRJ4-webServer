@@ -311,9 +311,11 @@ namespace Common.Tests.Models
         }
 
         [Test]
-        public void ConcludeBet_WithValidDataButNoWinners_PaysNothing()
+        public void ConcludeBet_WithValidDataButNoWinners_PaysBuyIn()
         {
             // Setup.
+            var pot = 100m;
+
             var outcomeWinner = new Outcome();
             var outcomeOther1 = new Outcome();
             var outcomeOther2 = new Outcome();
@@ -333,7 +335,7 @@ namespace Common.Tests.Models
 
             outcomeOther2.Participants.Add(user4);
 
-            _uut.Pot = 100m;
+            _uut.Pot = pot;
             _uut.Outcomes.Add(outcomeOther1);
             _uut.Outcomes.Add(outcomeWinner);
             _uut.Outcomes.Add(outcomeOther2);
@@ -342,12 +344,14 @@ namespace Common.Tests.Models
             var result = _uut.ConcludeBet(j, outcomeWinner);
 
             // Assert.
+            var expected = pot / 4;
+
             Assert.That(result, Is.True);
 
-            Assert.That(user1.Balance, Is.Zero);
-            Assert.That(user2.Balance, Is.Zero);
-            Assert.That(user3.Balance, Is.Zero);
-            Assert.That(user4.Balance, Is.Zero);
+            Assert.That(user1.Balance, Is.EqualTo(expected));
+            Assert.That(user2.Balance, Is.EqualTo(expected));
+            Assert.That(user3.Balance, Is.EqualTo(expected));
+            Assert.That(user4.Balance, Is.EqualTo(expected));
         }
 
         #endregion

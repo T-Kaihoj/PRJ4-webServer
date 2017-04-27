@@ -103,6 +103,19 @@ namespace Common.Models
 
             if (numberOfWinners <= 0)
             {
+                if (Participants.Count == 0)
+                {
+                    return;
+                }
+
+                var split = Pot / Participants.Count;
+
+                // Payout buyin.
+                foreach (var player in Participants)
+                {
+                    player.Balance += split;
+                }
+
                 return;
             }
 
