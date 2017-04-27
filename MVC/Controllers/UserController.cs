@@ -74,6 +74,7 @@ namespace MVC.Controllers
         #region Deposit
 
         // GET: /User/Deposit/
+        [Authorize]
         [HttpGet]
         public ActionResult Deposit()
         {
@@ -93,6 +94,7 @@ namespace MVC.Controllers
         }
 
         // POST: /User/Deposit/
+        [Authorize]
         [HttpPost]
         public ActionResult Deposit(DepositViewModel model)
         {
@@ -128,6 +130,7 @@ namespace MVC.Controllers
         #region EditProfile
 
         // GET: /User/EditProfile/
+        [Authorize]
         [HttpGet]
         public ActionResult EditProfile()
         {
@@ -149,6 +152,7 @@ namespace MVC.Controllers
         }
 
         // POST: /User/EditProfile/
+        [Authorize]
         [HttpPost]
         public ActionResult EditProfile(EditProfileViewModel viewModel)
         {
@@ -184,6 +188,7 @@ namespace MVC.Controllers
         #region Index
 
         // GET: /User/
+        [Authorize]
         [HttpGet]
         public ActionResult Index()
         {
@@ -216,6 +221,7 @@ namespace MVC.Controllers
         #region Withdraw
 
         // GET: /User/Withdraw/
+        [Authorize]
         [HttpGet]
         public ActionResult Withdraw()
         {
@@ -235,6 +241,7 @@ namespace MVC.Controllers
         }
 
         // POST: /User/Withdraw/
+        [Authorize]
         [HttpPost]
         public ActionResult Withdraw(WithdrawViewModel model)
         {
