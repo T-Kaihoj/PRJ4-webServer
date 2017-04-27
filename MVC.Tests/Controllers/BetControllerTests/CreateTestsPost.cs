@@ -16,19 +16,33 @@ namespace MVC.Tests.Controllers.BetControllerTests
     [TestFixture]
     public class CreateTestsPost : BaseRepositoryTest
     {
-
-        private BetController uut;
-        private IUserContext userContext;
+        private CreateBetViewModel _model;
+        private BetController _uut;
+        private IUserContext _userContext;
 
         [SetUp]
         public void Setup()
         {
             // Create mocks.
-            userContext = Substitute.For<IUserContext>();
+            _userContext = Substitute.For<IUserContext>();
 
             // Create the controller.
-            uut = new BetController(Factory, userContext);
-            uut.ControllerContext = new ControllerContext();
+            _uut = new BetController(Factory, _userContext);
+            _uut.ControllerContext = new ControllerContext();
+
+            // Setup viewmodel.
+            _model = new CreateBetViewModel()
+            {
+                BuyIn = "0",
+                Description = "Description",
+                Judge = "judge",
+                LobbyId = 0,
+                StartDate = (DateTime.Now - TimeSpan.FromDays(2)).ToLongDateString(),
+                StopDate = DateTime.Now.ToLongDateString(),
+                Title = "Name",
+                Outcome1 = "a",
+                Outcome2 = "b"
+            };
         }
 
         #region POST
@@ -36,96 +50,49 @@ namespace MVC.Tests.Controllers.BetControllerTests
         [Test]
         public void Create_WithInvalidModel_ReturnsCorrectView()
         {
-            var model = new CreateBetViewModel()
-            {
+            _model.Title = "";
 
-            };
+            var result = _uut.Create(_model);
 
-            var result = uut.Create(model);
+            Assert.That(_uut.ModelState.IsValid, Is.False);
 
-            Assert.That(uut.ModelState.IsValid, Is.False);
-
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-
-            Assert.That(vResult.ViewName, Is.EqualTo("Create"));
+            CheckViewName(result, "Create");
         }
 
         [Test]
         public void Create_WithInvalidModel_ReturnsCorrectViewModel()
         {
-            var model = new CreateBetViewModel()
-            {
-                Description = "test",
-                Title = ""
-            };
+            _model.Title = "";
 
-            var result = uut.Create(model);
+            var result = _uut.Create(_model);
 
-            Assert.That(uut.ModelState.IsValid, Is.False);
+            Assert.That(_uut.ModelState.IsValid, Is.False);
 
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-            Assert.That(vResult.Model, Is.TypeOf<CreateBetViewModel>());
-
-            Assert.That(vResult.Model, Is.EqualTo(model));
+            var model = CheckViewModel<CreateBetViewModel>(result);
+            Assert.That(model, Is.EqualTo(_model));
         }
 
         [Test]
         public void Create_WithNonExistingJudge_ReturnsError()
         {
-            var model = new CreateBetViewModel()
-            {
-                BuyIn = "0",
-                Description = "Description",
-                Judge = "judge",
-                LobbyId = 0,
-                StartDate = DateTime.Now.ToLongDateString(),
-                StopDate = DateTime.Now.ToLongDateString(),
-                Title = "Name",
-                Outcome1 = "a",
-                Outcome2 = "b"
-            };
-
             SetupOwner("owner");
 
-            var result = uut.Create(model);
+            var result = _uut.Create(_model);
 
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-            Assert.That(vResult.Model, Is.TypeOf<CreateBetViewModel>());
-
-            Assert.That(vResult.Model, Is.EqualTo(model));
-            Assert.That(vResult.ViewName, Is.EqualTo("Create"));
-
-            // Check that the right error message has been selected.
-            Assert.That(uut.ModelState.SelectMany(x => x.Value.Errors).Select(z => z.ErrorMessage).ToList(), Contains.Item(Resources.Bet.ErrorJudgeDoesntExist));
+            CheckViewName(result, "Create");
+            var model = CheckViewModel<CreateBetViewModel>(result);
+            Assert.That(model, Is.EqualTo(_model));
+            CheckErrorOnModel(_uut.ModelState, Resources.Bet.ErrorJudgeDoesntExist);
         }
 
         [Test]
-        public void Create_WithNonExistingOwner_ReturnsError()
+        public void Create_WithNonExistingOwner_Throws()
         {
-            var model = new CreateBetViewModel()
-            {
-                BuyIn = "0",
-                Description = "Description",
-                Judge = "judge",
-                LobbyId = 0,
-                StartDate = DateTime.Now.ToLongDateString(),
-                StopDate = DateTime.Now.ToLongDateString(),
-                Title = "Name",
-                Outcome1 = "a",
-                Outcome2 = "b"
-            };
-
-            SetupJudge(model.Judge);
+            SetupJudge(_model.Judge);
 
             TestDelegate del = () =>
             {
-                uut.Create(model);
+                _uut.Create(_model);
             };
 
             Assert.That(del ,Throws.Exception);
@@ -142,34 +109,45 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
 
-            // Setup viewmodel.
-            var model = new CreateBetViewModel()
-            {
-                BuyIn = "0",
-                Description = "Description",
-                Judge = "judge",
-                LobbyId = 0,
-                StartDate = DateTime.Now.ToLongDateString(),
-                StopDate = DateTime.Now.ToLongDateString(),
-                Title = "Name",
-                Outcome1 = "a",
-                Outcome2 = "b"
-            };
-
-            SetupJudge(model.Judge);
+            SetupJudge(_model.Judge);
             SetupOwner("owner");
 
             // Act.
-            var result = uut.Create(model);
+            var result = _uut.Create(_model);
 
             // Assert modelstate.
-            Assert.That(uut.ModelState.IsValid);
+            Assert.That(_uut.ModelState.IsValid, Is.True);
 
             // Assert on the returned view.
-            Assert.That(result, Is.TypeOf<RedirectResult>());
+            CheckRedirectsToRouteWithId(result, "Join");
+        }
 
-            var rResult = result as RedirectResult;
-            Assert.That(rResult.Url, Contains.Substring("/Bet/Join/"));
+        [Test]
+        public void Create_WithEndDateBeforeStartDate_ReturnsError()
+        {
+            // Register a lobby with the mock.
+            var lobby = new Lobby()
+            {
+                Bets = new List<Bet>()
+            };
+
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+
+            _model.StartDate = (DateTime.Now + TimeSpan.FromDays(2)).ToLongDateString();
+
+            SetupJudge(_model.Judge);
+            SetupOwner("owner");
+
+            // Act.
+            var result = _uut.Create(_model);
+
+            // Assert modelstate.
+            Assert.That(_uut.ModelState.IsValid, Is.False);
+
+            CheckViewName(result, "Create");
+            var model = CheckViewModel<CreateBetViewModel>(result);
+            Assert.That(model, Is.EqualTo(_model));
+            CheckErrorOnModel(_uut.ModelState, Resources.Bet.ErrorEndDateBeforeStartDate);
         }
 
         [Test]
@@ -187,28 +165,15 @@ namespace MVC.Tests.Controllers.BetControllerTests
             BetRepository.DidNotReceive().Add(Arg.Any<Bet>());
             MyWork.DidNotReceive().Complete();
 
-            var model = new CreateBetViewModel()
-            {
-                BuyIn = "0",
-                Description = "Description",
-                Judge = "judge",
-                LobbyId = 0,
-                StartDate = DateTime.Now.ToLongDateString(),
-                StopDate = DateTime.Now.ToLongDateString(),
-                Title = "Name",
-                Outcome1 = "a",
-                Outcome2 = "b"
-            };
-
-            SetupJudge(model.Judge);
+            SetupJudge(_model.Judge);
             SetupOwner("owner");
 
-            uut.Create(model);
+            _uut.Create(_model);
 
-            Assert.That(uut.ModelState.IsValid);
+            Assert.That(_uut.ModelState.IsValid);
 
             // Assert that we hit the repository.
-            UserRepository.Received(1).Get(model.Judge);
+            UserRepository.Received(1).Get(_model.Judge);
             UserRepository.Received(1).Get("owner");
             BetRepository.Received(1).Add(Arg.Any<Bet>());
             MyWork.Received(1).Complete();
@@ -228,7 +193,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
         {
             var owner = new User();
             UserRepository.Get(Arg.Is(name)).Returns(owner);
-            userContext.Identity.Name.Returns(name);
+            _userContext.Identity.Name.Returns(name);
         }
 
         #endregion

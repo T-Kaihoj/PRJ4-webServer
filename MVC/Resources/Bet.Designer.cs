@@ -151,6 +151,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End date must be after start date.
+        /// </summary>
+        public static string ErrorEndDateBeforeStartDate {
+            get {
+                return ResourceManager.GetString("ErrorEndDateBeforeStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Judge doesn&apos;t exist.
         /// </summary>
         public static string ErrorJudgeDoesntExist {

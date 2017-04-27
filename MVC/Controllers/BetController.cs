@@ -130,7 +130,16 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Create(CreateBetViewModel viewModel)
         {
-            if (!TryValidateModel(viewModel))
+            // Perform general validation.
+            TryValidateModel(viewModel);
+
+            // Check the dates.
+            if (viewModel.StopDateTime <= viewModel.StartDateTime)
+            {
+                ModelState.AddModelError("StopDate", Resources.Bet.ErrorEndDateBeforeStartDate);
+            }
+
+            if (!ModelState.IsValid)
             {
                 return View("Create", viewModel);
             }
@@ -185,7 +194,12 @@ namespace MVC.Controllers
                 myWork.Complete();
 
                 // Redirect to the bet page.
-                return Redirect($"/Bet/Join/{bet.BetId}");
+                return RedirectToRoute(new
+                    {
+                        controller = "Bet",
+                        action = "Join",
+                        id = bet.BetId
+                    });
             }
         }
 

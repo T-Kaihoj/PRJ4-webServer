@@ -147,6 +147,9 @@
   <data name="ErrorDescriptionRequired" xml:space="preserve">
     <value>Description is required</value>
   </data>
+  <data name="ErrorEndDateBeforeStartDate" xml:space="preserve">
+    <value>End date must be after start date</value>
+  </data>
   <data name="ErrorJudgeDoesntExist" xml:space="preserve">
     <value>Judge doesn't exist</value>
   </data>
