@@ -1,7 +1,7 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Security.Principal;
 using System.Web.Mvc;
-using Common;
 using Common.Models;
 using MVC.Controllers;
 using MVC.Identity;
@@ -23,7 +23,7 @@ namespace MVC.Tests.Controllers
         {
             context = Substitute.For<IUserContext>();
           
-            uut = new HomeController(context, Factory);
+            uut = new HomeController(Factory, context);
         }
 
         [Test]
@@ -33,6 +33,7 @@ namespace MVC.Tests.Controllers
             identityMock.IsAuthenticated.Returns(true);
             context.Identity.Returns(identityMock);
             var user = new User();
+            user.Outcomes = new List<Outcome>();
             Factory.GetUOF().User.Get(Arg.Any<string>()).Returns(user);
             // Act.
             var result = uut.Index();

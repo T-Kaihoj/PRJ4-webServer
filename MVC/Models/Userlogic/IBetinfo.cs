@@ -11,31 +11,31 @@ namespace MVC.Models.Userlogic
     {
         // INFO ___________________________________________
         //Preconditon:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition
         //Returner et Bet navn.
         string getBetName(long betID);
 
         //Preconditon:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition
         //Returner Bet deskribtion.
         string getDescribtion(long betID);
 
         //Precondition:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition:
         //Returner Bets Judge
         User getJudge(long betID);
 
         //Precondition:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition:
         //Returner Bettets startdato
         string getStartDate(long betID);
 
         //Precondition:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition:
         //Returner Bettets startdato
         string getEndDate(long betID);

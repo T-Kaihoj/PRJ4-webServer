@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common.Models;
 using MVC.Controllers;
@@ -26,11 +27,44 @@ namespace MVC.Tests.Controllers.BetControllerTests
             uut.ControllerContext = new ControllerContext();
         }
 
+        #region GET
+
+        [Test]
+        public void Show_BetIdDoesntExist_Returns404()
+        {
+            var result = uut.Show(412);
+
+            CheckStatusCode(result, 404);
+        }
+
         [Test]
         public void Show_CallsRepositoryGet()
         {
             // Register a bet with the mock.
-            var bet = new Bet();
+            var bet = new Bet()
+            {
+                Outcomes = new List<Outcome>()
+                {
+                    new Outcome()
+                    {
+                        Name = "test1",
+                        Participants = new List<User>()
+                        {
+                            new User(),
+                            new User()
+                        }
+                    },
+                    new Outcome()
+                    {
+                        Name = "test2",
+                        Participants = new List<User>()
+                        {
+                            new User(),
+                            new User()
+                        }
+                    }
+                }
+            };
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
 
             // Assert that we hit the repository.
@@ -61,5 +95,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
             // Assert that we passed the correct id.
             Assert.That(key, Is.EqualTo(passedKey));
         }
+
+        #endregion
     }
 }

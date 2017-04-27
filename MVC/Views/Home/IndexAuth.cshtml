@@ -6,36 +6,21 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
-            <h3>
-                LocalBet helps you make bets with your friends.
-            </h3>
-            <img src="~/Content/images/handshake-icon.png" width="100" alt="" />
+        <h1>
+            Home
+        </h1><br />
+        <div class="col-md-5">
+            <h2 class="label" style="font-size: 20px; background-color: darkslategray">Welcome : @Model.Name </h2>  <br><br />
         </div>
-        <div class="col-md-6">
-            <h1>
-                Home
-            </h1>
-            <br />
-            <h2 class="label" style="font-size: 20px; background-color: black" >Welcome : @Model.Name </h2>  <br><br />
-            <h2 class="label" style="font-size: 18px; background-color: black">Your Balance is : @Model.CurrentBalance </h2>
-            @* List Joined lobbies *@
-            <h3>Lobbies</h3>
-            @foreach (var l in Model.MemberOfLobbies)
-            {
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>
-                            @l.Name
-                        </h4>
-                    </div>
-                    <div class="col-md-6 text-md-right text-sm-left">
-                        <a class="btn btn-primary" href="#">Info</a>
-                        <a class="btn btn-primary" href="/Lobby/Show/@l.LobbyId">View</a>
-                    </div>
-                </div>
-            }
-            <hr /><br />
+        <div class="col-md-5">
+            <h2 class="label" style="font-size: 18px; background-color: darkslategray">Your Balance is : @Model.CurrentBalance </h2>
+        </div>
+            <br /><br />
+
+        </div>
+    <div class="row">
+        <div class="col-md-6" align="left">
+
             @* List Lobby Invites *@
             <h3>Invites</h3>
             @if (Model.InvitedToLobbies.Any())
@@ -72,13 +57,12 @@
                             <h4>
                                 @b.Name
                             </h4>
-                           
-                            @if(b.Judge.Username == Model.Username )
+
+                            @if (b.Judge.Username == Model.Username)
                             {
-                            <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
+                                <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
                             }
 
-                            <a class="btn btn-primary pull-right" href="/Bet/Show/@b.BetId">Info</a>
                             <!-- TODO: Only show when logged in user is owner of shown bet -->
                             @if (b.Owner.Username == Model.Username)
                             {
@@ -98,6 +82,81 @@
             {
                 <p>You have no aktive bets</p>
             }
+             <h3>Invites</h3>
+            @if (Model.InvitedToLobbies.Any())
+            {
+                foreach (var l in Model.InvitedToLobbies)
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                @l.Name
+                            </h4>
+                        </div>
+                        <div class="col-md-6 text-md-right text-sm-left">
+                            <a class="btn btn-primary" href="#">Info</a>
+                            <a class="btn btn-primary" href="/Lobby/Accept/@l.LobbyId">Accept</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>You have no lobby invites</p>
+            }
+
+            <h3>Friendlist</h3>
+            @if (Model.Friendlist.Any())
+            {
+               foreach (var f in Model.Friendlist)
+                {
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>
+                                @f.FirstName @f.LastName
+                            </h4> 
+                        </div>
+                        <div class="col-md-6 text-md-right text-sm-left">
+                            <a class="btn btn-primary" href="#">Info</a>
+                            <a class="btn btn-primary" href="#">messags</a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>You have no Friendss</p>
+            }
+
+
+        </div>
+        <div class="col-md-6" align="left">
+
+
+            @* List Joined lobbies *@
+            <h3>Lobbies</h3>
+            @if (Model.Bets.Any())
+            { 
+            foreach (var l in Model.MemberOfLobbies)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>
+                            @l.Name
+                        </h4>
+                    </div>
+                    <div class="col-md-6 text-md-right text-sm-left">
+                        <a class="btn btn-primary" href="/Lobby/Show/@l.LobbyId">View</a>
+                    </div>
+                </div>
+                }
+            }
+            else
+            {
+                <p>You are not member of any lobbies </p>
+            }
+            <hr/><br/>
+
 
         </div>
     </div>

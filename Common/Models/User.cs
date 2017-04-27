@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.CodeAnalysis;
+using Common.Exceptions;
 
 namespace Common.Models
 {
@@ -72,6 +73,8 @@ namespace Common.Models
             }
         }
 
+
+
         [Required]
         [ExcludeFromCodeCoverage]
         public string Hash { get; set; }
@@ -79,11 +82,35 @@ namespace Common.Models
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> MemberOfLobbies { get; set; }
 
+        public void addFriend(User u)
+        {
+            Friendlist.Add(u);
+            u.Friendlist.Add(this);
+            
+        }
+
+        public virtual ICollection<User> Friendlist { get; set; }
+
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Lobby> InvitedToLobbies { get; set; }
 
+        [NotMapped]
         [ExcludeFromCodeCoverage]
-        public virtual ICollection<Bet> Bets { get; set; }
+        public virtual ICollection<Bet> Bets
+        {
+            get
+            {
+                ICollection<Bet> result = new HashSet<Bet>();
+
+                foreach (var outcome in Outcomes)
+                {
+                    result.Add(outcome.bet);
+                }
+
+                return result;
+            }
+            
+        }
 
         [ExcludeFromCodeCoverage]
         public virtual ICollection<Bet> BetsOwned { get; set; }
@@ -98,12 +125,12 @@ namespace Common.Models
         {
             if (amount <= 0)
             {
-                throw new ArithmeticException();
+                throw new NegativeWithdrawException();
             }
 
             if (_balance < amount)
             {
-                throw new ArithmeticException(); 
+                throw new NotEnoughFundsException(); 
             }
 
             _balance -= amount;

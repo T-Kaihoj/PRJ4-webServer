@@ -135,6 +135,9 @@
   <data name="DisplayUserName" xml:space="preserve">
     <value>User name</value>
   </data>
+  <data name="ErrorEmailInUse" xml:space="preserve">
+    <value>The email is already in use</value>
+  </data>
   <data name="ErrorEmailInvalid" xml:space="preserve">
     <value>You must enter a valid email</value>
   </data>
@@ -150,6 +153,15 @@
   <data name="ErrorLastNameRequired" xml:space="preserve">
     <value>You must enter your last name</value>
   </data>
+  <data name="ErrorNegativeDeposit" xml:space="preserve">
+    <value>The deposit must be positive</value>
+  </data>
+  <data name="ErrorNegativeWithdraw" xml:space="preserve">
+    <value>You must enter a positive amount to withdraw</value>
+  </data>
+  <data name="ErrorNotEnoughFunds" xml:space="preserve">
+    <value>Not enough funds to cover requested withdraw</value>
+  </data>
   <data name="ErrorPassword1Required" xml:space="preserve">
     <value>You must enter a password</value>
   </data>
@@ -161,5 +173,8 @@
   </data>
   <data name="ErrorUserNameRequired" xml:space="preserve">
     <value>You must enter your user name</value>
+  </data>
+  <data name="ErrorUserNameTaken" xml:space="preserve">
+    <value>The user name is already in use</value>
   </data>
 </root>

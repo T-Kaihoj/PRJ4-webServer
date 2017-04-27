@@ -40,7 +40,22 @@ namespace DAL.Tests
         public void Dispose()
         {
             // Reset the database.
+            _context.Database.ExecuteSqlCommand("DELETE FROM Lobbies");
+            _context.Database.ExecuteSqlCommand("DELETE FROM Bets");
+            _context.Database.ExecuteSqlCommand("DELETE FROM Outcomes");
             _context.Database.ExecuteSqlCommand("DELETE FROM Users");
+        }
+
+        [Test]
+        public void Get_GetUserWithUsername_UserExist()
+        {
+            User user1 = Utility.CreateUser("ThisUser", "thisEmail@email.com");
+
+            _uut.Add(user1);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.Get("ThisUser"), Is.EqualTo(user1));
         }
 
         // Denne test er egentlig udnødvedig, da funktionen er en del af standard funktionerne (entity).
@@ -329,6 +344,30 @@ namespace DAL.Tests
 
             Assert.That(_uut.GetAll().Count(), Is.EqualTo(1));
             Assert.That(_uut.Get(user.Username).FirstName, Is.EqualTo(user.FirstName));
+        }
+
+        [Test]
+        public void GetByEmail_LocateFirstUserWithEmail_UserFound()
+        {
+            var user = Utility.CreateUser();
+
+            _uut.Add(user);
+
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetByEmail(user.Email), Is.EqualTo(user));
+        }
+
+        [Test]
+        public void GetByEmail_UserNotInDatabase_ReturnNull()
+        {
+            var user = Utility.CreateUser();
+            
+            _uut.Add(user);
+            
+            _context.SaveChanges();
+
+            Assert.That(_uut.GetByEmail(""), Is.Null);
         }
     }
 }

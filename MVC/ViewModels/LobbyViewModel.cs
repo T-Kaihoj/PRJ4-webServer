@@ -10,7 +10,7 @@ namespace MVC.ViewModels
         public string Description { get; set; }
 
         public ICollection<User> Participants { get; set; }
-        //Måske laves om til en liste af BetID'er?
+        //Måske laves om til en liste af BetId'er?
         public ICollection<Bet> Bets { get; set; }
 
     }

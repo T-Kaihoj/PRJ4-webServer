@@ -201,18 +201,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AuthenticationControllerTests.cs" />
-    <Compile Include="Controllers\BetControllerTests\CreateTests.cs" />
-    <Compile Include="Controllers\BetControllerTests\JoinTests.cs" />
+    <Compile Include="Controllers\BetControllerTests\ConcludeTestsGet.cs" />
+    <Compile Include="Controllers\BetControllerTests\ConcludeTestsPost.cs" />
+    <Compile Include="Controllers\BetControllerTests\CreateTestsGet.cs" />
+    <Compile Include="Controllers\BetControllerTests\CreateTestsPost.cs" />
+    <Compile Include="Controllers\BetControllerTests\JoinTestsPost.cs" />
+    <Compile Include="Controllers\BetControllerTests\JoinTestsGet.cs" />
+    <Compile Include="Controllers\BetControllerTests\RemoveTests.cs" />
     <Compile Include="Controllers\BetControllerTests\ShowTests.cs" />
     <Compile Include="Controllers\HomeControllerTests.cs" />
     <Compile Include="Controllers\LobbyControllerTests.cs" />
     <Compile Include="BaseRepositoryTest.cs" />
-    <Compile Include="Controllers\UserControllers\EditProfileTests.cs" />
+    <Compile Include="Controllers\UserControllerTests\IndexTests.cs" />
+    <Compile Include="Controllers\UserControllerTests\WithdrawTestsGet.cs" />
+    <Compile Include="Controllers\UserControllerTests\DepositTestsGet.cs" />
+    <Compile Include="Controllers\UserControllerTests\WithdrawTestsPost.cs" />
+    <Compile Include="Controllers\UserControllerTests\DepositTestsPost.cs" />
+    <Compile Include="Controllers\UserControllerTests\CreateUserTests.cs" />
+    <Compile Include="Controllers\UserControllerTests\EditProfileTests.cs" />
     <Compile Include="Identity\IdentityUserTests.cs" />
     <Compile Include="Identity\StoreTwoFactorTests.cs" />
     <Compile Include="Identity\StorePasswordTests.cs" />
     <Compile Include="Identity\StoreLockoutTests.cs" />
-    <Compile Include="Controllers\UserControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Identity\StoreUserTests.cs" />
     <Compile Include="ViewModels\Bets\CreateBetViewModelValidationTests.cs" />

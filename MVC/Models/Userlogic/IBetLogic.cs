@@ -22,13 +22,13 @@ namespace MVC.Models.Userlogic
         void addJudgeToBet(long userID);
 
         //Preconditon:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition
         //Returner Bet deskribtion.
         List<User> findWinners(long BetID);
 
         //Preconditon:
-        //Modtager et BetID
+        //Modtager et BetId
         //Postcondition
         //Returner Bet deskribtion.
         User findWinner(long BetID);
