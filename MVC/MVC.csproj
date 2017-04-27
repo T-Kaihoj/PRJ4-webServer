@@ -225,6 +225,7 @@
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Bets\ConcludeViewModel.cs" />
     <Compile Include="ViewModels\Bets\OutcomeView.cs" />
+    <Compile Include="ViewModels\Bets\PrintOutcomeViewModel.cs" />
     <Compile Include="ViewModels\Bets\ShowBetOutcomeViewModel.cs" />
     <Compile Include="ViewModels\Bets\ShowBetViewModel.cs" />
     <Compile Include="ViewModels\Bets\BetViewModel.cs" />
@@ -400,6 +401,7 @@
     <Content Include="Views\Bet\_Outcome.cshtml" />
     <Content Include="Views\Bet\Conclude.cshtml" />
     <Content Include="Views\Lobby\Invite.cshtml" />
+    <Content Include="Views\Bet\_PrintOutcome.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
