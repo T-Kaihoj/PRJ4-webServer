@@ -78,7 +78,6 @@ namespace MVC.Tests.Controllers
 
             var viewModel = new CreateLobbyViewModel()
             {
-                Description = "Description",
                 Name = "Name"
             };
 
@@ -95,7 +94,6 @@ namespace MVC.Tests.Controllers
             // Create the viewmodel.
             var viewModel = new CreateLobbyViewModel()
             {
-                Description = "Description",
                 Name = "Name"
             };
 
