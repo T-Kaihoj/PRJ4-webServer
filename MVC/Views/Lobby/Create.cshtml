@@ -17,12 +17,7 @@
                 <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.Name, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Name, null, new { @class = "help-block" })
-                </div>
-                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Name)
                 </div>
                 <div class="row">
                     <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Create lobby</button>
@@ -32,3 +27,10 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(findErrorTags);
+    </script>
+}

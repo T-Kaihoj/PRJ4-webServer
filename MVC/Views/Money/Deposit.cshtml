@@ -20,7 +20,7 @@
                <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.Deposit, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Deposit, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Deposit, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Deposit)
                 </div>
                 <div class="row">
                     <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Deposit</button>
@@ -30,3 +30,12 @@
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            findErrorTags();
+        });
+    </script>
+}

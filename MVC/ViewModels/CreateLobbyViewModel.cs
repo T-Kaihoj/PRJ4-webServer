@@ -4,9 +4,7 @@ namespace MVC.ViewModels
 {
     public class CreateLobbyViewModel
     {
-        [Required(ErrorMessage = "Name plox")]
+        [Required(ErrorMessage = "Please enter a name")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please provide a description")]
-        public string Description { get; set; }
     }
 }

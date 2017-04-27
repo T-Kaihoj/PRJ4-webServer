@@ -14,19 +14,28 @@
                 Withdraw Money
             </h1>
             <h2  class="label" >Your balance: @Model.CurrentBalance </h2>
-            
 
-            <form method="post" action="/User/Withdraw">
+            @using (Html.BeginForm("Withdraw", "User", FormMethod.Post))
+            {
                <div class="row form-group label-floating">
                     @Html.LabelFor(m => m.Withdraw, new { @class = "control-label" })
                     @Html.TextBoxFor(m => m.Withdraw, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Withdraw, null, new { @class = "help-block" })
+                    @Html.ValidationMessageFor(m => m.Withdraw)
                 </div>
                 <div class="row">
                     <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Withdraw</button>
                     <button type="reset" class="btn btn-primary pull-left">Cancel</button>
                 </div>
-            </form>
+            }
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            findErrorTags();
+        });
+    </script>
+}
