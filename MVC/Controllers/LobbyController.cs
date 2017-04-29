@@ -50,13 +50,21 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 var user = myWork.User.Get(viewModel.Username);
-
                 var lobby = myWork.Lobby.Get(viewModel.Id);
-                lobby.InviteUserToLobby(user);
+                if (user != null)
+                {
+                    lobby.InviteUserToLobby(user);
 
-                myWork.Complete();
+                    myWork.Complete();
+                }
+                else
+                {
+                    ModelState.AddModelError("Username", Resources.Lobby.ErrorInvitedUserDoesNotExist);
+                    return View("Invite", viewModel);
+                }
+                
 
-                return Redirect($"/Lobby/Invite/{lobby.LobbyId}");
+                return Redirect($"/Lobby/Show/{lobby.LobbyId}");
 
             }
         }
