@@ -50,13 +50,26 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 var user = myWork.User.Get(viewModel.Username);
-
                 var lobby = myWork.Lobby.Get(viewModel.Id);
-                lobby.InviteUserToLobby(user);
+                if (user != null)
+                {
+                    if (lobby.MemberList.Contains(user))
+                    {
+                        ModelState.AddModelError("Username", Resources.Lobby.ErrorUserAlreadyInLobby);
+                        return View("Invite", viewModel);
+                    }
 
-                myWork.Complete();
+                    lobby.InviteUserToLobby(user);
+                    myWork.Complete();
+                }
+                else
+                {
+                    ModelState.AddModelError("Username", Resources.Lobby.ErrorInvitedUserDoesNotExist);
+                    return View("Invite", viewModel);
+                }
+                
 
-                return Redirect($"/Lobby/Invite/{lobby.LobbyId}");
+                return Redirect($"/Lobby/Show/{lobby.LobbyId}");
 
             }
         }
@@ -201,7 +214,8 @@ namespace MVC.Controllers
                     ID = lobby.LobbyId,
                     Name = lobby.Name,
                     Bets = myBets,
-                    Participants = lobby.MemberList
+                    Participants = lobby.MemberList,
+                    InvitedUsers = lobby.InvitedList
                 };
 
                 return View(viewModel);

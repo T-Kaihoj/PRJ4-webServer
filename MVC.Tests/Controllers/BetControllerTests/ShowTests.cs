@@ -67,6 +67,14 @@ namespace MVC.Tests.Controllers.BetControllerTests
             };
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
 
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
+
             // Assert that we hit the repository.
             BetRepository.DidNotReceive().Get(Arg.Any<long>());
 
@@ -82,6 +90,14 @@ namespace MVC.Tests.Controllers.BetControllerTests
             // Register a bet with the mock.
             var bet = new Bet();
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
+
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
 
             // Setup capture of the argument.
             long key = 0;

@@ -28,10 +28,7 @@
                            <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
                        }
                         <a class="btn btn-primary pull-right" href="/Bet/Join/@b.BetId">Join Bet</a>
-                      
-                        
-                        <a class="btn btn-primary pull-right" href="/Bet/Show/@b.BetId">Info</a>
-                        <!-- TODO: Only show when logged in user is owner of shown bet -->
+
                         @if (b.Owner.Username == User.Identity.Name)
                         {
                             if (b.StartDate < DateTime.Now)
@@ -46,7 +43,15 @@
                         <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
                             @b.BuyIn
                         </label>
-                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="5 minutes left">
+                        @{
+                            DateTime current = DateTime.Now;
+                            DateTime betEndTime = b.StopDate;
+                            TimeSpan span = betEndTime.Subtract(current);
+                            string hours = (span.Hours > 9) ? span.Hours.ToString() : "0" + span.Hours;
+                            string minutes = (span.Minutes > 9) ? span.Minutes.ToString() : "0" + span.Minutes;
+                            string seconds = (span.Seconds > 9) ? span.Seconds.ToString() : "0" + span.Seconds;
+                        }
+                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="@span.Days day(s) @hours:@minutes:@seconds left">
                             <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
                         </label>
                     </p>
@@ -60,24 +65,52 @@
                 @Html.Partial("Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
             </div>
             <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Members of this lobby</th>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var u in Model.Participants)
-                        {
+                <div col="6">
+                    <h3>Users in lobby</h3>
+                    <table class="table table-striped">
+                        <thead>
                             <tr>
-                                <th scope="row">1</th>
-                                <td>@u.Username</td>
+                                <th style="width: 20%">#</th>
+                                <th style="width: 80%">Username</th>
                             </tr>
-                        }
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @{int i = 0;}
+                            @foreach (var u in Model.Participants)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@u.Username</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
+            <div class="row">
+                <div col="6">
+                    <h3>Invited users</h3>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th style="width: 20%">#</th>
+                            <th style="width: 80%">Username</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            @{i = 0;}
+                            @foreach (var u in Model.InvitedUsers)
+                            {
+                                i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@u.Username</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
         </div>
     </div>
 </div>

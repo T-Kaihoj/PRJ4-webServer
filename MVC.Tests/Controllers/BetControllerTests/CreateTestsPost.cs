@@ -109,7 +109,8 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
 
-            SetupJudge(_model.Judge);
+            var u = SetupJudge(_model.Judge);
+            lobby.MemberList.Add(u);
             SetupOwner("owner");
 
             // Act.
@@ -165,10 +166,13 @@ namespace MVC.Tests.Controllers.BetControllerTests
             BetRepository.DidNotReceive().Add(Arg.Any<Bet>());
             MyWork.DidNotReceive().Complete();
 
-            SetupJudge(_model.Judge);
+            var u = SetupJudge(_model.Judge);
             SetupOwner("owner");
 
+            lobby.MemberList.Add(u);
+
             _uut.Create(_model);
+            
 
             Assert.That(_uut.ModelState.IsValid);
 
@@ -183,10 +187,11 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
         #region Helpers
 
-        private void SetupJudge(string name)
+        private User SetupJudge(string name)
         {
             var judge = new User();
             UserRepository.Get(Arg.Is(name)).Returns(judge);
+            return judge;
         }
 
         private void SetupOwner(string name)

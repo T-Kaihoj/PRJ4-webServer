@@ -12,6 +12,7 @@ namespace MVC.ViewModels
         public ICollection<User> Participants { get; set; }
         //Måske laves om til en liste af BetId'er?
         public ICollection<Bet> Bets { get; set; }
+        public ICollection<User> InvitedUsers { get; set; }
 
     }
 }

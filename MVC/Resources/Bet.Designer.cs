@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Judge is not a member of this lobby.
+        /// </summary>
+        public static string ErrorJudgeIsNotMemberOfLobby {
+            get {
+                return ResourceManager.GetString("ErrorJudgeIsNotMemberOfLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter a judge.
         /// </summary>
         public static string ErrorJudgeRequired {
