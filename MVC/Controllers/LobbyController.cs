@@ -53,8 +53,13 @@ namespace MVC.Controllers
                 var lobby = myWork.Lobby.Get(viewModel.Id);
                 if (user != null)
                 {
-                    lobby.InviteUserToLobby(user);
+                    if (lobby.MemberList.Contains(user))
+                    {
+                        ModelState.AddModelError("Username", Resources.Lobby.ErrorUserAlreadyInLobby);
+                        return View("Invite", viewModel);
+                    }
 
+                    lobby.InviteUserToLobby(user);
                     myWork.Complete();
                 }
                 else

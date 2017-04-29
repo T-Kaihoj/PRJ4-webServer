@@ -68,5 +68,14 @@ namespace Resources {
                 return ResourceManager.GetString("ErrorInvitedUserDoesNotExist", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User is already a member of the lobby.
+        /// </summary>
+        public static string ErrorUserAlreadyInLobby {
+            get {
+                return ResourceManager.GetString("ErrorUserAlreadyInLobby", resourceCulture);
+            }
+        }
     }
 }
