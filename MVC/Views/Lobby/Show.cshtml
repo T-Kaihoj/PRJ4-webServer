@@ -43,7 +43,15 @@
                         <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
                             @b.BuyIn
                         </label>
-                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="5 minutes left">
+                        @{
+                            DateTime current = DateTime.Now;
+                            DateTime betEndTime = b.StopDate;
+                            TimeSpan span = betEndTime.Subtract(current);
+                            string hours = (span.Hours > 9) ? span.Hours.ToString() : "0" + span.Hours;
+                            string minutes = (span.Minutes > 9) ? span.Minutes.ToString() : "0" + span.Minutes;
+                            string seconds = (span.Seconds > 9) ? span.Seconds.ToString() : "0" + span.Seconds;
+                        }
+                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="@span.Days day(s) @hours:@minutes:@seconds left">
                             <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
                         </label>
                     </p>
