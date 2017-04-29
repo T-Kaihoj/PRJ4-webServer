@@ -162,7 +162,13 @@ namespace MVC.Controllers
                 if (bet.Judge == null)
                 {
                     ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeDoesntExist);
-
+                    return View("Create", viewModel);
+                }
+                // Get the lobby.
+                var lobby = myWork.Lobby.Get(viewModel.LobbyId);
+                if (!lobby.MemberList.Contains(bet.Judge))
+                {
+                    ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeIsNotMemberOfLobby);
                     return View("Create", viewModel);
                 }
 
@@ -187,8 +193,7 @@ namespace MVC.Controllers
 
                 myWork.Bet.Add(bet);
 
-                // Get the lobby.
-                var lobby = myWork.Lobby.Get(viewModel.LobbyId);
+
                 lobby.Bets.Add(bet);
 
                 myWork.Complete();

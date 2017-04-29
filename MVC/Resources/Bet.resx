@@ -153,6 +153,9 @@
   <data name="ErrorJudgeDoesntExist" xml:space="preserve">
     <value>Judge doesn't exist</value>
   </data>
+  <data name="ErrorJudgeIsNotMemberOfLobby" xml:space="preserve">
+    <value>Judge is not a member of this lobby</value>
+  </data>
   <data name="ErrorJudgeRequired" xml:space="preserve">
     <value>You must enter a judge</value>
   </data>
