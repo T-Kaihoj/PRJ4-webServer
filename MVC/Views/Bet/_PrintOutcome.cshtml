@@ -26,21 +26,5 @@
             @Model.Name
         </b>
     </h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Username</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var u in Model.Participants)
-            {
-                <tr>
-                    <th scope="row">@(counter++)</th>
-                    <td>@u</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    @Html.Partial("_PrintUserList", Model.Participants)
 </div>

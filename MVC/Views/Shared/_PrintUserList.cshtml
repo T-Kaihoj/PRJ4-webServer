@@ -1,0 +1,23 @@
+﻿@model ICollection<string>
+
+@{
+    int counter = 1;
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th style="width: 20%">#</th>
+            <th style="width: 80%">Username</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var u in Model)
+        {
+            <tr>
+                <th scope="row">@(counter++)</th>
+                <td>@u</td>
+            </tr>
+        }
+    </tbody>
+</table>
