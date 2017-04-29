@@ -9,5 +9,7 @@ namespace MVC.ViewModels
         public string Description { get; set; }
         public decimal MoneyPool { get; set; }
         public List<OutcomeViewModel> Outcomes { get; set; } = new List<OutcomeViewModel>();
+        public string LobbyTitle { get; set; }
+        public long LobbyId { get; set; }
     }
 }

@@ -117,70 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DisplayBuyIn" xml:space="preserve">
-    <value>Buy in</value>
+  <data name="ErrorInvitedUserDoesNotExist" xml:space="preserve">
+    <value>User was not found</value>
   </data>
-  <data name="DisplayDescription" xml:space="preserve">
-    <value>Description</value>
-  </data>
-  <data name="DisplayJudge" xml:space="preserve">
-    <value>Judge</value>
-  </data>
-  <data name="DisplayOutcome1" xml:space="preserve">
-    <value>Outcome 1</value>
-  </data>
-  <data name="DisplayOutcome2" xml:space="preserve">
-    <value>Outcome 2</value>
-  </data>
-  <data name="DisplayStartDate" xml:space="preserve">
-    <value>Start date</value>
-  </data>
-  <data name="DisplayStopDate" xml:space="preserve">
-    <value>Stop date</value>
-  </data>
-  <data name="DisplayTitle" xml:space="preserve">
-    <value>Title</value>
-  </data>
-  <data name="ErrorBuyInRequired" xml:space="preserve">
-    <value>Buy in is required</value>
-  </data>
-  <data name="ErrorDescriptionRequired" xml:space="preserve">
-    <value>Description is required</value>
-  </data>
-  <data name="ErrorEndDateBeforeStartDate" xml:space="preserve">
-    <value>End date must be after start date</value>
-  </data>
-  <data name="ErrorJudgeDoesntExist" xml:space="preserve">
-    <value>Judge doesn't exist</value>
-  </data>
-  <data name="ErrorJudgeIsNotMemberOfLobby" xml:space="preserve">
-    <value>Judge is not a member of this lobby</value>
-  </data>
-  <data name="ErrorJudgeRequired" xml:space="preserve">
-    <value>You must enter a judge</value>
-  </data>
-  <data name="ErrorOutcomeRequired" xml:space="preserve">
-    <value>Outcome is required</value>
-  </data>
-  <data name="ErrorSelectOutcomeRequired" xml:space="preserve">
-    <value>You must select an outcome</value>
-  </data>
-  <data name="ErrorStartDate" xml:space="preserve">
-    <value>Start date is required</value>
-  </data>
-  <data name="ErrorStopDate" xml:space="preserve">
-    <value>Stop date is required</value>
-  </data>
-  <data name="ErrorTitleRequired" xml:space="preserve">
-    <value>Title is required</value>
-  </data>
-  <data name="ExceptionBetAlreadyConcluded" xml:space="preserve">
-    <value>Bet is already concluded</value>
-  </data>
-  <data name="ExceptionOutcomeDoesntExist" xml:space="preserve">
-    <value>Outcome doesn't exist</value>
-  </data>
-  <data name="ExceptionUserIsNotJudge" xml:space="preserve">
-    <value>Current user is not judge</value>
+  <data name="ErrorUserAlreadyInLobby" xml:space="preserve">
+    <value>User is already a member of the lobby</value>
   </data>
 </root>

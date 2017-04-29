@@ -162,7 +162,13 @@ namespace MVC.Controllers
                 if (bet.Judge == null)
                 {
                     ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeDoesntExist);
-
+                    return View("Create", viewModel);
+                }
+                // Get the lobby.
+                var lobby = myWork.Lobby.Get(viewModel.LobbyId);
+                if (!lobby.MemberList.Contains(bet.Judge))
+                {
+                    ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeIsNotMemberOfLobby);
                     return View("Create", viewModel);
                 }
 
@@ -187,8 +193,7 @@ namespace MVC.Controllers
 
                 myWork.Bet.Add(bet);
 
-                // Get the lobby.
-                var lobby = myWork.Lobby.Get(viewModel.LobbyId);
+
                 lobby.Bets.Add(bet);
 
                 myWork.Complete();
@@ -240,6 +245,8 @@ namespace MVC.Controllers
                 viewModel.Description = bet.Description;
                 viewModel.MoneyPool = bet.BuyIn;
                 viewModel.Id = id;
+                viewModel.LobbyTitle = myWork.Lobby.Get(bet.Lobby.LobbyId).Name;
+                viewModel.LobbyId = bet.Lobby.LobbyId;
 
                 return View("Join", viewModel);
             }
@@ -354,8 +361,10 @@ namespace MVC.Controllers
                     Title = bet.Name,
                     StartDate = bet.StartDate.ToLongDateString(),
                     StopDate = bet.StopDate.ToLongDateString(),
-                    MoneyPool = bet.Pot
-                };
+                    MoneyPool = bet.Pot,
+                    LobbyTitle = myWork.Lobby.Get(bet.Lobby.LobbyId).Name,
+                    LobbyId = bet.Lobby.LobbyId
+            };
 
                 // Extract users for each outcome.
                 foreach (var outcome in bet.Outcomes)

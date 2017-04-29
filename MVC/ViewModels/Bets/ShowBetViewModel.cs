@@ -11,5 +11,7 @@ namespace MVC.ViewModels
         public string StopDate { get; set; }
         public List<ShowBetOutcomeViewModel> Outcomes { get; set; } = new List<ShowBetOutcomeViewModel>();
         public string Judge { get; set; }
+        public string LobbyTitle { get; set; }
+        public long LobbyId { get; set; }
     }
 }

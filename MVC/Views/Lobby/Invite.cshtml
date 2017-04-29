@@ -6,7 +6,8 @@
         <h2>
             @Html.LabelFor(m => m.Username, new { @class = "control-label" })
             @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
-            @Html.ValidationMessageFor(m => m.Username, null, new { @class = "help-block" })
+            @Html.ValidationMessageFor(m => m.Username)
+
         </h2>
         <button type="submit" class="btn btn-primary">Invite User to Lobby</button>
     </form>

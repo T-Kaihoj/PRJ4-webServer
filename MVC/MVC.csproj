@@ -216,6 +216,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Lobby.Designer.cs">
+      <DependentUpon>Lobby.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\User.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -424,6 +429,11 @@
     <EmbeddedResource Include="Resources\Bet.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Bet.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lobby.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lobby.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\User.resx">
