@@ -11,8 +11,8 @@ namespace MVC.Controllers
     [Authorize]
     public class LobbyController : Controller
     {
-        private IFactory _factory;
-        private IUserContext _userContext;
+        private readonly IFactory _factory;
+        private readonly IUserContext _userContext;
 
         public LobbyController(IFactory factory, IUserContext userContext)
         {
@@ -20,58 +20,36 @@ namespace MVC.Controllers
             _userContext = userContext;
         }
 
-        // GET: /<controller>/
-        public ActionResult Index()
+        #region Accept
+
+        //GET: /<controller/Accept/<id>
+        public ActionResult Accept(long id)
         {
-            return View();
+            using (var myWork = _factory.GetUOF())
+            {
+                var lobby = myWork.Lobby.Get(id);
+
+                if (lobby != null)
+                {
+                    var myUser = myWork.User.Get((_userContext.Identity.Name));
+                    lobby.AcceptLobby(myUser);
+                }
+
+                myWork.Complete();
+            }
+
+            //TODO: More error handling?
+            return Redirect("/Lobby/List");
         }
+
+        #endregion
+
+        #region Create
 
         // GET: /<controller>/Create
         public ActionResult Create()
         {
             return View(new CreateLobbyViewModel());
-        }
-
-
-        [HttpGet]
-        public ActionResult Invite(long id)
-        {
-            var viewModel = new InviteToLobbyViewModel()
-            {
-                Id = id
-            };
-
-            return View(viewModel);
-        }
-
-        [HttpPost]
-        public ActionResult Invite(InviteToLobbyViewModel viewModel)
-        {
-            using (var myWork = _factory.GetUOF())
-            {
-                var user = myWork.User.Get(viewModel.Username);
-                var lobby = myWork.Lobby.Get(viewModel.Id);
-                if (user != null)
-                {
-                    if (lobby.MemberList.Contains(user))
-                    {
-                        ModelState.AddModelError("Username", Resources.Lobby.ErrorUserAlreadyInLobby);
-                        return View("Invite", viewModel);
-                    }
-
-                    lobby.InviteUserToLobby(user);
-                    myWork.Complete();
-                }
-                else
-                {
-                    ModelState.AddModelError("Username", Resources.Lobby.ErrorInvitedUserDoesNotExist);
-                    return View("Invite", viewModel);
-                }
-                
-
-                return Redirect($"/Lobby/Show/{lobby.LobbyId}");
-
-            }
         }
 
         [HttpPost]
@@ -106,15 +84,74 @@ namespace MVC.Controllers
             //TODO: Return error.
         }
 
+        #endregion
+
+        #region Index
+
+        // GET: /<controller>/
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Invite
+
+        [HttpGet]
+        public ActionResult Invite(long id)
+        {
+            var viewModel = new InviteToLobbyViewModel()
+            {
+                Id = id
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Invite(InviteToLobbyViewModel viewModel)
+        {
+            using (var myWork = _factory.GetUOF())
+            {
+                var user = myWork.User.Get(viewModel.Username);
+                var lobby = myWork.Lobby.Get(viewModel.Id);
+
+                // Does the user exits?
+                if (user != null)
+                {
+                    // Is the user already a member of the lobby?
+                    if (lobby.MemberList.Contains(user))
+                    {
+                        ModelState.AddModelError("Username", Resources.Lobby.ErrorUserAlreadyInLobby);
+
+                        return View("Invite", viewModel);
+                    }
+
+                    lobby.InviteUserToLobby(user);
+                    myWork.Complete();
+                }
+                else
+                {
+                    // User doesn't exist.
+                    ModelState.AddModelError("Username", Resources.Lobby.ErrorInvitedUserDoesNotExist);
+
+                    return View("Invite", viewModel);
+                }
+
+                return Redirect($"/Lobby/Show/{lobby.LobbyId}");
+            }
+        }
+
+        #endregion
+
+        #region List
+
         // GET: /<controller>/List
         public ActionResult List()
         {
             using (var myWork = _factory.GetUOF())
             {
-                // Get all lobbies, and convert to the domain model.
-                var hej = User.Identity.Name;
-                ;
-
                 var aUser = myWork.User.Get(_userContext.Identity.Name);
 
                 // Display the lobbies.
@@ -127,24 +164,10 @@ namespace MVC.Controllers
                 return View(viewModel);
             }   
         }
-        //GET: /<controller/Accept/<id>
-        public ActionResult Accept(long id)
-        {
-            using (var myWork = _factory.GetUOF())
-            {
-                var lobby = myWork.Lobby.Get(id);
 
-                if (lobby != null)
-                {
-                    var myUser = myWork.User.Get((_userContext.Identity.Name));
-                    lobby.AcceptLobby(myUser);
-                }
-                   
-                myWork.Complete();
-            }
-            //TODO: More error handling?
-            return Redirect($"/Lobby/List");
-        }
+        #endregion
+
+        #region Leave
 
         // GET: /<controller>/Show/<id>
         public ActionResult Leave(long id)
@@ -166,7 +189,11 @@ namespace MVC.Controllers
             }
         }
 
-        // GET: /<controller>/Show/<id>
+        #endregion
+
+        #region Remove
+
+        // GET: /<controller>/Remove/<id>
         public ActionResult Remove(long id)
         {
             using (var myWork = _factory.GetUOF())
@@ -187,6 +214,10 @@ namespace MVC.Controllers
                 return Redirect("Lobby/List");
             }
         }
+
+        #endregion
+
+        #region Show
 
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
@@ -221,6 +252,7 @@ namespace MVC.Controllers
                 return View(viewModel);
             }
         }
-        
+
+        #endregion
     }
 }

@@ -1,15 +1,21 @@
-﻿
-@model  MVC.ViewModels.InviteToLobbyViewModel
+﻿@model  MVC.ViewModels.InviteToLobbyViewModel
 
 <div class="col-md-5">
-    <form method="post" action="/Lobby/Invite/@Model.Id">
-        <h2>
-            @Html.LabelFor(m => m.Username, new { @class = "control-label" })
-            @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+    @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post))
+    {
+        <div class="row form-group label-floating">
+            @Html.LabelFor(m => m.Username, new {@class = "control-label"})
+            @Html.TextBoxFor(m => m.Username, new {@class = "form-control"})
             @Html.ValidationMessageFor(m => m.Username)
-
-        </h2>
+        </div>
+        @Html.HiddenFor(m => m.Id)
         <button type="submit" class="btn btn-primary">Invite User to Lobby</button>
-    </form>
+    }
 </div>
 
+@section Scripts
+{
+    <script>
+        $(document).ready(findErrorTags);
+    </script>
+}
