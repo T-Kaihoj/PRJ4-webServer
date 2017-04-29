@@ -1,8 +1,7 @@
-﻿@using MVC.Models.Userlogic
-@using MVC.ViewModels;
+﻿@using MVC.ViewModels;
 
 @{
-    ViewData["Title"] = "LobbyPage";
+    ViewData["Title"] = "Lobby Page";
 }
 
 @model LobbyViewModel
@@ -10,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="header">
+            <h1>
                 @Html.DisplayFor(m => m.Name)
             </h1>
 
@@ -23,11 +22,11 @@
                         </label>
                         @b.Name
 
-                       @if (b.Judge.Username == User.Identity.Name)
-                       {
-                           <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
-                       }
-                        <a class="btn btn-primary pull-right" href="/Bet/Join/@b.BetId">Join Bet</a>
+                        @if (b.Judge.Username == User.Identity.Name)
+                        {
+                            @Html.ActionLink("Conclude", "Conclude", new { controller = "Bet", id = b.BetId }, new { @class = "btn btn-primary pull-right" })
+                        }
+                        @Html.ActionLink("Join Bet", "Join", new { controller = "Bet", id = b.BetId }, new { @class = "btn btn-primary pull-right" })
 
                         @if (b.Owner.Username == User.Identity.Name)
                         {
@@ -37,7 +36,7 @@
                             }
                             else
                             {
-                                <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
+                                @Html.ActionLink("Remove", "Remove", new { controller = "Bet", id = b.BetId }, new { @class = "btn btn-primary pull-right" })
                             }
                         }
                         <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
@@ -58,11 +57,11 @@
                 </div>
             }
             <p class="lead">
-                <a href="/Bet/Create/@Model.ID" class="btn btn-primary pull-left">Create new bet</a>
-                <a href="/Lobby/Leave/@Model.ID" class="btn btn-primary pull-right">Leave Lobby</a>
+                @Html.ActionLink("Create new bet", "Create", new { controller = "Bet", id = Model.ID }, new { @class = "btn btn-primary pull-left" })
+                @Html.ActionLink("Leave lobby", "Leave", new { controller = "Lobby", id = Model.ID }, new { @class = "btn btn-primary pull-right" })
             </p>
             <div class="row">
-                @Html.Partial("Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
+                @Html.Partial("Invite", new InviteToLobbyViewModel() { Id = Model.ID, Username = "" })
             </div>
             <div class="row">
                 <div col="6">
@@ -75,6 +74,7 @@
                     <h3>Invited users</h3>
                     @Html.Partial("_PrintUserList", Model.InvitedUsers.Select(x => x.Username).ToList())
                 </div>
+            </div>
         </div>
     </div>
 </div>

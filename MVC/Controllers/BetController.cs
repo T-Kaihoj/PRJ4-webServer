@@ -293,7 +293,7 @@ namespace MVC.Controllers
 
         #region Remove
 
-        // GET: /<controller>/Remove/<Lobby>/<Bet>
+        // GET: /<controller>/Remove/<id>
         [HttpGet]
         public ActionResult Remove(long id)
         {
