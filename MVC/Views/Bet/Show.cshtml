@@ -8,6 +8,11 @@
 
 <div class="container">
     <div class="row">
+        <div class="col-md-12">
+            <a href="/Lobby/Show/@Model.LobbyId"><h3>In @Html.DisplayFor(m => m.LobbyTitle)</h3></a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-8">
             <h1 class="header">
                 @Html.DisplayFor(m => m.Title)
@@ -22,7 +27,7 @@
             </dl>
         </div>
         <div class="col-md-4 text-md-right">
-            <h2>Money pool</h2><br />
+            <h2>Money pool</h2><br/>
             @Html.DisplayFor(m => m.MoneyPool)
         </div>
     </div>

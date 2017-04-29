@@ -245,6 +245,8 @@ namespace MVC.Controllers
                 viewModel.Description = bet.Description;
                 viewModel.MoneyPool = bet.BuyIn;
                 viewModel.Id = id;
+                viewModel.LobbyTitle = myWork.Lobby.Get(bet.Lobby.LobbyId).Name;
+                viewModel.LobbyId = bet.Lobby.LobbyId;
 
                 return View("Join", viewModel);
             }
@@ -359,8 +361,10 @@ namespace MVC.Controllers
                     Title = bet.Name,
                     StartDate = bet.StartDate.ToLongDateString(),
                     StopDate = bet.StopDate.ToLongDateString(),
-                    MoneyPool = bet.Pot
-                };
+                    MoneyPool = bet.Pot,
+                    LobbyTitle = myWork.Lobby.Get(bet.Lobby.LobbyId).Name,
+                    LobbyId = bet.Lobby.LobbyId
+            };
 
                 // Extract users for each outcome.
                 foreach (var outcome in bet.Outcomes)
