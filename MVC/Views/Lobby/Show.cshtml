@@ -57,23 +57,28 @@
                 @Html.Partial("Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
             </div>
             <div class="row">
-                <table class="table">
-                    <thead>
+                <div col="6">
+                    <table class="table table-striped">
+                        <thead>
                         <tr>
                             <th>Members of this lobby</th>
                             <th>Username</th>
                         </tr>
-                    </thead>
-                    <tbody>
+                        </thead>
+                        <tbody>
+                        @{ int i = 0;}
                         @foreach (var u in Model.Participants)
                         {
+                            i++;
                             <tr>
-                                <th scope="row">1</th>
+                                <th scope="row">@i</th>
                                 <td>@u.Username</td>
                             </tr>
                         }
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
+                <div col="6"></div>
             </div>
         </div>
     </div>
