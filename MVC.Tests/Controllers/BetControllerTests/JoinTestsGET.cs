@@ -49,7 +49,14 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             };
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
 
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
             // Act.
             var result = uut.Join(412);
 
@@ -65,6 +72,14 @@ namespace MVC.Tests.Controllers.BetControllerTests
             {
 
             };
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
+
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
 
             // Act.
@@ -99,9 +114,15 @@ namespace MVC.Tests.Controllers.BetControllerTests
                 Description = "description",
                 Name = "name"
             };
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
             bet.Outcomes.Add(outcome1);
             bet.Outcomes.Add(outcome2);
-
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
             BetRepository.Get(Arg.Is(betId)).Returns(bet);
 
             // Act.
