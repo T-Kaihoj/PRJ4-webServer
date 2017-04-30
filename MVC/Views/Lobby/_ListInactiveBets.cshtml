@@ -1,0 +1,31 @@
+﻿@using MVC.ViewModels;
+
+@model LobbyViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse_inactive">
+        <h1 class="panel-title">
+            Completed Bets (Click to open)
+            @Html.Partial("_CollapsibleInfoText")
+        </h1>
+    </div>
+    <div id="collapse_inactive" class="panel-collapse collapse">
+        <div class="panel-body">
+            @{
+                if (Model.ActiveBets.Count == 0)
+                {
+                    <div>
+                        There are currently no completed bets in the lobby.
+                    </div>
+                }
+                else
+                {
+                    foreach (var bet in Model.ActiveBets)
+                    {
+                        @Html.Partial("_PrintSingleBet", bet);
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>

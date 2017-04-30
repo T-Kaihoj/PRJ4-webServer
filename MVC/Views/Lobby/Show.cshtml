@@ -7,109 +7,55 @@
 @model LobbyViewModel
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1>
-                @Html.DisplayFor(m => m.Name)
-            </h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h1 class="panel-title">
-                        Bets
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h1>
+                        @Html.DisplayFor(m => m.Name)
                     </h1>
                 </div>
-                <div class="panel-body">
-                    @{
-                        if (Model.Bets.Count == 0)
-                        {
-                            @:There are currently no active bets in the lobby.
-                        }
-                    }
-
-                    @foreach (var b in Model.Bets)
-                    {
-                        <div class="row" align="left">
-                            <div class="col-md-12">
-                                <p class="lead">
-                                    <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
-                                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                    </label>
-                                    @b.Name
-
-                                    @if (b.Judge.Username == User.Identity.Name)
-                                    {
-                                        @Html.ActionLink("Conclude", "Conclude", new { controller = "Bet", id = b.BetId }, new { @class = "btn btn-primary pull-right" })
-                                    }
-                                    @Html.ActionLink("Join Bet", "Join", new { controller = "Bet", id = b.BetId }, new { @class = "btn btn-primary pull-right" })
-
-                                    @if (b.Owner.Username == User.Identity.Name)
-                                    {
-                                        if (b.StartDate < DateTime.Now)
-                                        {
-                                            <a class="btn btn-primary pull-right disabled" data-toggle="tooltip" title="Bet is already in progress" href="#">Remove</a>
-                                        }
-                                        else
-                                        {
-                                            @Html.ActionLink("Remove", "Remove", new { controller = "Bet", id = b.BetId }, new { @class = "btn btn-primary pull-right" })
-                                        }
-                                    }
-                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
-                                        @b.BuyIn
-                                    </label>
-                                    @{
-                                        DateTime current = DateTime.Now;
-                                        DateTime betEndTime = b.StopDate;
-                                        TimeSpan span = betEndTime.Subtract(current);
-                                        string hours = (span.Hours > 9) ? span.Hours.ToString() : "0" + span.Hours;
-                                        string minutes = (span.Minutes > 9) ? span.Minutes.ToString() : "0" + span.Minutes;
-                                        string seconds = (span.Seconds > 9) ? span.Seconds.ToString() : "0" + span.Seconds;
-                                    }
-                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="@span.Days day(s) @hours:@minutes:@seconds left">
-                                        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
-                                    </label>
-                                </p>
+                <div class="col-md-4">
+                    @Html.ActionLink("Leave lobby", "Leave", new { controller = "Lobby", id = Model.Id }, new { @class = "btn btn-raised btn-warning pull-right" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @Html.Partial("_ListActiveBets", Model)
+                    @Html.Partial("_ListInactiveBets", Model)
+                    @Html.Partial("Invite", new InviteToLobbyViewModel() { Id = Model.Id, Username = "" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" data-toggle="collapse" data-target="#collapse_usersinlobby">
+                            <h1 class="panel-title">
+                                Users in lobby
+                                @Html.Partial("_CollapsibleInfoText")
+                            </h1>
+                        </div>
+                        <div id="collapse_usersinlobby" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @Html.Partial("_PrintUserList", Model.Participants.Select(x => x.Username).ToList())
                             </div>
-                        </div>
-                    }
-                    <div class="row">
-                        <div class="col-md-6">
-                            @Html.ActionLink("Create new bet", "Create", new { controller = "Bet", id = Model.ID }, new { @class = "btn btn-raised btn-primary pull-left" })
-                        </div>
-                        <div class="col-md-6">
-                            @Html.ActionLink("Leave lobby", "Leave", new { controller = "Lobby", id = Model.ID }, new { @class = "btn btn-raised btn-primary pull-right" })
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            @Html.Partial("Invite", new InviteToLobbyViewModel() { Id = Model.ID, Username = "" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Users in lobby</h3>
-                </div>
-                <div class="panel-body">
-                    @Html.Partial("_PrintUserList", Model.Participants.Select(x => x.Username).ToList())
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Invited users</h3>
-                </div>
-                <div class="panel-body">
-                    @Html.Partial("_PrintUserList", Model.InvitedUsers.Select(x => x.Username).ToList())
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" data-toggle="collapse" data-target="#collapse_usersinvitedtolobby">
+                            <h1 class="panel-title">
+                                Invited users
+                                @Html.Partial("_CollapsibleInfoText")
+                            </h1>
+                        </div>
+                        <div id="collapse_usersinvitedtolobby" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @Html.Partial("_PrintUserList", Model.InvitedUsers.Select(x => x.Username).ToList())
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

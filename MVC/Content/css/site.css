@@ -78,3 +78,14 @@ div.navbar a:hover {
   .text-lg-center { text-align: center; }
   .text-lg-justify { text-align: justify; }
 }
+
+/*
+ * For displaying text with collapsing data
+ * http://stackoverflow.com/a/31967516/3365039
+ */
+[data-toggle="collapse"].collapsed .if-not-collapsed {
+    display: none;
+}
+[data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+    display: none;
+}
