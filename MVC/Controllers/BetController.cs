@@ -59,6 +59,7 @@ namespace MVC.Controllers
             // Ensure the id is valid.
             if (model.SelectedOutcome < 0)
             {
+                // TODO: Currently not working with no outcome selected.
                 // TODO: Could be extracted to a validationhelper.
                 ModelState.AddModelError("SelectedOutcome", Resources.Bet.ErrorSelectOutcomeRequired);
             }
