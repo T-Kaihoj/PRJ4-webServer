@@ -388,9 +388,9 @@
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\User\UserCreated.cshtml" />
-    <Content Include="Views\Shared\LoginBox.cshtml" />
-    <Content Include="Views\Shared\MenuBox.cshtml" />
-    <Content Include="Views\Shared\UserBox.cshtml" />
+    <Content Include="Views\Shared\_LoginBox.cshtml" />
+    <Content Include="Views\Shared\_MenuBox.cshtml" />
+    <Content Include="Views\Shared\_UserBox.cshtml" />
     <Content Include="Views\Lobby\Show.cshtml" />
     <Content Include="Views\Lobby\Create.cshtml" />
     <Content Include="Views\Lobby\List.cshtml" />
