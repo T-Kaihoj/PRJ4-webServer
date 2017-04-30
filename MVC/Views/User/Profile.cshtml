@@ -1,11 +1,14 @@
-﻿@model MVC.ViewModels.UserProfileViewModel
+﻿@using MVC.ViewModels;
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+@model UserProfileViewModel
 
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h3>
-                What should we write here?
-            </h3>
         </div>
         <div class="col-md-6">
             <div class="row">
@@ -42,7 +45,7 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <a href="/User/EditProfile" class="btn btn-primary pull-right">Edit</a>
+                    @Html.ActionLink("Edit", "EditProfile", "User", new {@class= "btn btn-primary pull-right" })
                 </div>
             </div>
         </div>

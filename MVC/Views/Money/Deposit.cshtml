@@ -1,8 +1,7 @@
-﻿
-@using MVC.ViewModels;
+﻿@using MVC.ViewModels;
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Deposit Money";
 }
 
 @model  DepositViewModel
@@ -10,23 +9,35 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="header">
-                Deposit Money
-            </h1>
-            <h2  class="label" >Your balance: @Model.CurrentBalance </h2>
-            
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        Deposit Money
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <h2 class="label">
+                        Your balance: @Model.CurrentBalance
+                    </h2>
 
-            <form method="post" action="/User/Deposit">
-               <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Deposit, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Deposit, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Deposit)
+                    @using (Html.BeginForm("Deposit", "User", FormMethod.Post))
+                    {
+                        <div class=" form-group label-floating">
+                            @Html.LabelFor(m => m.Deposit, new { @class = "control-label" })
+                            @Html.TextBoxFor(m => m.Deposit, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Deposit)
+                        </div>
+                        <div>
+                            <button type="submit" value="post" name="action:post" class="btn btn-raised btn-primary pull-right">
+                                Deposit
+                            </button>
+                            <button type="reset" class="btn btn-raised pull-left">
+                                Reset
+                            </button>
+                        </div>
+                    }
                 </div>
-                <div class="row">
-                    <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Deposit</button>
-                    <button type="reset" class="btn btn-primary pull-left">Cancel</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>

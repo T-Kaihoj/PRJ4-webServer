@@ -14,7 +14,7 @@ body {
 }
 @media screen and (max-width: 768px) {
     body {
-        padding-top: 40px;
+        padding-top: 70px;
     }
 
     div.container.body-content {
@@ -46,8 +46,8 @@ div.navbar a:hover {
 .vertical-align > [class*=" col-"] {
   display: flex;
   align-items: center;     /* Align the flex-items vertically */
-  
 }
+
 /*
  * Responsive text aligning
  * http://ohryan.ca/2014/08/14/set-responsive-text-alignment-bootstrap-3/
@@ -77,4 +77,15 @@ div.navbar a:hover {
   .text-lg-right { text-align: right; }
   .text-lg-center { text-align: center; }
   .text-lg-justify { text-align: justify; }
+}
+
+/*
+ * For displaying text with collapsing data
+ * http://stackoverflow.com/a/31967516/3365039
+ */
+[data-toggle="collapse"].collapsed .if-not-collapsed {
+    display: none;
+}
+[data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+    display: none;
 }

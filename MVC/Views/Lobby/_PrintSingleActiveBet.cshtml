@@ -1,0 +1,49 @@
+﻿@using Common.Models;
+
+@model Bet
+
+<div class="row" align="left">
+    <div class="col-md-12">
+        <p class="lead">
+            @{
+                // TODO: Handle if the user is not a member of the bet.
+            }
+            <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </label>
+            @Model.Name
+
+            @if (Model.Judge.Username == User.Identity.Name)
+            {
+                @Html.ActionLink("Conclude", "Conclude", new {controller = "Bet", id = Model.BetId}, new {@class = "btn btn-primary pull-right"})
+            }
+            @Html.ActionLink("Join Bet", "Join", new {controller = "Bet", id = Model.BetId}, new {@class = "btn btn-primary pull-right"})
+
+            @if (Model.Owner.Username == User.Identity.Name)
+            {
+                if (Model.StartDate < DateTime.Now)
+                {
+                    <a class="btn btn-primary pull-right disabled" data-toggle="tooltip" title="Bet is already in progress" href="#">Remove</a>
+                }
+                else
+                {
+                    @Html.ActionLink("Remove", "Remove", new {controller = "Bet", id = Model.BetId}, new {@class = "btn btn-primary pull-right"})
+                }
+            }
+            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @Model.BuyIn">
+                @Model.BuyIn
+            </label>
+            @{
+                DateTime current = DateTime.Now;
+                DateTime betEndTime = Model.StopDate;
+                TimeSpan span = betEndTime.Subtract(current);
+                string hours = (span.Hours > 9) ? span.Hours.ToString() : "0" + span.Hours;
+                string minutes = (span.Minutes > 9) ? span.Minutes.ToString() : "0" + span.Minutes;
+                string seconds = (span.Seconds > 9) ? span.Seconds.ToString() : "0" + span.Seconds;
+            }
+            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="@span.Days day(s) @hours:@minutes:@seconds left">
+                <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+            </label>
+        </p>
+    </div>
+</div>

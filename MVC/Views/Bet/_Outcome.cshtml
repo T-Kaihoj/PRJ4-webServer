@@ -1,11 +1,12 @@
-﻿@model MVC.ViewModels.OutcomeViewModel
+﻿@using MVC.ViewModels;
 
-<div class="col-md-5">
-    <form method="post" action="/Bet/Join">
-        <h2>
-            @Html.DisplayFor(m => m.Name)
-            @Html.HiddenFor(m => m.Id, new {Value = Model.Id})
-        </h2>
-        <button type="submit" class="btn btn-primary">Join</button>
-    </form>
-</div>
+@model OutcomeViewModel
+
+@using (Html.BeginForm("Join", "Bet", FormMethod.Post))
+{
+    <h2>
+        @Html.DisplayFor(m => m.Name)
+        @Html.HiddenFor(m => m.Id, new { Value = Model.Id })
+    </h2>
+    <button type="submit" class="btn btn-raised btn-primary">Join</button>
+}
