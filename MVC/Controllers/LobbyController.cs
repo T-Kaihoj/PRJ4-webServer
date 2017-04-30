@@ -251,7 +251,7 @@ namespace MVC.Controllers
                     Id = lobby.LobbyId,
                     Name = lobby.Name,
                     ActiveBets = activeBets,
-                    InactiveBets = inactiveBets,
+                    CompletedBets = inactiveBets,
                     Participants = lobby.MemberList,
                     InvitedUsers = lobby.InvitedList
                 };

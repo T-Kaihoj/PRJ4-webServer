@@ -1,0 +1,20 @@
+﻿@using Common.Models;
+
+@model Bet
+
+<div class="row" align="left">
+    <div class="col-md-12">
+        <p class="lead">
+            @{
+                // TODO: Handle if the user is not a member of the bet.
+            }
+            <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </label>
+            @Model.Name
+            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @Model.BuyIn">
+                @Model.BuyIn
+            </label>
+        </p>
+    </div>
+</div>

@@ -12,7 +12,7 @@
     <div id="collapse_inactive" class="panel-collapse collapse">
         <div class="panel-body">
             @{
-                if (Model.InactiveBets.Count == 0)
+                if (Model.CompletedBets.Count == 0)
                 {
                     <div>
                         There are currently no completed bets in the lobby.
@@ -20,9 +20,9 @@
                 }
                 else
                 {
-                    foreach (var bet in Model.InactiveBets)
+                    foreach (var bet in Model.CompletedBets)
                     {
-                        @Html.Partial("_PrintSingleBet", bet);
+                        @Html.Partial("_PrintSingleCompletedBet", bet);
                     }
                 }
             }

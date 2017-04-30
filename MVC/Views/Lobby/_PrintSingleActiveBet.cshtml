@@ -5,6 +5,9 @@
 <div class="row" align="left">
     <div class="col-md-12">
         <p class="lead">
+            @{
+                // TODO: Handle if the user is not a member of the bet.
+            }
             <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
                 <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
             </label>
@@ -12,9 +15,9 @@
 
             @if (Model.Judge.Username == User.Identity.Name)
             {
-                @Html.ActionLink("Conclude", "Conclude", new { controller = "Bet", id = Model.BetId }, new { @class = "btn btn-primary pull-right" })
+                @Html.ActionLink("Conclude", "Conclude", new {controller = "Bet", id = Model.BetId}, new {@class = "btn btn-primary pull-right"})
             }
-            @Html.ActionLink("Join Bet", "Join", new { controller = "Bet", id = Model.BetId }, new { @class = "btn btn-primary pull-right" })
+            @Html.ActionLink("Join Bet", "Join", new {controller = "Bet", id = Model.BetId}, new {@class = "btn btn-primary pull-right"})
 
             @if (Model.Owner.Username == User.Identity.Name)
             {
@@ -24,7 +27,7 @@
                 }
                 else
                 {
-                    @Html.ActionLink("Remove", "Remove", new { controller = "Bet", id = Model.BetId }, new { @class = "btn btn-primary pull-right" })
+                    @Html.ActionLink("Remove", "Remove", new {controller = "Bet", id = Model.BetId}, new {@class = "btn btn-primary pull-right"})
                 }
             }
             <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @Model.BuyIn">

@@ -410,9 +410,10 @@
     <Content Include="Views\Bet\Concluded.cshtml" />
     <Content Include="Views\Shared\_PrintUserList.cshtml" />
     <Content Include="Views\Lobby\_ListActiveBets.cshtml" />
-    <Content Include="Views\Lobby\_PrintSingleBet.cshtml" />
+    <Content Include="Views\Lobby\_PrintSingleActiveBet.cshtml" />
     <Content Include="Views\Lobby\_ListInactiveBets.cshtml" />
     <Content Include="Views\Shared\_CollapsibleInfoText.cshtml" />
+    <Content Include="Views\Lobby\_PrintSingleCompletedBet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
