@@ -89,3 +89,8 @@ div.navbar a:hover {
 [data-toggle="collapse"]:not(.collapsed) .if-collapsed {
     display: none;
 }
+
+/*header inline*/
+.header-inline {
+    display: inline
+}
