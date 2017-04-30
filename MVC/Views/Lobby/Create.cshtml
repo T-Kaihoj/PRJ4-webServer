@@ -1,7 +1,7 @@
 ﻿@using MVC.ViewModels;
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Create Lobby";
 }
 
 @model CreateLobbyViewModel
@@ -9,21 +9,31 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1 class="header">
-                Create lobby
-            </h1>
-
-            <form method="post" action="/Lobby/Create" >
-                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Name, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Name)
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        Create lobby
+                    </h1>
                 </div>
-                <div class="row">
-                    <button type="submit" value="post" name="action:post" class="btn btn-primary pull-right">Create lobby</button>
-                    <button type="reset" class="btn btn-primary pull-left">Cancel</button>
+                <div class="panel-body">
+                @using (Html.BeginForm("Create", "Lobby", FormMethod.Post))
+                {
+                    <div class="form-group label-floating">
+                        @Html.LabelFor(m => m.Name, new {@class = "control-label"})
+                        @Html.TextBoxFor(m => m.Name, new {@class = "form-control"})
+                        @Html.ValidationMessageFor(m => m.Name)
+                    </div>
+                    <div>
+                        <button type="submit" value="post" name="action:post" class="btn btn-raised btn-primary pull-right">
+                            Create lobby
+                        </button>
+                        <button type="reset" class="btn btn-raised pull-left">
+                            Cancel
+                        </button>
+                    </div>
+                }
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
