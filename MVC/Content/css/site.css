@@ -48,6 +48,16 @@ div.navbar a:hover {
   align-items: center;     /* Align the flex-items vertically */
 }
 
+/* Helper to vertically center all content, usefull with the smaller buttons below. */
+.table.vert-align tbody > tr > td {
+    vertical-align: middle;
+}
+
+.table.vert-align tr td a.btn {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 /*
  * Responsive text aligning
  * http://ohryan.ca/2014/08/14/set-responsive-text-alignment-bootstrap-3/

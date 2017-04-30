@@ -10,13 +10,13 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="row">
-                <div class="col-md-8">
+                <div class="col-md-12">
                     <h1>
                         @Html.DisplayFor(m => m.Name)
+                        <span class="pull-right">
+                            @Html.ActionLink("Leave lobby", "Leave", new { controller = "Lobby", id = Model.Id }, new { @class = "btn btn-raised btn-warning pull-right" })
+                        </span>
                     </h1>
-                </div>
-                <div class="col-md-4">
-                    @Html.ActionLink("Leave lobby", "Leave", new { controller = "Lobby", id = Model.Id }, new { @class = "btn btn-raised btn-warning pull-right" })
                 </div>
             </div>
             <div class="row">

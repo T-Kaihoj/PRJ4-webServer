@@ -19,11 +19,36 @@
                     </div>
                 }
                 else
-                {
-                    foreach (var bet in Model.ActiveBets)
-                    {
-                        @Html.Partial("_PrintSingleActiveBet", bet);
-                   }
+                { 
+                    <div class="table-responsive">
+                        <table class="table vert-align">
+                            <tr>
+                                <th class="col-md-1 text-center">
+                                    Joined
+                                </th>
+                                <th class="col-md-6">
+                                    Name
+                                </th>
+                                <th class="col-md-1">
+                                </th>
+                                <th class="col-md-1">
+                                </th>
+                                <th class="col-md-1 text-center">
+                                    Time
+                                </th>
+                                <th class="col-md-1 text-right">
+                                    Buy in
+                                </th>
+                                <th class="col-md-1">
+
+                                </th>
+                            </tr>
+                            @foreach (var bet in Model.ActiveBets)
+                            {
+                                @Html.Partial("_PrintSingleActiveBet", bet)
+                            }
+                        </table>
+                    </div>
                 }
             }
             <div>

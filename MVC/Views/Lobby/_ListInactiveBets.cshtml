@@ -20,10 +20,28 @@
                 }
                 else
                 {
-                    foreach (var bet in Model.CompletedBets)
-                    {
-                        @Html.Partial("_PrintSingleCompletedBet", bet);
-                    }
+                    <div class="table-responsive">
+                        <table class="table vert-align">
+                            <tr>
+                                <th class="col-md-1 text-center">
+                                    Joined
+                                </th>
+                                <th class="col-md-9">
+                                    Name
+                                </th>
+                                <th class="col-md-1 text-right">
+                                    Buy in
+                                </th>
+                                <th class="col-md-1">
+                                
+                                </th>
+                            </tr>
+                            @foreach (var bet in Model.CompletedBets)
+                            {
+                                @Html.Partial("_PrintSingleCompletedBet", bet)
+                            }
+                        </table>
+                    </div>
                 }
             }
         </div>
