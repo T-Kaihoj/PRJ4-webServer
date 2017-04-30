@@ -9,9 +9,18 @@ div.row
     border-top:0;
 }
 
-body { padding-top: 70px; }
+body {
+    padding-top: 70px;
+}
 @media screen and (max-width: 768px) {
-    body { padding-top: 0px; }
+    body {
+        padding-top: 40px;
+    }
+
+    div.container.body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 
 /* Background for bets (Currently not used, but kept for easy access to the colors. */
