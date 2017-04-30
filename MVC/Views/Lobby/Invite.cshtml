@@ -1,16 +1,25 @@
 ﻿@model  MVC.ViewModels.InviteToLobbyViewModel
 
-<div class="col-md-5">
-    @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post))
-    {
-        <div class="row form-group label-floating">
-            @Html.LabelFor(m => m.Username, new {@class = "control-label"})
-            @Html.TextBoxFor(m => m.Username, new {@class = "form-control"})
-            @Html.ValidationMessageFor(m => m.Username)
-        </div>
-        @Html.HiddenFor(m => m.Id)
-        <button type="submit" class="btn btn-primary">Invite User to Lobby</button>
-    }
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Invite user to lobby
+        </h3>
+    </div>
+    <div class="panel-body">
+        @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post))
+        {
+            <div class="form-group label-floating">
+                @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+                @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+            <div>
+                @Html.HiddenFor(m => m.Id)
+                <button type="submit" class="btn btn-raised btn-primary">Invite User to Lobby</button>
+            </div>
+        }
+    </div>
 </div>
 
 @section Scripts
