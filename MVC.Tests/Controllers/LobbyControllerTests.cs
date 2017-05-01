@@ -106,7 +106,7 @@ namespace MVC.Tests.Controllers
 
             // Assert that the object passed to the repository, matches our data.
             Assert.That(lobby.Name, Is.EqualTo(viewModel.Name));
-            // TODO: Extend.
+           
         }
 
         #endregion
