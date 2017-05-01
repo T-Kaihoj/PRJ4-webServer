@@ -59,8 +59,21 @@ namespace MVC.Controllers
             // Ensure the id is valid.
             if (model.SelectedOutcome < 0)
             {
-                // TODO: Currently not working with no outcome selected.
-                // TODO: Could be extracted to a validationhelper.
+                using (var myWork = GetUOF)
+                {
+                    // Find the bet.
+                    var bet = myWork.Bet.Get(model.BetId);
+
+                    // Does the bet exist?
+                    if (bet == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    // Populate the viewmodel.
+                    model = new ConcludeViewModel(bet);
+                }
+
                 ModelState.AddModelError("SelectedOutcome", Resources.Bet.ErrorSelectOutcomeRequired);
             }
             
