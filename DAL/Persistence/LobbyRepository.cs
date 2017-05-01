@@ -16,7 +16,7 @@ namespace DAL.Persistence
         {
             return OurContext.Lobbies
                     .Where(b => b.LobbyId == id)
-                    .Include(b => b.Bets.Select(p => p.Outcomes))
+                    .Include(b => b.Bets.Select(p => p.Outcomes.Select(t => t.Participants)))
                     .Include(b => b.MemberList)
                     .Include(b => b.InvitedList)
                     .SingleOrDefault();
