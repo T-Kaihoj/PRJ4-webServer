@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
 // TODO: I am confused regarding the population of a users invitedto and memberof, compared to the equivalent lists here (Magnus).
 
@@ -78,8 +79,14 @@ namespace Common.Models
             MemberList.Add(user);
         }
 
-        public void RemoveLobby()
+        public bool RemoveLobby()
         {
+            // Is there any active bets?
+            if (Bets.Any(b => !b.IsConcluded))
+            {
+                return false;
+            }
+
             foreach (var member in MemberList)
             {
                 RemoveMemberFromBets(member);
@@ -91,6 +98,8 @@ namespace Common.Models
                 member.InvitedToLobbies.Remove(this);
             }
             InvitedList.Clear();
+
+            return true;
         }
 
         public void RemoveMemberFromLobby(User user)
