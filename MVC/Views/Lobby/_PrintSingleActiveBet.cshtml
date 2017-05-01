@@ -47,6 +47,14 @@
         @Model.BuyIn
     </td>
     <td>
-        @Html.ActionLink("Join", "Join", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
+        @if (Model.Participants.Any(x => x.Username == User.Identity.Name))
+        {
+            @Html.ActionLink("Show", "Show", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
+        }
+        else
+        {
+            @Html.ActionLink("Join", "Join", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
+        }
+
     </td>
 </tr>
