@@ -55,7 +55,13 @@
                                         {
                                             <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
                                         }
-                                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
+                                        
+                                        <td>
+                                            @Html.ActionLink("View Bet", "Show", "Bet", new { id = b.BetId }, new { @class = "btn btn-raised" })
+                                        </td>
+                                        
+
+                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
                                             @b.BuyIn
                                         </label>
                                         <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @b.StopDate">
