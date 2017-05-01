@@ -39,7 +39,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
-            //TODO: More error handling?
+            
             return Redirect("/Lobby/List");
         }
 
@@ -82,7 +82,7 @@ namespace MVC.Controllers
                 return Redirect($"/Lobby/Show/{lobby.LobbyId}");
             }
 
-            //TODO: Return error.
+           
         }
 
         #endregion
@@ -208,10 +208,7 @@ namespace MVC.Controllers
                     throw new Exception("No such lobby");
                 }
 
-                if (!lobby.RemoveLobby())
-                {
-                    return View("RemoveFailed");
-                }
+                lobby.RemoveLobby();
 
                 myWork.Lobby.Remove(lobby);
                 myWork.Complete();
@@ -229,7 +226,7 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 // Get the lobby from the database.
-                var lobby = myWork.Lobby.GetEager(id);
+                var lobby = myWork.Lobby.Get(id);
 
                 if (lobby == null)
                 {
