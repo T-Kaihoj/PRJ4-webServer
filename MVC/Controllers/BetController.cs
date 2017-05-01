@@ -157,11 +157,16 @@ namespace MVC.Controllers
                 ModelState.AddModelError("StopDate", Resources.Bet.ErrorEndDateBeforeStartDate);
             }
 
+            if (viewModel.BuyInDecimal < 0)
+            {
+                ModelState.AddModelError("Buyin", Resources.Bet.ErrorBuyinMustBePositive);
+            }
+
             if (!ModelState.IsValid)
             {
                 return View("Create", viewModel);
             }
-
+            
             using (var myWork = GetUOF)
             {
                 // Create the bet.
