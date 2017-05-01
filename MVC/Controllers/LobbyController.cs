@@ -208,7 +208,10 @@ namespace MVC.Controllers
                     throw new Exception("No such lobby");
                 }
 
-                lobby.RemoveLobby();
+                if (!lobby.RemoveLobby())
+                {
+                    return View("RemoveFailed");
+                }
 
                 myWork.Lobby.Remove(lobby);
                 myWork.Complete();
