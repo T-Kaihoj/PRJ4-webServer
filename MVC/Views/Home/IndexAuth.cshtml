@@ -33,35 +33,30 @@
                         foreach (var b in Model.Bets)
                         {
                             <div class="row">
-                                <div class="col-md-2">
+                                <div class="col-md-4">
                                     <h4>
                                         @b.Name
                                     </h4>
                                 </div>
-                                <div class="col-md-10">
-                                    
-                                        <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
-                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                                        </label>
+                                <div class="col-md-8">
+                                    @if (b.Judge.Username == Model.Username)
+                                    {
+                                       
+                                        <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
+                                    }
 
-
-                                        @if (b.Judge.Username == Model.Username)
-                                        {
-                                            <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
-                                        }
-
-                                        <!-- TODO: Only show when logged in user is owner of shown bet -->
-                                        @if (b.Owner.Username == Model.Username)
-                                        {
-                                            <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
-                                        }
-                                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
-                                            @b.BuyIn
-                                        </label>
-                                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @b.StopDate">
-                                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                                        </label>
-                                    
+                                    <!-- TODO: Only show when logged in user is owner of shown bet -->
+                                    @if (b.Owner.Username == Model.Username)
+                                    {
+                                        @Html.ActionLink("Remove", "Remove", new { controller = "Bet", id =b.BetId }, new { @class = "btn btn-primary pull-right" })
+                                     
+                                    }
+                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
+                                        @b.BuyIn
+                                    </label>
+                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @b.StopDate">
+                                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                    </label>
                                 </div>
                             </div>
                             <hr />
