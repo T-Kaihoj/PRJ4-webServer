@@ -71,7 +71,11 @@ namespace MVC.Controllers
                     }
 
                     // Populate the viewmodel.
-                    model = new ConcludeViewModel(bet);
+                    var newModel = new ConcludeViewModel(bet);
+
+                    model.Description = newModel.Description;
+                    model.Title = newModel.Title;
+                    model.Outcomes = newModel.Outcomes;
                 }
 
                 ModelState.AddModelError("SelectedOutcome", Resources.Bet.ErrorSelectOutcomeRequired);
