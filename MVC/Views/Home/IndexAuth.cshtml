@@ -8,16 +8,22 @@
 
 <div class="container">
     <div class="row">
-        <h1>
-            Home
-        </h1><br />
-        <div class="col-md-5">
-            <h2 class="label" style="font-size: 20px; background-color: darkslategray">Welcome : @Model.Name </h2>  <br><br />
+        <div class="col-md-12">
+            <h1>
+                Home
+            </h1>
         </div>
-        <div class="col-md-5">
-            <h2 class="label" style="font-size: 18px; background-color: darkslategray">Your Balance is : @Model.CurrentBalance </h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <span class="label" style="font-size: 20px; background-color: darkslategray">Welcome : @Model.Name </span>
         </div>
-        <br /><br />
+        <div class="col-md-6 pull-right">
+            <span class="label pull-right" style="font-size: 18px; background-color: darkslategray">Your Balance is : @Model.CurrentBalance </span>
+        </div>
+    </div>
+    <div class="row">
+        <br />
     </div>
     <div class="row">
         <div class="col-md-6" align="left">
