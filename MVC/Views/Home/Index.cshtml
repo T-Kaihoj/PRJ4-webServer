@@ -98,7 +98,8 @@
 {
     <script>
         // Setup validation of the "createUserForm"
-        $(document).ready(function() {
+        $(function () {
+            findErrorTags();
             $("#createUserForm").validate({
                 rules: {
                     FirstName: {
