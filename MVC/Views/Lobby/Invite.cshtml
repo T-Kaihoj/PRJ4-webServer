@@ -1,16 +1,28 @@
 ﻿@model  MVC.ViewModels.InviteToLobbyViewModel
 
-<div class="col-md-5">
-    @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post))
-    {
-        <div class="row form-group label-floating">
-            @Html.LabelFor(m => m.Username, new {@class = "control-label"})
-            @Html.TextBoxFor(m => m.Username, new {@class = "form-control"})
-            @Html.ValidationMessageFor(m => m.Username)
+<div class="panel panel-primary">
+    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse_invite">
+        <h1 class="panel-title">
+            Invite user to lobby
+            @Html.Partial("_CollapsibleInfoText")
+        </h1>
+    </div>
+    <div id="collapse_invite" class="panel-collapse collapse">
+        <div class="panel-body">
+            @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post))
+            {
+                <div class="form-group label-floating">
+                    @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Username)
+                </div>
+                <div>
+                    @Html.HiddenFor(m => m.Id)
+                    <button type="submit" class="btn btn-raised btn-primary">Invite User to Lobby</button>
+                </div>
+            }
         </div>
-        @Html.HiddenFor(m => m.Id)
-        <button type="submit" class="btn btn-primary">Invite User to Lobby</button>
-    }
+    </div>
 </div>
 
 @section Scripts

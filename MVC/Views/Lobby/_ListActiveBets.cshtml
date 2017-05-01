@@ -1,0 +1,59 @@
+﻿@using MVC.ViewModels;
+
+@model LobbyViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading" data-toggle="collapse" data-target="#collapse_active">
+        <h1 class="panel-title">
+            Active Bets
+            @Html.Partial("_CollapsibleInfoText")
+        </h1>
+    </div>
+    <div id="collapse_active" class="panel-collapse collapse in">
+        <div class="panel-body">
+            @{
+                if (Model.ActiveBets.Count == 0)
+                {
+                    <div>
+                        There are currently no active bets in the lobby.
+                    </div>
+                }
+                else
+                { 
+                    <div class="table-responsive">
+                        <table class="table vert-align">
+                            <tr>
+                                <th class="col-md-1 text-center">
+                                    Joined
+                                </th>
+                                <th class="col-md-6">
+                                    Name
+                                </th>
+                                <th class="col-md-1">
+                                </th>
+                                <th class="col-md-1">
+                                </th>
+                                <th class="col-md-1 text-center">
+                                    Time
+                                </th>
+                                <th class="col-md-1 text-right">
+                                    Buy in
+                                </th>
+                                <th class="col-md-1">
+
+                                </th>
+                            </tr>
+                            @foreach (var bet in Model.ActiveBets)
+                            {
+                                @Html.Partial("_PrintSingleActiveBet", bet)
+                            }
+                        </table>
+                    </div>
+                }
+            }
+            <div>
+                @Html.ActionLink("Create new bet", "Create", new { controller = "Bet", id = Model.Id }, new { @class = "btn btn-raised btn-primary pull-left" })
+            </div>
+        </div>
+    </div>
+</div>

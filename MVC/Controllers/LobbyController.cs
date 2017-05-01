@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using Common;
 using Common.Models;
@@ -225,26 +226,32 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 // Get the lobby from the database.
-                var lobby = myWork.Lobby.Get(id);
+                var lobby = myWork.Lobby.GetEager(id);
 
                 if (lobby == null)
                 {
                     // Error.
                     throw new Exception("No such lobby");
                 }
-                List<Bet> myBets = new List<Bet>();
+
+                var myBets = new List<Bet>();
                 foreach (var bet in lobby.Bets)
                 {
                     var tempBet = myWork.Bet.GetEager(bet.BetId);
                     myBets.Add(tempBet);
                 }
 
+                // Sort in active and inactive.
+                var activeBets = myBets.Where(b => !b.IsConcluded).ToList();
+                var inactiveBets = myBets.Where(b => b.IsConcluded).ToList();
+
                 // Create a viewmodel for the lobby.
                 var viewModel = new LobbyViewModel()
                 {
-                    ID = lobby.LobbyId,
+                    Id = lobby.LobbyId,
                     Name = lobby.Name,
-                    Bets = myBets,
+                    ActiveBets = activeBets,
+                    CompletedBets = inactiveBets,
                     Participants = lobby.MemberList,
                     InvitedUsers = lobby.InvitedList
                 };

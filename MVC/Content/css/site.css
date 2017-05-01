@@ -9,9 +9,18 @@ div.row
     border-top:0;
 }
 
-body { padding-top: 70px; }
+body {
+    padding-top: 70px;
+}
 @media screen and (max-width: 768px) {
-    body { padding-top: 0px; }
+    body {
+        padding-top: 70px;
+    }
+
+    div.container.body-content {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
 }
 
 /* Background for bets (Currently not used, but kept for easy access to the colors. */
@@ -37,8 +46,18 @@ div.navbar a:hover {
 .vertical-align > [class*=" col-"] {
   display: flex;
   align-items: center;     /* Align the flex-items vertically */
-  
 }
+
+/* Helper to vertically center all content, usefull with the smaller buttons below. */
+.table.vert-align tbody > tr > td {
+    vertical-align: middle;
+}
+
+.table.vert-align tr td a.btn {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
 /*
  * Responsive text aligning
  * http://ohryan.ca/2014/08/14/set-responsive-text-alignment-bootstrap-3/
@@ -68,4 +87,15 @@ div.navbar a:hover {
   .text-lg-right { text-align: right; }
   .text-lg-center { text-align: center; }
   .text-lg-justify { text-align: justify; }
+}
+
+/*
+ * For displaying text with collapsing data
+ * http://stackoverflow.com/a/31967516/3365039
+ */
+[data-toggle="collapse"].collapsed .if-not-collapsed {
+    display: none;
+}
+[data-toggle="collapse"]:not(.collapsed) .if-collapsed {
+    display: none;
 }

@@ -16,6 +16,7 @@ namespace MVC.ViewModels
         {
             Title = bet.Name;
             BetId = bet.BetId;
+            Description = bet.Description;
 
             foreach (var outcome in bet.Outcomes)
             {
@@ -24,6 +25,8 @@ namespace MVC.ViewModels
         }
 
         public string Title { get; }
+
+        public string Description { get; }
 
         public List<OutcomeView> Outcomes { get; } = new List<OutcomeView>();
 
