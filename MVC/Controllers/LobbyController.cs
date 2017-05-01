@@ -208,7 +208,10 @@ namespace MVC.Controllers
                     throw new Exception("No such lobby");
                 }
 
-                lobby.RemoveLobby();
+                if (!lobby.RemoveLobby())
+                {
+                    return View("RemoveFailed");
+                }
 
                 myWork.Lobby.Remove(lobby);
                 myWork.Complete();
@@ -226,7 +229,7 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 // Get the lobby from the database.
-                var lobby = myWork.Lobby.Get(id);
+                var lobby = myWork.Lobby.GetEager(id);
 
                 if (lobby == null)
                 {

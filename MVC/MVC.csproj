@@ -417,6 +417,7 @@
     <Content Include="Views\Shared\_CollapsibleInfoText.cshtml" />
     <Content Include="Views\Lobby\_PrintSingleCompletedBet.cshtml" />
     <Content Include="Views\friend\index.cshtml" />
+    <Content Include="Views\Lobby\RemoveFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
