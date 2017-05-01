@@ -49,11 +49,11 @@
     <td>
         @if (Model.Participants.Any(x => x.Username == User.Identity.Name))
         {
-            @Html.ActionLink("Join", "Join", "Bet", new {id = Model.BetId}, new {@class = "btn btn-raised"})
+            @Html.ActionLink("Show", "Show", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
         }
         else
         {
-            @Html.ActionLink("Show", "Show", "Bet", new {id = Model.BetId}, new {@class = "btn btn-raised"})
+            @Html.ActionLink("Join", "Join", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
         }
 
     </td>
