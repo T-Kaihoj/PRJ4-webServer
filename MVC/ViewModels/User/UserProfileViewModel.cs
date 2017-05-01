@@ -9,6 +9,7 @@ namespace MVC.ViewModels
         private string _firstName = string.Empty;
         private string _lastName = string.Empty;
         private string _userName = string.Empty;
+        private decimal _balance = 0;
 
         #region Accessors.
 
@@ -61,6 +62,19 @@ namespace MVC.ViewModels
             set
             {
                 _userName = value.Trim();
+            }
+        }
+
+        public decimal Balance
+        {
+            get
+            {
+                return _balance;
+            }
+
+            set
+            {
+                _balance = value;
             }
         }
 
