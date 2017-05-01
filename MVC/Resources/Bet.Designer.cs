@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buy in must be positive.
+        /// </summary>
+        public static string ErrorBuyinMustBePositive {
+            get {
+                return ResourceManager.GetString("ErrorBuyinMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy in is required.
         /// </summary>
         public static string ErrorBuyInRequired {
@@ -151,11 +160,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End date must be after start date.
+        /// </summary>
+        public static string ErrorEndDateBeforeStartDate {
+            get {
+                return ResourceManager.GetString("ErrorEndDateBeforeStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Judge doesn&apos;t exist.
         /// </summary>
         public static string ErrorJudgeDoesntExist {
             get {
                 return ResourceManager.GetString("ErrorJudgeDoesntExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Judge is not a member of this lobby.
+        /// </summary>
+        public static string ErrorJudgeIsNotMemberOfLobby {
+            get {
+                return ResourceManager.GetString("ErrorJudgeIsNotMemberOfLobby", resourceCulture);
             }
         }
         

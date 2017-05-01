@@ -38,6 +38,36 @@ namespace MVC.Tests.Controllers.UserControllerTests
         #region POST
 
         [Test]
+        public void Withdraw_InvalidData_ReturnsErrorWithCorrectModelData()
+        {
+            // Setup.
+            var user = new User()
+            {
+                Balance = 100m,
+                Username = "test"
+            };
+
+            context.Identity.Name.Returns(user.Username);
+
+            UserRepository.Get(Arg.Is(user.Username)).Returns(user);
+
+            viewModel.CurrentBalance = 0;
+            viewModel.Withdraw = -10m;
+
+            // Act.
+            var result = uut.Withdraw(viewModel);
+
+            // Assert the the view is correct.
+            CheckViewName(result, "~/Views/Money/Withdraw.cshtml");
+
+            // Check that the viewmodel is correct.
+            var model = CheckViewModel<WithdrawViewModel>(result);
+
+            // Check that the correct balance is returned.
+            Assert.That(model.CurrentBalance, Is.EqualTo(user.Balance));
+        }
+
+        [Test]
         public void Withdraw_NegativeWithdraw_ReturnsError()
         {
             // Setup.

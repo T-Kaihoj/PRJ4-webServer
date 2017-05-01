@@ -21,7 +21,7 @@ namespace Common.Tests.Models
         }
 
         #region Email
-        // TODO: Could make more rigourous tests for email validity (Require a "@" at least).
+        //  Could make more rigourous tests for email validity (Require a "@" at least).
         [Test]
         public void Email_Set_DoesNotThrow()
         {

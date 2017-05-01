@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BetController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Identity\Store\StorePartialPassword.cs" />
     <Compile Include="Identity\Store\StorePartial.cs" />
     <Compile Include="Identity\UserContext.cs" />
+    <Compile Include="ViewModels\FriendAddViewmodel.cs" />
     <Compile Include="Models\Userlogic\IBetinfo.cs" />
     <Compile Include="Models\Userlogic\IBetJudge.cs" />
     <Compile Include="Models\Userlogic\IBetLogic.cs" />
@@ -216,6 +218,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Lobby.Designer.cs">
+      <DependentUpon>Lobby.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Resources\User.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -225,6 +232,7 @@
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\Bets\ConcludeViewModel.cs" />
     <Compile Include="ViewModels\Bets\OutcomeView.cs" />
+    <Compile Include="ViewModels\Bets\PrintOutcomeViewModel.cs" />
     <Compile Include="ViewModels\Bets\ShowBetOutcomeViewModel.cs" />
     <Compile Include="ViewModels\Bets\ShowBetViewModel.cs" />
     <Compile Include="ViewModels\Bets\BetViewModel.cs" />
@@ -382,9 +390,9 @@
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\User\UserCreated.cshtml" />
-    <Content Include="Views\Shared\LoginBox.cshtml" />
-    <Content Include="Views\Shared\MenuBox.cshtml" />
-    <Content Include="Views\Shared\UserBox.cshtml" />
+    <Content Include="Views\Shared\_LoginBox.cshtml" />
+    <Content Include="Views\Shared\_MenuBox.cshtml" />
+    <Content Include="Views\Shared\_UserBox.cshtml" />
     <Content Include="Views\Lobby\Show.cshtml" />
     <Content Include="Views\Lobby\Create.cshtml" />
     <Content Include="Views\Lobby\List.cshtml" />
@@ -400,6 +408,18 @@
     <Content Include="Views\Bet\_Outcome.cshtml" />
     <Content Include="Views\Bet\Conclude.cshtml" />
     <Content Include="Views\Lobby\Invite.cshtml" />
+    <Content Include="Views\Bet\_PrintOutcome.cshtml" />
+    <Content Include="Views\Bet\Concluded.cshtml" />
+    <Content Include="Views\Shared\_PrintUserList.cshtml" />
+    <Content Include="Views\Lobby\_ListActiveBets.cshtml" />
+    <Content Include="Views\Lobby\_PrintSingleActiveBet.cshtml" />
+    <Content Include="Views\Lobby\_ListInactiveBets.cshtml" />
+    <Content Include="Views\Shared\_CollapsibleInfoText.cshtml" />
+    <Content Include="Views\Lobby\_PrintSingleCompletedBet.cshtml" />
+    <Content Include="Views\friend\index.cshtml" />
+    <Content Include="Views\Bet\_ListActiveBets.cshtml" />
+    <Content Include="Views\Bet\_PrintSingleActiveBet.cshtml" />
+    <Content Include="Views\Lobby\RemoveFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -421,6 +441,11 @@
     <EmbeddedResource Include="Resources\Bet.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Bet.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Resources</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Lobby.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lobby.Designer.cs</LastGenOutput>
       <CustomToolNamespace>Resources</CustomToolNamespace>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\User.resx">

@@ -1,100 +1,113 @@
-﻿@{
+﻿@using MVC.ViewModels;
+
+@{
     ViewData["Title"] = "Create Bet";
 }
 
-@model MVC.ViewModels.CreateBetViewModel
+@model CreateBetViewModel
 
 <div class="container">
-    <form method="post" action="/Bet/Create">
-        <div class="row">
-            <div class="col-md-12">
-                <h1 class="header">
-                    Create bet
-                </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Title, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Title, null, new { @class = "help-block" })
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        Create bet
+                    </h1>
                 </div>
-                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Description, null, new { @class = "help-block" })
-                </div>
-                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.BuyIn, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.BuyIn, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.BuyIn, null, new { @class = "help-block" })
-                </div>
-                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Outcome1, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Outcome1, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Outcome1, null, new { @class = "help-block" })
-                </div>
+                <div class="panel-body">
+                    @using (Html.BeginForm("Create", "Bet", FormMethod.Post))
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row form-group label-floating">
+                                    @Html.LabelFor(m => m.Title, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Title)
+                                </div>
+                                <div class="row form-group label-floating">
+                                    @Html.LabelFor(m => m.Description, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Description)
+                                </div>
+                                <div class="row form-group label-floating">
+                                    @Html.LabelFor(m => m.BuyIn, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.BuyIn, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.BuyIn)
+                                </div>
+                                <div class="row form-group label-floating">
+                                    @Html.LabelFor(m => m.Outcome1, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Outcome1, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Outcome1)
+                                </div>
 
-            </div>
-            <div class="col-md-6">
-                <div class="form-group label-floating">
-                    @Html.LabelFor(m => m.Judge, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Judge, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Judge, null, new { @class = "help-block" })
-                </div>
-                <div class="form-group label-floating">
-                    @Html.LabelFor(m => m.StartDate, new { @class = "control-label" })
-                    @Html.ValidationMessageFor(m => m.StartDate, null, new { @class = "help-block" })
-                    <div class="input-group date" id="datetimepickerstart">
-                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div>                    
-                </div>
-                <div class="form-group label-floating">
-                    @Html.LabelFor(m => m.StopDate, new { @class = "control-label" })
-                    @Html.ValidationMessageFor(m => m.StopDate, null, new { @class = "help-block" })
-                    <div class="input-group date" id="datetimepickerend">
-                        @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control" })
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div> 
-                </div>
-                <div class="row form-group label-floating">
-                    @Html.LabelFor(m => m.Outcome2, new { @class = "control-label" })
-                    @Html.TextBoxFor(m => m.Outcome2, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => m.Outcome2, null, new { @class = "help-block" })
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.Judge, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Judge, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Judge)
+                                </div>
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.StartDate, new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(m => m.StartDate)
+                                    <div class="input-group date" id="datetimepickerstart">
+                                        @Html.TextBoxFor(m => m.StartDate, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.StopDate, new { @class = "control-label" })
+                                    @Html.ValidationMessageFor(m => m.StopDate)
+                                    <div class="input-group date" id="datetimepickerend">
+                                        @Html.TextBoxFor(m => m.StopDate, new { @class = "form-control" })
+                                        <span class="input-group-addon">
+                                            <span class="glyphicon glyphicon-calendar"></span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="row form-group label-floating">
+                                    @Html.LabelFor(m => m.Outcome2, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Outcome2, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Outcome2)
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Note a manual hack here. We wish to align the toggle button and the submit button. We use some custom css,
+                        but this interferes with pull-right from bootstrap. To circumvent this, we set a manual style on the submit
+                        button to get it to pull right. -->
+                        <div class="row vertical-align">
+                            <div class="col-md-6">
+                                <div class="togglebutton">
+                                    <label>
+                                        End when judged
+                                        <!-- A few nonblank spaces to get some distance between the toggle button and the text. -->
+                                        &nbsp; &nbsp;
+                                        <input id="endonjudged" type="checkbox" checked="">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                @Html.HiddenFor(m => m.LobbyId)
+                                <button type="submit" class="btn btn-raised btn-primary" style="margin-left: auto;">Create bet</button>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>
-        <!-- Note a manual hack here. We wish to align the toggle button and the submit button. We use some custom css,
-        but this interferes with pull-right from bootstrap. To circumvent this, we set a manual style on the submit
-        button to get it to pull right. -->
-        <div class="row vertical-align">
-            <div class="col-md-6">
-                <div class="togglebutton">
-                    <label>
-                        End when judged
-                        <!-- A few nonblank spaces to get some distance between the toggle button and the text. -->
-                        &nbsp; &nbsp;
-                        <input id="endonjudged" type="checkbox" checked="">
-                    </label>
-                </div>
-            </div>
-            <div class="col-md-6">
-                @Html.HiddenFor(m => m.LobbyId)
-                <button type="submit" class="btn btn-primary" style="margin-left: auto;">Create bet</button>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        registerDateTimePicker("#datetimepickerstart");
-        registerDateTimePicker("#datetimepickerend");
-    });
-</script>
+@section Scripts
+{
+    <script>
+        $(function () {
+            findErrorTags();
+            registerDateTimePicker("#datetimepickerstart");
+            registerDateTimePicker("#datetimepickerend");
+        });
+    </script>
+}

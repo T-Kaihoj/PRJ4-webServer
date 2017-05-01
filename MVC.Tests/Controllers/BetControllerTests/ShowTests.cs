@@ -67,6 +67,14 @@ namespace MVC.Tests.Controllers.BetControllerTests
             };
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
 
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
+
             // Assert that we hit the repository.
             BetRepository.DidNotReceive().Get(Arg.Any<long>());
 
@@ -82,6 +90,14 @@ namespace MVC.Tests.Controllers.BetControllerTests
             // Register a bet with the mock.
             var bet = new Bet();
             BetRepository.Get(Arg.Any<long>()).Returns(bet);
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
+
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
 
             // Setup capture of the argument.
             long key = 0;
@@ -94,6 +110,103 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             // Assert that we passed the correct id.
             Assert.That(key, Is.EqualTo(passedKey));
+        }
+
+        [Test]
+        public void Show_MemberOfLobby_ReturnsView()
+        {
+            // Register a user with the bet.
+            string username = "hello";
+
+            var user = new User()
+            {
+                Username = username
+            };
+
+            UserRepository.Get(Arg.Any<string>()).Returns(user);
+
+            userContext.Identity.Name.Returns(username);
+
+            // Register a bet with the mock.
+            long betid = 1000;
+
+            var outcome = new Outcome();
+            outcome.Participants.Add(user);
+
+            var bet = new Bet()
+            {
+                BetId = betid
+            };
+            bet.Outcomes.Add(outcome);
+
+            BetRepository.Get(Arg.Any<long>()).Returns(bet);
+
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
+            lobby.MemberList.Add(user);
+
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
+
+            // Act.
+            var result = uut.Show(betid);
+
+            // Assert.
+            CheckViewName(result, "Show");
+        }
+
+        [Test]
+        public void Show_NotMemberOfLobby_ReturnsView()
+        {
+            // Register a user with the bet.
+            string username = "hello";
+            string username2 = "hello2";
+
+            var user = new User()
+            {
+                Username = username
+            };
+            var user2 = new User()
+            {
+                Username = username2
+            };
+
+            userContext.Identity.Name.Returns(username2);
+
+            UserRepository.Get(Arg.Is(username2)).Returns(user2);
+
+            // Register a bet with the mock.
+            long betid = 1000;
+
+            var outcome = new Outcome();
+            outcome.Participants.Add(user);
+
+            var bet = new Bet()
+            {
+                BetId = betid
+            };
+            bet.Outcomes.Add(outcome);
+
+            BetRepository.Get(Arg.Any<long>()).Returns(bet);
+
+            var lobby = new Lobby()
+            {
+                LobbyId = 1,
+                Name = "lobby"
+            };
+            lobby.MemberList.Add(user);
+
+            bet.Lobby = lobby;
+            LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
+
+            // Act.
+            var result = uut.Show(betid);
+
+            // Assert.
+            CheckStatusCode(result, 403);
         }
 
         #endregion

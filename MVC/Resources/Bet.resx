@@ -141,14 +141,23 @@
   <data name="DisplayTitle" xml:space="preserve">
     <value>Title</value>
   </data>
+  <data name="ErrorBuyinMustBePositive" xml:space="preserve">
+    <value>Buy in must be positive</value>
+  </data>
   <data name="ErrorBuyInRequired" xml:space="preserve">
     <value>Buy in is required</value>
   </data>
   <data name="ErrorDescriptionRequired" xml:space="preserve">
     <value>Description is required</value>
   </data>
+  <data name="ErrorEndDateBeforeStartDate" xml:space="preserve">
+    <value>End date must be after start date</value>
+  </data>
   <data name="ErrorJudgeDoesntExist" xml:space="preserve">
     <value>Judge doesn't exist</value>
+  </data>
+  <data name="ErrorJudgeIsNotMemberOfLobby" xml:space="preserve">
+    <value>Judge is not a member of this lobby</value>
   </data>
   <data name="ErrorJudgeRequired" xml:space="preserve">
     <value>You must enter a judge</value>

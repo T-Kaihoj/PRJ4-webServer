@@ -31,7 +31,8 @@ namespace MVC
 
             // JavaScript for the site.
             bundles.Add(new ScriptBundle("~/bundles/js-site").Include(
-                "~/Content/js/site.js"
+                "~/Content/js/site.js",
+                "~/Content/js/validation.js"
             ));
 
             // Stylesheets for the libraries.

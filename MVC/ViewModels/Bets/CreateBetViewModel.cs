@@ -68,7 +68,7 @@ namespace MVC.ViewModels
 
         [Required(ErrorMessageResourceType = typeof(Resources.Bet),
             ErrorMessageResourceName = "ErrorOutcomeRequired")]
-        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayOutcome2")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayOutcome1")]
         public string Outcome1
         {
             get { return _outcome1; }

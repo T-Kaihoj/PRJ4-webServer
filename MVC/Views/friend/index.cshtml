@@ -1,0 +1,24 @@
+﻿
+@using MVC.ViewModels;
+
+@{
+    ViewData["Title"] = "friends";
+}
+
+@model MVC.ViewModels.FriendAddViewmodel
+
+<div class="container">
+
+    <form method="post">
+        <div class="row form-group label-floating">
+            User name for friend <br />
+            <input type="text" id="UserNamesername" name="Username" value="@Model.Username" /> <br />
+        </div>
+        <div class="row form-group label-floating">
+            <input type="submit" value="Add Friend">
+        </div>
+
+    </form>
+
+
+</div>

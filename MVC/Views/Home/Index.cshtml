@@ -4,131 +4,151 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 @model CreateUserViewModel
 
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-            <h3>
-                LocalBet helps you make bets with your friends.
-            </h3>
-            <img src="~/Content/images/handshake-icon.png" width="420" alt=""/>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        LocalBet helps you make bets with your friends.
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <img src="~/Content/images/handshake-icon.png" alt="" style="width: 100%"/>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
-            <form action="/User/Create" id="createUserForm" method="post">
-                <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group label-floating">
-                            @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "help-block" })
-                        </div>
-                    </div>
-                    <div class="col-md-6 ">
-                        <div class="form-group label-floating">
-                            @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "help-block" })
-                        </div>
-                    </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Create a new user
+                    </h3>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group label-floating">
-                            @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "help-block" })
+                <div class="panel-body">
+                    @using (Html.BeginForm("Create", "User", FormMethod.Post, new { @id = "createUserForm" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "help-block" })
+                                </div>
+                            </div>
+                            <div class="col-md-6 ">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "help-block" })
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group label-floating">
-                            @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "help-block" })
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group label-floating">
-                            @Html.LabelFor(m => m.Password1, new { @class = "control-label" })
-                            @Html.PasswordFor(m => m.Password1, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password1, null, new { @class = "help-block" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group label-floating">
-                            @Html.LabelFor(m => m.Password2, new { @class = "control-label" })
-                            @Html.PasswordFor(m => m.Password2, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "help-block" })
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.Password1, new { @class = "control-label" })
+                                    @Html.PasswordFor(m => m.Password1, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password1, null, new { @class = "help-block" })
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.Password2, new { @class = "control-label" })
+                                    @Html.PasswordFor(m => m.Password2, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "help-block" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-raised btn-primary pull-right">Register</button>
+                            </div>
+                        </div>
+                    }
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-primary pull-right">Register</button>
-                    </div>
-                </div>
-            </form>
-            <script>
-                // Setup validation of the "createUserForm"
-                $(document).ready(function() {
-                    $("#createUserForm").validate({
-                        rules: {
-                            FirstName: {
-                                required: true
-                            },
-                            LastName: {
-                                required: true
-                            },
-                            UserName: {
-                                required: true
-                            },
-                            Email: {
-                                required: true
-                            },
-                            Password1: {
-                                required: true
-                            },
-                            Password2: {
-                                required: true,
-                                equalTo: "#Password1"
-                            }
-                        },
-
-                        messages: {
-                            FirstName: {
-                                required: "@Resources.User.ErrorFirstNameRequired"
-                            },
-                            LastName: {
-                                required: "@Resources.User.ErrorLastNameRequired"
-                            },
-                            UserName: {
-                                required: "@Resources.User.ErrorUserNameRequired"
-                            },
-                            Email: {
-                                required: "@Resources.User.ErrorEmailRequired"
-                            },
-                            Password1: {
-                                required: "@Resources.User.ErrorPassword1Required"
-                            },
-                            Password2: {
-                                required: "@Resources.User.ErrorPassword2Required",
-                                equalto: "@Resources.User.ErrorPasswordsNotIdentical"
-                            }
-                        },
-
-                        submitHandler: function(form) {
-                            form.submit();
-                        }
-                    });
-                });
-            </script>
+            </div>
         </div>
     </div>
 </div>
+
+@section Scripts
+{
+    <script>
+        // Setup validation of the "createUserForm"
+        $(function () {
+            findErrorTags();
+            $("#createUserForm").validate({
+                rules: {
+                    FirstName: {
+                        required: true
+                    },
+                    LastName: {
+                        required: true
+                    },
+                    UserName: {
+                        required: true
+                    },
+                    Email: {
+                        required: true
+                    },
+                    Password1: {
+                        required: true
+                    },
+                    Password2: {
+                        required: true,
+                        equalTo: "#Password1"
+                    }
+                },
+
+                messages: {
+                    FirstName: {
+                        required: "@Resources.User.ErrorFirstNameRequired"
+                    },
+                    LastName: {
+                        required: "@Resources.User.ErrorLastNameRequired"
+                    },
+                    UserName: {
+                        required: "@Resources.User.ErrorUserNameRequired"
+                    },
+                    Email: {
+                        required: "@Resources.User.ErrorEmailRequired"
+                    },
+                    Password1: {
+                        required: "@Resources.User.ErrorPassword1Required"
+                    },
+                    Password2: {
+                        required: "@Resources.User.ErrorPassword2Required",
+                        equalto: "@Resources.User.ErrorPasswordsNotIdentical"
+                    }
+                },
+
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+}
