@@ -10,7 +10,7 @@ namespace MVC.ViewModels
 
         public ICollection<User> Participants { get; set; }
         public ICollection<Bet> ActiveBets { get; set; }
-        public ICollection<Bet> InactiveBets { get; set; }
+        public ICollection<Bet> CompletedBets { get; set; }
         public ICollection<User> InvitedUsers { get; set; }
     }
 }

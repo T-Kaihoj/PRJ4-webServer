@@ -7,18 +7,18 @@
 @model ShowBetViewModel
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <a href="/Lobby/Show/@Model.LobbyId"><h3>In @Html.DisplayFor(m => m.LobbyTitle)</h3></a>
-        </div>
-    </div>
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            <h1 class="panel-title">
-                @Html.DisplayFor(m => m.Title)
-            </h1>
-        </div>
+    <div class="panel panel-default">
         <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>
+                        @Html.DisplayFor(m => m.Title)
+                        <span class="pull-right">
+                            @Html.ActionLink("Return to lobby", "Show", "Lobby", new { id = Model.LobbyId }, new { @class = "btn btn-raised pull-right" })
+                        </span>
+                    </h1>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-8">
                     <dl>

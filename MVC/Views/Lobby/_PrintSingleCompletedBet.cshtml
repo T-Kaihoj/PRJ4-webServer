@@ -1,0 +1,21 @@
+﻿@using Common.Models;
+
+@model Bet
+
+<tr>
+    <td class="text-center">
+        @{
+            // TODO: Handle if the user is not a member of the bet.
+        }
+        <span class="glyphicon glyphicon-ok" aria-hidden="true" aria-label="Left Align" data-toggle="tooltip" title="Joined"></span>
+    </td>
+    <td>
+        @Model.Name
+    </td>
+    <td class="text-right">
+        @Model.BuyIn
+    </td>
+    <td>
+        @Html.ActionLink("Show", "Show", "Bet", new { id = Model.BetId }, new { @class="btn btn-raised"})
+    </td>
+</tr>

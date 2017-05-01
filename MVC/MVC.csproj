@@ -182,6 +182,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BetController.cs" />
+    <Compile Include="Controllers\friendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -198,6 +199,7 @@
     <Compile Include="Identity\Store\StorePartialPassword.cs" />
     <Compile Include="Identity\Store\StorePartial.cs" />
     <Compile Include="Identity\UserContext.cs" />
+    <Compile Include="ViewModels\FriendAddViewmodel.cs" />
     <Compile Include="Models\Userlogic\IBetinfo.cs" />
     <Compile Include="Models\Userlogic\IBetJudge.cs" />
     <Compile Include="Models\Userlogic\IBetLogic.cs" />
@@ -388,9 +390,9 @@
     <Content Include="Views\_ViewImports.cshtml" />
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\User\UserCreated.cshtml" />
-    <Content Include="Views\Shared\LoginBox.cshtml" />
-    <Content Include="Views\Shared\MenuBox.cshtml" />
-    <Content Include="Views\Shared\UserBox.cshtml" />
+    <Content Include="Views\Shared\_LoginBox.cshtml" />
+    <Content Include="Views\Shared\_MenuBox.cshtml" />
+    <Content Include="Views\Shared\_UserBox.cshtml" />
     <Content Include="Views\Lobby\Show.cshtml" />
     <Content Include="Views\Lobby\Create.cshtml" />
     <Content Include="Views\Lobby\List.cshtml" />
@@ -410,9 +412,11 @@
     <Content Include="Views\Bet\Concluded.cshtml" />
     <Content Include="Views\Shared\_PrintUserList.cshtml" />
     <Content Include="Views\Lobby\_ListActiveBets.cshtml" />
-    <Content Include="Views\Lobby\_PrintSingleBet.cshtml" />
+    <Content Include="Views\Lobby\_PrintSingleActiveBet.cshtml" />
     <Content Include="Views\Lobby\_ListInactiveBets.cshtml" />
     <Content Include="Views\Shared\_CollapsibleInfoText.cshtml" />
+    <Content Include="Views\Lobby\_PrintSingleCompletedBet.cshtml" />
+    <Content Include="Views\friend\index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

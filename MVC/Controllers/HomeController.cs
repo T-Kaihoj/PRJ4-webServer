@@ -25,7 +25,7 @@ namespace MVC.Controllers
 
         public PartialViewResult LoginBox()
         {
-            return PartialView(new AuthenticationViewModel());
+            return PartialView("_LoginBox", new AuthenticationViewModel());
         }
 
         [HttpGet]
