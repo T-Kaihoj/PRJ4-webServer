@@ -371,6 +371,14 @@ namespace MVC.Controllers
                     return HttpNotFound();
                 }
 
+                // Is the user a member of the bet?
+                var currentUser = myWork.User.Get(GetUserName);
+
+                if (!bet.Participants.Contains(currentUser))
+                {
+                    return HttpForbidden();
+                }
+
                 // Create the viewmodel, and copy over data.
                 var viewmodel = new ShowBetViewModel()
                 {
