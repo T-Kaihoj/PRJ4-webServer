@@ -29,7 +29,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @if (Model.Bets.Any() || Model.BetsJudged.Any())
+                    @if (Model.Bets.Any(b => !b.IsConcluded) || Model.BetsJudged.Any(b => !b.IsConcluded))
                     {
                         foreach (var b in Model.Bets.Where(b => !b.IsConcluded))
                         {
