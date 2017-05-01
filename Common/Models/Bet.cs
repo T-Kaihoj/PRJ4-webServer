@@ -184,10 +184,14 @@ namespace Common.Models
 
         public virtual bool JoinBet(User user, Outcome outcome)
         {
-           
-           if (!this.Lobby.MemberList.Contains(user))
+            if (this.Lobby != null)
             {
-                return false;
+                
+            
+                 if (! (this.Lobby.MemberList.Contains(user)))
+             {
+                    return false;
+             }
             }
 
             // Is the bet concluded?
