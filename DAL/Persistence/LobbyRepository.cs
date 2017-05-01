@@ -15,12 +15,13 @@ namespace DAL.Persistence
         public Lobby GetEager(long id)
         {
             return OurContext.Lobbies
-                .Where(b => b.LobbyId == id)
-                .Include(b => b.Bets)
-                .Include(b => b.MemberList)
-                .Include(b => b.InvitedList)
-                .SingleOrDefault();
+                    .Where(b => b.LobbyId == id)
+                    .Include(b => b.Bets.Select(p => p.Participants))
+                    .Include(b => b.MemberList)
+                    .Include(b => b.InvitedList)
+                    .SingleOrDefault();
         }
+
 
         public Context OurContext
         {
