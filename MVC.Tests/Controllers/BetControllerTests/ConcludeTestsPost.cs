@@ -104,11 +104,18 @@ namespace MVC.Tests.Controllers.BetControllerTests
         {
             long id = 123;
 
+            var bet = new Bet()
+            {
+                BetId = id
+            };
+
             // Create the model.
             var model = new ConcludeViewModel()
             {
                 BetId = id
             };
+
+            BetRepository.Get(Arg.Any<long>()).Returns(bet);
 
             // Act.
             var result = uut.Conclude(model);
@@ -128,11 +135,18 @@ namespace MVC.Tests.Controllers.BetControllerTests
         {
             long id = 123;
 
+            var bet = new Bet()
+            {
+                BetId = id
+            };
+
             // Create the model.
             var model = new ConcludeViewModel()
             {
                 BetId = id
             };
+
+            BetRepository.Get(Arg.Any<long>()).Returns(bet);
 
             // Act.
             var result = uut.Conclude(model);

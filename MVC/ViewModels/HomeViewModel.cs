@@ -15,6 +15,7 @@ namespace MVC.ViewModels
         public IEnumerable<Lobby> InvitedToLobbies { get; set; }
         public ICollection<Bet> Bets { get; set; }
         public ICollection<User> Friendlist { get; set; }
+        public ICollection<Bet> BetsJudged { get; set; }
 
     }
 }

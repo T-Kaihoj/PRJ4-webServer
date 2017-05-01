@@ -217,7 +217,8 @@ namespace MVC.Controllers
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserName = user.Username
+                UserName = user.Username,
+                Balance = user.Balance
             };
 
             return View("Profile", viewModel);

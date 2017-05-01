@@ -36,7 +36,7 @@ namespace MVC.Controllers
 
             // Lookup the user in the repository.
 
-            var user = GetUOF.User.Get(userName);     
+            var user = GetUOF.User.Get(userName);
 
             // Populate the viewmodel.
             var viewModel = new HomeViewModel()
@@ -47,6 +47,9 @@ namespace MVC.Controllers
                 InvitedToLobbies = user.InvitedToLobbies,
                 Bets = user.Bets,
                 Friendlist = user.Friendlist,
+                Username = user.Username,
+                BetsJudged = user.BetsJudged
+               
                Username = user.Username,
                User = user
             };

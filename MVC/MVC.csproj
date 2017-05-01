@@ -419,6 +419,7 @@
     <Content Include="Views\friend\index.cshtml" />
     <Content Include="Views\Bet\_ListActiveBets.cshtml" />
     <Content Include="Views\Bet\_PrintSingleActiveBet.cshtml" />
+    <Content Include="Views\Lobby\RemoveFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
