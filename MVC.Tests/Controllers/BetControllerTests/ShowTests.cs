@@ -113,7 +113,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
-        public void Show_MemberOfBet_ReturnsView()
+        public void Show_MemberOfLobby_ReturnsView()
         {
             // Register a user with the bet.
             string username = "hello";
@@ -146,6 +146,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
                 LobbyId = 1,
                 Name = "lobby"
             };
+            lobby.MemberList.Add(user);
 
             bet.Lobby = lobby;
             LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
@@ -158,7 +159,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
         }
 
         [Test]
-        public void Show_NotMemberOfBet_ReturnsView()
+        public void Show_NotMemberOfLobby_ReturnsView()
         {
             // Register a user with the bet.
             string username = "hello";
@@ -196,6 +197,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
                 LobbyId = 1,
                 Name = "lobby"
             };
+            lobby.MemberList.Add(user);
 
             bet.Lobby = lobby;
             LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
