@@ -28,7 +28,7 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    @if (Model.Bets.Any())
+                    @if (Model.Bets.Any() || Model.BetsJudged.Any())
                     {
                         foreach (var b in Model.Bets)
                         {
@@ -39,15 +39,11 @@
                                     </h4>
                                 </div>
                                 <div class="col-md-8">
-                                    @if (b.Judge.Username == Model.Username)
-                                    {
-                                        <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
-                                    }
-
                                     <!-- TODO: Only show when logged in user is owner of shown bet -->
                                     @if (b.Owner.Username == Model.Username)
                                     {
-                                        <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
+                                        <a href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId" class="btn btn-raised btn-warning">Remove</a>
+
                                     }
                                     <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
                                         @b.BuyIn
@@ -55,10 +51,38 @@
                                     <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @b.StopDate">
                                         <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
                                     </label>
+
+                                </div>
+                            </div>
+                            <hr/>
+                        }
+
+                        foreach (var item in Model.BetsJudged)
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>
+                                        @item.Name
+                                    </h4>
+                                </div>
+                                <div class="col-md-8">
+                                    @if (item.Judge.Username == Model.Username)
+                                    {
+                                        <a href="/Bet/Conclude/@item.BetId" class="btn btn-raised btn-primary">Conclude</a>
+                                    }
+                                   <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @item.BuyIn">
+                                        @item.BuyIn
+                                    </label>
+                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @item.StopDate">
+                                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                    </label>
+
                                 </div>
                             </div>
                             <hr />
+                            
                         }
+
                     }
                     else
                     {
@@ -85,8 +109,8 @@
                                     </h4>
                                 </div>
                                 <div class="col-md-6 text-md-right text-sm-left">
-                                    <a class="btn btn-primary" href="#">Info</a>
-                                    <a class="btn btn-primary" href="/Lobby/Accept/@l.LobbyId">Accept</a>
+                                    <a href="#" class="btn btn-raised btn-info">Info</a>
+                                    <a href="/Lobby/Accept/@l.LobbyId" class="btn btn-raised btn-primary">Accept</a>
                                 </div>
                             </div>
                             <hr />
@@ -119,8 +143,8 @@
                                     </h4>
                                 </div>
                                 <div class="col-md-6 text-md-right text-sm-left">
-                                    <a class="btn btn-primary" href="#">Info</a>
-                                    <a class="btn btn-primary" href="#">messags</a>
+                                    <a class="btn btn-raised btn-info" href="#">Info</a>
+                                    <a class="btn btn-raised btn-info" href="#">messags</a>
                                 </div>
                             </div>
                             <hr />
@@ -153,7 +177,8 @@
                                     </h4>
                                 </div>
                                 <div class="col-md-6 text-md-right text-sm-left">
-                                    <a class="btn btn-primary" href="/Lobby/Show/@l.LobbyId">View</a>
+                                    <a href="/Lobby/Show/@l.LobbyId" class="btn btn-raised btn-info">View</a>
+                                    
                                 </div>
                             </div>
                             <hr />
