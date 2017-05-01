@@ -45,7 +45,7 @@
                                         <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
                                     }
 
-                                    <!-- TODO: Only show when logged in user is owner of shown bet -->
+                                   
                                     @if (b.Owner.Username == Model.Username)
                                     {
                                         @Html.ActionLink("Remove", "Remove", new { controller = "Bet", id =b.BetId }, new { @class = "btn btn-primary pull-right" })

@@ -30,7 +30,8 @@
         
     </td>
     <td>
-        @Html.ActionLink(Model.Name, "Show", "Bet", new { id = Model.BetId })
+        @Html.ActionLink(Model.Name, "Show", new { controller = "Bet", id = Model.BetId })
+
     </td>
     <td>
         @if (Model.Judge.Username == User.Identity.Name)

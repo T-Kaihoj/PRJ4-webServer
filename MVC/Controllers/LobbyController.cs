@@ -39,7 +39,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
-            //TODO: More error handling?
+            
             return Redirect("/Lobby/List");
         }
 
@@ -82,7 +82,7 @@ namespace MVC.Controllers
                 return Redirect($"/Lobby/Show/{lobby.LobbyId}");
             }
 
-            //TODO: Return error.
+           
         }
 
         #endregion
@@ -208,10 +208,7 @@ namespace MVC.Controllers
                     throw new Exception("No such lobby");
                 }
 
-                if (!lobby.RemoveLobby())
-                {
-                    return View("RemoveFailed");
-                }
+                lobby.RemoveLobby();
 
                 myWork.Lobby.Remove(lobby);
                 myWork.Complete();

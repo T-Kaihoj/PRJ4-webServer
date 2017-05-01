@@ -135,7 +135,7 @@ namespace Common.Models
 
             _balance -= amount;
 
-            // TODO: Return balance or amount?
+           
             return amount;
         }
 
@@ -148,7 +148,7 @@ namespace Common.Models
 
             _balance += amount;
 
-            // TODO: Return balance or amount?
+            
             return amount;
         }
     }
