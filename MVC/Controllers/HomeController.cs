@@ -47,7 +47,7 @@ namespace MVC.Controllers
                 InvitedToLobbies = user.InvitedToLobbies,
                 Bets = user.Bets,
                 Friendlist = user.Friendlist,
-               Username = user.Username
+                Username = user.Username
             };
 
             return View("IndexAuth", viewModel);

@@ -53,11 +53,40 @@
                     <div class="row">
                         <div class="col-md-6">
                             <p style="text-align: left; font-size: 20px">
-                                Balance
-                                <span style="float: right;">@Html.DisplayFor(m => m.Balance)</span>
+                            Balance
+                            <span style="float: right;">@Html.DisplayFor(m => m.Balance)</span>
                             <p />
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p style="text-align: left; font-size: 20px">
+                                Friends:
+                            <p />
+                        </div>
+                    </div>
+
+                    @if (Model.Friendlist.Any())
+                    {
+                        foreach (var f in Model.Friendlist)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        @f.FirstName @f.LastName
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 text-md-right text-sm-left">
+                                    <a class="btn btn-primary" href="#">Info</a>
+                                    <a class="btn btn-primary" href="#">messags</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>You have no Friendss</p>
+                    }
                         <div class="row">
                             <div class="col-md-12">
                                @Html.ActionLink("Edit", "EditProfile", "User", new {@class="btn btn-raised btn-primary pull-right"})
