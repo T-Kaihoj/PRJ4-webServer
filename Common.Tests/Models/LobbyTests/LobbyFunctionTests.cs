@@ -108,7 +108,7 @@ namespace Common.Tests.Models
         #region RemoveLobby
 
         [Test]
-        public void RemoveLobb_WithInvitedUsersAndMemebers_RemovesMembersAndClears()
+        public void RemoveLobby_WithInvitedUsersAndMemebers_RemovesMembersAndClears()
         {
             // Create users, bets and outcomes.
             var user1 = Substitute.For<User>();
@@ -137,10 +137,12 @@ namespace Common.Tests.Models
 
             bet1.Outcomes.Add(outcome11);
             bet1.Outcomes.Add(outcome12);
+            bet1.Result = outcome11;
 
             bet2.Outcomes.Add(outcome21);
             bet2.Outcomes.Add(outcome22);
             bet2.Outcomes.Add(outcome23);
+            bet2.Result = outcome23;
 
             _uut.InvitedList.Add(iUser1);
             _uut.InvitedList.Add(iUser2);
@@ -161,6 +163,52 @@ namespace Common.Tests.Models
             
             Assert.That(_uut.InvitedList, Has.Count.Zero);
             Assert.That(_uut.MemberList, Has.Count.Zero);
+        }
+
+        [Test]
+        public void RemoveLobby_WithActiveBet_Fails()
+        {
+            // Create users, bets and outcomes.
+            var user1 = Substitute.For<User>();
+            var user2 = Substitute.For<User>();
+            var user3 = Substitute.For<User>();
+
+            var bet1 = new Bet();
+            var bet2 = new Bet();
+
+            var outcome11 = new Outcome();
+            var outcome12 = new Outcome();
+            var outcome21 = new Outcome();
+            var outcome22 = new Outcome();
+            var outcome23 = new Outcome();
+
+            // Link outcomes, bets and users.
+            outcome11.Participants.Add(user1);
+            outcome12.Participants.Add(user3);
+
+            outcome21.Participants.Add(user1);
+            outcome22.Participants.Add(user2);
+            outcome23.Participants.Add(user3);
+
+            bet1.Outcomes.Add(outcome11);
+            bet1.Outcomes.Add(outcome12);
+
+            bet2.Outcomes.Add(outcome21);
+            bet2.Outcomes.Add(outcome22);
+            bet2.Outcomes.Add(outcome23);
+
+            _uut.MemberList.Add(user1);
+            _uut.MemberList.Add(user2);
+            _uut.MemberList.Add(user3);
+
+            _uut.Bets.Add(bet1);
+            _uut.Bets.Add(bet2);
+
+            // Act.
+            var result = _uut.RemoveLobby();
+
+            // Ensure the lobby is not removed.
+            Assert.That(result, Is.False);
         }
 
         #endregion

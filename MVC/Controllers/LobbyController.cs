@@ -39,7 +39,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
-            //TODO: More error handling?
+            
             return Redirect("/Lobby/List");
         }
 
@@ -82,7 +82,7 @@ namespace MVC.Controllers
                 return Redirect($"/Lobby/Show/{lobby.LobbyId}");
             }
 
-            //TODO: Return error.
+           
         }
 
         #endregion
@@ -226,7 +226,7 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 // Get the lobby from the database.
-                var lobby = myWork.Lobby.Get(id);
+                var lobby = myWork.Lobby.GetEager(id);
 
                 if (lobby == null)
                 {
