@@ -12,6 +12,7 @@ namespace Common.Models
         private string _name;
         private string _description;
         private readonly IUtility _utility;
+        private decimal _pot;
 
         #region Constructors
 
@@ -66,7 +67,17 @@ namespace Common.Models
         public Decimal BuyIn { get; set; }
 
         [ExcludeFromCodeCoverage]
-        public Decimal Pot { get; set; }
+        public Decimal Pot
+        {
+            get { return _pot; }
+            set
+            {
+                if(value < 0)
+                    throw new BetPotMustBePossitive();
+
+                _pot = value;
+            }
+        }
 
         [NotMapped]
         public ICollection<User> Participants
@@ -184,10 +195,14 @@ namespace Common.Models
 
         public virtual bool JoinBet(User user, Outcome outcome)
         {
-           
-           if (!this.Lobby.MemberList.Contains(user))
+            if (this.Lobby != null)
             {
-                return false;
+                
+            
+                 if (! (this.Lobby.MemberList.Contains(user)))
+             {
+                    return false;
+             }
             }
 
             // Is the bet concluded?

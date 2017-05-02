@@ -226,7 +226,7 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 // Get the lobby from the database.
-                var lobby = myWork.Lobby.Get(id);
+                var lobby = myWork.Lobby.GetEager(id);
 
                 if (lobby == null)
                 {

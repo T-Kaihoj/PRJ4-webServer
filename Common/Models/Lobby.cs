@@ -116,7 +116,7 @@ namespace Common.Models
             MemberList.Remove(user);
 
             // Remove the reverse association.
-            
+            user.MemberOfLobbies.Remove(this);
         }
 
         private void RemoveMemberFromBets(User user)
@@ -131,6 +131,6 @@ namespace Common.Models
             }
         }
 
-
+      
     }
 }

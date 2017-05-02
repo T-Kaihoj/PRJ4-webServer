@@ -133,6 +133,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buy in must be positive.
+        /// </summary>
+        public static string ErrorBuyinMustBePositive {
+            get {
+                return ResourceManager.GetString("ErrorBuyinMustBePositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy in is required.
         /// </summary>
         public static string ErrorBuyInRequired {

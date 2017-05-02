@@ -141,6 +141,9 @@
   <data name="DisplayTitle" xml:space="preserve">
     <value>Title</value>
   </data>
+  <data name="ErrorBuyinMustBePositive" xml:space="preserve">
+    <value>Buy in must be positive</value>
+  </data>
   <data name="ErrorBuyInRequired" xml:space="preserve">
     <value>Buy in is required</value>
   </data>

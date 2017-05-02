@@ -107,6 +107,8 @@ namespace MVC.Tests.Controllers.BetControllerTests
             var user = new User();
             UserRepository.Get(Arg.Is(userName)).Returns(user);
             userContext.Identity.Name.Returns(userName);
+            bet.Lobby = new Lobby();
+            bet.Lobby.MemberList.Add(user);
 
             OutcomeRepository.Get(Arg.Is(id)).Returns(outcome);
 
@@ -142,11 +144,15 @@ namespace MVC.Tests.Controllers.BetControllerTests
 
             bet.Result = outcome;
 
+
             string userName = "username";
             var user = new User();
+            bet.Lobby = new Lobby();
+            bet.Lobby.MemberList.Add(user);
+           
             UserRepository.Get(Arg.Is(userName)).Returns(user);
             userContext.Identity.Name.Returns(userName);
-
+            
             OutcomeRepository.Get(Arg.Is(id)).Returns(outcome);
 
             // Act.

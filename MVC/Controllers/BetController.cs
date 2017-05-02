@@ -160,11 +160,16 @@ namespace MVC.Controllers
                 ModelState.AddModelError("StopDate", Resources.Bet.ErrorEndDateBeforeStartDate);
             }
 
+            if (viewModel.BuyInDecimal < 0)
+            {
+                ModelState.AddModelError("Buyin", Resources.Bet.ErrorBuyinMustBePositive);
+            }
+
             if (!ModelState.IsValid)
             {
                 return View("Create", viewModel);
             }
-
+            
             using (var myWork = GetUOF)
             {
                 // Create the bet.
@@ -372,6 +377,14 @@ namespace MVC.Controllers
                 if (bet == null)
                 {
                     return HttpNotFound();
+                }
+
+                // Is the user a member of the lobby?
+                var currentUser = myWork.User.Get(GetUserName);
+
+                if (!bet.Lobby.MemberList.Contains(currentUser))
+                {
+                    return HttpForbidden();
                 }
 
                 // Create the viewmodel, and copy over data.
