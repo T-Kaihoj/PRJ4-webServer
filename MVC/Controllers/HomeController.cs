@@ -48,10 +48,8 @@ namespace MVC.Controllers
                 Bets = user.Bets,
                 Friendlist = user.Friendlist,
                 Username = user.Username,
-                BetsJudged = user.BetsJudged
-               
-               Username = user.Username,
-               User = user
+                BetsJudged = user.BetsJudged,
+                User = user
             };
 
             return View("IndexAuth", viewModel);
