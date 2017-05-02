@@ -182,7 +182,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BetController.cs" />
-    <Compile Include="Controllers\friendController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -417,6 +417,9 @@
     <Content Include="Views\Shared\_CollapsibleInfoText.cshtml" />
     <Content Include="Views\Lobby\_PrintSingleCompletedBet.cshtml" />
     <Content Include="Views\friend\index.cshtml" />
+    <Content Include="Views\Bet\_ListActiveBets.cshtml" />
+    <Content Include="Views\Bet\_PrintSingleActiveBet.cshtml" />
+    <Content Include="Views\Lobby\RemoveFailed.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
