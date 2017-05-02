@@ -119,12 +119,15 @@ namespace MVC.Controllers
         [HttpGet]
         public ActionResult Create(long id)
         {
-            var viewModel = new CreateBetViewModel()
+            using (var myWork = GetUOF)
             {
-                LobbyId = id
-            };
-
-            return View("Create", viewModel);
+                var viewModel = new CreateBetViewModel()
+                {
+                    LobbyId = id,
+                    Participants = myWork.Lobby.Get(id).MemberList
+                };
+                return View("Create", viewModel);
+            }
         }
 
         // POST: /<controller>/Create
