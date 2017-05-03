@@ -28,32 +28,32 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                                <b>Lastname</b>
-                                <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.LastName)</span>
+                            <b>Lastname</b>
+                            <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.LastName)</span>
                             <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                                <b>Email</b>
-                                <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.Email)</span>
+                            <b>Email</b>
+                            <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.Email)</span>
                             <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                                <b>Username</b>
-                                <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.UserName)</span>
+                            <b>Username</b>
+                            <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.UserName)</span>
                             <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                                <b>Balance</b>
-                                <span style="float: right; font-size: 18px; color: limegreen;font-weight: bold">@Html.DisplayFor(m => m.Balance)</span>
+                            <b>Balance</b>
+                            <span style="float: right; font-size: 18px; color: limegreen;font-weight: bold">@Html.DisplayFor(m => m.Balance)</span>
                             <p />
                         </div>
                     </div>
@@ -62,39 +62,9 @@
                             @Html.ActionLink("Edit", "EditProfile", "User", new { @class = "btn btn-raised btn-primary pull-right" })
                         </div>
                     </div>
-                    <hr />
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p style="text-align: left; font-size: 20px">
-                                <b>Friends</b>
-                            <p />
-                        </div>
-                    </div>
-
-                    @if (Model.Friendlist.Any())
-                    {
-                        foreach (var f in Model.Friendlist)
-                        {
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h4>
-                                        @f.FirstName @f.LastName
-                                    </h4>
-                                </div>
-                                <div class="col-md-6 text-md-right text-sm-left">
-                                    <a class="btn  btn-raised btn-info" href="#">Info</a>
-                                    <a class="btn btn-raised btn-info" href="#">messages</a>
-                                </div>
-                            </div>
-                            <hr />
-                        }
-                    }
-                    else
-                    {
-                        <p>You have no Friendss</p>
-                    }
                 </div>
             </div>
+            @Html.Partial("_FriendsList", Model.Friendlist)
         </div>
         <div class="col-md-6">
             <div class="panel panel-primary">

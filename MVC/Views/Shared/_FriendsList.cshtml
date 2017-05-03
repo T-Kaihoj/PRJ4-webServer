@@ -14,21 +14,22 @@
             <div>
                 <table class="table vert-align" id="friendsTable">
                     <tbody>
-                        @foreach (var f in Model)
-                        {
-                            <tr>
-                                <td class="col-md-6 col-xs-8">
-                                    @f.FirstName @f.LastName
-                                </td>
-                                <td class="col-md-6 col-xs-4 text-right">
-                                    <a class="btn btn-raised btn-info" href="#">Info</a>
-                                    <a class="btn btn-raised btn-info" href="#">Message</a>
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var f in Model)
+                    {
+                        <tr>
+                            <td class="col-md-6 col-xs-8">
+                                @f.FirstName @f.LastName
+                            </td>
+                            <td class="col-md-6 col-xs-4 text-right">
+                                <a class="btn btn-raised btn-primary" href="#">Info</a>
+                                <a class="btn btn-raised btn-primary" href="#">Message</a>
+                            </td>
+                        </tr>
+                    }
                     </tbody>
                 </table>
             </div>
+            <hr/>
         }
         else
         {
@@ -36,7 +37,7 @@
         }
         <div class="row">
             <div class="col-md-12">
-                @Html.ActionLink("Add Friends", "Index", new { controller = "Friend" }, new { @class = "btn btn-raised btn-info" })
+                @Html.ActionLink("Add Friends", "Index", new { controller = "Friend" }, new { @class = "btn btn-raised btn-primary pull-right" })
             </div>
         </div>
     </div>
