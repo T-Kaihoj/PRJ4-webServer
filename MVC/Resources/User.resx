@@ -135,6 +135,9 @@
   <data name="DisplayUserName" xml:space="preserve">
     <value>User name</value>
   </data>
+  <data name="ErrorDepositRequired" xml:space="preserve">
+    <value>Please provide amount you want to deposit</value>
+  </data>
   <data name="ErrorEmailInUse" xml:space="preserve">
     <value>The email is already in use</value>
   </data>
@@ -179,5 +182,8 @@
   </data>
   <data name="ErrorUserNameWhitespace" xml:space="preserve">
     <value>Username may not contain whitespaces</value>
+  </data>
+  <data name="ErrorWithdrawRequired" xml:space="preserve">
+    <value>Please provide amount you want to withdraw</value>
   </data>
 </root>

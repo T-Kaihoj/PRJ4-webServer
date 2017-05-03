@@ -20,7 +20,7 @@
                         Your balance: @Model.CurrentBalance
                     </h2>
 
-                    @using (Html.BeginForm("Deposit", "User", FormMethod.Post))
+                    @using (Html.BeginForm("Deposit", "User", FormMethod.Post, new { @id = "DepositMoneyForm" }))
                     {
                         <div class=" form-group label-floating">
                             @Html.LabelFor(m => m.Deposit, new { @class = "control-label" })
@@ -45,7 +45,25 @@
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
+        $(function () {
+            $("DepositMoneyForm").validate({
+                rules: {
+                    Deposit: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    Deposit: {
+                        required: "@Resources.User.ErrorDepositRequired"
+                    }
+                },
+
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
             findErrorTags();
         });
     </script>

@@ -86,5 +86,14 @@ namespace Resources {
                 return ResourceManager.GetString("ErrorUserAlreadyInLobby", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A user name is required.
+        /// </summary>
+        public static string ErrorUserNameRequired {
+            get {
+                return ResourceManager.GetString("ErrorUserNameRequired", resourceCulture);
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@
     </div>
     <div id="collapse_invite" class="panel-collapse collapse">
         <div class="panel-body">
-            @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post))
+            @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post, new { @id = "InviteUserToLobbyForm" }))
             {
                 <div class="form-group label-floating">
                     @Html.LabelFor(m => m.Username, new { @class = "control-label" })
@@ -29,6 +29,26 @@
 @section Scripts
 {
     <script>
-        $(document).ready(findErrorTags);
+        $(function() {
+            $("#InviteUserToLobbyForm").validate({
+                rules: {
+                    Username: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    Username: {
+                        required: "@Resources.Lobby.ErrorUserNameRequired"
+                    }
+                },
+
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+
+            findErrorTags();
+        });
     </script>
 }

@@ -19,7 +19,7 @@
                     <div>
                         @Model.Description
                     </div>
-                    @using (Html.BeginForm("Conclude", "Bet", FormMethod.Post))
+                    @using (Html.BeginForm("Conclude", "Bet", FormMethod.Post, new { @id = "ConcludeBetForm" }))
                     {
                         <div class="form-group">
                             @foreach (var outcome in Model.Outcomes)
@@ -53,6 +53,24 @@
 {
     <script>
         $(function () {
+            $("#ConcludeBetForm").validate({
+                rules: {
+                    SelectedOutcome: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    SelectedOutcome: {
+                        required: "@Resources.Bet.ErrorSelectOutcomeRequired"
+                    }
+                },
+
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+
             findErrorTags();
         });
     </script>
