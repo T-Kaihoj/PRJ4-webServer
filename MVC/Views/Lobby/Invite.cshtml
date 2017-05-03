@@ -1,14 +1,25 @@
 ﻿
 @model  MVC.ViewModels.InviteToLobbyViewModel
 
+@{
+    var collapseClass = "panel-collapse collapse";
+    var headerClass = "panel-heading collapsed";
+
+    if (Html.ValidationMessageFor(m => m.Username).ToString().Contains("field-validation-error"))
+    {
+        collapseClass += " in";
+        headerClass = "panel-heading";
+    }
+}
+
 <div class="panel panel-primary">
-    <div class="panel-heading collapsed" data-toggle="collapse" data-target="#collapse_invite">
+    <div class="@headerClass" data-toggle="collapse" data-target="#collapse_invite">
         <h1 class="panel-title">
             Invite user to lobby
             @Html.Partial("_CollapsibleInfoText")
         </h1>
     </div>
-    <div id="collapse_invite" class="panel-collapse collapse">
+    <div id="collapse_invite" class="@collapseClass">
         <div class="panel-body">
             @using (Html.BeginForm("Invite", "Lobby", FormMethod.Post, new { @id = "InviteUserToLobbyForm" }))
             {
