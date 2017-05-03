@@ -17,8 +17,8 @@
                 </div>
                 <div class="panel-body">
                     <p style="text-align: left; font-size: 20px">
-                        <span style="font-size: 18px; color:limegreen; font-weight: bold;">@Model.CurrentBalance</span>
                         <b>Your balance:</b>
+                        <span style="font-size: 18px; color:black; font-weight: bold;">@Model.CurrentBalance</span>
                     </p>
                     @using (Html.BeginForm("Withdraw", "User", FormMethod.Post, new { @id = "WithdrawMoneyForm" }))
                     {
