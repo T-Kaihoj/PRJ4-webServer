@@ -147,7 +147,6 @@
                     <h3 class="panel-title">
                         Friendlist
                         <span class="pull-right">
-                            @Html.ActionLink("Add Friends", "Index", new { controller = "Friend" }, new { @class = "pull-right" })
                         </span>
                     </h3>
                 </div>
@@ -174,6 +173,7 @@
                     {
                         <p>You have no friends</p>
                     }
+                    @Html.ActionLink("Add Friends", "Index", new { controller = "Friend" }, new { @class = "btn btn-raised btn-info pull-right" })
                 </div>
             </div>
         </div>
