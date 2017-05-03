@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
 using Common.Models;
 using MVC.Controllers;
@@ -47,7 +48,8 @@ namespace MVC.Tests.Controllers.UserControllerTests
                 Email = "a@a.a",
                 FirstName = "first",
                 LastName = "last",
-                Username = "test"
+                Username = "test",
+                Outcomes = new List<Outcome>()
             };
 
             context.Identity.Name.Returns(user.Username);
@@ -71,7 +73,8 @@ namespace MVC.Tests.Controllers.UserControllerTests
                 Email = "a@a.a",
                 FirstName = "first",
                 LastName = "last",
-                Username = "test"
+                Username = "test",
+                Outcomes = new List<Outcome>()
             };
 
             context.Identity.Name.Returns(user.Username);

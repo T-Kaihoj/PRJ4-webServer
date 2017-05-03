@@ -13,7 +13,8 @@ namespace MVC.ViewModels
         private string _userName = string.Empty;
         private decimal _balance = 0;
         private ICollection<User> _friendlist = new List<User>();
-
+        private ICollection<Bet> _bets = new List<Bet>();
+        private ICollection<Lobby> _lobbies = new List<Lobby>();
 
         #region Accessors.
 
@@ -95,6 +96,31 @@ namespace MVC.ViewModels
             }
         }
 
+        public ICollection<Bet> Bets
+        {
+            get
+            {
+                return _bets;
+            }
+
+            set
+            {
+                _bets = value;
+            }
+        }
+
+        public ICollection<Lobby> Lobbies
+        {
+            get
+            {
+                return _lobbies;
+            }
+
+            set
+            {
+                _lobbies = value;
+            }
+        }
         #endregion
     }
 }
