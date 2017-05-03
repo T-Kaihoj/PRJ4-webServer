@@ -19,12 +19,12 @@
                     <div>
                         @Model.Description
                     </div>
-                    @using (Html.BeginForm("Conclude", "Bet", FormMethod.Post))
+                    @using (Html.BeginForm("Conclude", "Bet", FormMethod.Post, new { @id = "ConcludeBetForm" }))
                     {
                         <div class="form-group">
                             @foreach (var outcome in Model.Outcomes)
                             {
-                                <div class="radio">
+                                <div>
                                     <label>
                                         <input id="@outcome.Id"
                                                name="SelectedOutcome"
