@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Common;
 using Common.Models;
 using MVC.Identity;
+using MVC.Others;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -227,11 +228,15 @@ namespace MVC.Controllers
             {
                 // Get the lobby from the database.
                 var lobby = myWork.Lobby.GetEager(id);
-
+                var user = myWork.User.Get(_userContext.Identity.Name);
                 if (lobby == null)
                 {
                     // Error.
                     throw new Exception("No such lobby");
+                }
+                if (!lobby.MemberList.Contains(user))
+                {
+                    return new HttpForbiddenResult();
                 }
 
                 var myBets = new List<Bet>();
