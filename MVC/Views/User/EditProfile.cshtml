@@ -9,8 +9,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-        </div>
-        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -54,6 +52,8 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+        </div>
     </div>
 </div>
 
@@ -70,9 +70,6 @@
                     LastName: {
                         required: true
                     },
-                    UserName: {
-                        required: true
-                    },
                     Email: {
                         required: true
                     }
@@ -84,9 +81,6 @@
                     },
                     LastName: {
                         required: "@Resources.User.ErrorLastNameRequired"
-                    },
-                    UserName: {
-                        required: "@Resources.User.ErrorUserNameRequired"
                     },
                     Email: {
                         required: "@Resources.User.ErrorEmailRequired"
