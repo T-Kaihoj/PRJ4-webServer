@@ -2,31 +2,67 @@
 @using MVC.ViewModels;
 
 @{
-    ViewData["Title"] = "friends";
+    ViewData["Title"] = "Invite friend";
 }
 
-@model MVC.ViewModels.FriendAddViewmodel
+@model FriendAddViewmodel
 
 <div class="container">
-
-    <form method="post">
-        <div class="col-md-3">
+    <div class="row">
+        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Add friend</h3>
+                    <h3 class="panel-title">
+                        Invite user
+                    </h3>
                 </div>
                 <div class="panel-body">
-                    <div class="row form-group label-floating">
-                        <p style="text-align: left; font-size: 20px"><b>Type in username</b></p><br />
-                        <input type="text" id="UserNamesername" name="Username" value="@Model.Username" /> <br />
-                    </div>
-                    <div class="row form-group label-floating">
-                        <input type="submit" value="Add Friend" class="btn btn-raised btn-info">
-                    </div>
+                    @using (Html.BeginForm("Index", "Friend", FormMethod.Post, new { @id = "addFriendForm" }))
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating">
+                                    @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(m => m.Username)
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="submit" class="btn btn-raised btn-primary">Invite</button>
+                            </div>
+                        </div>
+                    }
                 </div>
-
             </div>
         </div>
-    </form>
+    </div>
 </div>
 
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            $("#addFriendForm").validate({
+                rules: {
+                    Username: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    Username: {
+                        required: "Username is required"
+                    }
+                },
+
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
+            findErrorTags();
+        });
+    </script>
+}
