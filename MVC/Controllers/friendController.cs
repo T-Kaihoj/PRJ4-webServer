@@ -39,6 +39,8 @@ namespace MVC.Controllers
                 //Returning different does not exist
                 if (friend == null)
                 {
+                    ModelState.AddModelError("Username", "User does not exist");
+
                     return View(model);
                 }
 
