@@ -18,9 +18,8 @@
                 <div class="panel-body">
                     <p style="text-align: left; font-size: 20px">
                         <b>Your balance:</b>
-                        <span style="font-size: 18px; color: lawngreen; font-weight: bold;">@Model.CurrentBalance</span>
+                        <span style="font-size: 18px; color:limegreen; font-weight: bold;">@Model.CurrentBalance</span>
                     </p>
-
                     @using (Html.BeginForm("Withdraw", "User", FormMethod.Post))
                     {
                         <div class="form-group label-floating">
