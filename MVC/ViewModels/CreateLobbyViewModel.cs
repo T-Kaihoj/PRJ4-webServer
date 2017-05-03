@@ -4,7 +4,8 @@ namespace MVC.ViewModels
 {
     public class CreateLobbyViewModel
     {
-        [Required(ErrorMessage = "Please enter a name")]
+        [Required(ErrorMessageResourceType = typeof(Resources.Lobby),
+            ErrorMessageResourceName = "ErrorLobbyNameRequired")]
         public string Name { get; set; }
     }
 }

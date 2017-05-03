@@ -70,11 +70,29 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must write a name for the lobby.
+        /// </summary>
+        public static string ErrorLobbyNameRequired {
+            get {
+                return ResourceManager.GetString("ErrorLobbyNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User is already a member of the lobby.
         /// </summary>
         public static string ErrorUserAlreadyInLobby {
             get {
                 return ResourceManager.GetString("ErrorUserAlreadyInLobby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A user name is required.
+        /// </summary>
+        public static string ErrorUserNameRequired {
+            get {
+                return ResourceManager.GetString("ErrorUserNameRequired", resourceCulture);
             }
         }
     }

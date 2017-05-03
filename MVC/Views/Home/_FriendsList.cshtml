@@ -1,0 +1,51 @@
+﻿@using Common.Models;
+
+@model ICollection<User>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Friendlist
+        </h3>
+    </div>
+    <div class="panel-body">
+        @if (Model.Any())
+        {
+            <div>
+                <table class="table vert-align" id="friendsTable">
+                    <tbody>
+                        @foreach (var f in Model)
+                        {
+                            <tr>
+                                <td class="col-md-6 col-xs-8">
+                                    @f.FirstName @f.LastName
+                                </td>
+                                <td class="col-md-6 col-xs-4 text-right">
+                                    <a class="btn btn-raised btn-info" href="#">Info</a>
+                                    <a class="btn btn-raised btn-info" href="#">Message</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>You have no friends</p>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Add Friends", "Index", new { controller = "Friend" }, new { @class = "btn btn-raised btn-info" })
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#friendsTable tr:first td").each(function () {
+            $(this).css("border-top", "0px");
+        });
+    });
+</script>
+
