@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using Common.Models;
@@ -17,8 +16,8 @@ namespace MVC.ViewModels
         private string _outcome2 = string.Empty;
         private string _outcome1 = string.Empty;
         private string _title = string.Empty;
-        private string _startDate = string.Empty;
-        private string  _stopDate = string.Empty;
+        private string _startDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        private string _stopDate = (DateTime.Now + TimeSpan.FromDays(1)).ToString("dd/MM/yyyy HH:mm");
         private ICollection<User> _participants;
 
         public ICollection<User> Participants

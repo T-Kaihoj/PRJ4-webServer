@@ -9,8 +9,6 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-        </div>
-        <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -25,14 +23,14 @@
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.FirstName)
                                 </div>
                             </div>
                             <div class="col-md-6 ">
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.LastName)
                                 </div>
                             </div>
                         </div>
@@ -41,7 +39,7 @@
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.Email, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.Email)
                                 </div>
                             </div>
                         </div>
@@ -53,6 +51,8 @@
                     }
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
         </div>
     </div>
 </div>
@@ -70,9 +70,6 @@
                     LastName: {
                         required: true
                     },
-                    UserName: {
-                        required: true
-                    },
                     Email: {
                         required: true
                     }
@@ -85,9 +82,6 @@
                     LastName: {
                         required: "@Resources.User.ErrorLastNameRequired"
                     },
-                    UserName: {
-                        required: "@Resources.User.ErrorUserNameRequired"
-                    },
                     Email: {
                         required: "@Resources.User.ErrorEmailRequired"
                     }
@@ -98,5 +92,7 @@
                 }
             });
         });
+
+        findErrorTags();
     </script>
 }

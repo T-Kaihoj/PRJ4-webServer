@@ -115,6 +115,33 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a smaller number.
+        /// </summary>
+        public static string ErrorDecimalTooLarge {
+            get {
+                return ResourceManager.GetString("ErrorDecimalTooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deposit must be a number.
+        /// </summary>
+        public static string ErrorDepositMustBeNumber {
+            get {
+                return ResourceManager.GetString("ErrorDepositMustBeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide amount you want to deposit.
+        /// </summary>
+        public static string ErrorDepositRequired {
+            get {
+                return ResourceManager.GetString("ErrorDepositRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The email is already in use.
         /// </summary>
         public static string ErrorEmailInUse {
@@ -237,6 +264,33 @@ namespace Resources {
         public static string ErrorUserNameTaken {
             get {
                 return ResourceManager.GetString("ErrorUserNameTaken", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username may not contain whitespaces.
+        /// </summary>
+        public static string ErrorUserNameWhitespace {
+            get {
+                return ResourceManager.GetString("ErrorUserNameWhitespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Withdraw must be a number.
+        /// </summary>
+        public static string ErrorWithdrawMustBeNumber {
+            get {
+                return ResourceManager.GetString("ErrorWithdrawMustBeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide amount you want to withdraw.
+        /// </summary>
+        public static string ErrorWithdrawRequired {
+            get {
+                return ResourceManager.GetString("ErrorWithdrawRequired", resourceCulture);
             }
         }
     }
