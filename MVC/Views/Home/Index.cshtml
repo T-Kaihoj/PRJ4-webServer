@@ -35,14 +35,14 @@
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.FirstName, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.FirstName, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.FirstName)
                                 </div>
                             </div>
                             <div class="col-md-6 ">
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.LastName, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.LastName, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.LastName)
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.UserName, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.UserName, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.UserName)
                                 </div>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.Email, new { @class = "control-label" })
                                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.Email)
                                 </div>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.Password1, new { @class = "control-label" })
                                     @Html.PasswordFor(m => m.Password1, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Password1, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.Password1)
                                 </div>
                             </div>
                         </div>
@@ -78,7 +78,7 @@
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.Password2, new { @class = "control-label" })
                                     @Html.PasswordFor(m => m.Password2, new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(m => m.Password2, null, new { @class = "help-block" })
+                                    @Html.ValidationMessageFor(m => m.Password2)
                                 </div>
                             </div>
                         </div>
@@ -99,7 +99,10 @@
     <script>
         // Setup validation of the "createUserForm"
         $(function () {
-            findErrorTags();
+            $.validator.addMethod("regex", function(value, element, regexpr) {
+                return regexpr.test(value);
+            }, "@Resources.User.ErrorUserNameWhitespace");
+
             $("#createUserForm").validate({
                 rules: {
                     FirstName: {
@@ -109,7 +112,8 @@
                         required: true
                     },
                     UserName: {
-                        required: true
+                        required: true,
+                        regex: /^\S*$/
                     },
                     Email: {
                         required: true
@@ -131,7 +135,8 @@
                         required: "@Resources.User.ErrorLastNameRequired"
                     },
                     UserName: {
-                        required: "@Resources.User.ErrorUserNameRequired"
+                        required: "@Resources.User.ErrorUserNameRequired",
+                        regex: "@Resources.User.ErrorUserNameWhitespace"
                     },
                     Email: {
                         required: "@Resources.User.ErrorEmailRequired"
@@ -149,6 +154,8 @@
                     form.submit();
                 }
             });
+
+            findErrorTags();
         });
     </script>
 }

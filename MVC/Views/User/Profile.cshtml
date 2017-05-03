@@ -21,43 +21,72 @@
                     <div class="row">
                          <div class="col-md-6" >
                              <p style="text-align: left; font-size: 20px">
-                                    Firstname
-                             <span style="float: right;">@Html.DisplayFor(m => m.FirstName)</span>
+                                    <b>Firstname</b>
+                             <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.FirstName)</span>
                                  <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <p style="text-align: left; font-size: 20px">
-                                Lastname
-                                <span style="float: right;">@Html.DisplayFor(m => m.LastName)</span>
+                                <b>Lastname</b>
+                                <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.LastName)</span>
                             <p />
                         </div>
                 </div>
                     <div class="row">
                         <div class="col-md-6">
                             <p style="text-align: left; font-size: 20px">
-                                Email
-                                <span style="float: right;">@Html.DisplayFor(m => m.Email)</span>
+                                <b>Email</b>
+                                <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.Email)</span>
                             <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <p style="text-align: left; font-size: 20px">
-                            Username
-                            <span style="float: right;">@Html.DisplayFor(m => m.UserName)</span>
+                                <b>Username</b>
+                            <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.UserName)</span>
                             <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <p style="text-align: left; font-size: 20px">
-                                Balance
-                                <span style="float: right;">@Html.DisplayFor(m => m.Balance)</span>
+                                <b>Balance</b>
+                            <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.Balance)</span>
                             <p />
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p style="text-align: left; font-size: 20px">
+                                <b>Friends</b>
+                            <p />
+                        </div>
+                    </div>
+
+                    @if (Model.Friendlist.Any())
+                    {
+                        foreach (var f in Model.Friendlist)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        @f.FirstName @f.LastName
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 text-md-right text-sm-left">
+                                    <a class="btn  btn-raised btn-primary" href="#">Info</a>
+                                    <a class="btn btn-raised btn-primary" href="#">messages</a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>You have no Friendss</p>
+                    }
                         <div class="row">
                             <div class="col-md-12">
                                @Html.ActionLink("Edit", "EditProfile", "User", new {@class="btn btn-raised btn-primary pull-right"})
