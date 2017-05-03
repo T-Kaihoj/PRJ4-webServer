@@ -21,7 +21,7 @@
                         <span style="font-size: 18px; color: limegreen; font-weight: bold;">@Model.CurrentBalance</span>
                     </p>
 
-                    @using (Html.BeginForm("Deposit", "User", FormMethod.Post))
+                    @using (Html.BeginForm("Deposit", "User", FormMethod.Post, new { @id = "DepositMoneyForm" }))
                     {
                         <div class=" form-group label-floating">
                             @Html.LabelFor(m => m.Deposit, new { @class = "control-label" })
@@ -46,7 +46,31 @@
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
+        $(function () {
+            $("#DepositMoneyForm").validate({
+                rules: {
+                    Deposit: {
+                        required: true,
+                        number: true,
+                        min: 0,
+                        max: @Decimal.MaxValue
+                    }
+                },
+
+                messages: {
+                    Deposit: {
+                        required: "@Resources.User.ErrorDepositRequired",
+                        number: "@Resources.User.ErrorDepositMustBeNumber",
+                        min: "@Resources.User.ErrorNegativeDeposit",
+                        max: "@Resources.User.ErrorDecimalTooLarge"
+                    }
+                },
+
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
             findErrorTags();
         });
     </script>

@@ -16,7 +16,7 @@
                     </h1>
                 </div>
                 <div class="panel-body">
-                @using (Html.BeginForm("Create", "Lobby", FormMethod.Post))
+                @using (Html.BeginForm("Create", "Lobby", FormMethod.Post, new { @id = "CreateLobbyForm" }))
                 {
                     <div class="form-group label-floating">
                         @Html.LabelFor(m => m.Name, new {@class = "control-label"})
@@ -41,7 +41,25 @@
 @section Scripts
 {
     <script>
-        $(function() {
+        $(function () {
+            $("#CreateLobbyForm").validate({
+                rules: {
+                    Name: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    Name: {
+                        required: "@Resources.Lobby.ErrorLobbyNameRequired"
+                    }
+                },
+
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
             findErrorTags();
         });
     </script>

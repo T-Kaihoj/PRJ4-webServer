@@ -8,8 +8,6 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-        </div>
         <div class="col-md-6">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -19,33 +17,33 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                         <div class="col-md-12" >
-                             <p style="text-align: left; font-size: 20px">
-                                    <b>Firstname</b>
-                             <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.FirstName)</span>
-                                 <p />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-6" >
                             <p style="text-align: left; font-size: 20px">
-                                <b>Lastname</b>
-                                <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.LastName)</span>
-                            <p />
-                        </div>
-                </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p style="text-align: left; font-size: 20px">
-                                <b>Email</b>
-                                <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.Email)</span>
+                            <b>Firstname</b>
+                            <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.FirstName)</span>
                             <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                                <b>Username</b>
+                            <b>Lastname</b>
+                            <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.LastName)</span>
+                            <p />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="text-align: left; font-size: 20px">
+                            <b>Email</b>
+                            <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.Email)</span>
+                            <p />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="text-align: left; font-size: 20px">
+                            <b>Username</b>
                             <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.UserName)</span>
                             <p />
                         </div>
@@ -53,15 +51,15 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                                <b>Balance</b>
-                            <span style="float: right; font-size: 18px; color: limegreen; font-weight: bold;">@Html.DisplayFor(m => m.Balance)</span>
+                            <b>Balance</b>
+                            <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.Balance)</span>
                             <p />
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                                <b>Friends</b>
+                            <b>Friends</b>
                             <p />
                         </div>
                     </div>
@@ -88,13 +86,15 @@
                     {
                         <p>You have no Friendss</p>
                     }
-                        <div class="row">
-                            <div class="col-md-12">
-                               @Html.ActionLink("Edit", "EditProfile", "User", new {@class="btn btn-raised btn-success pull-right"})
-                            </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.ActionLink("Edit", "EditProfile", "User", new {@class="btn btn-raised btn-primary pull-right"})
                         </div>
+                    </div>
                 </div>
             </div>
+        </div>
+        <div class="col-md-6">
         </div>
     </div>
 </div>

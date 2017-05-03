@@ -22,23 +22,23 @@ namespace MVC.Tests.ViewModels
         [Test]
         public void Constructor_GetBuyIn_ReturnsEmptyString()
         {
-            Assert.That(uut.BuyIn, Is.EqualTo(string.Empty));
+            Assert.That(uut.BuyIn, Is.Empty);
         }
 
         [Test]
         public void Constructor_GetDescription_ReturnsEmptyString()
         {
-            Assert.That(uut.Description, Is.EqualTo(string.Empty));
+            Assert.That(uut.Description, Is.Empty);
         }
 
         [Test]
         public void Constructor_GetJudge_ReturnsEmptyString()
         {
-            Assert.That(uut.Judge, Is.EqualTo(string.Empty));
+            Assert.That(uut.Judge, Is.Empty);
         }
 
         [Test]
-        public void Constructor_GetLobbyId_ReturnsZerog()
+        public void Constructor_GetLobbyId_ReturnsZero()
         {
             Assert.That(uut.LobbyId, Is.EqualTo(0));
         }
@@ -46,31 +46,31 @@ namespace MVC.Tests.ViewModels
         [Test]
         public void Constructor_GetOutcome1_ReturnsEmptyString()
         {
-            Assert.That(uut.Outcome1, Is.EqualTo(string.Empty));
+            Assert.That(uut.Outcome1, Is.Empty);
         }
 
         [Test]
         public void Constructor_GetOutcome2_ReturnsEmptyString()
         {
-            Assert.That(uut.Outcome2, Is.EqualTo(string.Empty));
+            Assert.That(uut.Outcome2, Is.Empty);
         }
 
         [Test]
-        public void Constructor_GetStartDate_ReturnsEmptyString()
+        public void Constructor_GetStartDate_ReturnsNonEmptyString()
         {
-            Assert.That(uut.StartDate, Is.EqualTo(string.Empty));
+            Assert.That(uut.StartDate, Is.Not.Empty);
         }
 
         [Test]
-        public void Constructor_GetStopDate_ReturnsEmptyString()
+        public void Constructor_GetStopDate_ReturnsNonEmptyString()
         {
-            Assert.That(uut.StopDate, Is.EqualTo(string.Empty));
+            Assert.That(uut.StopDate, Is.Not.Empty);
         }
 
         [Test]
         public void Constructor_GetTitle_ReturnsEmptyString()
         {
-            Assert.That(uut.Title, Is.EqualTo(string.Empty));
+            Assert.That(uut.Title, Is.Empty);
         }
 
         #endregion

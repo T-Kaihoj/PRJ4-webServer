@@ -99,7 +99,10 @@
     <script>
         // Setup validation of the "createUserForm"
         $(function () {
-            findErrorTags();
+            $.validator.addMethod("regex", function(value, element, regexpr) {
+                return regexpr.test(value);
+            }, "@Resources.User.ErrorUserNameWhitespace");
+
             $("#createUserForm").validate({
                 rules: {
                     FirstName: {
