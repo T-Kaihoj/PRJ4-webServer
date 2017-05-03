@@ -219,7 +219,9 @@ namespace MVC.Controllers
                 LastName = user.LastName,
                 UserName = user.Username,
                 Balance = user.Balance,
-                Friendlist = user.Friendlist
+                Friendlist = user.Friendlist,
+                Bets = user.Bets,
+                Lobbies = user.MemberOfLobbies
             };
 
             return View("Profile", viewModel);
