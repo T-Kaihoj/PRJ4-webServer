@@ -135,6 +135,9 @@
   <data name="DisplayUserName" xml:space="preserve">
     <value>User name</value>
   </data>
+  <data name="ErrorDecimalTooLarge" xml:space="preserve">
+    <value>Please enter a smaller number</value>
+  </data>
   <data name="ErrorDepositMustBeNumber" xml:space="preserve">
     <value>Deposit must be a number</value>
   </data>

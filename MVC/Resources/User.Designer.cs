@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a smaller number.
+        /// </summary>
+        public static string ErrorDecimalTooLarge {
+            get {
+                return ResourceManager.GetString("ErrorDecimalTooLarge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deposit must be a number.
         /// </summary>
         public static string ErrorDepositMustBeNumber {

@@ -51,7 +51,8 @@
                     Deposit: {
                         required: true,
                         number: true,
-                        min: 0
+                        min: 0,
+                        max: @Decimal.MaxValue
                     }
                 },
 
@@ -59,7 +60,8 @@
                     Deposit: {
                         required: "@Resources.User.ErrorDepositRequired",
                         number: "@Resources.User.ErrorDepositMustBeNumber",
-                        min: "@Resources.User.ErrorNegativeDeposit"
+                        min: "@Resources.User.ErrorNegativeDeposit",
+                        max: "@Resources.User.ErrorDecimalTooLarge"
                     }
                 },
 
