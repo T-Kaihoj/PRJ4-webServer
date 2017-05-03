@@ -239,5 +239,14 @@ namespace Resources {
                 return ResourceManager.GetString("ErrorUserNameTaken", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username may not contain whitespaces.
+        /// </summary>
+        public static string ErrorUserNameWhitespace {
+            get {
+                return ResourceManager.GetString("ErrorUserNameWhitespace", resourceCulture);
+            }
+        }
     }
 }

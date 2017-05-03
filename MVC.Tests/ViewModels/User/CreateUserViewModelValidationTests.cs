@@ -99,6 +99,7 @@ namespace MVC.Tests.ViewModels
         [TestCase("", false)]
         [TestCase(" ", false)]
         [TestCase("a", true)]
+        [TestCase("a a", false)]
         public void Validate_WithUserName_ReturnsExpected(string value, bool expected)
         {
             // Arrange.
