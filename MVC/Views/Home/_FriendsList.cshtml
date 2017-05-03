@@ -11,27 +11,22 @@
     <div class="panel-body">
         @if (Model.Any())
         {
-            <div class="table">
-                <table class="table vert-align">
-                    <tr>
-                        <th class="col-md-6 col-xs-8">
-                            Name
-                        </th>
-                        <th class="col-md-6 col-xs-4 text-right">
-                        </th>
-                    </tr>
-                    @foreach (var f in Model)
-                    {
-                        <tr>
-                            <td class="col-md-6 col-xs-8">
-                                @f.FirstName @f.LastName
-                            </td>
-                            <td class="col-md-6 col-xs-4">
-                                <a class="btn btn-raised btn-info" href="#">Info</a>
-                                <a class="btn btn-raised btn-info" href="#">Message</a>
-                            </td>
-                        </tr>
-                    }
+            <div>
+                <table class="table vert-align" id="friendsTable">
+                    <tbody>
+                        @foreach (var f in Model)
+                        {
+                            <tr>
+                                <td class="col-md-6 col-xs-8">
+                                    @f.FirstName @f.LastName
+                                </td>
+                                <td class="col-md-6 col-xs-4 text-right">
+                                    <a class="btn btn-raised btn-info" href="#">Info</a>
+                                    <a class="btn btn-raised btn-info" href="#">Message</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
             </div>
         }
@@ -46,3 +41,11 @@
         </div>
     </div>
 </div>
+<script>
+    $(function () {
+        $("#friendsTable tr:first td").each(function () {
+            $(this).css("border-top", "0px");
+        });
+    });
+</script>
+
