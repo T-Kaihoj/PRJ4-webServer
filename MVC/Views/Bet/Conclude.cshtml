@@ -24,7 +24,7 @@
                         <div class="form-group">
                             @foreach (var outcome in Model.Outcomes)
                             {
-                                <div class="radio">
+                                <div>
                                     <label>
                                         <input id="@outcome.Id"
                                                name="SelectedOutcome"
@@ -53,24 +53,6 @@
 {
     <script>
         $(function () {
-            $("#ConcludeBetForm").validate({
-                rules: {
-                    SelectedOutcome: {
-                        required: true
-                    }
-                },
-
-                messages: {
-                    SelectedOutcome: {
-                        required: "@Resources.Bet.ErrorSelectOutcomeRequired"
-                    }
-                },
-
-                submitHandler: function(form) {
-                    form.submit();
-                }
-            });
-
             findErrorTags();
         });
     </script>
