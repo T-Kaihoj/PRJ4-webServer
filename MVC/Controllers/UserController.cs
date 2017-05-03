@@ -66,7 +66,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
-            return RedirectToAction("Index");
+            return View("UserCreated");
         }
 
         #endregion
@@ -217,7 +217,10 @@ namespace MVC.Controllers
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
-                UserName = user.Username
+                UserName = user.Username,
+                Balance = user.Balance,
+                Friendlist = user.Friendlist,
+                Bets = user.Bets
             };
 
             return View("Profile", viewModel);

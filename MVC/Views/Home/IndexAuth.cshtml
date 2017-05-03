@@ -1,165 +1,176 @@
-﻿@{
+﻿@using MVC.ViewModels;
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-@model  MVC.ViewModels.HomeViewModel
+@model HomeViewModel
 
 <div class="container">
     <div class="row">
-        <h1>
-            Home
-        </h1><br />
-        <div class="col-md-5">
-            <h2 class="label" style="font-size: 20px; background-color: darkslategray">Welcome : @Model.Name </h2>  <br><br />
+        <div class="col-md-12">
+            <h1>
+                Home
+            </h1>
         </div>
-        <div class="col-md-5">
-            <h2 class="label" style="font-size: 18px; background-color: darkslategray">Your Balance is : @Model.CurrentBalance </h2>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <span class="label" style="font-size: 20px;">Welcome : @Model.Name </span>
+            <span class="label pull-right" style="font-size: 18px;">Your Balance is :
+                <span style="color: limegreen" >@Model.CurrentBalance </span></span>
         </div>
-            <br /><br />
-
-        </div>
+    </div>
+    <div class="row">
+        <br />
+    </div>
     <div class="row">
         <div class="col-md-6" align="left">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    @* List Bets *@
+                    <h3 class="panel-title">
+                        Bets
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.Bets.Any(b => !b.IsConcluded) || Model.BetsJudged.Any(b => !b.IsConcluded))
+                    {
+                        foreach (var b in Model.Bets.Where(b => !b.IsConcluded))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>
+                                        @b.Name
+                                    </h4>
+                                </div>
+                                <div class="col-md-8">
+                                        <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
+                                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                                        </label>
 
-            @* List Lobby Invites *@
-            <h3>Invites</h3>
-            @if (Model.InvitedToLobbies.Any())
-            {
-                foreach (var l in Model.InvitedToLobbies)
-                {
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>
-                                @l.Name
-                            </h4>
-                        </div>
-                        <div class="col-md-6 text-md-right text-sm-left">
-                            <a class="btn btn-primary" href="/Lobby/Accept/@l.LobbyId">Accept</a>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>You have no lobby invites</p>
-            }
-            @* List Bets *@
-            <h3>Bets</h3>
-            @if (Model.Bets.Any())
-            {
-                foreach (var b in Model.Bets)
-                {
-                    <div class="row" align="left">
-                        <p class="lead">
-                            <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                            </label>
-                            <h4>
-                                @b.Name
-                            </h4>
+                                        @if (b.Judge.Username == Model.Username)
+                                        {
+                                            <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
+                                        }
 
-                            @if (b.Judge.Username == Model.Username)
-                            {
-                                <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
-                            }
-
-                            <!-- TODO: Only show when logged in user is owner of shown bet -->
-                            @if (b.Owner.Username == Model.Username)
-                            {
-                                <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
-                            }
-                            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
-                                @b.BuyIn
-                            </label>
-                            <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @b.StopDate">
-                                <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-                            </label>
-                        </p>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>You have no aktive bets</p>
-            }
-             <h3>Invites</h3>
-            @if (Model.InvitedToLobbies.Any())
-            {
-                foreach (var l in Model.InvitedToLobbies)
-                {
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>
-                                @l.Name
-                            </h4>
-                        </div>
-                        <div class="col-md-6 text-md-right text-sm-left">
-                            <a class="btn btn-primary" href="#">Info</a>
-                            <a class="btn btn-primary" href="/Lobby/Accept/@l.LobbyId">Accept</a>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>You have no lobby invites</p>
-            }
-
-            <h3>Friendlist</h3>
-            <div><a class="btn btn-primary" href="/friend">add friends</a></div>
-            
-            @if (Model.Friendlist.Any())
-            {
-               foreach (var f in Model.Friendlist)
-                {
-                    <div class="row">
-                        <div class="col-md-6">
-                            <h4>
-                                @f.FirstName @f.LastName
-                            </h4> 
-                        </div>
-                        <div class="col-md-6 text-md-right text-sm-left">
-                            <a class="btn btn-primary" href="#">Info</a>
-                            <a class="btn btn-primary" href="#">messags</a>
-                        </div>
-                    </div>
-                }
-            }
-            else
-            {
-                <p>You have no Friendss</p>
-            }
-
-
+                                        @if (b.Owner.Username == Model.Username)
+                                        {
+                                            <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
+                                        }
+                                        
+                                        <span>
+                                            @Html.ActionLink("View Bet", "Show", "Bet", new { id = b.BetId }, new { @class = "btn btn-raised" })
+                                        </span>
+                                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
+                                            @b.BuyIn
+                                        </label>
+                                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @b.StopDate">
+                                            <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                        </label>
+                                    
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                        foreach (var item in Model.BetsJudged.Where(b => !b.IsConcluded))
+                        {
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>
+                                        @item.Name
+                                    </h4>
+                                </div>
+                                <div class="col-md-8">
+                                    @if (item.Judge.Username == Model.Username)
+                                    {
+                                        @Html.ActionLink("Conclude", "Conclude", new { controller = "Bet", id = item.BetId }, new { @class = "btn btn-raised btn-primary" })
+                                    }
+                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @item.BuyIn">
+                                        @item.BuyIn
+                                    </label>
+                                    <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Bet ends @item.StopDate">
+                                        <span class="glyphicon glyphicon-time" aria-hidden="true"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                    }
+                    else
+                    {
+                        <p>You have no active bets</p>
+                    }
+                </div>
+            </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Invites
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.InvitedToLobbies.Any())
+                    {
+                        foreach (var l in Model.InvitedToLobbies)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        @l.Name
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 text-md-right text-sm-left">
+                                    <a href="#" class="btn btn-raised btn-info">
+                                        Info
+                                    </a>
+                                    @Html.ActionLink("Accept", "Accept", new { controller = "Lobby" ,id = l.LobbyId }, new { @class = "btn btn-raised btn-primary" })
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                    }
+                    else
+                    {
+                        <p>You have no lobby invites</p>
+                    }
+                </div>
+            </div>
+            @Html.Partial("_FriendsList", Model.Friendlist)
         </div>
         <div class="col-md-6" align="left">
-
-
-            @* List Joined lobbies *@
-            <h3>Lobbies</h3>
-            @if (Model.Bets.Any())
-            { 
-            foreach (var l in Model.MemberOfLobbies)
-            {
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4>
-                            @l.Name
-                        </h4>
-                    </div>
-                    <div class="col-md-6 text-md-right text-sm-left">
-                        <a class="btn btn-primary" href="/Lobby/Show/@l.LobbyId">View</a>
-                    </div>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    @* List Joined lobbies *@
+                    <h3 class="panel-title">
+                        Lobbies
+                    </h3>
                 </div>
-                }
-            }
-            else
-            {
-                <p>You are not member of any lobbies </p>
-            }
-            <hr/><br/>
+                <div class="panel-body">
+                    @if (Model.MemberOfLobbies.Any())
+                    {
+                        foreach (var l in Model.MemberOfLobbies)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4>
+                                        @l.Name
+                                    </h4>
+                                </div>
+                                <div class="col-md-6 text-md-right text-sm-left">
+                                    <a href="/Lobby/Show/@l.LobbyId" class="btn btn-raised btn-info">View</a>
 
-
+                                </div>
+                            </div>
+                            <hr />
+                        }
+                    }
+                    else
+                    {
+                        <p>You are not member of any lobbies </p>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>

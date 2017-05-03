@@ -16,11 +16,11 @@
                     </h1>
                 </div>
                 <div class="panel-body">
-                    <h2 class="label">
-                        Your balance: @Model.CurrentBalance
-                    </h2>
-
-                    @using (Html.BeginForm("Withdraw", "User", FormMethod.Post))
+                    <p style="text-align: left; font-size: 20px">
+                        <span style="font-size: 18px; color:limegreen; font-weight: bold;">@Model.CurrentBalance</span>
+                        <b>Your balance:</b>
+                    </p>
+                    @using (Html.BeginForm("Withdraw", "User", FormMethod.Post, new { @id = "WithdrawMoneyForm" }))
                     {
                         <div class="form-group label-floating">
                             @Html.LabelFor(m => m.Withdraw, new {@class = "control-label"})
@@ -45,7 +45,31 @@
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
+        $(function () {
+            $("#WithdrawMoneyForm").validate({
+                rules: {
+                    Withdraw: {
+                        required: true,
+                        number: true,
+                        min: 0,
+                        max: @Model.CurrentBalance.ToString("F2").Replace(',', '.')
+                    }
+                },
+
+                messages: {
+                    Withdraw: {
+                        required: "@Resources.User.ErrorWithdrawRequired",
+                        number: "@Resources.User.ErrorWithdrawMustBeNumber",
+                        min: "@Resources.User.ErrorNegativeWithdraw",
+                        max: "@Resources.User.ErrorNotEnoughFunds"
+                    }
+                },
+
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
             findErrorTags();
         });
     </script>

@@ -120,7 +120,13 @@
   <data name="ErrorInvitedUserDoesNotExist" xml:space="preserve">
     <value>User was not found</value>
   </data>
+  <data name="ErrorLobbyNameRequired" xml:space="preserve">
+    <value>You must write a name for the lobby</value>
+  </data>
   <data name="ErrorUserAlreadyInLobby" xml:space="preserve">
     <value>User is already a member of the lobby</value>
+  </data>
+  <data name="ErrorUserNameRequired" xml:space="preserve">
+    <value>A user name is required</value>
   </data>
 </root>

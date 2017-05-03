@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using System.Web.Mvc;
+using Common.Models;
 using MVC.Controllers;
 using MVC.Identity;
 using MVC.ViewModels;
@@ -32,30 +33,32 @@ namespace MVC.Tests.Controllers.BetControllerTests
         [Test]
         public void Create_WithLobbyId_ReturnsCorrectView()
         {
+            // Arrange.
             long id = 123;
 
+            LobbyRepository.Get(Arg.Any<long>()).Returns(new Lobby());
+
+            // Act.
             var result = uut.Create(id);
 
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-
-            Assert.That(vResult.ViewName, Is.EqualTo("Create"));
+            // Assert.
+            CheckViewName(result, "Create");
         }
 
         [Test]
         public void Create_WithLobbyId_ReturnsCorrectViewModel()
         {
+            // Arrange.
             long id = 123;
 
+            LobbyRepository.Get(Arg.Any<long>()).Returns(new Lobby());
+
+            // Act.
             var result = uut.Create(id);
 
-            Assert.That(result, Is.TypeOf<ViewResult>());
-
-            var vResult = result as ViewResult;
-            Assert.That(vResult.Model, Is.TypeOf<CreateBetViewModel>());
-
-            var model = vResult.Model as CreateBetViewModel;
+            // Assert.
+            var model = CheckViewModel<CreateBetViewModel>(result);
+            
             Assert.That(model.LobbyId, Is.EqualTo(id));
         }
 

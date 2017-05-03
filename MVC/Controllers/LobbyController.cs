@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using Common;
 using Common.Models;
 using MVC.Identity;
+using MVC.Others;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -39,7 +40,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
-            //TODO: More error handling?
+            
             return Redirect("/Lobby/List");
         }
 
@@ -82,7 +83,7 @@ namespace MVC.Controllers
                 return Redirect($"/Lobby/Show/{lobby.LobbyId}");
             }
 
-            //TODO: Return error.
+           
         }
 
         #endregion
@@ -226,12 +227,16 @@ namespace MVC.Controllers
             using (var myWork = _factory.GetUOF())
             {
                 // Get the lobby from the database.
-                var lobby = myWork.Lobby.Get(id);
-
+                var lobby = myWork.Lobby.GetEager(id);
+                var user = myWork.User.Get(_userContext.Identity.Name);
                 if (lobby == null)
                 {
                     // Error.
                     throw new Exception("No such lobby");
+                }
+                if (!lobby.MemberList.Contains(user))
+                {
+                    return new HttpForbiddenResult();
                 }
 
                 var myBets = new List<Bet>();

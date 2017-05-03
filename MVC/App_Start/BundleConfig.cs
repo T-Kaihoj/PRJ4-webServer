@@ -38,7 +38,6 @@ namespace MVC
             // Stylesheets for the libraries.
             var bundleCssLibs = new StyleBundle("~/bundles/css-libs").Include(
                 "~/Content/assets/css/bootstrap.css",
-                "~/Content/assets/css/bootstrap-theme.css",
                 "~/Content/assets/css/bootstrap-material-design.css",
                 "~/Content/assets/css/bootstrap-datetimepicker.css",
                 "~/Content/assets/css/font-awesome.css",

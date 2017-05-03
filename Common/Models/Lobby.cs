@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 
-// TODO: I am confused regarding the population of a users invitedto and memberof, compared to the equivalent lists here (Magnus).
+
 
 namespace Common.Models
 {
@@ -48,7 +49,7 @@ namespace Common.Models
 
         public void InviteUserToLobby(User user)
         {
-            //TODO sede meg to user
+            // sede meg to user
             //user.meg("InvitetoLobby",this)
 
             if (user != null)
@@ -78,8 +79,14 @@ namespace Common.Models
             MemberList.Add(user);
         }
 
-        public void RemoveLobby()
+        public bool RemoveLobby()
         {
+            // Is there any active bets?
+            if (Bets.Any(b => !b.IsConcluded))
+            {
+                return false;
+            }
+
             foreach (var member in MemberList)
             {
                 RemoveMemberFromBets(member);
@@ -91,6 +98,8 @@ namespace Common.Models
                 member.InvitedToLobbies.Remove(this);
             }
             InvitedList.Clear();
+
+            return true;
         }
 
         public void RemoveMemberFromLobby(User user)
@@ -102,7 +111,7 @@ namespace Common.Models
 
             RemoveMemberFromBets(user);
 
-            // TODO: We seem to do two removals here. Surely we can get EF to handle this for us?
+            
             // Remove the user from the memberlist.
             MemberList.Remove(user);
 
@@ -122,18 +131,6 @@ namespace Common.Models
             }
         }
 
-        // TODO: Currently unused.
-        /*public void RemoveLobbyFromLists()
-        {
-            foreach (var member in MemberList)
-            {
-                member.MemberOfLobbies.Remove(this);
-            }
-
-            foreach (var member in InvitedList)
-            {
-                member.InvitedToLobbies.Remove(this);
-            }
-        }*/
+      
     }
 }

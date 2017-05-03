@@ -24,11 +24,11 @@ namespace MVC.ViewModels
             }
         }
 
-        public string Title { get; }
+        public string Title { get; set; }
 
-        public string Description { get; }
+        public string Description { get; set; }
 
-        public List<OutcomeView> Outcomes { get; } = new List<OutcomeView>();
+        public List<OutcomeView> Outcomes { get; set; } = new List<OutcomeView>();
 
         [Required(ErrorMessageResourceType = typeof(Resources.Bet),
             ErrorMessageResourceName = "ErrorSelectOutcomeRequired")]

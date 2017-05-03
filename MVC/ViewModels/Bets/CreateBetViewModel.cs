@@ -1,7 +1,8 @@
 ﻿using System;
-using System.ComponentModel;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
+using Common.Models;
 using Common.Validation;
 
 namespace MVC.ViewModels
@@ -15,8 +16,15 @@ namespace MVC.ViewModels
         private string _outcome2 = string.Empty;
         private string _outcome1 = string.Empty;
         private string _title = string.Empty;
-        private string _startDate = string.Empty;
-        private string  _stopDate = string.Empty;
+        private string _startDate = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+        private string _stopDate = (DateTime.Now + TimeSpan.FromDays(1)).ToString("dd/MM/yyyy HH:mm");
+        private ICollection<User> _participants;
+
+        public ICollection<User> Participants
+        {
+            get { return _participants; }
+            set { _participants = value; }
+        }
 
         [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayBuyIn")]
         [Required(ErrorMessageResourceType = typeof(Resources.Bet),
@@ -68,7 +76,7 @@ namespace MVC.ViewModels
 
         [Required(ErrorMessageResourceType = typeof(Resources.Bet),
             ErrorMessageResourceName = "ErrorOutcomeRequired")]
-        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayOutcome2")]
+        [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayOutcome1")]
         public string Outcome1
         {
             get { return _outcome1; }

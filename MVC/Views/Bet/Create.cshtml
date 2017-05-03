@@ -16,7 +16,7 @@
                     </h1>
                 </div>
                 <div class="panel-body">
-                    @using (Html.BeginForm("Create", "Bet", FormMethod.Post))
+                    @using (Html.BeginForm("Create", "Bet", FormMethod.Post, new { @id = "CreateBetForm" }))
                     {
                         <div class="row">
                             <div class="col-md-6">
@@ -44,9 +44,18 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group label-floating">
-                                    @Html.LabelFor(m => m.Judge, new { @class = "control-label" })
-                                    @Html.TextBoxFor(m => m.Judge, new { @class = "form-control" })
+                                    @Html.LabelFor(m => m.Judge, new {@class = "control-label"})
+                                    @Html.TextBoxFor(m => m.Judge, new {@class = "form-control"})
                                     @Html.ValidationMessageFor(m => m.Judge)
+                                </div>
+                                <div class="dropdown">
+                                    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Judges Available <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                        @foreach (var u in Model.Participants)
+                                        {
+                                            <li><a href="#">@u.Username</a></li>
+                                        }
+                                    </ul>
                                 </div>
                                 <div class="form-group label-floating">
                                     @Html.LabelFor(m => m.StartDate, new { @class = "control-label" })
@@ -104,7 +113,67 @@
 @section Scripts
 {
     <script>
-        $(document).ready(function () {
+        $(function () {
+            $("#CreateBetForm").validate({
+                rules: {
+                    Title: {
+                        required: true
+                    },
+                    Description: {
+                        required: true
+                    },
+                    BuyIn: {
+                        required: true
+                    },
+                    Judge: {
+                        required: true
+                    },
+                    Outcome1: {
+                        required: true
+                    },
+                    Outcome2: {
+                        required: true
+                    },
+                    StartDate: {
+                        required: true
+                    },
+                    StopDate: {
+                        required: true
+                    }
+                },
+
+                messages: {
+                    Title: {
+                        required: "@Resources.Bet.ErrorTitleRequired"
+                    },
+                    Description: {
+                        required: "@Resources.Bet.ErrorDescriptionRequired"
+                    },
+                    BuyIn: {
+                        required: "@Resources.Bet.ErrorBuyInRequired"
+                    },
+                    Judge: {
+                        required: "@Resources.Bet.ErrorJudgeRequired"
+                    },
+                    Outcome1: {
+                        required: "@Resources.Bet.ErrorOutcomeRequired"
+                    },
+                    Outcome2: {
+                        required: "@Resources.Bet.ErrorOutcomeRequired"
+                    },
+                    StartDate: {
+                        required: "@Resources.Bet.ErrorStartDate"
+                    },
+                    StopDate: {
+                        required: "@Resources.Bet.ErrorStopDate"
+                    }
+                },
+
+                submitHandler: function (form) {
+                    form.submit();
+                }
+            });
+
             findErrorTags();
             registerDateTimePicker("#datetimepickerstart");
             registerDateTimePicker("#datetimepickerend");

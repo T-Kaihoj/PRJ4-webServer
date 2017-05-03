@@ -60,7 +60,7 @@ namespace MVC.Tests.Controllers
             };
             _numberOfLobies = lobbies.Count;
             LobbyRepository.GetAll().Returns(lobbies);
-            LobbyRepository.Get(0).Returns(_lobby1);
+            LobbyRepository.GetEager(0).Returns(_lobby1);
 
             // Create the controller.
             uut = new LobbyController(Factory, _userContext);
@@ -106,7 +106,7 @@ namespace MVC.Tests.Controllers
 
             // Assert that the object passed to the repository, matches our data.
             Assert.That(lobby.Name, Is.EqualTo(viewModel.Name));
-            // TODO: Extend.
+           
         }
 
         #endregion
@@ -117,12 +117,12 @@ namespace MVC.Tests.Controllers
         public void Show_CallsRepositoryGet()
         {
             // Assert that we hit the repository.
-            LobbyRepository.DidNotReceive().Get(Arg.Any<long>());
+            LobbyRepository.DidNotReceive().GetEager(Arg.Any<long>());
 
             uut.Show(0);
 
             // Assert that we hit the repository.
-            LobbyRepository.Received(1).Get(Arg.Any<long>());
+            LobbyRepository.Received(1).GetEager(Arg.Any<long>());
         }
         
         [Test]
@@ -130,11 +130,11 @@ namespace MVC.Tests.Controllers
         {
             // Register a bet with the mock.
             var lobby = new Lobby();
-            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+            LobbyRepository.GetEager(Arg.Any<long>()).Returns(lobby);
 
             // Setup capture of the argument.
             long key = 0;
-            LobbyRepository.Get(Arg.Do<long>(i => key = i));
+            LobbyRepository.GetEager(Arg.Do<long>(i => key = i));
 
             long passedKey = 100;
 

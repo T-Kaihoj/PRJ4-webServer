@@ -23,8 +23,7 @@ namespace Common.Models
         {
             if (toDB == null)
                 return null;
-            // TODO: db
-            // TODO: What does the above note entail?
+           
             if (toDB.Contains("'") || toDB.Contains("[") || toDB.Contains("]"))
             {
                 throw new InvalidDataException("sqlInjection");

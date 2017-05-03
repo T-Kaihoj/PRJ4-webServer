@@ -182,7 +182,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\BetController.cs" />
-    <Compile Include="Controllers\friendController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LobbyController.cs" />
     <Compile Include="Controllers\UserController.cs" />
@@ -269,10 +269,6 @@
     <Content Include="Content\assets\css\bootstrap-material-design.css.map" />
     <Content Include="Content\assets\css\bootstrap-material-design.min.css" />
     <Content Include="Content\assets\css\bootstrap-material-design.min.css.map" />
-    <Content Include="Content\assets\css\bootstrap-theme.css" />
-    <Content Include="Content\assets\css\bootstrap-theme.css.map" />
-    <Content Include="Content\assets\css\bootstrap-theme.min.css" />
-    <Content Include="Content\assets\css\bootstrap-theme.min.css.map" />
     <Content Include="Content\assets\css\bootstrap.css" />
     <Content Include="Content\assets\css\bootstrap.css.map" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
@@ -417,6 +413,10 @@
     <Content Include="Views\Shared\_CollapsibleInfoText.cshtml" />
     <Content Include="Views\Lobby\_PrintSingleCompletedBet.cshtml" />
     <Content Include="Views\friend\index.cshtml" />
+    <Content Include="Views\Bet\_ListActiveBets.cshtml" />
+    <Content Include="Views\Bet\_PrintSingleActiveBet.cshtml" />
+    <Content Include="Views\Lobby\RemoveFailed.cshtml" />
+    <Content Include="Views\Home\_FriendsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

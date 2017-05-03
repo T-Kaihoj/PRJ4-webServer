@@ -38,6 +38,11 @@ namespace MVC.Controllers
                 // Populate the viewmodel.
                 var model = new ConcludeViewModel(bet);
 
+                if (bet.IsConcluded)
+                {
+                    return Show(bet.BetId);
+                }
+
                 // Check access restrictions.
                 if (GetUserName == bet.Judge.Username)
                 {
@@ -59,8 +64,25 @@ namespace MVC.Controllers
             // Ensure the id is valid.
             if (model.SelectedOutcome < 0)
             {
-                // TODO: Currently not working with no outcome selected.
-                // TODO: Could be extracted to a validationhelper.
+                using (var myWork = GetUOF)
+                {
+                    // Find the bet.
+                    var bet = myWork.Bet.Get(model.BetId);
+
+                    // Does the bet exist?
+                    if (bet == null)
+                    {
+                        return HttpNotFound();
+                    }
+
+                    // Populate the viewmodel.
+                    var newModel = new ConcludeViewModel(bet);
+
+                    model.Description = newModel.Description;
+                    model.Title = newModel.Title;
+                    model.Outcomes = newModel.Outcomes;
+                }
+
                 ModelState.AddModelError("SelectedOutcome", Resources.Bet.ErrorSelectOutcomeRequired);
             }
             
@@ -119,12 +141,15 @@ namespace MVC.Controllers
         [HttpGet]
         public ActionResult Create(long id)
         {
-            var viewModel = new CreateBetViewModel()
+            using (var myWork = GetUOF)
             {
-                LobbyId = id
-            };
-
-            return View("Create", viewModel);
+                var viewModel = new CreateBetViewModel()
+                {
+                    LobbyId = id,
+                    Participants = myWork.Lobby.Get(id).MemberList
+                };
+                return View("Create", viewModel);
+            }
         }
 
         // POST: /<controller>/Create
@@ -140,11 +165,16 @@ namespace MVC.Controllers
                 ModelState.AddModelError("StopDate", Resources.Bet.ErrorEndDateBeforeStartDate);
             }
 
+            if (viewModel.BuyInDecimal < 0)
+            {
+                ModelState.AddModelError("Buyin", Resources.Bet.ErrorBuyinMustBePositive);
+            }
+
             if (!ModelState.IsValid)
             {
                 return View("Create", viewModel);
             }
-
+            
             using (var myWork = GetUOF)
             {
                 // Create the bet.
@@ -352,6 +382,14 @@ namespace MVC.Controllers
                 if (bet == null)
                 {
                     return HttpNotFound();
+                }
+
+                // Is the user a member of the lobby?
+                var currentUser = myWork.User.Get(GetUserName);
+
+                if (!bet.Lobby.MemberList.Contains(currentUser))
+                {
+                    return HttpForbidden();
                 }
 
                 // Create the viewmodel, and copy over data.

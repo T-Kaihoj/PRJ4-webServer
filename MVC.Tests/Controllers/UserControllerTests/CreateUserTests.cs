@@ -39,11 +39,12 @@ namespace MVC.Tests.Controllers.UserControllerTests
             };
         }
 
-        [Test]
-        public void Create_NoEmail_ReturnsError()
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Create_NoEmail_ReturnsError(string input)
         {
             // Setup.
-            viewModel.Email = "";
+            viewModel.Email = input;
 
             // Act.
             var result = uut.Create(viewModel);
@@ -61,11 +62,12 @@ namespace MVC.Tests.Controllers.UserControllerTests
             CheckErrorOnModel(uut.ModelState, Resources.User.ErrorEmailRequired);
         }
 
-        [Test]
-        public void Create_NoFirstName_ReturnsError()
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Create_NoFirstName_ReturnsError(string input)
         {
             // Setup.
-            viewModel.FirstName = "";
+            viewModel.FirstName = input;
 
             // Act.
             var result = uut.Create(viewModel);
@@ -83,11 +85,12 @@ namespace MVC.Tests.Controllers.UserControllerTests
             CheckErrorOnModel(uut.ModelState, Resources.User.ErrorFirstNameRequired);
         }
 
-        [Test]
-        public void Create_NoLastName_ReturnsError()
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Create_NoLastName_ReturnsError(string input)
         {
             // Setup.
-            viewModel.LastName = "";
+            viewModel.LastName = input;
 
             // Act.
             var result = uut.Create(viewModel);
@@ -105,11 +108,12 @@ namespace MVC.Tests.Controllers.UserControllerTests
             CheckErrorOnModel(uut.ModelState, Resources.User.ErrorLastNameRequired);
         }
 
-        [Test]
-        public void Create_NoPassword1_ReturnsError()
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Create_NoPassword1_ReturnsError(string input)
         {
             // Setup.
-            viewModel.Password1 = "";
+            viewModel.Password1 = input;
 
             // Act.
             var result = uut.Create(viewModel);
@@ -127,11 +131,12 @@ namespace MVC.Tests.Controllers.UserControllerTests
             CheckErrorOnModel(uut.ModelState, Resources.User.ErrorPassword1Required);
         }
 
-        [Test]
-        public void Create_NoPassword2_ReturnsError()
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Create_NoPassword2_ReturnsError(string input)
         {
             // Setup.
-            viewModel.Password2 = "";
+            viewModel.Password2 = input;
 
             // Act.
             var result = uut.Create(viewModel);
@@ -149,11 +154,12 @@ namespace MVC.Tests.Controllers.UserControllerTests
             CheckErrorOnModel(uut.ModelState, Resources.User.ErrorPassword2Required);
         }
 
-        [Test]
-        public void Create_NoUserName_ReturnsError()
+        [TestCase("")]
+        [TestCase(" ")]
+        public void Create_NoUserName_ReturnsError(string input)
         {
             // Setup.
-            viewModel.UserName = "";
+            viewModel.UserName = input;
 
             // Act.
             var result = uut.Create(viewModel);
@@ -221,13 +227,13 @@ namespace MVC.Tests.Controllers.UserControllerTests
         }
 
         [Test]
-        public void Create_WithValidData_ReturnsFrontPage()
+        public void Create_WithValidData_ReturnsFrontUserCreatedPage()
         {
             // Act.
             var result = uut.Create(viewModel);
 
             // Assert.
-            CheckRedirectsToRouteWithId(result, "Index");
+            CheckViewName(result, "UserCreated");
         }
     }
 }
