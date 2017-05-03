@@ -38,6 +38,11 @@ namespace MVC.Controllers
                 // Populate the viewmodel.
                 var model = new ConcludeViewModel(bet);
 
+                if (bet.IsConcluded)
+                {
+                    return Show(bet.BetId);
+                }
+
                 // Check access restrictions.
                 if (GetUserName == bet.Judge.Username)
                 {
