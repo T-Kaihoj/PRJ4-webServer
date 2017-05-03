@@ -115,6 +115,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deposit must be a number.
+        /// </summary>
+        public static string ErrorDepositMustBeNumber {
+            get {
+                return ResourceManager.GetString("ErrorDepositMustBeNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide amount you want to deposit.
         /// </summary>
         public static string ErrorDepositRequired {
@@ -255,6 +264,15 @@ namespace Resources {
         public static string ErrorUserNameWhitespace {
             get {
                 return ResourceManager.GetString("ErrorUserNameWhitespace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Withdraw must be a number.
+        /// </summary>
+        public static string ErrorWithdrawMustBeNumber {
+            get {
+                return ResourceManager.GetString("ErrorWithdrawMustBeNumber", resourceCulture);
             }
         }
         

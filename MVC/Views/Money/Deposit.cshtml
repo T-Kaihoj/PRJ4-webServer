@@ -46,16 +46,20 @@
 {
     <script>
         $(function () {
-            $("DepositMoneyForm").validate({
+            $("#DepositMoneyForm").validate({
                 rules: {
                     Deposit: {
-                        required: true
+                        required: true,
+                        number: true,
+                        min: 0
                     }
                 },
 
                 messages: {
                     Deposit: {
-                        required: "@Resources.User.ErrorDepositRequired"
+                        required: "@Resources.User.ErrorDepositRequired",
+                        number: "@Resources.User.ErrorDepositMustBeNumber",
+                        min: "@Resources.User.ErrorNegativeDeposit"
                     }
                 },
 
