@@ -99,6 +99,10 @@
     <script>
         // Setup validation of the "createUserForm"
         $(function () {
+            $.validator.addMethod("regex", function(value, element, regexpr) {
+                return regexpr.test(value);
+            }, "@Resources.User.ErrorUserNameWhitespace");
+
             $("#createUserForm").validate({
                 rules: {
                     FirstName: {
@@ -108,7 +112,8 @@
                         required: true
                     },
                     UserName: {
-                        required: true
+                        required: true,
+                        regex: /^\S*$/
                     },
                     Email: {
                         required: true
@@ -130,7 +135,8 @@
                         required: "@Resources.User.ErrorLastNameRequired"
                     },
                     UserName: {
-                        required: "@Resources.User.ErrorUserNameRequired"
+                        required: "@Resources.User.ErrorUserNameRequired",
+                        regex: "@Resources.User.ErrorUserNameWhitespace"
                     },
                     Email: {
                         required: "@Resources.User.ErrorEmailRequired"
