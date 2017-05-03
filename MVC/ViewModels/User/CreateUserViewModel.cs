@@ -64,6 +64,8 @@ namespace MVC.ViewModels
         [Display(ResourceType = typeof(Resources.User), Name = "DisplayUserName")]
         [Required(ErrorMessageResourceType = typeof(Resources.User),
             ErrorMessageResourceName = "ErrorUserNameRequired")]
+        [RegularExpression(@"^\S*$", ErrorMessageResourceType = typeof(Resources.User),
+            ErrorMessageResourceName = "ErrorUserNameWhitespace")]
         public string UserName
         {
             get

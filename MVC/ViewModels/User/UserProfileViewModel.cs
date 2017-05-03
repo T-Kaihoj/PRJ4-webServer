@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Common.Models;
 
 namespace MVC.ViewModels
 {
@@ -9,6 +11,9 @@ namespace MVC.ViewModels
         private string _firstName = string.Empty;
         private string _lastName = string.Empty;
         private string _userName = string.Empty;
+        private decimal _balance = 0;
+        private ICollection<User> _friendlist = new List<User>();
+
 
         #region Accessors.
 
@@ -61,6 +66,32 @@ namespace MVC.ViewModels
             set
             {
                 _userName = value.Trim();
+            }
+        }
+
+        public decimal Balance
+        {
+            get
+            {
+                return _balance;
+            }
+
+            set
+            {
+                _balance = value;
+            }
+        }
+
+        public ICollection<User> Friendlist
+        {
+            get
+            {
+                return _friendlist;
+            }
+
+            set
+            {
+                _friendlist = value;
             }
         }
 

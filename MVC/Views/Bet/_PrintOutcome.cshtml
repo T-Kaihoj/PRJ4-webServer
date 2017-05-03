@@ -1,0 +1,40 @@
+﻿@model MVC.ViewModels.PrintOutcomeViewModel
+
+@{
+    string styleBackground = "";
+    string stylePull = "text-md-right";
+    string stylePanel = "";
+    string gradientDirection = "right";
+
+    if (Model.Left)
+    {
+        stylePull = "";
+        gradientDirection = "left";
+    }
+
+    if (Model.Loser)
+    {
+        styleBackground = $"background: linear-gradient(to {gradientDirection}, rgba(240,128,128,0), rgba(240,128,128,1))";
+        stylePanel = "panel-danger";
+    }
+    else if (Model.Winner)
+    {
+        styleBackground = $"background: linear-gradient(to {gradientDirection}, rgba(144,238,144,0), rgba(144,238,144,1))";
+        stylePanel = "panel-success";
+    }
+}
+
+<div class="col-md-5">
+    <div class="panel @stylePanel">
+        <div class="panel-heading">
+            <h2 class="@stylePull panel-title">
+                <b>
+                    @Model.Name
+                </b>
+            </h2>
+        </div>
+        <div class="panel-body" style="@styleBackground">
+            @Html.Partial("_PrintUserList", Model.Participants)
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿@using Common.Models;
+
+@model Bet
+
+@{
+    DateTime current = DateTime.Now;
+    DateTime betEndTime = Model.StopDate;
+    TimeSpan span = betEndTime.Subtract(current);
+    string hours = (span.Hours > 9) ? span.Hours.ToString() : "0" + span.Hours;
+    string minutes = (span.Minutes > 9) ? span.Minutes.ToString() : "0" + span.Minutes;
+    string seconds = (span.Seconds > 9) ? span.Seconds.ToString() : "0" + span.Seconds;
+}
+
+<tr>
+    <td class="text-center">
+        @{
+            // TODO: Handle if the user is not a member of the bet.
+        }
+        @{
+            bool joined = Model.Participants.Any(x => x.Username == User.Identity.Name);
+            if (joined)
+            {
+                <span class="glyphicon glyphicon-ok" aria-hidden="true" aria-label="Left Align" data-toggle="tooltip" title="Joined"></span>
+            }
+            else
+            {
+                <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Left Align" data-toggle="tooltip" title="Not joined"></span>
+            }
+        }
+        
+    </td>
+    <td>
+        @Html.ActionLink(Model.Name, "Show", new { controller = "Bet", id = Model.BetId })
+
+    </td>
+    <td>
+        @if (Model.Judge.Username == User.Identity.Name)
+        {
+            @Html.ActionLink("Conclude", "Conclude", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
+        }
+    </td>
+    <td>
+        @if (Model.Owner.Username == User.Identity.Name)
+        {
+            if (Model.StartDate < DateTime.Now)
+            {
+                <a class="btn btn-raised disabled" data-toggle="tooltip" title="Bet is already in progress" href="#">In progress</a>
+            }
+            else
+            {
+                @Html.ActionLink("Remove", "Remove", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
+            }
+        }
+    </td>
+    <td class="text-center">
+        <span class="glyphicon glyphicon-hourglass" aria-hidden="true" aria-label="Left Align" data-toggle="tooltip" title="@span.Days day(s) @hours:@minutes:@seconds left"></span>
+    </td>
+    <td class="text-right">
+        @Model.BuyIn
+    </td>
+    <td>
+        @if (joined)
+        {
+            @Html.ActionLink("Show", "Show", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
+        }
+        else
+        {
+            @Html.ActionLink("Join", "Join", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
+        }
+
+    </td>
+</tr>

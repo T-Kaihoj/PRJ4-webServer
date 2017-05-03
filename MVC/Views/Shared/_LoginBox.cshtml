@@ -1,0 +1,14 @@
+﻿<ul class="nav navbar-nav navbar-right">
+    <li>
+        <a id="loginButton" href="javascript:{}" onclick="document.getElementById('LoginForm').submit(); return false;">Sign in</a>
+    </li>
+</ul>
+@using (Html.BeginForm("SignIn", "Authentication", FormMethod.Post, new { @class = "navbar-form navbar-right", id = "LoginForm" }))
+{
+    <div class="form-group">
+        <input name="UserName" type="text" class="form-control" placeholder="User name" onkeydown="enterClicksButton('loginButton', event)">
+    </div>
+    <div class="form-group">
+        <input name="Password" type="password" class="form-control" placeholder="Password" onkeydown="enterClicksButton('loginButton', event)">
+    </div>
+}

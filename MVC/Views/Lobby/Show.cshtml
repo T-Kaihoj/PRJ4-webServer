@@ -1,82 +1,62 @@
-﻿@using MVC.Models.Userlogic
-@using MVC.ViewModels;
+﻿@using MVC.ViewModels;
 
 @{
-    ViewData["Title"] = "LobbyPage";
+    ViewData["Title"] = "Lobby Page";
 }
 
 @model LobbyViewModel
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h1 class="header">
-                @Html.DisplayFor(m => m.Name)
-            </h1>
-
-            @foreach (var b in Model.Bets)
-            {
-                <div class="row" align="left">
-                    <p class="lead">
-                        <label type="label" class="btn btn-default" aria-label="Left Align" data-toggle="tooltip" title="Joined">
-                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
-                        </label>
-                        @b.Name
-
-                       @if (b.Judge.Username == User.Identity.Name)
-                       {
-                           <a class="btn btn-primary pull-right" href="/Bet/Conclude/@b.BetId">Conclude</a>
-                       }
-                        <a class="btn btn-primary pull-right" href="/Bet/Join/@b.BetId">Join Bet</a>
-                      
-                        
-                        <a class="btn btn-primary pull-right" href="/Bet/Show/@b.BetId">Info</a>
-                        <!-- TODO: Only show when logged in user is owner of shown bet -->
-                        @if (b.Owner.Username == User.Identity.Name)
-                        {
-                            if (b.StartDate < DateTime.Now)
-                            {
-                                <a class="btn btn-primary pull-right disabled" data-toggle="tooltip" title="Bet is already in progress" href="#">Remove</a>
-                            }
-                            else
-                            {
-                                <a class="btn btn-primary pull-right" href="/Bet/Remove/@b.Lobby.LobbyId/@b.BetId">Remove</a>
-                            }
-                        }
-                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="Entry fee @b.BuyIn">
-                            @b.BuyIn
-                        </label>
-                        <label type="label" class="btn btn-default pull-right" aria-label="Left Align" data-toggle="tooltip" title="5 minutes left">
-                            <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
-                        </label>
-                    </p>
-                </div>
-            }
-            <p class="lead">
-                <a href="/Bet/Create/@Model.ID" class="btn btn-primary pull-left">Create new bet</a>
-                <a href="/Lobby/Leave/@Model.ID" class="btn btn-primary pull-right">Leave Lobby</a>
-            </p>
+    <div class="panel panel-default">
+        <div class="panel-body">
             <div class="row">
-                @Html.Partial("Invite", new InviteToLobbyViewModel() {Id = Model.ID, Username = ""})
+                <div class="col-md-12">
+                    <h1>
+                        @Html.DisplayFor(m => m.Name)
+                        <span class="pull-right">
+                            @Html.ActionLink("Leave lobby", "Leave", new { controller = "Lobby", id = Model.Id }, new { @class = "btn btn-raised btn-warning pull-right" })
+                        </span>
+                    </h1>
+                </div>
             </div>
             <div class="row">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Members of this lobby</th>
-                            <th>Username</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var u in Model.Participants)
-                        {
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>@u.Username</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="col-md-12">
+                    @Html.Partial("_ListActiveBets", Model)
+                    @Html.Partial("_ListInactiveBets", Model)
+                    @Html.Partial("Invite", new InviteToLobbyViewModel() { Id = Model.Id, Username = "" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" data-toggle="collapse" data-target="#collapse_usersinlobby">
+                            <h1 class="panel-title">
+                                Users in lobby
+                                @Html.Partial("_CollapsibleInfoText")
+                            </h1>
+                        </div>
+                        <div id="collapse_usersinlobby" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @Html.Partial("_PrintUserList", Model.Participants.Select(x => x.Username).ToList())
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading" data-toggle="collapse" data-target="#collapse_usersinvitedtolobby">
+                            <h1 class="panel-title">
+                                Invited users
+                                @Html.Partial("_CollapsibleInfoText")
+                            </h1>
+                        </div>
+                        <div id="collapse_usersinvitedtolobby" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                                @Html.Partial("_PrintUserList", Model.InvitedUsers.Select(x => x.Username).ToList())
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

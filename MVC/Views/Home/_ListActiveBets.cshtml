@@ -1,0 +1,35 @@
+﻿@using MVC.ViewModels;
+
+@model HomeViewModel
+
+<div class="panel panel-primary">
+    <div class="panel-heading" data-toggle="collapse" data-target="#collapse_active">
+        <h1 class="panel-title">
+            Active Bets
+            @Html.Partial("_CollapsibleInfoText")
+        </h1>
+    </div>
+    <div id="collapse_active" class="panel-collapse collapse in">
+        <div class="panel-body">
+            @{
+                //if (Model.ActiveBets.Count == 0)
+                if(!Model.Bets.Any())
+                {
+                    <div>
+                        There are currently no active bets in the lobby.
+                    </div>
+                }
+                else
+                {
+                    foreach (var bet in Model.Bets)
+                    {
+                        @Html.Partial("_PrintSingleBet", bet);
+                   }
+                }
+            }
+            @*<div>
+                @Html.ActionLink("Create new bet", "Create", new { controller = "Bet", id = Model.Id }, new { @class = "btn btn-raised btn-primary pull-left" })
+            </div>*@
+        </div>
+    </div>
+</div>

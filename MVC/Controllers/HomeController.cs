@@ -25,7 +25,7 @@ namespace MVC.Controllers
 
         public PartialViewResult LoginBox()
         {
-            return PartialView(new AuthenticationViewModel());
+            return PartialView("_LoginBox", new AuthenticationViewModel());
         }
 
         [HttpGet]
@@ -36,7 +36,7 @@ namespace MVC.Controllers
 
             // Lookup the user in the repository.
 
-            var user = GetUOF.User.Get(userName);     
+            var user = GetUOF.User.Get(userName);
 
             // Populate the viewmodel.
             var viewModel = new HomeViewModel()
@@ -47,7 +47,9 @@ namespace MVC.Controllers
                 InvitedToLobbies = user.InvitedToLobbies,
                 Bets = user.Bets,
                 Friendlist = user.Friendlist,
-               Username = user.Username
+                Username = user.Username,
+                BetsJudged = user.BetsJudged,
+                User = user
             };
 
             return View("IndexAuth", viewModel);

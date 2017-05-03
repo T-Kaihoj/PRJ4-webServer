@@ -7,106 +7,66 @@
 @model ShowBetViewModel
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-8">
-            <h1 class="header">
-                @Html.DisplayFor(m => m.Title)
-            </h1>
-            <dl>
-                <dt>
-                    Decription
-                </dt>
-                <dd>
-                    @Html.DisplayFor(m => m.Description)
-                </dd>
-            </dl>
-        </div>
-        <div class="col-md-4 text-md-right">
-            <h2>Money pool</h2><br />
-            @Html.DisplayFor(m => m.MoneyPool)
-        </div>
-    </div>
-    <div class="row">
-        @if (Model.Outcomes[0].loser)
-        {
-            @:<div class="col-md-5" style="background: linear-gradient(to left, rgba(240,128,128,0), rgba(240,128,128,1))">
-        }
-        else if (Model.Outcomes[0].winner) 
-        {
-            @:<div class="col-md-5" style="background: linear-gradient(to left, rgba(144,238,144,0), rgba(144,238,144,1))">
-        }
-        else
-        {
-            @:<div class="col-md-5">
-        }
-        <h2 class="pull-left">
-            <b>
-                @Html.DisplayFor(m => m.Outcomes[0].Name)
-            </b>
-        </h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Username</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var u in Model.Outcomes[0].Participants)
-                {
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>@u</td>
-                    </tr>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>
+                        @Html.DisplayFor(m => m.Title)
+                        <span class="pull-right">
+                            @Html.ActionLink("Return to lobby", "Show", "Lobby", new { id = Model.LobbyId }, new { @class = "btn btn-raised pull-right" })
+                        </span>
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <dl>
+                        <dt>
+                            Decription
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(m => m.Description)
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-md-4 text-md-right">
+                    <dl>
+                        <dt>
+                            Money pool
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(m => m.MoneyPool)
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row">
+                @{
+                    // Create the two viewmodels.
+                    PrintOutcomeViewModel left = Model.Outcomes[0];
+                    PrintOutcomeViewModel right = Model.Outcomes[1];
+
+                    left.Left = true;
                 }
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-2">
-        <h1 class="text-center">VS</h1>
-    </div>
-    @if (Model.Outcomes[1].loser)
-    {
-        @:<div class="col-md-5" style="background: linear-gradient(to right, rgba(240,128,128,0), rgba(240,128,128,1))">
-        }
-    else if (Model.Outcomes[1].winner)
-    {
-        @:<div class="col-md-5" style="background: linear-gradient(to right, rgba(144,238,144,0), rgba(144,238,144,1))">
-        }
-    else
-    {
-        @:<div class="col-md-5">
-        }
-    <h2 class="text-md-right">
-        <b>
-            @Html.DisplayFor(m => m.Outcomes[1].Name)
-        </b>
-    </h2>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Username</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var u in Model.Outcomes[1].Participants)
-            {
-                <tr>
-                    <th scope="row">1</th>
-                    <td>@u</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <p class="lead">
-            Current Judge(s)
-        </p>
-        <ul>
-            <li>@Html.DisplayFor(m => m.Judge)</li>
-        </ul>
+                @Html.Partial("_PrintOutcome", left)
+                <div class="col-md-2">
+                    <h1 class="text-center">
+                        VS
+                    </h1>
+                </div>
+                @Html.Partial("_PrintOutcome", right)
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="lead">
+                        Current Judge(s)
+                    </p>
+                    <ul>
+                        <li>@Html.DisplayFor(m => m.Judge)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

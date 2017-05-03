@@ -1,23 +1,59 @@
-﻿@{
-    ViewData["Title"] = "Conclude " + Model.Title  ;
+﻿@using MVC.ViewModels;
+
+@{
+    ViewData["Title"] = "Conclude " + Model.Title;
 }
 
-@model MVC.ViewModels.ConcludeViewModel
+@model ConcludeViewModel
 
-@Model.Title  
-
-<br />
-
-<form method="post" action="/Bet/Conclude/">
-    @foreach (var Outcome in Model.Outcomes)
-    {
-            <div>
-                <input id="@Outcome.Id"
-                       name="SelectedOutcome"
-                       type="radio"
-                       value="@Outcome.Id" />
-                <label for="@Outcome.Id">@Outcome.Title</label>                      
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        @Model.Title
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <div>
+                        @Model.Description
+                    </div>
+                    @using (Html.BeginForm("Conclude", "Bet", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @foreach (var outcome in Model.Outcomes)
+                            {
+                                <div class="radio">
+                                    <label>
+                                        <input id="@outcome.Id"
+                                               name="SelectedOutcome"
+                                               type="radio"
+                                               value="@outcome.Id" />
+                                        @outcome.Title
+                                    </label>
+                                </div>
+                            }
+                            <div>
+                                @Html.ValidationMessageFor(m => m.SelectedOutcome)
+                            </div>
+                        </div>
+                        <div>
+                            @Html.HiddenFor(m => m.BetId)
+                            <input type="submit" value="Submit" class="btn btn-raised btn-primary"/>
+                        </div>
+                    }
+                </div>
             </div>
-    } 
-    <input type="submit" value="Submit" class="submit" />
-</form>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function () {
+            findErrorTags();
+        });
+    </script>
+}
