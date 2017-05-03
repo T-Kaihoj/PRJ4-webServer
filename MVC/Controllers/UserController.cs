@@ -66,7 +66,7 @@ namespace MVC.Controllers
                 myWork.Complete();
             }
 
-            return RedirectToAction("Index");
+            return View("UserCreated");
         }
 
         #endregion

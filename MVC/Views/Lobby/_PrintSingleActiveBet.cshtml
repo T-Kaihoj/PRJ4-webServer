@@ -14,9 +14,6 @@
 <tr>
     <td class="text-center">
         @{
-            // TODO: Handle if the user is not a member of the bet.
-        }
-        @{
             bool joined = Model.Participants.Any(x => x.Username == User.Identity.Name);
             if (joined)
             {
@@ -31,7 +28,6 @@
     </td>
     <td>
         @Html.ActionLink(Model.Name, "Show", new { controller = "Bet", id = Model.BetId })
-
     </td>
     <td>
         @if (Model.Judge.Username == User.Identity.Name)
