@@ -7,6 +7,7 @@ namespace MVC.ViewModels
     public class HomeViewModel
     {
         public int ID { get; set; }
+        public User User { get; set; }
         public string Name { get; set; }
         public string Username { get; set; }
         public decimal CurrentBalance { get; set; }
@@ -14,6 +15,7 @@ namespace MVC.ViewModels
         public IEnumerable<Lobby> InvitedToLobbies { get; set; }
         public ICollection<Bet> Bets { get; set; }
         public ICollection<User> Friendlist { get; set; }
+        public ICollection<Bet> BetsJudged { get; set; }
 
     }
 }

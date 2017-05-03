@@ -417,6 +417,9 @@ namespace Common.Tests.Models
             var outcome2 = new Outcome();
             var u = Substitute.For<User>();
 
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u);
+
             outcome1.Participants.Add(u);
 
             _uut.Outcomes.Add(outcome1);
@@ -438,6 +441,9 @@ namespace Common.Tests.Models
 
             outcome.Participants.Add(u);
 
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u);
+
             _uut.Outcomes.Add(outcome);
 
             // Act.
@@ -457,6 +463,9 @@ namespace Common.Tests.Models
             var outcome = new Outcome();
             var u = Substitute.For<User>();
             u.Balance = initialBalance;
+
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u);
 
             _uut.Outcomes.Add(outcome);
             _uut.BuyIn = buyIn;
@@ -479,6 +488,9 @@ namespace Common.Tests.Models
             var outcome = new Outcome();
             var u = Substitute.For<User>();
             u.Balance = initialBalance;
+
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u);
 
             _uut.Outcomes.Add(outcome);
             _uut.BuyIn = buyIn;
@@ -504,6 +516,9 @@ namespace Common.Tests.Models
             var u2 = Substitute.For<User>();
             u2.Balance = initialBalance;
 
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u1);
+            _uut.Lobby.MemberList.Add(u2);
             _uut.Outcomes.Add(outcome);
             _uut.BuyIn = buyIn;
 
@@ -531,6 +546,9 @@ namespace Common.Tests.Models
             _uut.Outcomes.Add(outcome);
             _uut.BuyIn = buyIn;
 
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u);
+
             // Act.
             var result = _uut.JoinBet(u, outcome);
 
@@ -549,6 +567,10 @@ namespace Common.Tests.Models
             var outcome = new Outcome();
             var u = Substitute.For<User>();
             u.Balance = initialBalance;
+
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u);
+            
 
             _uut.Outcomes.Add(outcome);
             _uut.BuyIn = buyIn;
@@ -573,6 +595,10 @@ namespace Common.Tests.Models
             u1.Balance = initialBalance;
             var u2 = Substitute.For<User>();
             u2.Balance = initialBalance;
+
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u1);
+            _uut.Lobby.MemberList.Add(u2);
 
             _uut.Outcomes.Add(outcome);
             _uut.BuyIn = buyIn;
@@ -603,7 +629,9 @@ namespace Common.Tests.Models
             _uut.Outcomes.Add(outcome);
             _uut.BuyIn = buyIn;
             _uut.Judge = u1;
-
+            _uut.Lobby = new Lobby();
+            _uut.Lobby.MemberList.Add(u1);
+            _uut.Lobby.MemberList.Add(u2);
             _uut.ConcludeBet(u1, outcome);
 
             TestDelegate del = () =>

@@ -16,22 +16,10 @@
         @{
             // TODO: Handle if the user is not a member of the bet.
         }
-        @{
-            bool joined = Model.Participants.Any(x => x.Username == User.Identity.Name);
-            if (joined)
-            {
-                <span class="glyphicon glyphicon-ok" aria-hidden="true" aria-label="Left Align" data-toggle="tooltip" title="Joined"></span>
-            }
-            else
-            {
-                <span class="glyphicon glyphicon-remove" aria-hidden="true" aria-label="Left Align" data-toggle="tooltip" title="Not joined"></span>
-            }
-        }
-        
+        <span class="glyphicon glyphicon-ok" aria-hidden="true" aria-label="Left Align" data-toggle="tooltip" title="Joined"></span>
     </td>
     <td>
-        @Html.ActionLink(Model.Name, "Show", new { controller = "Bet", id = Model.BetId })
-
+        @Model.Name
     </td>
     <td>
         @if (Model.Judge.Username == User.Identity.Name)
@@ -44,7 +32,7 @@
         {
             if (Model.StartDate < DateTime.Now)
             {
-                <a class="btn btn-raised disabled" data-toggle="tooltip" title="Bet is already in progress" href="#">In progress</a>
+                <a class="btn btn-raised disabled" data-toggle="tooltip" title="Bet is already in progress" href="#">Remove</a>
             }
             else
             {
@@ -59,14 +47,6 @@
         @Model.BuyIn
     </td>
     <td>
-        @if (joined)
-        {
-            @Html.ActionLink("Show", "Show", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
-        }
-        else
-        {
-            @Html.ActionLink("Join", "Join", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
-        }
-
+        @Html.ActionLink("Join", "Join", "Bet", new { id = Model.BetId }, new { @class = "btn btn-raised" })
     </td>
 </tr>

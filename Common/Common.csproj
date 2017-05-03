@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\BetPotMustBePossitive.cs" />
     <Compile Include="Exceptions\LocalBetException.cs" />
     <Compile Include="Exceptions\NegativeWithdrawException.cs" />
     <Compile Include="Exceptions\NotEnoughFundsException.cs" />
