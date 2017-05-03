@@ -227,13 +227,13 @@ namespace MVC.Tests.Controllers.UserControllerTests
         }
 
         [Test]
-        public void Create_WithValidData_ReturnsFrontPage()
+        public void Create_WithValidData_ReturnsFrontUserCreatedPage()
         {
             // Act.
             var result = uut.Create(viewModel);
 
             // Assert.
-            CheckRedirectsToRouteWithId(result, "Index");
+            CheckViewName(result, "UserCreated");
         }
     }
 }
