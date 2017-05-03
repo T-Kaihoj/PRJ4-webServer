@@ -1,0 +1,40 @@
+﻿@using Common.Models;
+
+@model ICollection<User>
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">
+            Friendlist
+        </h3>
+    </div>
+    <div class="panel-body">
+        @if (Model.Any())
+        {
+            foreach (var f in Model)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>
+                            @f.FirstName @f.LastName
+                        </h4>
+                    </div>
+                    <div class="col-md-6 text-md-right text-sm-left">
+                        <a class="btn btn-raised btn-info" href="#">Info</a>
+                        <a class="btn btn-raised btn-info" href="#">Messages</a>
+                    </div>
+                </div>
+                <hr />
+            }
+        }
+        else
+        {
+            <p>You have no friends</p>
+        }
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Add Friends", "Index", new {controller = "Friend"}, new {@class = "btn btn-raised btn-info"})
+            </div>
+        </div>
+    </div>
+</div>
