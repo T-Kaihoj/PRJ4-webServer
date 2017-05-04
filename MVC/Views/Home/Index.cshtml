@@ -106,14 +106,17 @@
             $("#createUserForm").validate({
                 rules: {
                     FirstName: {
-                        required: true
+                        required: true,
+                        regex: /^[a-åA-ÅZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð]{1,746}$/ 
                     },
                     LastName: {
-                        required: true
+                        required: true,
+                        regex: /([a-åA-Å]+([\s{1}][a-åA-Å]+)*)/
                     },
                     UserName: {
                         required: true,
-                        regex: /^\S*$/
+                        //regex: /^\S*$/
+                        regex: /^[a-åA-ÅZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð_.-]{1,746}$/
                     },
                     Email: {
                         required: true
@@ -129,14 +132,16 @@
 
                 messages: {
                     FirstName: {
-                        required: "@Resources.User.ErrorFirstNameRequired"
+                        required: "@Resources.User.ErrorFirstNameRequired",
+                        regex: "@Resources.User.ErrorFirstNameIllegalCharacters"
                     },
                     LastName: {
-                        required: "@Resources.User.ErrorLastNameRequired"
+                        required: "@Resources.User.ErrorLastNameRequired",
+                        regex: "@Resources.User.ErrorLastNameIllegalCharacters"
                     },
                     UserName: {
                         required: "@Resources.User.ErrorUserNameRequired",
-                        regex: "@Resources.User.ErrorUserNameWhitespace"
+                        regex: "@Resources.User.ErrorUserNameIllegalCharacters"
                     },
                     Email: {
                         required: "@Resources.User.ErrorEmailRequired"
