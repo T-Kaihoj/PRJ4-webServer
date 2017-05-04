@@ -6,6 +6,8 @@ namespace Common.Repositories
     {
         User Get(string username);
 
+        User GetEager(string username);
+
         User GetByEmail(string email);
     }
 }
