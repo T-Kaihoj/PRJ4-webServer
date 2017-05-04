@@ -1,4 +1,5 @@
-﻿@using MVC.ViewModels;
+﻿@using Common.Models
+@using MVC.ViewModels;
 
 @{
     ViewData["Title"] = "Profile";
@@ -108,26 +109,51 @@
                 <div class="panel-body">
                     @if (Model.Bets.Any())
                     {
-                        foreach (var bet in Model.Bets.Where(x => x.IsConcluded)) //only show concluded bets
+                        var bets = Model.Bets.Where(x => x.IsConcluded);
+
+                        List<Bet> betsWon = new List<Bet>();
+                        List<Bet> betsLost = new List<Bet>();
+
+
+                        foreach (var bet in bets)
                         {
-                            var outcomesWon = Model.Outcomes.Select(x => x).Where(x => x.OutcomeId == bet.Result.OutcomeId);
-                            var betsWon = outcomesWon.Select(x => x.bet);
+                            if (Model.Outcomes.Contains(bet.Result))
+                            {
+                                betsWon.Add(bet);
+                            }
+                            else
+                            {
+                                betsLost.Add(bet);
+                            }
+                        }
+
                             foreach (var won in betsWon)
                             {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <p style="float: left; font-size: 18px; padding-right: 1.8em">
-                                            <b>@won.Name</b>
+                                            <b>[Won] @won.Name</b>
                                         </p>
 
-                                        <span style="float: right"> @Html.ActionLink("View", "Show", "Bet", new { id = bet.BetId }, new { @class = "btn btn-raised btn-primary" })</span>
+                                        <span style="float: right"> @Html.ActionLink("View", "Show", "Bet", new { id = won.BetId }, new { @class = "btn btn-raised btn-primary" })</span>
                                     </div>
                                 </div>
                                 <hr />
                             }
+                            foreach (var lost in betsLost)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="float: left; font-size: 18px; padding-right: 1.8em">
+                                            <b>[Lost] @lost.Name</b>
+                                        </p>
 
+                                        <span style="float: right"> @Html.ActionLink("View", "Show", "Bet", new { id = lost.BetId }, new { @class = "btn btn-raised btn-primary" })</span>
+                                    </div>
+                                </div>
+                                <hr />
+                            }
                         }
-                    }
                 </div>
             </div>
     </div>
