@@ -59,6 +59,25 @@
                             <p />
                         </div>
                     </div>
+                    @{
+                        var bets = Model.Bets.Where(x => x.IsConcluded);
+
+                        List<Bet> betsWon = new List<Bet>();
+                        List<Bet> betsLost = new List<Bet>();
+
+
+                        foreach (var bet in bets)
+                        {
+                            if (Model.Outcomes.Contains(bet.Result))
+                            {
+                                betsWon.Add(bet);
+                            }
+                            else
+                            {
+                                betsLost.Add(bet);
+                            }
+                        }
+                    }
                     <div class="row">
                         <div class="col-md-12">
                             @Html.ActionLink("Edit", "EditProfile", "User", new { @class = "btn btn-raised btn-primary pull-right" })
@@ -121,24 +140,6 @@
                 <div class="panel-body">
                     @if (Model.Bets.Any())
                     {
-                        var bets = Model.Bets.Where(x => x.IsConcluded);
-
-                        List<Bet> betsWon = new List<Bet>();
-                        List<Bet> betsLost = new List<Bet>();
-
-
-                        foreach (var bet in bets)
-                        {
-                            if (Model.Outcomes.Contains(bet.Result))
-                            {
-                                betsWon.Add(bet);
-                            }
-                            else
-                            {
-                                betsLost.Add(bet);
-                            }
-                        }
-
                             foreach (var won in betsWon)
                             {
                                 <div class="row">
