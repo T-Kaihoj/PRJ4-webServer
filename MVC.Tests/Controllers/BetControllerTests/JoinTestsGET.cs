@@ -209,7 +209,7 @@ namespace MVC.Tests.Controllers.BetControllerTests
             {
                 Assert.That(model.Description, Is.EqualTo(bet.Description));
                 Assert.That(model.Id, Is.EqualTo(bet.BetId));
-                Assert.That(model.MoneyPool, Is.EqualTo(bet.BuyIn));
+                Assert.That(model.BuyIn, Is.EqualTo(bet.BuyIn));
                 Assert.That(model.Title, Is.EqualTo(bet.Name));
 
                 Assert.That(model.Outcomes.Select(x => x.Name), Contains.Item(outcome1.Name));
