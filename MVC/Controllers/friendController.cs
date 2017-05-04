@@ -50,12 +50,7 @@ namespace MVC.Controllers
                 myWork.Complete();
 
             }
-
-            
-
             return Redirect("/");
         }
-       
-
     }
 }
