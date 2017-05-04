@@ -169,6 +169,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to First name contains illegal characters.
+        /// </summary>
+        public static string ErrorFirstNameIllegalCharacters {
+            get {
+                return ResourceManager.GetString("ErrorFirstNameIllegalCharacters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must enter your first name.
         /// </summary>
         public static string ErrorFirstNameRequired {
@@ -183,6 +192,15 @@ namespace Resources {
         public static string ErrorJudgeDoesNotExist {
             get {
                 return ResourceManager.GetString("ErrorJudgeDoesNotExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last name contains illegal characters.
+        /// </summary>
+        public static string ErrorLastNameIllegalCharacters {
+            get {
+                return ResourceManager.GetString("ErrorLastNameIllegalCharacters", resourceCulture);
             }
         }
         
@@ -246,6 +264,15 @@ namespace Resources {
         public static string ErrorPasswordsNotIdentical {
             get {
                 return ResourceManager.GetString("ErrorPasswordsNotIdentical", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User name contains illegal characters..
+        /// </summary>
+        public static string ErrorUserNameIllegalCharacters {
+            get {
+                return ResourceManager.GetString("ErrorUserNameIllegalCharacters", resourceCulture);
             }
         }
         
