@@ -85,16 +85,6 @@ namespace MVC.Controllers
 
         #endregion
 
-        #region Index
-
-        // GET: /<controller>/
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        #endregion
-
         #region Invite
 
         [HttpGet]
