@@ -202,6 +202,8 @@ namespace MVC.Controllers
                 // Ensure both owner and judge was found.
                 if (bet.Judge == null)
                 {
+                    viewModel.Participants = myWork.Lobby.Get(viewModel.LobbyId).MemberList;
+
                     ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeDoesntExist);
                     return View("Create", viewModel);
                 }
@@ -209,6 +211,8 @@ namespace MVC.Controllers
                 var lobby = myWork.Lobby.Get(viewModel.LobbyId);
                 if (!lobby.MemberList.Contains(bet.Judge))
                 {
+                    viewModel.Participants = myWork.Lobby.Get(viewModel.LobbyId).MemberList;
+
                     ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeIsNotMemberOfLobby);
                     return View("Create", viewModel);
                 }
