@@ -79,16 +79,16 @@
                     @if (Model.Lobbies.Any())
                     {
                         bool showHr = Model.Lobbies.Count > 1;
-                        foreach (var f in Model.Lobbies)
+                        foreach (var lobby in Model.Lobbies)
                         {
                             <div class="row">
                                 <div class="col-md-12">
                                     <p style="float: left; font-size: 18px; padding-right: 1.8em">
-                                        <b>Lobbyname</b> @f.Name
+                                        <b>Lobbyname</b> @lobby.Name
                                     </p>
-                                    @foreach (var b in Model.JudgeBets)
+                                    @foreach (var bet in Model.JudgeBets)
                                     {
-                                        if (f.Bets.Contains(b))
+                                        if (lobby.Bets.Contains(bet))
                                         {
                                             <img src="~/Content/images/whistle.jpg" alt="" title="You are judge in this lobby" style="width: 5%" />
                                         }
