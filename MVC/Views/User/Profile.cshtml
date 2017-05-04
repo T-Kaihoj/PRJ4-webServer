@@ -67,37 +67,69 @@
             @Html.Partial("_FriendsList", Model.Friendlist)
         </div>
         <div class="col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Ongoing lobbies
-                </h3>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Ongoing lobbies
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.Lobbies.Any())
+                    {
+                        foreach (var f in Model.Lobbies)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="float: left; font-size: 18px; padding-right: 1.8em">
+                                        <b>Lobbyname</b> @f.Name
+                                    </p>
+                                    @foreach (var b in Model.JudgeBets)
+                                    {
+                                        if (f.Bets.Contains(b))
+                                        {
+                                            <img src="~/Content/images/whistle.jpg" alt="" title="You are judge in this lobby" style="width: 5%" />
+                                        }
+                                    }
+                                    <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = f.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
+                                </div>
+                            </div>
+                            <hr/>
+                        }
+                    }
+                </div>
             </div>
-            <div class="panel-body">
-                @if (Model.Lobbies.Any())
-                {
-                    foreach (var f in Model.Lobbies)
-                     {
-                         <div class="row">
-                             <div class="col-md-12">
-                                 <p style="float: left; font-size: 18px; padding-right: 1.8em">
-                                     <b>Lobbyname</b> @f.Name
-                                 </p>
-                                 @foreach (var b in Model.JudgeBets)
-                                 {
-                                     if (f.Bets.Contains(b))
-                                     {
-                                        <img src="~/Content/images/whistle.jpg" alt="" title="You are judge in this lobby" style="width: 5%" />
-                                     }
-                                 }
-                                 <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = f.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
-                             </div>
-                         </div>
-                         <hr/>
-                     }
-                }
+            <!-- COMPLETED BETS BEGIN -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Completed bets
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.Bets.Any())
+                    {
+                        foreach (var bet in Model.Bets.Where(x => x.IsConcluded)) //only show concluded bets
+                        {
+                            var outcomesWon = Model.Outcomes.Select(x => x).Where(x => x.OutcomeId == bet.Result.OutcomeId);
+                            var betsWon = outcomesWon.Select(x => x.bet);
+                            foreach (var won in betsWon)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p style="float: left; font-size: 18px; padding-right: 1.8em">
+                                            <b>@won.Name</b>
+                                        </p>
+
+                                        <span style="float: right"> @Html.ActionLink("View", "Show", "Bet", new { id = bet.BetId }, new { @class = "btn btn-raised btn-primary" })</span>
+                                    </div>
+                                </div>
+                                <hr />
+                            }
+
+                        }
+                    }
+                </div>
             </div>
-        </div>
     </div>
 
         </div>
