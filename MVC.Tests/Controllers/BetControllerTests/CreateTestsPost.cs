@@ -92,6 +92,10 @@ namespace MVC.Tests.Controllers.BetControllerTests
         {
             SetupOwner("owner");
 
+            var lobby = new Lobby();
+
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+
             var result = _uut.Create(_model);
 
             CheckViewName(result, "Create");
