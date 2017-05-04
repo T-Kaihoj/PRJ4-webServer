@@ -197,12 +197,10 @@ namespace Common.Models
         {
             if (this.Lobby != null)
             {
-                
-            
-                 if (! (this.Lobby.MemberList.Contains(user)))
-             {
-                    return false;
-             }
+                if (! (this.Lobby.MemberList.Contains(user)))
+                    {
+                        return false;
+                    }
             }
 
             // Is the bet concluded?
@@ -232,7 +230,7 @@ namespace Common.Models
             // Does the user have sufficient funds?
             if (user.Balance < BuyIn)
             {
-                return false;
+                throw new UserNotEnoughFunds();
             }
 
             // Add the user to the outcome, and move the amount from the balance to the pot.

@@ -1,0 +1,19 @@
+﻿@model MVC.ViewModels.OutcomeViewModel
+
+@{
+    ViewData["Title"] = "Not enough funds";
+}
+
+<div style="margin-bottom: 40px; margin-top: 20px">
+    <span style="text-align: left; font-size: 20px" class="label label-danger">You don't have enough money to join the bet!</span>
+</div>
+<div style="margin-bottom: 20px; margin-top: 20px">
+    <span style="text-align: left; font-size: 20px" class="label label-warning">The buyin is: @Model.BuyIn</span>
+</div>
+<div style="margin-bottom: 60px; margin-top: 20px">
+   <span style="text-align: left; font-size: 20px" class="label label-success">Your balance is: @Model.UserBalance</span>
+</div>
+
+<div >
+    @Html.ActionLink("Deposit Money", "Deposit", "User", null, new { @class = "btn btn-raised btn-primary"})
+</div>

@@ -418,6 +418,7 @@
     <Content Include="Views\Bet\_PrintSingleActiveBet.cshtml" />
     <Content Include="Views\Lobby\RemoveFailed.cshtml" />
     <Content Include="Views\Shared\_FriendsList.cshtml" />
+    <Content Include="Views\Bet\NotEnoughFunds.cshtml" />
     <Content Include="Views\User\LimitedProfile.cshtml" />
     <Content Include="Views\Shared\UnauthorizedAccess.cshtml" />
     <Content Include="Views\Shared\FileNotFound.cshtml" />
