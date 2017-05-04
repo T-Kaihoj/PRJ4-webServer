@@ -106,7 +106,7 @@ namespace MVC.Controllers
 
                 if (lobby == null)
                 {
-                    return HttpForbidden();
+                    return HttpNotFound();
                 }
 
                 var currentUser = myWork.User.Get(GetUserName);
