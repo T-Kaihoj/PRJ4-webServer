@@ -7,18 +7,13 @@
 @model ShowBetViewModel
 
 <div class="container">
-    <div class="panel panel-default">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-md-12">
-                    <h1>
-                        @Html.DisplayFor(m => m.Title)
-                        <span class="pull-right">
-                            @Html.ActionLink("Return to lobby", "Show", "Lobby", new { id = Model.LobbyId }, new { @class = "btn btn-raised pull-right" })
-                        </span>
-                    </h1>
-                </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <div class="panel-title">
+                @Html.DisplayFor(m => m.Title)
             </div>
+        </div>
+        <div class="panel-body">
             <div class="row">
                 <div class="col-md-8">
                     <dl>
@@ -65,8 +60,12 @@
                     <ul>
                         <li>@Html.DisplayFor(m => m.Judge)</li>
                     </ul>
+                    <span class="pull-right">
+                        @Html.ActionLink("Return to lobby", "Show", "Lobby", new { id = Model.LobbyId }, new { @class = "btn btn-raised btn-primary pull-right" })
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
