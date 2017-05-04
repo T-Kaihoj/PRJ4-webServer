@@ -6,6 +6,7 @@ using Common;
 using Common.Exceptions;
 using Common.Models;
 using MVC.Identity;
+using MVC.Others;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -13,10 +14,14 @@ namespace MVC.Controllers
     [Authorize]
     public class BetController : BaseController
     {
+        private readonly IFactory _factory;
+        private readonly IUserContext _userContext;
+
         public BetController(IFactory factory , IUserContext userContext)
             : base(factory, userContext)
         {
-            
+            _factory = factory;
+            _userContext = userContext;
         }
         
         #region Conclude
@@ -172,6 +177,11 @@ namespace MVC.Controllers
 
             if (!ModelState.IsValid)
             {
+                using (var myWork = GetUOF)
+                {
+                    viewModel.Participants = myWork.Lobby.Get(viewModel.LobbyId).MemberList;
+                }
+
                 return View("Create", viewModel);
             }
             
@@ -192,6 +202,8 @@ namespace MVC.Controllers
                 // Ensure both owner and judge was found.
                 if (bet.Judge == null)
                 {
+                    viewModel.Participants = myWork.Lobby.Get(viewModel.LobbyId).MemberList;
+
                     ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeDoesntExist);
                     return View("Create", viewModel);
                 }
@@ -199,6 +211,8 @@ namespace MVC.Controllers
                 var lobby = myWork.Lobby.Get(viewModel.LobbyId);
                 if (!lobby.MemberList.Contains(bet.Judge))
                 {
+                    viewModel.Participants = myWork.Lobby.Get(viewModel.LobbyId).MemberList;
+
                     ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeIsNotMemberOfLobby);
                     return View("Create", viewModel);
                 }
@@ -251,6 +265,9 @@ namespace MVC.Controllers
 
             using (var myWork = GetUOF)
             {
+                // Get current user
+                var currentUser = myWork.User.Get(_userContext.Identity.Name);
+
                 // Get the bet.
                 var bet = myWork.Bet.Get(id);
 
@@ -258,6 +275,11 @@ namespace MVC.Controllers
                 if (bet == null)
                 {
                     return HttpNotFound();
+                }
+                // User does not exist in lobby
+                if (!bet.Lobby.MemberList.Contains(currentUser))
+                {
+                    return new HttpForbiddenResult();
                 }
 
                 // Extract data.
@@ -301,8 +323,17 @@ namespace MVC.Controllers
                 // Get the current user.
                 var user = myWork.User.Get(GetUserName);
 
+                // Get current user
+                var currentUser = myWork.User.Get(_userContext.Identity.Name);
+
                 // Get the bet from the database.
                 var bet = outcome.bet;
+
+                // User does not exist in lobby
+                if (!bet.Lobby.MemberList.Contains(currentUser))
+                {
+                    return new HttpForbiddenResult();
+                }
 
                 // Join the bet.
                 try
@@ -316,7 +347,7 @@ namespace MVC.Controllers
 
                 myWork.Complete();
 
-                return RedirectToAction("Show", new {id = bet.BetId});
+                return RedirectToAction("Show", new { id = bet.BetId });
             }
         }
 

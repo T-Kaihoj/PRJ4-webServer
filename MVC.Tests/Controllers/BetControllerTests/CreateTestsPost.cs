@@ -51,8 +51,17 @@ namespace MVC.Tests.Controllers.BetControllerTests
         public void Create_WithInvalidModel_ReturnsCorrectView()
         {
             _model.Title = "";
+            var lobby = new Lobby();
+
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+
+            var u = SetupJudge(_model.Judge);
+            lobby.MemberList.Add(u);
+
 
             var result = _uut.Create(_model);
+
+
 
             Assert.That(_uut.ModelState.IsValid, Is.False);
 
@@ -63,6 +72,12 @@ namespace MVC.Tests.Controllers.BetControllerTests
         public void Create_WithInvalidModel_ReturnsCorrectViewModel()
         {
             _model.Title = "";
+            var lobby = new Lobby();
+
+            LobbyRepository.Get(Arg.Any<long>()).Returns(lobby);
+
+            var u = SetupJudge(_model.Judge);
+            lobby.MemberList.Add(u);
 
             var result = _uut.Create(_model);
 
