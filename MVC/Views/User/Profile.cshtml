@@ -86,14 +86,21 @@
                                     <p style="float: left; font-size: 18px; padding-right: 1.8em">
                                         <b>Lobbyname</b> @lobby.Name
                                     </p>
-                                    @foreach (var bet in Model.JudgeBets)
-                                    {
-                                        if (lobby.Bets.Contains(bet))
+                                    @{
+                                        bool showWhistle = false;
+                                        foreach (var bet in Model.JudgeBets)
+                                        {
+                                            if (lobby.Bets.Contains(bet))
+                                            {
+                                                showWhistle = true;
+                                            }
+                                        }
+                                        if (showWhistle)
                                         {
                                             <img src="~/Content/images/whistle.jpg" alt="" title="You are judge in this lobby" style="width: 5%" />
                                         }
                                     }
-                                    <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = f.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
+                                    <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = lobby.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
                                 </div>
                             </div>
                             if (showHr)
