@@ -72,12 +72,15 @@
                         double BetsTotal = betsWon.Count + betsLost.Count;
                         double BetsLostPercentage = betsLost.Count / BetsTotal * 100;
                         double BetsWonPercentage = betsWon.Count / BetsTotal * 100;
+
+                        BetsWonPercentage = (double.IsNaN(BetsWonPercentage) ? 0 : BetsWonPercentage);
+
                     }
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
                                 <b>Winrate</b>
-                                <span style="float: right; font-size: 18px; color: black">@BetsWonPercentage %</span>
+                                <span style="float: right; font-size: 18px; color: black">@BetsWonPercentage.ToString("F2") %</span>
                             <p />
                         </div>
                     </div>
