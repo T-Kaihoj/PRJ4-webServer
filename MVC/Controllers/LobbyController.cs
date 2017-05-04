@@ -112,7 +112,9 @@ namespace MVC.Controllers
                 var currentUser = myWork.User.Get(GetUserName);
 
                 if (!lobby.MemberList.Contains(currentUser))
-                    return new HttpForbiddenResult();
+                {
+                    return HttpForbidden();
+                }
             }
 
             var viewModel = new InviteToLobbyViewModel()
@@ -135,8 +137,9 @@ namespace MVC.Controllers
                 var currentUser = myWork.User.Get(GetUserName);
 
                 if (!lobby.MemberList.Contains(currentUser))
-                    return new HttpForbiddenResult();
-
+                {
+                    return HttpForbidden();
+                }
 
                 // Does the user exits?
                 if (user != null)
