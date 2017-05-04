@@ -258,14 +258,15 @@ namespace MVC.Controllers
                 // Get the lobby from the database.
                 var lobby = myWork.Lobby.GetEager(id);
                 var user = myWork.User.Get(GetUserName);
+
                 if (lobby == null)
                 {
-                    // Error.
-                    throw new Exception("No such lobby");
+                    return HttpNotFound();
                 }
+
                 if (!lobby.MemberList.Contains(user))
                 {
-                    return new HttpForbiddenResult();
+                    return HttpForbidden();
                 }
 
                 var myBets = new List<Bet>();
