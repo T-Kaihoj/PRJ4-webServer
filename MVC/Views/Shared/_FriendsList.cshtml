@@ -21,8 +21,8 @@
                                 @f.FirstName @f.LastName
                             </td>
                             <td class="col-md-6 col-xs-4 text-right">
-                                <a class="btn btn-raised btn-primary" href="#">Info</a>
-                                <a class="btn btn-raised btn-primary" href="#">Message</a>
+                                @Html.ActionLink("Profile", "LimitedProfile", new { controller = "User" , id= f.Username }, new { @class = "btn btn-raised btn-primary style=margin-top: 5px"  })
+                                <a class="btn btn-raised btn-primary" style="margin-top: 5px" href="#">Message</a>
                             </td>
                         </tr>
                     }
