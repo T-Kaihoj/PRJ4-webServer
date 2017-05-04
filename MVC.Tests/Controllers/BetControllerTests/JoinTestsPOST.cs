@@ -68,6 +68,8 @@ namespace MVC.Tests.Controllers.BetControllerTests
             var user = new User();
             UserRepository.Get(Arg.Is(userName)).Returns(user);
             userContext.Identity.Name.Returns(userName);
+            bet.Lobby = new Lobby();
+            bet.Lobby.MemberList.Add(user);
 
             OutcomeRepository.Get(Arg.Is(id)).Returns(outcome);
 
