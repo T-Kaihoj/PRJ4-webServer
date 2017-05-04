@@ -186,6 +186,13 @@ namespace MVC.Controllers
                 }
 
                 lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
+
+                if (!lobby.MemberList.Any())
+                {
+                    //Slet tom lobby
+                    myWork.Lobby.Remove(lobby);
+                }
+
                 myWork.Complete();
                 return Redirect($"/Lobby/List");
             }

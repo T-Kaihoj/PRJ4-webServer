@@ -98,7 +98,7 @@ namespace Common.Models
                 member.InvitedToLobbies.Remove(this);
             }
             InvitedList.Clear();
-
+            
             return true;
         }
 
