@@ -103,6 +103,15 @@ namespace MVC.Controllers
         [HttpGet]
         public ActionResult Invite(long id)
         {
+            using (var myWork = _factory.GetUOF())
+            {
+                var lobby = myWork.Lobby.Get(id);
+                var currentUser = myWork.User.Get(_userContext.Identity.Name);
+
+                if (!lobby.MemberList.Contains(currentUser))
+                    return new HttpForbiddenResult();
+            }
+
             var viewModel = new InviteToLobbyViewModel()
             {
                 Id = id
@@ -118,6 +127,13 @@ namespace MVC.Controllers
             {
                 var user = myWork.User.Get(viewModel.Username);
                 var lobby = myWork.Lobby.Get(viewModel.Id);
+
+
+                var currentUser = myWork.User.Get(_userContext.Identity.Name);
+
+                if (!lobby.MemberList.Contains(currentUser))
+                    return new HttpForbiddenResult();
+
 
                 // Does the user exits?
                 if (user != null)
