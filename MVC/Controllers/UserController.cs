@@ -222,7 +222,8 @@ namespace MVC.Controllers
                 Friendlist = user.Friendlist,
                 Bets = user.Bets,
                 Lobbies = user.MemberOfLobbies,
-                JudgeBets = user.BetsJudged
+                JudgeBets = user.BetsJudged,
+                Outcomes = user.Outcomes
             };
 
             return View("Profile", viewModel);

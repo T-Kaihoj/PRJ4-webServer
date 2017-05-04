@@ -16,6 +16,7 @@ namespace MVC.ViewModels
         private ICollection<Bet> _bets = new List<Bet>();
         private ICollection<Lobby> _lobbies = new List<Lobby>();
         private ICollection<Bet> _judgeBets = new List<Bet>();
+        private ICollection<Outcome> _outcomes = new List<Outcome>();
 
         #region Accessors.
 
@@ -134,6 +135,12 @@ namespace MVC.ViewModels
             {
                 _judgeBets = value;
             }
+        }
+
+        public ICollection<Outcome> Outcomes
+        {
+            get { return _outcomes; }
+            set { _outcomes = value; }
         }
         #endregion
     }
