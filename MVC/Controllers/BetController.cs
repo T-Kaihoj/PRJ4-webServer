@@ -148,10 +148,17 @@ namespace MVC.Controllers
         {
             using (var myWork = GetUOF)
             {
+                var lobby = myWork.Lobby.Get(id);
+
+                if (lobby == null)
+                {
+                    return HttpNotFound();
+                }
+
                 var viewModel = new CreateBetViewModel()
                 {
                     LobbyId = id,
-                    Participants = myWork.Lobby.Get(id).MemberList
+                    Participants = lobby.MemberList
                 };
                 return View("Create", viewModel);
             }
