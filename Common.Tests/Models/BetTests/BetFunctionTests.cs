@@ -550,10 +550,13 @@ namespace Common.Tests.Models
             _uut.Lobby.MemberList.Add(u);
 
             // Act.
-            var result = _uut.JoinBet(u, outcome);
+            TestDelegate del = () =>
+            {
+                _uut.JoinBet(u, outcome);
+            };
 
             // Assert.
-            Assert.That(result, Is.False);
+            Assert.That(del, Throws.TypeOf<UserNotEnoughFunds>());
             Assert.That(u.Balance, Is.EqualTo(initialBalance));
         }
 
