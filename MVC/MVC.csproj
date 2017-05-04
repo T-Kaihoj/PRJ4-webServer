@@ -416,7 +416,7 @@
     <Content Include="Views\Bet\_ListActiveBets.cshtml" />
     <Content Include="Views\Bet\_PrintSingleActiveBet.cshtml" />
     <Content Include="Views\Lobby\RemoveFailed.cshtml" />
-    <Content Include="Views\Home\_FriendsList.cshtml" />
+    <Content Include="Views\Shared\_FriendsList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

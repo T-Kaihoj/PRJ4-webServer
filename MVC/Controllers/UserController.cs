@@ -220,7 +220,8 @@ namespace MVC.Controllers
                 UserName = user.Username,
                 Balance = user.Balance,
                 Friendlist = user.Friendlist,
-                Bets = user.Bets
+                Bets = user.Bets,
+                Lobbies = user.MemberOfLobbies
             };
 
             return View("Profile", viewModel);
