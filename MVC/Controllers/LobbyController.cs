@@ -11,15 +11,12 @@ using MVC.ViewModels;
 namespace MVC.Controllers
 {
     [Authorize]
-    public class LobbyController : Controller
+    public class LobbyController : BaseController
     {
-        private readonly IFactory _factory;
-        private readonly IUserContext _userContext;
-
         public LobbyController(IFactory factory, IUserContext userContext)
+            : base(factory, userContext)
         {
-            _factory = factory;
-            _userContext = userContext;
+ 
         }
 
         #region Accept
@@ -27,13 +24,13 @@ namespace MVC.Controllers
         //GET: /<controller/Accept/<id>
         public ActionResult Accept(long id)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 var lobby = myWork.Lobby.Get(id);
 
                 if (lobby != null)
                 {
-                    var myUser = myWork.User.Get((_userContext.Identity.Name));
+                    var myUser = myWork.User.Get(GetUserName);
                     lobby.AcceptLobby(myUser);
                 }
 
@@ -58,7 +55,7 @@ namespace MVC.Controllers
         // POST: /<controller>/Create
         public ActionResult Create(CreateLobbyViewModel viewModel)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 // Perform data validation.
                 if (!TryValidateModel(viewModel))
@@ -75,7 +72,7 @@ namespace MVC.Controllers
 
                 // Save to the database.
                 myWork.Lobby.Add(lobby);
-                var aUser = myWork.User.Get(_userContext.Identity.Name);
+                var aUser = myWork.User.Get(GetUserName);
                 lobby.MemberList.Add(aUser);
                 myWork.Complete();
 
@@ -103,13 +100,21 @@ namespace MVC.Controllers
         [HttpGet]
         public ActionResult Invite(long id)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 var lobby = myWork.Lobby.Get(id);
-                var currentUser = myWork.User.Get(_userContext.Identity.Name);
+
+                if (lobby == null)
+                {
+                    return HttpNotFound();
+                }
+
+                var currentUser = myWork.User.Get(GetUserName);
 
                 if (!lobby.MemberList.Contains(currentUser))
-                    return new HttpForbiddenResult();
+                {
+                    return HttpForbidden();
+                }
             }
 
             var viewModel = new InviteToLobbyViewModel()
@@ -123,17 +128,18 @@ namespace MVC.Controllers
         [HttpPost]
         public ActionResult Invite(InviteToLobbyViewModel viewModel)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 var user = myWork.User.Get(viewModel.Username);
                 var lobby = myWork.Lobby.Get(viewModel.Id);
 
 
-                var currentUser = myWork.User.Get(_userContext.Identity.Name);
+                var currentUser = myWork.User.Get(GetUserName);
 
                 if (!lobby.MemberList.Contains(currentUser))
-                    return new HttpForbiddenResult();
-
+                {
+                    return HttpForbidden();
+                }
 
                 // Does the user exits?
                 if (user != null)
@@ -168,9 +174,9 @@ namespace MVC.Controllers
         // GET: /<controller>/List
         public ActionResult List()
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
-                var aUser = myWork.User.Get(_userContext.Identity.Name);
+                var aUser = myWork.User.Get(GetUserName);
 
                 // Display the lobbies.
                 var viewModel = new LobbiesViewModel()
@@ -190,7 +196,7 @@ namespace MVC.Controllers
         // GET: /<controller>/Show/<id>
         public ActionResult Leave(long id)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 // Get the lobby from the database.
                 var lobby = myWork.Lobby.Get(id);
@@ -201,7 +207,7 @@ namespace MVC.Controllers
                     throw new Exception("No such lobby");
                 }
 
-                lobby.RemoveMemberFromLobby(myWork.User.Get(_userContext.Identity.Name));
+                lobby.RemoveMemberFromLobby(myWork.User.Get(GetUserName));
 
                 if (!lobby.MemberList.Any())
                 {
@@ -221,7 +227,7 @@ namespace MVC.Controllers
         // GET: /<controller>/Remove/<id>
         public ActionResult Remove(long id)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 // Get the lobby from the database.
                 var lobby = myWork.Lobby.Get(id);
@@ -247,19 +253,20 @@ namespace MVC.Controllers
         // GET: /<controller>/Show/<id>
         public ActionResult Show(long id)
         {
-            using (var myWork = _factory.GetUOF())
+            using (var myWork = GetUOF)
             {
                 // Get the lobby from the database.
                 var lobby = myWork.Lobby.GetEager(id);
-                var user = myWork.User.Get(_userContext.Identity.Name);
+                var user = myWork.User.Get(GetUserName);
+
                 if (lobby == null)
                 {
-                    // Error.
-                    throw new Exception("No such lobby");
+                    return HttpNotFound();
                 }
+
                 if (!lobby.MemberList.Contains(user))
                 {
-                    return new HttpForbiddenResult();
+                    return HttpForbidden();
                 }
 
                 var myBets = new List<Bet>();
