@@ -1,0 +1,82 @@
+﻿@using MVC.ViewModels;
+
+@{
+    ViewData["Title"] = "Profile";
+}
+
+@model UserProfileViewModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        <img src="~/Content/images/avatar.png" alt="" hspace="10" style="width: 4.5%; " />
+                        <span style="float: left"> <p>Userprofile</p></span>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="text-align: left; font-size: 20px">
+                                <b>Firstname</b>
+                                <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.FirstName)</span>
+                            <p />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="text-align: left; font-size: 20px">
+                                <b>Lastname</b>
+                                <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.LastName)</span>
+                            <p />
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="text-align: left; font-size: 20px">
+                                <b>Username</b>
+                                <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.UserName)</span>
+                            <p />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Friendlist
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.Friendlist.Any())
+                    {
+                        <div>
+                            <table class="table vert-align" id="friendsTable">
+                                <tbody>
+                                @foreach (var f in Model.Friendlist)
+                                {
+                                    <tr>
+                                        <td class="col-md-6 col-xs-8">
+                                            @f.FirstName @f.LastName
+                                        </td>
+                                    </tr>
+                                }
+                                </tbody>
+                            </table>
+                        </div>
+                        <hr />
+                    }
+                    else
+                    {
+                        <p>You have no friends</p>
+                    }
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>

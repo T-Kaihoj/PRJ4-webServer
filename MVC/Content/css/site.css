@@ -37,8 +37,20 @@ table thead tr th, table th {
 }
 
 /* Style links in the navbar to have a color change on hover. */
-div.navbar a:hover {
-    background-color: #19a094 !important;
+div.navbar ul.nav > li > a:hover {
+    background-color: #19a094
+}
+
+ul.dropdown-menu > li > a:hover {
+    background-color: transparent;
+}
+
+.navbar .navbar-brand:hover {
+    background-color: #19a094;
+}
+
+.navbar .navbar-toggle:hover {
+    background-color: #19a094;
 }
 
 .vertical-align {

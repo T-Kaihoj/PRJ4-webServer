@@ -153,11 +153,17 @@
   <data name="ErrorEmailRequired" xml:space="preserve">
     <value>You must enter your email</value>
   </data>
+  <data name="ErrorFirstNameIllegalCharacters" xml:space="preserve">
+    <value>First name contains illegal characters</value>
+  </data>
   <data name="ErrorFirstNameRequired" xml:space="preserve">
     <value>You must enter your first name</value>
   </data>
   <data name="ErrorJudgeDoesNotExist" xml:space="preserve">
     <value>You must enter a valid judge</value>
+  </data>
+  <data name="ErrorLastNameIllegalCharacters" xml:space="preserve">
+    <value>Last name contains illegal characters</value>
   </data>
   <data name="ErrorLastNameRequired" xml:space="preserve">
     <value>You must enter your last name</value>
@@ -179,6 +185,9 @@
   </data>
   <data name="ErrorPasswordsNotIdentical" xml:space="preserve">
     <value>The two passwords must be identical</value>
+  </data>
+  <data name="ErrorUserNameIllegalCharacters" xml:space="preserve">
+    <value>User name contains illegal characters.</value>
   </data>
   <data name="ErrorUserNameRequired" xml:space="preserve">
     <value>You must enter your user name</value>

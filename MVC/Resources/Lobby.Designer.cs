@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You don&apos;t have enough money to join bet.
+        /// </summary>
+        public static string ErrorNotEnoughFunds {
+            get {
+                return ResourceManager.GetString("ErrorNotEnoughFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User is already a member of the lobby.
         /// </summary>
         public static string ErrorUserAlreadyInLobby {

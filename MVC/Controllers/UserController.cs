@@ -5,6 +5,7 @@ using Common.Exceptions;
 using Common.Models;
 using Microsoft.AspNet.Identity;
 using MVC.Identity;
+using MVC.Others;
 using MVC.ViewModels;
 
 namespace MVC.Controllers
@@ -190,6 +191,35 @@ namespace MVC.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public ActionResult LimitedProfile(String id)
+        {
+            using (var myWork = GetUOF)
+            {
+                var user = myWork.User.Get(id);
+                var currentUser = myWork.User.Get(GetUserName);
+                if (!user.Friendlist.Contains(currentUser) || user == null)
+                {
+                    return new HttpForbiddenResult();
+                }
+
+                var viewModel = new UserProfileViewModel()
+                {
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    UserName = user.Username,
+                    Balance = user.Balance,
+                    Friendlist = user.Friendlist,
+                    Bets = user.Bets,
+                    Lobbies = user.MemberOfLobbies,
+                    JudgeBets = user.BetsJudged
+                };
+
+                return View("LimitedProfile", viewModel);
+            }
+        }
+
         #endregion
 
         #region Index
@@ -221,7 +251,9 @@ namespace MVC.Controllers
                 Balance = user.Balance,
                 Friendlist = user.Friendlist,
                 Bets = user.Bets,
-                Lobbies = user.MemberOfLobbies
+                Lobbies = user.MemberOfLobbies,
+                JudgeBets = user.BetsJudged,
+                Outcomes = user.Outcomes
             };
 
             return View("Profile", viewModel);

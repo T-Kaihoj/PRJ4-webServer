@@ -4,9 +4,12 @@
 
 @using (Html.BeginForm("Join", "Bet", FormMethod.Post))
 {
-    <h2>
+    <h4 class="visible-xs">
         @Html.DisplayFor(m => m.Name)
-        @Html.HiddenFor(m => m.Id, new { Value = Model.Id })
-    </h2>
+    </h4>
+    <h1 class="hidden-xs">
+        @Html.DisplayFor(m => m.Name)
+    </h1>
+    @Html.HiddenFor(m => m.Id, new { Value = Model.Id })
     <button type="submit" class="btn btn-raised btn-primary">Join</button>
 }
