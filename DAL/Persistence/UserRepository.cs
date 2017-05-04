@@ -33,6 +33,19 @@ namespace DAL.Persistence
             return _context.Set<User>().Find(username);
         }
 
+        public User GetEager(string username)
+        {
+            return OurContext.Users
+                .Where(b => b.Username == username)
+                .Include(b => b.Outcomes.Select(s => s.bet))
+                .Include(b => b.Bets.Select(s => s.Outcomes))
+                .Include(b => b.BetsJudged)
+                .Include(b => b.BetsOwned)
+                .Include(b => b.Friendlist)
+                .Include(b => b.InvitedToLobbies)
+                    .SingleOrDefault();
+        }
+
         [ExcludeFromCodeCoverage]
         public Context OurContext
         {

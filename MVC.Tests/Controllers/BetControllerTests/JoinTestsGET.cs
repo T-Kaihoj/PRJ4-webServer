@@ -1,4 +1,8 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Web.Mvc;
 using Common.Models;
@@ -44,19 +48,42 @@ namespace MVC.Tests.Controllers.BetControllerTests
         public void Join_BetExists_ReturnsCorrectViewModel()
         {
             // Setup.
-            var bet = new Bet()
+            var user = new User
             {
+                FirstName = "qw",
+                LastName = "qw",
+                Balance = 100,
+                BetsJudged = null,
+                BetsOwned = null,
+                Email = "qw@email.com",
+                Friendlist = null,
+                Hash = "dfgj",
+                InvitedToLobbies = null,
+                Username = "qw"
 
             };
-            BetRepository.Get(Arg.Any<long>()).Returns(bet);
+            var users = new List<User>();
+            users.Add(user);
+
+            userContext.Identity.Name.Returns(user.Username);
+
+            var bets = new List<Bet>();
+            bets.Add(new Bet {Participants = {user}});
+
+            UserRepository.Get(Arg.Is(user.Username)).Returns(user);
+
+            BetRepository.Get(Arg.Any<long>()).Returns(bets.ElementAt(0));
             var lobby = new Lobby()
             {
                 LobbyId = 1,
-                Name = "lobby"
+                Name = "lobby",
+                MemberList = users
+
             };
 
-            bet.Lobby = lobby;
+            bets.ElementAt(0).Lobby = lobby;
             LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
+
             // Act.
             var result = uut.Join(412);
 
@@ -68,19 +95,40 @@ namespace MVC.Tests.Controllers.BetControllerTests
         public void Join_BetExists_ReturnsCorrectView()
         {
             // Setup.
-            var bet = new Bet()
+            var user = new User
             {
+                FirstName = "qw",
+                LastName = "qw",
+                Balance = 100,
+                BetsJudged = null,
+                BetsOwned = null,
+                Email = "qw@email.com",
+                Friendlist = null,
+                Hash = "dfgj",
+                InvitedToLobbies = null,
+                Username = "qw"
 
             };
+            var users = new List<User>();
+            users.Add(user);
+
+            userContext.Identity.Name.Returns(user.Username);
+
+            UserRepository.Get(Arg.Is(user.Username)).Returns(user);
+
+            var bets = new List<Bet>();
+            bets.Add(new Bet {Participants = {user}});
+
             var lobby = new Lobby()
             {
                 LobbyId = 1,
-                Name = "lobby"
+                Name = "lobby",
+                MemberList = users
             };
 
-            bet.Lobby = lobby;
+            bets.ElementAt(0).Lobby = lobby;
             LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
-            BetRepository.Get(Arg.Any<long>()).Returns(bet);
+            BetRepository.Get(Arg.Any<long>()).Returns(bets.ElementAt(0));
 
             // Act.
             var result = uut.Join(412);
@@ -93,6 +141,26 @@ namespace MVC.Tests.Controllers.BetControllerTests
         public void Join_BetExists_PopulatesViewModelCorrectly()
         {
             // Setup.
+            var user = new User
+            {
+                FirstName = "qw",
+                LastName = "qw",
+                Balance = 100,
+                BetsJudged = null,
+                BetsOwned = null,
+                Email = "qw@email.com",
+                Friendlist = null,
+                Hash = "dfgj",
+                InvitedToLobbies = null,
+                Username = "qw"
+
+            };
+            var users = new List<User>();
+            users.Add(user);
+
+            userContext.Identity.Name.Returns(user.Username);
+            UserRepository.Get(Arg.Is(user.Username)).Returns(user);
+
             long betId = 5;
 
             var outcome1 = new Outcome()
@@ -114,17 +182,23 @@ namespace MVC.Tests.Controllers.BetControllerTests
                 Description = "description",
                 Name = "name"
             };
+
+
             var lobby = new Lobby()
             {
                 LobbyId = 1,
-                Name = "lobby"
+                Name = "lobby",
+                MemberList = users
             };
             bet.Outcomes.Add(outcome1);
             bet.Outcomes.Add(outcome2);
             bet.Lobby = lobby;
             LobbyRepository.Get(Arg.Is(lobby.LobbyId)).Returns(lobby);
             BetRepository.Get(Arg.Is(betId)).Returns(bet);
+            
+           
 
+            
             // Act.
             var result = uut.Join(betId);
 

@@ -1,4 +1,5 @@
-﻿@using MVC.ViewModels;
+﻿@using Common.Models
+@using MVC.ViewModels;
 
 @{
     ViewData["Title"] = "Profile";
@@ -12,15 +13,16 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <div class="panel-title">
-                        <img src="~/Content/images/avatar.png" alt="" hspace="10" style="width: 4.5%; "/>
-                        <span style="float: left"> <p>Userprofile</p></span>
+                        <h3 class="panel-title">
+                            Profile
+                        </h3>
                     </div>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                            <b>Firstname</b>
+                            <b>First name</b>
                             <span style="float: right; font-size: 18px">@Html.DisplayFor(m => m.FirstName)</span>
                             <p/>
                         </div>
@@ -28,7 +30,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
-                            <b>Lastname</b>
+                            <b>Last name</b>
                             <span style="float: right; font-size: 18px ">@Html.DisplayFor(m => m.LastName)</span>
                             <p />
                         </div>
@@ -49,6 +51,36 @@
                             <p />
                         </div>
                     </div>
+                    @{
+                        var bets = Model.Bets.Where(x => x.IsConcluded);
+
+                        List<Bet> betsWon = new List<Bet>();
+                        List<Bet> betsLost = new List<Bet>();
+
+
+                        foreach (var bet in bets)
+                        {
+                            if (Model.Outcomes.Contains(bet.Result))
+                            {
+                                betsWon.Add(bet);
+                            }
+                            else
+                            {
+                                betsLost.Add(bet);
+                            }
+                        }
+                        double BetsTotal = betsWon.Count + betsLost.Count;
+                        double BetsLostPercentage = betsLost.Count / BetsTotal * 100;
+                        double BetsWonPercentage = betsWon.Count / BetsTotal * 100;
+                    }
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p style="text-align: left; font-size: 20px">
+                                <b>Winrate</b>
+                                <span style="float: right; font-size: 18px; color: black">@BetsWonPercentage %</span>
+                            <p />
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-md-12">
                             <p style="text-align: left; font-size: 20px">
@@ -57,6 +89,7 @@
                             <p />
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-md-12">
                             @Html.ActionLink("Edit", "EditProfile", "User", new { @class = "btn btn-raised btn-primary pull-right" })
@@ -70,56 +103,85 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        Ongoing bets
+                        Ongoing lobbies
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    @if (Model.Lobbies.Any())
+                    {
+                        bool showHr = Model.Lobbies.Count > 1;
+                        foreach (var lobby in Model.Lobbies)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="float: left; font-size: 18px; padding-right: 1.8em">
+                                        @lobby.Name
+                                    </p>
+                                    @{
+                                        bool showWhistle = false;
+                                        foreach (var bet in Model.JudgeBets)
+                                        {
+                                            if (lobby.Bets.Contains(bet))
+                                            {
+                                                showWhistle = true;
+                                            }
+                                        }
+                                        if (showWhistle)
+                                        {
+                                            <img src="~/Content/images/whistle.jpg" alt="" title="You are judge in this lobby" style="width: 5%" />
+                                        }
+                                    }
+                                    <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = lobby.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
+                                </div>
+                            </div>
+                            if (showHr)
+                            {
+                                <hr />
+                            }
+                        }
+                    }
+                </div>
+            </div>
+            <!-- COMPLETED BETS BEGIN -->
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Completed bets
                     </h3>
                 </div>
                 <div class="panel-body">
                     @if (Model.Bets.Any())
                     {
-                        foreach (var f in Model.Bets)
+                        foreach (var won in betsWon)
                         {
                             <div class="row">
                                 <div class="col-md-12">
                                     <p style="float: left; font-size: 18px; padding-right: 1.8em">
-                                        <b>Betname</b> @f.Name
-                                        <span style="float: left; padding-right: 1.8em"><b>Buy in</b> @f.BuyIn </span>
-                                        <span style="float: left; padding-right: 1.8em"><b>Lobby</b> @f.Lobby.Name </span>
+                                        <b>[Won]</b> @won.Name
                                     </p>
-                                    <br/>
-                                    <span style="float: right"> @Html.ActionLink("View Bet", "Show", "Bet", new {id = f.BetId}, new {@class = "btn btn-raised btn-primary"})</span>
+
+                                    <span style="float: right"> @Html.ActionLink("View", "Show", "Bet", new { id = won.BetId }, new { @class = "btn btn-raised btn-primary" })</span>
                                 </div>
                             </div>
-                            <hr/>
+                            <hr />
+                        }
+                        foreach (var lost in betsLost)
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p style="float: left; font-size: 18px; padding-right: 1.8em">
+                                        <b>[Lost]</b> @lost.Name
+                                    </p>
+
+                                    <span style="float: right"> @Html.ActionLink("View", "Show", "Bet", new { id = lost.BetId }, new { @class = "btn btn-raised btn-primary" })</span>
+                                </div>
+                            </div>
+                            <hr />
                         }
                     }
                 </div>
             </div>
-        </div>
-        <div class="col-md-6">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">
-                    Ongoing lobbies
-                </h3>
-            </div>
-            <div class="panel-body">
-                @if (Model.Lobbies.Any())
-                {
-                    foreach (var f in Model.Lobbies)
-                     {
-                         <div class="row">
-                             <div class="col-md-12">
-                                 <p style="float: left; font-size: 18px; padding-right: 1.8em">
-                                     <b>Lobbyname</b> @f.Name
-                                 </p>
-                                 <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = f.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
-                             </div>
-                         </div>
-                         <hr/>
-                     }
-                }
-            </div>
-        </div>
+            <!-- COMPLETED BETS END -->
     </div>
 
         </div>

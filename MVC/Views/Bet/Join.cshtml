@@ -7,41 +7,44 @@
 @model JoinBetViewModel
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <a href="/Lobby/Show/@Model.LobbyId"><h3>In @Html.DisplayFor(m => m.LobbyTitle)</h3></a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-8">
-            <h1 class="header">
-                @Html.DisplayFor(m => m.Title)
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h1 class="panel-title">
+                In @Html.DisplayFor(m => m.LobbyTitle)
             </h1>
-            <dl>
-                <dt>
-                    Decription
-                </dt>
-                <dd>
-                    @Html.DisplayFor(m => m.Description)
-                </dd>
-            </dl>
         </div>
-        <div class="col-md-4 text-md-right">
-            <h2>Money pool</h2><br/>
-            
-            @Html.DisplayFor(m => m.BuyIn)
-            @Html.ValidationMessageFor(m => m.BuyIn)
+        <div class="panel-body">
+        <div class="row">
+            <div class="col-md-8">
+                <h1 class="header">
+                    @Html.DisplayFor(m => m.Title)
+                </h1>
+                <dl>
+                    <dt>
+                        Decription
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(m => m.Description)
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-md-4 text-md-right">
+                <h2>Money pool</h2><br />
+                @Html.DisplayFor(m => m.MoneyPool)
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5">
+                @Html.Partial("_Outcome", Model.Outcomes[0])
+            </div>
+            <div class="col-xs-2">
+                <h4 class="text-xs-center visible-xs">VS</h4>
+                <h1 class="text-xs-center hidden-xs">VS</h1>
+            </div>
+            <div class="col-xs-5 text-right">
+                @Html.Partial("_Outcome", Model.Outcomes[1])
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-5">
-            @Html.Partial("_Outcome", Model.Outcomes[0])
-        </div>
-        <div class="col-md-2">
-            <h1 class="text-md-center">VS</h1>
-        </div>
-        <div class="col-md-5 text-md-right">
-            @Html.Partial("_Outcome", Model.Outcomes[1])
-        </div>
-    </div>
+ </div>
 </div>
