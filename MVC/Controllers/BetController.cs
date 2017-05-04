@@ -266,7 +266,8 @@ namespace MVC.Controllers
                     var ovm = new OutcomeViewModel()
                     {
                         Id = outcomes.OutcomeId,
-                        Name = outcomes.Name
+                        Name = outcomes.Name,
+                        BuyIn = bet.BuyIn
                     };
 
                     viewModel.Outcomes.Add(ovm);
@@ -274,7 +275,7 @@ namespace MVC.Controllers
 
                 viewModel.Title = bet.Name;
                 viewModel.Description = bet.Description;
-                viewModel.MoneyPool = bet.BuyIn;
+                viewModel.BuyIn = bet.BuyIn;
                 viewModel.Id = id;
                 viewModel.LobbyTitle = myWork.Lobby.Get(bet.Lobby.LobbyId).Name;
                 viewModel.LobbyId = bet.Lobby.LobbyId;
@@ -304,6 +305,9 @@ namespace MVC.Controllers
                 // Get the bet from the database.
                 var bet = outcome.bet;
 
+                //Add stats to viewmodel
+                model.BuyIn = bet.BuyIn;
+                model.UserBalance = myWork.User.Get(GetUserName).Balance;
                 // Join the bet.
                 try
                 {
@@ -312,6 +316,10 @@ namespace MVC.Controllers
                 catch (BetConcludedException)
                 {
                     return View("Concluded");
+                }
+                catch (UserNotEnoughFunds)
+                {
+                    return View("NotEnoughFunds", model);
                 }
 
                 myWork.Complete();

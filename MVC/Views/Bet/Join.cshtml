@@ -28,7 +28,9 @@
         </div>
         <div class="col-md-4 text-md-right">
             <h2>Money pool</h2><br/>
-            @Html.DisplayFor(m => m.MoneyPool)
+            
+            @Html.DisplayFor(m => m.BuyIn)
+            @Html.ValidationMessageFor(m => m.BuyIn)
         </div>
     </div>
     <div class="row">
