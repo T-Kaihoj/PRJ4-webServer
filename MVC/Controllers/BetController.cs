@@ -177,6 +177,11 @@ namespace MVC.Controllers
 
             if (!ModelState.IsValid)
             {
+                using (var myWork = GetUOF)
+                {
+                    viewModel.Participants = myWork.Lobby.Get(viewModel.LobbyId).MemberList;
+                }
+
                 return View("Create", viewModel);
             }
             
