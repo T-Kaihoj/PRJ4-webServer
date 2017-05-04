@@ -83,6 +83,13 @@
                                  <p style="float: left; font-size: 18px; padding-right: 1.8em">
                                      <b>Lobbyname</b> @f.Name
                                  </p>
+                                 @foreach (var b in Model.JudgeBets)
+                                 {
+                                     if (f.Bets.Contains(b))
+                                     {
+                                        <img src="~/Content/images/whistle.jpg" alt="" title="You are judge in this lobby" style="width: 5%" />
+                                     }
+                                 }
                                  <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = f.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
                              </div>
                          </div>
