@@ -77,6 +77,7 @@
                 <div class="panel-body">
                     @if (Model.Lobbies.Any())
                     {
+                        bool showHr = Model.Lobbies.Count > 1;
                         foreach (var f in Model.Lobbies)
                         {
                             <div class="row">
@@ -94,7 +95,10 @@
                                     <span style="float: right"> @Html.ActionLink("View Lobby", "Show", "Lobby", new {id = f.LobbyId}, new {@class = "btn btn-raised btn-primary"})</span>
                                 </div>
                             </div>
-                            <hr/>
+                            if (showHr)
+                            {
+                                <hr />
+                            }
                         }
                     }
                 </div>
