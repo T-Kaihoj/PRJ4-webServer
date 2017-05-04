@@ -209,6 +209,8 @@ namespace MVC.Controllers
                 var lobby = myWork.Lobby.Get(viewModel.LobbyId);
                 if (!lobby.MemberList.Contains(bet.Judge))
                 {
+                    viewModel.Participants = myWork.Lobby.Get(viewModel.LobbyId).MemberList;
+
                     ModelState.AddModelError("Judge", Resources.Bet.ErrorJudgeIsNotMemberOfLobby);
                     return View("Create", viewModel);
                 }
