@@ -8,21 +8,21 @@ namespace MVC.Controllers
         {
             Response.StatusCode = 404;
 
-            return View("~/Views/Shared/FileNotFound.cshtml");
+            return View("FileNotFound");
         }
 
         public ActionResult NotPermitted()
         {
             Response.StatusCode = 403;
 
-            return View("~/Views/Shared/UnauthorizedAccess.cshtml");
+            return View("UnauthorizedAccess");
         }
 
         public ActionResult Index()
         {
             Response.StatusCode = 500;
 
-            return View("~/Views/Shared/Error.cshtml");
+            return View("Error");
         }
     }
 }
