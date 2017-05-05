@@ -123,6 +123,9 @@
   <data name="ErrorLobbyNameRequired" xml:space="preserve">
     <value>You must write a name for the lobby</value>
   </data>
+  <data name="ErrorNameToLong" xml:space="preserve">
+    <value>Name of lobby most be under 40 characters</value>
+  </data>
   <data name="ErrorNotEnoughFunds" xml:space="preserve">
     <value>You don't have enough money to join bet</value>
   </data>

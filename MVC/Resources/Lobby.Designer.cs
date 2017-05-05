@@ -79,6 +79,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name of lobby most be under 40 characters.
+        /// </summary>
+        public static string ErrorNameToLong {
+            get {
+                return ResourceManager.GetString("ErrorNameToLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You don&apos;t have enough money to join bet.
         /// </summary>
         public static string ErrorNotEnoughFunds {
