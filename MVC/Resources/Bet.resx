@@ -189,4 +189,10 @@
   <data name="ErrorNotEnoughFunds" xml:space="preserve">
     <value>You don't have enough money to join bet</value>
   </data>
+  <data name="ErrorDescriptionToLong" xml:space="preserve">
+    <value>Bet description must be no longer then 140 characters</value>
+  </data>
+  <data name="ErrorNameToLong" xml:space="preserve">
+    <value>Bet title must be no longer then 40 characters</value>
+  </data>
 </root>

@@ -160,6 +160,15 @@ namespace Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bet description must be no longer then 140 characters.
+        /// </summary>
+        public static string ErrorDescriptionToLong {
+            get {
+                return ResourceManager.GetString("ErrorDescriptionToLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date must be after start date.
         /// </summary>
         public static string ErrorEndDateBeforeStartDate {
@@ -192,6 +201,15 @@ namespace Resources {
         public static string ErrorJudgeRequired {
             get {
                 return ResourceManager.GetString("ErrorJudgeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bet title must be no longer then 40 characters.
+        /// </summary>
+        public static string ErrorNameToLong {
+            get {
+                return ResourceManager.GetString("ErrorNameToLong", resourceCulture);
             }
         }
         

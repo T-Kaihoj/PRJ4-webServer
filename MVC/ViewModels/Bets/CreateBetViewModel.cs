@@ -39,6 +39,7 @@ namespace MVC.ViewModels
         [Required(ErrorMessageResourceType = typeof(Resources.Bet),
             ErrorMessageResourceName = "ErrorDescriptionRequired")]
         [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayDescription")]
+        
         public string Description
         {
             get { return _description; }
@@ -68,6 +69,8 @@ namespace MVC.ViewModels
         [Required(ErrorMessageResourceType = typeof(Resources.Bet),
             ErrorMessageResourceName = "ErrorTitleRequired")]
         [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayTitle")]
+        [StringLength(40, ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorNameToLong")]
         public string Title
         {
             get { return _title; }
