@@ -39,7 +39,8 @@ namespace MVC.ViewModels
         [Required(ErrorMessageResourceType = typeof(Resources.Bet),
             ErrorMessageResourceName = "ErrorDescriptionRequired")]
         [Display(ResourceType = typeof(Resources.Bet), Name = "DisplayDescription")]
-        
+        [StringLength(140, ErrorMessageResourceType = typeof(Resources.Bet),
+            ErrorMessageResourceName = "ErrorDescriptionToLong")]
         public string Description
         {
             get { return _description; }
