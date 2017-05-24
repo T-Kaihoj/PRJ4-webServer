@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
 using Common.Models;
 using DAL;
-using SimpleInjector;
-using SimpleInjector.Diagnostics;
 
 namespace TestingApp
 {
@@ -16,17 +10,7 @@ namespace TestingApp
     {
         static void Main(string[] args)
         {
-            // Create a container for dependency injection.
-            var container = new Container();
-
-            // Register the components.
-            container.Register<IFactory, Factory>(Lifestyle.Singleton);
-            container.Register<IUtility, Utility>();
-
-            // Verification and self-diagnostics.
-            container.Verify();
-
-            var factory = container.GetInstance<IFactory>();
+            var factory = new Factory();
 
             // Setup data entities.
             User user;
@@ -100,7 +84,7 @@ namespace TestingApp
 
             
 
-            int batchSize = 10000;
+            int batchSize = 100;
             long runs = (4294967296 / batchSize) + 1;
 
             // Create loop to run for 2^32. We do this in batches of 10000.
@@ -110,7 +94,6 @@ namespace TestingApp
             {
                 using (var uof = factory.GetUOF())
                 {
-
                     // Create the elements.
                     for (int j = 0; j < batchSize; ++j)
                     {
@@ -136,6 +119,8 @@ namespace TestingApp
 
                     Console.WriteLine($"Completed run {i} of {runs}.");
                 }
+
+                items.Clear();
             }
         }
     }
